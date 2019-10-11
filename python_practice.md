@@ -8,13 +8,15 @@
 ```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
 
 
-### "Data Types"
+
+### Data Types
 ---
 List : mutable, ordered
 Tuple : immutable, ordered
 Set : mutable, not ordered
 Dictionary: immutable, not ordered
 String : immutable
+
 
 
 ### [List] 
@@ -31,6 +33,7 @@ String : immutable
 
 ##### 3. Multiple Assignment
 ```i[1],i[2],i[3] = i[3],i[2],i[1]``` 
+
 
 
 ### "String" 
