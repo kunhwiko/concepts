@@ -8,17 +8,17 @@
 ```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
 
 
-
 ### Data Types
 ---
-| List          | mutable       | ordered     |
+| Type          | mutable?      | ordered?    |
 | ------------- |:-------------:| ----------: |
+| List          | mutable       | ordered     |
 | Tuple         | immutable     | ordered     |
 | Set           | mutable       | not ordered |
 | Dictionary    | immutable     | not ordered |
 | String        | immutable     |             |
 
-``` ```
+
 
 ### [List] 
 ---
