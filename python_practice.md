@@ -1,11 +1,21 @@
 # Python Code
----
-### Operations 
+
+### Logic Operations / Bit Manipulation 
 ---
 ##### 1. Using boolean logic
 ```sign = (x > 0) - (x < 0)``` #find the sign of real number x
 
 ```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
+
+
+### "Data Types"
+---
+List : mutable, ordered
+Tuple : immutable, ordered
+Set : mutable, not ordered
+Dictionary: immutable, not ordered
+String : immutable
+
 
 ### [List] 
 ---
@@ -22,6 +32,7 @@
 ##### 3. Multiple Assignment
 ```i[1],i[2],i[3] = i[3],i[2],i[1]``` 
 
+
 ### "String" 
 ---
 ##### 1. Replace
@@ -33,9 +44,5 @@
 ##### 3. Count
 ```s.lower().count("example")``` #creates a copy of string as lowercases; counts the number of occurrences 
 
-### "Data Types"
----
-List : mutable, ordered
-Tuple : immutable, ordered
-Set : mutable, not ordered
-Dictionary: immutable, not ordered
+
+
