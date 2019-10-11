@@ -8,6 +8,7 @@
 ```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
 
 
+
 ### Data Types
 ---
 | Type          | mutable?      | ordered?    |
@@ -34,6 +35,13 @@
 
 ##### 3. Multiple Assignment
 ```i[1],i[2],i[3] = i[3],i[2],i[1]``` 
+
+
+
+### {Dict} 
+---
+##### 1. Search
+```max(d.keys(),key = d.get)```#return the maximum value based on dictionary values
 
 
 
