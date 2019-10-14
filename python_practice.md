@@ -7,6 +7,12 @@
 
 ```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
 
+##### 2. Bitwise Comparison
+```~5``` #NOT operation, 0101 -> 1010
+```5&3``` #AND operation,0101 & 0011 -> 0001
+```5|3``` #OR operation, 0101 | 0011 -> 7
+```5^3``` #XOR operation, 0101^0011 -> 6
+
 
 
 ### Data Types
