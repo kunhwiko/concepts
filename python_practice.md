@@ -25,7 +25,7 @@
 | List          | mutable       | ordered     |
 | Tuple         | immutable     | ordered     |
 | Set           | mutable       | not ordered |
-| Dictionary    | immutable     | not ordered |
+| Dictionary    | mutable       | not ordered |
 | String        | immutable     |             |
 
 
