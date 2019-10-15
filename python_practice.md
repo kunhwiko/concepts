@@ -16,6 +16,8 @@
 
 ```5^3``` #XOR operation, 0101^0011 -> 6
 
+```a^b^a``` = ```a^a^b``` #useful for finding unique number
+
 
 
 ### Data Types
