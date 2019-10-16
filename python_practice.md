@@ -16,7 +16,7 @@
 
 ```5^3``` #XOR operation, 0101^0011 -> 6
 
-```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #useful for finding unique number
+```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #commutative
 
 
 
