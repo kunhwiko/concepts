@@ -18,6 +18,8 @@
 
 ```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #commutative
 
+```mask = 0xffffffff```#32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
+
 
 
 ### Data Types
