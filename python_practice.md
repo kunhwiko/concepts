@@ -20,6 +20,9 @@
 
 ```mask = 0xffffffff```#32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
 
+##### 3. Changing integer to binary
+```bin(x)``` #returns binary string of integer x
+
 
 
 ### Data Types
