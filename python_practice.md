@@ -18,7 +18,7 @@
 ```l.sort(key=lambda x : len(x),reverse=True)``` #sort by function from most to least
 
 ##### 2. Slicing
-```l[::-1]``` #[from(index inclusive): to(index exclusive): by]
+```l[::-1]``` #[from (inclusive) : to (exclusive) : by]
 
 ```max(l,key=len)``` #return the maximum value based on length
 
@@ -44,6 +44,9 @@
 
 ##### 3. Count
 ```s.lower().count("example")``` #creates a copy of string as lowercases; counts the number of occurrences 
+
+##### 4. Appending
+```s[:1] + "something" + s[1:]``` #add a string in the middle of existing string
 
 
 # Python Code
