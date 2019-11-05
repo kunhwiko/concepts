@@ -1,30 +1,3 @@
-# Python Code
-
-### Logic Operations / Bit Manipulation 
----
-##### 1. Using boolean logic
-```sign = (x > 0) - (x < 0)``` #find the sign of real number x
-
-```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
-
-##### 2. Bitwise Comparison
-```~5``` #NOT operation, 0101 -> 1010
-
-```5&3``` #AND operation,0101 & 0011 -> 0001
-
-```5|3``` #OR operation, 0101 | 0011 -> 7
-
-```5^3``` #XOR operation, 0101^0011 -> 6
-
-```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #commutative
-
-```mask = 0xffffffff```#32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
-
-##### 3. Changing integer to binary
-```bin(x)``` #returns binary string of integer x
-
-
-
 ### Data Types
 ---
 | Type          | mutable?      | ordered?    |
@@ -45,7 +18,7 @@
 ```l.sort(key=lambda x : len(x),reverse=True)``` #sort by function from most to least
 
 ##### 2. Slicing
-```l[::-1]``` #from(index inclusive): to(index exclusive): by
+```l[::-1]``` #[from(index inclusive): to(index exclusive): by]
 
 ```max(l,key=len)``` #return the maximum value based on length
 
@@ -73,4 +46,27 @@
 ```s.lower().count("example")``` #creates a copy of string as lowercases; counts the number of occurrences 
 
 
+# Python Code
 
+### Logic Operations / Bit Manipulation 
+---
+##### 1. Using boolean logic
+```sign = (x > 0) - (x < 0)``` #find the sign of real number x
+
+```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
+
+##### 2. Bitwise Comparison
+```~5``` #NOT operation, 0101 -> 1010
+
+```5&3``` #AND operation,0101 & 0011 -> 0001
+
+```5|3``` #OR operation, 0101 | 0011 -> 7
+
+```5^3``` #XOR operation, 0101^0011 -> 6
+
+```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #commutative
+
+```mask = 0xffffffff```#32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
+
+##### 3. Changing integer to binary
+```bin(x)``` #returns binary string of integer x
