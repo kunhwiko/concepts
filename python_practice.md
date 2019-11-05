@@ -13,14 +13,14 @@
 ### [List] 
 ---
 ##### 1. Ordering
-```l.sort(key=len,reverse=True)``` #sort by string length from longest to shortest 
+```l.sort(key=len,reverse=True)``` #sorts from longest to shortest length 
 
-```l.sort(key=lambda x : len(x),reverse=True)``` #sort by function from most to least
+```l.sort(key=lambda x : len(x),reverse=True)``` #using lambda
 
 ##### 2. Slicing
-```l[::-1]``` #[from (inclusive) : to (exclusive) : by]
+```l[::-1]``` #reverse list
 
-```max(l,key=len)``` #return the maximum value based on length
+```max(l,key=len)``` #maximum value based on length
 
 ##### 3. Multiple Assignment
 ```i[1],i[2],i[3] = i[3],i[2],i[1]``` 
@@ -37,13 +37,13 @@
 ### "String" 
 ---
 ##### 1. Replace
-```s = s.replace("h","w",3)``` #creates a copy of string; indicates from, to, number of times (default -> all strings)
+```s = s.replace("h","w",3)``` #creates a copy of string and replaces h to w 3 times
 
 ##### 2. Find
 ```s.find("ll",5)``` #returns the index of where "ll" is in string after index 5
 
 ##### 3. Count
-```s.lower().count("example")``` #creates a copy of string as lowercases; counts the number of occurrences 
+```s.lower().count("e")``` #creates a copy of string as lowercases and counts number of e 
 
 ##### 4. Appending
 ```s[:1] + "something" + s[1:]``` #add a string in the middle of existing string
@@ -54,7 +54,7 @@
 ### Logic Operations / Bit Manipulation 
 ---
 ##### 1. Using boolean logic
-```sign = (x > 0) - (x < 0)``` #find the sign of real number x
+```sign = (x > 0) - (x < 0)``` #find the sign of number
 
 ```sign * random_integer * (random_integer < 500)``` #print a number only if conditions are met, otherwise 0  
 
