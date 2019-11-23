@@ -14,22 +14,25 @@
 ### [List] 
 ---
 ##### 1. Sorting
-```l.sort(key=len,reverse=True)``` 
-
 #sorts from longest to shortest length 
 
-```l.sort(key=lambda x : len(x),reverse=True)``` 
+```l.sort(key=len,reverse=True)``` 
 
 #using lambda
 
-```l[::-1]``` 
+```l.sort(key=lambda x : len(x),reverse=True)``` 
 
 #reverse list
 
+```l[::-1]``` 
+
+
 ##### 2. Search
+#maximum value based on length
+
 ```max(l,key=len)``` 
 
-#maximum value based on length
+
 
 ##### 3. Multiple Assignment
 ```i[1],i[2],i[3] = i[3],i[2],i[1]``` 
@@ -39,32 +42,36 @@
 ### {Dict} 
 ---
 ##### 1. Search
+#return the maximum value based on dictionary values
+
 ```max(d.keys(), key = d.get)```
 
-#return the maximum value based on dictionary values
 
 
 
 ### "String" 
 ---
 ##### 1. Replace
-```s = s.replace("h","w",3)``` 
-
 #creates a copy of string and replaces h to w 3 times
 
-##### 2. Find / Count
-```s.find("ll",5)``` 
+```s = s.replace("h","w",3)``` 
 
+
+##### 2. Find / Count
 #returns the index of where "ll" is in string after index 5
 
-```s.lower().count("e")``` 
+```s.find("ll",5)``` 
 
 #creates a copy of string as lowercases and counts number of e 
 
+```s.lower().count("e")``` 
+
+
 ##### 3. Appending
+#add a string in the middle of existing string
+
 ```s[:1] + "something" + s[1:]``` 
 
-#add a string in the middle of existing string
 
 
 
@@ -72,13 +79,14 @@
 ### Logic Operations / Bit Manipulation 
 ---
 ##### 1. Using boolean logic
+#find the sign of number
+
 ```sign = (x > 0) - (x < 0)``` 
 
-#find the sign of number
+#print a number only if conditions are met, otherwise 0  
 
 ```sign * random_integer * (random_integer < 500)``` 
 
-#print a number only if conditions are met, otherwise 0  
 
 ##### 2. Bitwise Comparison
 ```~5``` #NOT operation, 0101 -> 1010
@@ -91,9 +99,9 @@
 
 ```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #commutative
 
-```mask = 0xffffffff```
+```mask = 0xffffffff``` #32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
 
-#32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
+ 
 
 ##### 3. Changing integer to binary
 ```bin(x)``` #returns integer x as a string of binarys
