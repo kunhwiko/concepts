@@ -14,7 +14,7 @@
 ### [List] 
 ---
 ##### 1. Sorting
-#sorts from longest to shortest length 
+##### #sorts from longest to shortest length 
 
 ```l.sort(key=len,reverse=True)``` 
 
