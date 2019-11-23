@@ -15,12 +15,15 @@
 ---
 ##### 1. Sorting
 ```l.sort(key=len,reverse=True)``` 
+
 #sorts from longest to shortest length 
 
 ```l.sort(key=lambda x : len(x),reverse=True)``` 
+
 #using lambda
 
 ```l[::-1]``` 
+
 #reverse list
 
 ##### 2. Search
