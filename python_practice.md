@@ -89,19 +89,19 @@
 
 
 ##### 2. Bitwise Comparison
-```~5``` #NOT operation, 0101 -> 1010
+```~5``` ##### #NOT operation, 0101 -> 1010
 
-```5&3``` #AND operation,0101 & 0011 -> 0001
+```5&3``` ##### #AND operation,0101 & 0011 -> 0001
 
-```5|3``` #OR operation, 0101 | 0011 -> 7
+```5|3``` ##### #OR operation, 0101 | 0011 -> 7
 
-```5^3``` #XOR operation, 0101^0011 -> 6
+```5^3``` ##### #XOR operation, 0101^0011 -> 6
 
-```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #commutative
+```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` ##### #commutative
 
-```mask = 0xffffffff``` #32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
+```mask = 0xffffffff``` ##### #32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
 
  
 
 ##### 3. Changing integer to binary
-```bin(x)``` #returns integer x as a string of binarys
+```bin(x)``` ##### #returns integer x as a string of binarys
