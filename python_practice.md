@@ -1,4 +1,4 @@
-##### Python Tips 
+# Python Tips 
 ### Data Types
 ---
 | Type          | mutable?      | ordered?    |
