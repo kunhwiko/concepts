@@ -28,6 +28,7 @@
 
 ##### 2. Search
 ```max(l,key=len)``` 
+
 #maximum value based on length
 
 ##### 3. Multiple Assignment
@@ -39,6 +40,7 @@
 ---
 ##### 1. Search
 ```max(d.keys(), key = d.get)```
+
 #return the maximum value based on dictionary values
 
 
@@ -47,17 +49,21 @@
 ---
 ##### 1. Replace
 ```s = s.replace("h","w",3)``` 
+
 #creates a copy of string and replaces h to w 3 times
 
 ##### 2. Find / Count
 ```s.find("ll",5)``` 
+
 #returns the index of where "ll" is in string after index 5
 
 ```s.lower().count("e")``` 
+
 #creates a copy of string as lowercases and counts number of e 
 
 ##### 3. Appending
 ```s[:1] + "something" + s[1:]``` 
+
 #add a string in the middle of existing string
 
 
@@ -67,9 +73,11 @@
 ---
 ##### 1. Using boolean logic
 ```sign = (x > 0) - (x < 0)``` 
+
 #find the sign of number
 
 ```sign * random_integer * (random_integer < 500)``` 
+
 #print a number only if conditions are met, otherwise 0  
 
 ##### 2. Bitwise Comparison
@@ -83,7 +91,9 @@
 
 ```a^b^a``` = ```a^a^b``` = ```0^b``` = ```b``` #commutative
 
-```mask = 0xffffffff```#32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
+```mask = 0xffffffff```
+
+#32bits of 1's can be used as ```a&mask``` to make 'a' an unsigned integer 
 
 ##### 3. Changing integer to binary
 ```bin(x)``` #returns integer x as a string of binarys
