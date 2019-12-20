@@ -1,5 +1,5 @@
 # Python Tips 
-### Data Types
+### Data Structures
 ---
 | Type          | mutable?      | ordered?    |
 | ------------- |:-------------:| ----------: |
