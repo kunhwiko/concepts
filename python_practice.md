@@ -13,5 +13,6 @@
 ---
 ##### Sorting
 ```python
-arr.sort(key=len, reverse=True)  #Sorts using length, from longest to shortest
+arr.sort(key=len, reverse=True)  #Sorts by length, from longest to shortest
+arr.sort(key=lambda x: len(x), reverse=True) #Same but utilizing lambda
 ```
