@@ -11,3 +11,7 @@
 
 ### [List]
 ---
+##### Sorting
+```python
+arr.sort(key=len, reverse=True)  #Sorts using length, from longest to shortest
+```
