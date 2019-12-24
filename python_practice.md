@@ -9,4 +9,5 @@
 | Dictionary    | mutable       | not ordered |
 | String / Int  | immutable     |             |
 
-
+### [List]
+---
