@@ -22,7 +22,7 @@ arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
 max(arr,key=len)    # Find the longest element in list
 ```
 
-##### Binary Search
+##### Binary Search Algorithm
 ```python
 class Solution:
     def mySqrt(self, x):
