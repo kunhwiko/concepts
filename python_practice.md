@@ -55,7 +55,23 @@ i[1],i[2],i[3] = i[3],i[2],i[1]    # i[1] = i[3] ...
 val1 = val2 = i[1]                 # val1 and val2 become i[1]
 ```
 
+### "String"
+---
+##### Replace
+```python
+s = s.replace("h","w",3)      # creates a copy and replaces first 3 "h"s to "w"
+```
 
+##### Find / Count
+```python
+s.find("ll",5)       # returns the index of where "ll" is in string after index 5
+s.lower.count("e")   # creates a copy as lowercases and then counts number of "e"s
+```
+
+##### Changing
+```python
+s = s[:1] + "r" + s[2:]  # since strings are not mutable, s[1] = "r" is not allowed 
+```
 
 
 ### Logic Operations / Bit Manipulation 
