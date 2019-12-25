@@ -22,6 +22,22 @@ arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
 max(arr,key=len)    # Find the longest element in list
 ```
 
+##### Binary Search
+```python
+class Solution:
+    def mySqrt(self, x):
+        left, right = 0, x
+        
+        while(left<=right):
+            mid = (left+right)//2
+            if mid**2 <= x < (mid+1)**2:
+                return mid 
+            elif x < mid**2:
+                right = mid 
+            else:
+                left = mid + 1 
+```                
+
 ##### Reversing
 ```python
 arr[::-1]
@@ -38,6 +54,9 @@ for ind, num in enumerate(nums):
 i[1],i[2],i[3] = i[3],i[2],i[1]    # i[1] = i[3] ...
 val1 = val2 = i[1]                 # val1 and val2 become i[1]
 ```
+
+
+
 
 ### Logic Operations / Bit Manipulation 
 ---
