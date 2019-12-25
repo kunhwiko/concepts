@@ -24,6 +24,7 @@ max(arr,key=len)    # Find the longest element in list
 
 ##### Binary Search Algorithm
 ```python
+# Binary search uses two pointers to converge to an answer faster than one pointer
 class Solution:
     def mySqrt(self, x):
         left, right = 0, x
