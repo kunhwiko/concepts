@@ -22,7 +22,7 @@ arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
 max(arr,key=len)    # Find the longest element in list
 ```
 
-##### Binary Search Algorithm
+##### Binary Search Algorithm / Two Pointers Method
 ```python
 # Binary search uses two pointers to converge to an answer faster than one pointer
 class Solution:
