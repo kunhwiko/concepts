@@ -65,8 +65,12 @@ for ind, num in enumerate(nums):
 
 ##### Multiple Assignment
 ```python
-i[1],i[2],i[3] = i[3],i[2],i[1]    # i[1] = i[3] ...
-val1 = val2 = i[1]                 # val1 and val2 become i[1]
+i[1],i[2],i[3] = i[3],i[2],i[1]             # i[1] = i[3] ...
+val1 = val2 = i[1]                          # val1 and val2 become i[1]
+
+results = [1] * 10                         
+results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
+
 ```
 
 ### "String"
