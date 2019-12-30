@@ -114,8 +114,8 @@ while p1 != p2:
 
 # Step 3
 while p1 != p2:
-    p1 = p1.next if p1 else headB
-    p2 = p2.next if p2 else headA
+    p1 = p1.next if p1 else headB   # p1 = headB if not p1 else p1.next
+    p2 = p2.next if p2 else headA   # p2 = headA if not p2 else p2.next
 ```
 
 
