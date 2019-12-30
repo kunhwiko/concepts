@@ -15,6 +15,7 @@
 ```python
 arr.sort(key=len, reverse=True)              # Sorts by length, from longest to shortest
 arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
+arr[::-1]                                    # Reversing
 ```
 
 ##### Searching
@@ -89,6 +90,32 @@ s.lower.count("e")   # creates a copy as lowercases and then counts number of "e
 ##### Changing
 ```python
 s = s[:1] + "r" + s[2:]  # since strings are not mutable, s[1] = "r" is not allowed 
+```
+
+### Python Things
+---
+##### Pythonic
+```python
+# Step 1
+while p1 != p2:
+    if p1 != None:
+        p1 = p1.next
+    else:
+        p1 = headB
+    if p2 != None:
+        p2 = p2.next
+    else:
+        p2 = headA
+
+# Step 2
+while p1 != p2:
+    p1 = p1.next if p1 != None else headB
+    p2 = p2.next if p2 != None else headA
+
+# Step 3
+while p1 != p2:
+    p1 = p1.next if p1 else headB
+    p2 = p2.next if p2 else headA
 ```
 
 
