@@ -72,7 +72,7 @@ s = s.replace("h","w",3)      # creates a copy and replaces first 3 "h"s to "w"
 ##### Find / Count
 ```python
 s.find("ll",5)       # returns the index of where "ll" is in string after index 5
-s.lower.count("e")   # creates a copy as lowercases and then counts number of "e"s
+s.lower().count("e")   # creates a copy as lowercases and then counts number of "e"s
 ```
 
 ##### Changing
