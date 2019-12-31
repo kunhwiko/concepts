@@ -52,18 +52,6 @@ class Solution:
         return best_sum
 ```
 
-
-##### Reversing
-```python
-arr[::-1]
-```
-
-##### Enumerating
-```python
-for ind, num in enumerate(nums):
-  print(ind, num)
-```
-
 ##### Multiple Assignment
 ```python
 i[1],i[2],i[3] = i[3],i[2],i[1]             # i[1] = i[3] ...
