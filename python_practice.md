@@ -64,9 +64,10 @@ results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 
 ### "String"
 ---
-##### Replace
+##### Changing
 ```python
 s = s.replace("h","w",3)      # creates a copy and replaces first 3 "h"s to "w"
+s = s[:1] + "r" + s[2:]  # since strings are not mutable, s[1] = "r" is not allowed 
 ```
 
 ##### Find / Count
@@ -75,9 +76,13 @@ s.find("ll",5)       # returns the index of where "ll" is in string after index 
 s.lower().count("e")   # creates a copy as lowercases and then counts number of "e"s
 ```
 
-##### Changing
+##### Operations
 ```python
-s = s[:1] + "r" + s[2:]  # since strings are not mutable, s[1] = "r" is not allowed 
+s.capitalize()          # first letter is capitalized
+s.isalnum()             # checks alphanumeric character
+s.isalpha()             # checks alphabet character
+s.isdecimal()           # checks decimal
+s.isnumeric()           # checks numeric
 ```
 
 ### Python Things
