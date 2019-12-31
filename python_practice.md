@@ -81,7 +81,7 @@ s.lower().count("e")   # creates a copy as lowercases and then counts number of 
 s.capitalize()          # first letter is capitalized
 s.isalnum()             # checks alphanumeric character
 s.isalpha()             # checks alphabet character
-s.isdecimal()           # checks decimal
+s.isdecimal()           # checks decimal character
 s.isnumeric()           # checks numeric
 ```
 
