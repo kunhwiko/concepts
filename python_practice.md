@@ -62,27 +62,35 @@ results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 
 ```
 
+### {Dictionary}
+---
+##### Searching
+```python
+max(counter.keys(), key = counter.get)     # Find the highest value out of keys
+```
+
+
 ### "String"
 ---
 ##### Changing
 ```python
-s = s.replace("h","w",3)      # creates a copy and replaces first 3 "h"s to "w"
-s = s[:1] + "r" + s[2:]  # since strings are not mutable, s[1] = "r" is not allowed 
+s = s.replace("h","w",3)      # Creates a copy and replaces first 3 "h"s to "w"
+s = s[:1] + "r" + s[2:]  # Since strings are not mutable, s[1] = "r" is not allowed 
 ```
 
 ##### Find / Count
 ```python
-s.find("ll",5)       # returns the index of where "ll" is in string after index 5
-s.lower().count("e")   # creates a copy as lowercases and then counts number of "e"s
+s.find("ll",5)       # Returns the index of where "ll" is in string after index 5
+s.lower().count("e")   # Creates a copy as lowercases and then counts number of "e"s
 ```
 
 ##### Operations
 ```python
-s.capitalize()          # first letter is capitalized
-s.isalnum()             # checks alphanumeric character
-s.isalpha()             # checks alphabet character
-s.isdecimal()           # checks decimal character
-s.isnumeric()           # checks numeric
+s.capitalize()          # First letter is capitalized
+s.isalnum()             # Checks alphanumeric character
+s.isalpha()             # Checks alphabet character
+s.isdecimal()           # Checks decimal character
+s.isnumeric()           # Checks numeric
 ```
 
 ### Python Things
