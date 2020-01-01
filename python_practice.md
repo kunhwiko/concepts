@@ -52,6 +52,20 @@ class Solution:
         return best_sum
 ```
 
+##### Boyer Moore's Voting Algorithm
+```python
+# Boyer Moore's Voting Algorithm keeps 
+    def majorityElement(self, nums: List[int]) -> int:
+        candidate = None
+        counter = 0
+        
+        for num in nums:
+            if counter == 0:
+                candidate = num
+            counter += (1 if num == candidate else -1)
+        return candidate
+```
+
 ##### Multiple Assignment
 ```python
 i[1],i[2],i[3] = i[3],i[2],i[1]             # i[1] = i[3] ...
