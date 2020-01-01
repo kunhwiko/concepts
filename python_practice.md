@@ -52,7 +52,7 @@ def maxSubArray(self, nums):
 
 ##### Boyer Moore's Voting Algorithm
 ```python
-# Keeps track of majority key and value 
+# Keeps track of majority key and value in O(n) time and O(1) space
 def majorityElement(nums):
     candidate = None
     counter = 0
