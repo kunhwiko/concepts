@@ -26,44 +26,42 @@ max(arr,key=len)    # Find the longest element in list
 ##### Binary Search Algorithm / Two Pointers Method
 ```python
 # Binary search uses two pointers to converge to an answer faster than one pointer
-class Solution:
-    def mySqrt(self, x):
-        left, right = 0, x
+def mySqrt(x):
+    left, right = 0, x
         
-        while(left<=right):
-            mid = (left+right)//2
-            if mid**2 <= x < (mid+1)**2:
-                return mid 
-            elif x < mid**2:
-                right = mid 
-            else:
-                left = mid + 1 
+    while(left<=right):
+        mid = (left+right)//2
+        if mid**2 <= x < (mid+1)**2:
+            return mid 
+        elif x < mid**2:
+            right = mid 
+        else:
+            left = mid + 1 
 ```                
 
 ##### Kadane's Algorithm
 ```python
 # Kadane's keeps track of current and best sum of subarrays going from left to right
-class Solution:
-    def maxSubArray(self, nums):
-        curr_sum = best_sum = nums[0]
-        for num in nums[1:]:
-            curr_sum = max(num, curr_sum + num)
-            best_sum = max(best_sum, curr_sum)
-        return best_sum
+def maxSubArray(self, nums):
+    curr_sum = best_sum = nums[0]
+    for num in nums[1:]:
+        curr_sum = max(num, curr_sum + num)
+        best_sum = max(best_sum, curr_sum)
+    return best_sum
 ```
 
 ##### Boyer Moore's Voting Algorithm
 ```python
-# Boyer Moore's Voting Algorithm keeps 
-    def majorityElement(self, nums: List[int]) -> int:
-        candidate = None
-        counter = 0
+# Keeps track of majority key and value 
+def majorityElement(nums):
+    candidate = None
+    counter = 0
         
-        for num in nums:
-            if counter == 0:
-                candidate = num
-            counter += (1 if num == candidate else -1)
-        return candidate
+    for num in nums:
+        if counter == 0:
+            candidate = num
+        counter += (1 if num == candidate else -1)
+    return candidate
 ```
 
 ##### Multiple Assignment
