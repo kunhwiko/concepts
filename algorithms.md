@@ -98,7 +98,7 @@ public class MergeSort{
 }
 ```
 
-### Quick Sort
+##### Quick Sort (Java)
 ```java
 
 // Time Complexity : O(nlogn), worst case -> O(n^2)  Space Complexity : O(n) 
