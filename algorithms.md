@@ -136,7 +136,7 @@ public class QuickSort{
 }
 ```
 
-##### Quick Select
+##### Quick Select (Java)
 ```java
 // A change in quick sort, only sorts needed parts and not the entire array 
 public class QuickSelect{
