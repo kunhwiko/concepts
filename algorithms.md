@@ -136,10 +136,8 @@ public class QuickSort{
 }
 ```
 
-### Quick Select
-```
-java
-###
+##### Quick Select
+```java
 // A change in quick sort, only sorts needed parts and not the entire array 
 public class QuickSelect{
     public int partition(int arr[], int left, int right){
