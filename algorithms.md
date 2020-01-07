@@ -190,3 +190,13 @@ def mySqrt(x):
         else:
             left = mid + 1 
 ```              
+
+##### Depth First Search (Python)
+```python
+# Recursion
+def printAllNodes(root):
+    if root != None:
+       print(root.val)
+       printAllNodes(root.left)
+       printAllNodes(root.right)       
+```
