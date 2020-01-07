@@ -212,3 +212,20 @@ def dfsIteration(root):
         if node.right:
             stack.append(node.right)
 ```
+
+##### Breath First Search (Python)
+```python
+# Iteration
+def bfsIteration(root):
+    nodes = [root]
+    
+    while nodes:
+        queue = []
+        for node in nodes:
+            print(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        nodes = queue       
+```
