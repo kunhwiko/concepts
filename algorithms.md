@@ -194,9 +194,21 @@ def mySqrt(x):
 ##### Depth First Search (Python)
 ```python
 # Recursion
-def printAllNodes(root):
+def dfsRecursive(root):
     if root != None:
        print(root.val)
-       printAllNodes(root.left)
-       printAllNodes(root.right)       
+       dfsRecursive(root.left)
+       dfsRecursive(root.right)
+       
+# Iteration
+def dfsIteration(root):
+    stack = [root]
+    
+    while stack:
+        node = stack.pop()
+        print(node.val)
+        if node.left:
+            stack.append(node.left)
+        if node.right:
+            stack.append(node.right)
 ```
