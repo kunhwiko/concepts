@@ -120,7 +120,8 @@ while p1 != p2:
 ---
 ##### Boolean Logic
 ```python
-sign = (x>0) - (x<0)                  # Can easily find sign 
+sign = (x>0) - (x<0)                  # Can easily find sign
+sign = (x<0) == (y<0)                 # Can easily compare signs (when multiplying/dividing)
 sign * random_num * (random_num<500)  # Get result only if random_num is below 500
 ```
  
