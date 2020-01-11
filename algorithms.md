@@ -233,7 +233,7 @@ def bfsIteration(root):
 ---
 ##### Kadane's Algorithm
 ```python
-# Kadane's keeps track of current and best sum of subarrays going from left to right
+# Finds maximum subarray from left to right 
 def maxSubArray(self, nums):
     curr_sum = best_sum = nums[0]
     for num in nums[1:]:
