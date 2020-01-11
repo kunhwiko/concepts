@@ -23,17 +23,6 @@ arr[::-1]                                    # Reversing
 max(arr,key=len)    # Find the longest element in list
 ```
 
-##### Kadane's Algorithm
-```python
-# Kadane's keeps track of current and best sum of subarrays going from left to right
-def maxSubArray(self, nums):
-    curr_sum = best_sum = nums[0]
-    for num in nums[1:]:
-        curr_sum = max(num, curr_sum + num)
-        best_sum = max(best_sum, curr_sum)
-    return best_sum
-```
-
 ##### Boyer Moore's Voting Algorithm
 ```python
 # Keeps track of majority key and value in O(n) time and O(1) space
