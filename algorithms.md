@@ -229,9 +229,9 @@ def bfsIteration(root):
             queue.append(node.right)
 ```
 
-### Dynamic Programming
+### Subproblems
 ---
-##### Kadane's Algorithm
+##### Kadane's Algorithm (Dynamic Programming)
 ```python
 # Finds maximum subarray from left to right 
 def maxSubArray(nums):
