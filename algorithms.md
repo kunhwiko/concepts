@@ -234,7 +234,7 @@ def bfsIteration(root):
 ##### Kadane's Algorithm
 ```python
 # Finds maximum subarray from left to right 
-def maxSubArray(self, nums):
+def maxSubArray(nums):
     curr_sum = best_sum = nums[0]
     for num in nums[1:]:
         curr_sum = max(num, curr_sum + num)
