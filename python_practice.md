@@ -109,7 +109,14 @@ while p1 != p2:
 a = [1,2,3] 
 b = [4,5,6]
 for i in zip(a,b):
-    print(i)
+    print(i)     # [(1,4),(2,5),(3,6)]
+```
+
+##### Map
+```python
+nums = [1,2,3,4]
+k = map(lambda x : x**2, nums)
+print(list(k))     # [1,4,9,16]
 ```
 
 ### Logic Operations / Bit Manipulation 
