@@ -104,6 +104,13 @@ while p1 != p2:
     p2 = p2.next if p2 else headA   # p2 = headA if not p2 else p2.next
 ```
 
+##### Zip
+```python
+a = [1,2,3] 
+b = [4,5,6]
+for i in zip(a,b):
+    print(i)
+```
 
 ### Logic Operations / Bit Manipulation 
 ---
