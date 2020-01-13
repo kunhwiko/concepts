@@ -2,6 +2,7 @@
 ---
 ##### Bubble Sort
 ```python
+# Swaps adjacent elements if they are in wrong order 
 # Time Complexity : O(n^2)   Space Complexity : O(1)
 def bubbleSort(arr):
     for i in range(len(arr)-1):
@@ -12,6 +13,7 @@ def bubbleSort(arr):
 
 ##### Selection Sort
 ```python
+# Finds minimum element and places them in the beginning 
 # Time Complexity : O(n^2)   Space Complexity : O(1)
 def selectionSort(arr):
     for i in range(len(arr)-1):
