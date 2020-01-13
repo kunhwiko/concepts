@@ -175,7 +175,7 @@ public class QuickSelect{
 
 ### Search Algorithms
 ---
-##### Binary Search Algorithm / Two Pointers
+##### Binary Search 
 ```python
 # Binary search uses two pointers to converge to an answer faster than one pointer
 def mySqrt(x):
