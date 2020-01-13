@@ -1,6 +1,6 @@
 ### Sorting Algorithms
 ---
-##### Bubble Sort (Java)
+##### Bubble Sort
 ```java
 // Time Complexity : O(n^2)   Space Complexity : O(1)
 
@@ -17,7 +17,7 @@ public void bubbleSort(int[] arr){
 }
 ```
 
-##### Selection Sort (Java)
+##### Selection Sort
 ```java
 // Time Complexity : O(n^2)   Space Complexity : O(1)
 
@@ -36,7 +36,7 @@ public void selectionSort(int[] arr){
 }
 ```
 
-##### Merge Sort (Java)
+##### Merge Sort
 ```java
 // Time Complexity : O(nlogn)  Space Complexity : O(n) 
 
@@ -98,7 +98,7 @@ public class MergeSort{
 }
 ```
 
-##### Quick Sort (Java)
+##### Quick Sort 
 ```java
 
 // Time Complexity : O(nlogn), worst case -> O(n^2)  Space Complexity : O(n) 
@@ -136,7 +136,7 @@ public class QuickSort{
 }
 ```
 
-##### Quick Select (Java)
+##### Quick Select
 ```java
 // A change in quick sort, only sorts needed parts and not the entire array 
 public class QuickSelect{
@@ -175,7 +175,7 @@ public class QuickSelect{
 
 ### Search Algorithms
 ---
-##### Binary Search Algorithm / Two Pointers (Python)
+##### Binary Search Algorithm / Two Pointers
 ```python
 # Binary search uses two pointers to converge to an answer faster than one pointer
 def mySqrt(x):
@@ -191,7 +191,7 @@ def mySqrt(x):
             left = mid + 1 
 ```              
 
-##### Depth First Search (Python)
+##### Depth First Search
 ```python
 # Recursion
 def dfsRecursive(root):
@@ -213,7 +213,7 @@ def dfsIteration(root):
             stack.append(node.left)
 ```
 
-##### Breath First Search (Python)
+##### Breath First Search
 ```python
 # Iteration
 def bfsIteration(root):
@@ -227,6 +227,29 @@ def bfsIteration(root):
             queue.append(node.left)
         if node.right:
             queue.append(node.right)
+```
+
+##### Floyd's Cycle Detection 
+```python
+# Finds beginning of cycle, if one exists
+# a = distance from head to start of cycle
+# b = distance from start of cycle to where slow,fast meet
+# c = distance from where slow,fast meet to start of cycle
+# distance fast moved = a + b + c + a, distance slow moved = a + b
+# relation of fast and slow : a+b+c+a = 2 * (a+b) -> c = a
+def detect(head):
+    slow = fast = head 
+    while fast != None and fast.next != None:
+        fast = fast.next.next
+        slow = slow.next 
+        if slow == fast:
+            break
+    if fast == None or fast.next == None:
+        return None
+    while head != fast:
+        head = head.next
+        fast = fast.next
+    return head    
 ```
 
 ### Subproblems
