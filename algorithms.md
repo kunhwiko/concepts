@@ -11,23 +11,17 @@ def bubbleSort(arr):
 ```
 
 ##### Selection Sort
-```java
-// Time Complexity : O(n^2)   Space Complexity : O(1)
-
-public void selectionSort(int[] arr){
-    for(int i = 0; i < arr.length-1; i++){
-        int minIndex = i;
-        for(int j = i+1; j < arr.length; j++){
-            if(arr[j] < arr[minIndex]){
-                minIndex = j;
-            }
-        }
-        int tmp = arr[i];
-        arr[i] = arr[minIndex];
-        arr[minIndex] = tmp;
-    }
-}
+```python
+# Time Complexity : O(n^2)   Space Complexity : O(1)
+def selectionSort(arr):
+    for i in range(len(arr)-1):
+        minIndex = i
+        for j in range(i+1,len(arr)):
+            if arr[j] < arr[minIndex]:
+                minIndex = j
+        arr[i],arr[minIndex] = arr[minIndex],arr[i]      
 ```
+
 
 ##### Merge Sort
 ```java
