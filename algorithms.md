@@ -252,9 +252,9 @@ def detect(head):
     return head    
 ```
 
-### Subproblems
+### Subproblems and Dynamic Programming
 ---
-##### Kadane's Algorithm (Dynamic Programming)
+##### Kadane's Algorithm
 ```python
 # Finds maximum subarray from left to right 
 def maxSubArray(nums):
