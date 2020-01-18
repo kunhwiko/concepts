@@ -166,7 +166,7 @@ public class QuickSelect{
 ---
 ##### Binary Search 
 ```python
-# Binary search uses two pointers to converge to an answer faster than one pointer
+# Search with two pointers to converge faster than one pointer
 def mySqrt(x):
     left, right = 0, x
         
@@ -174,7 +174,7 @@ def mySqrt(x):
         mid = (left + right)//2
         if mid**2 <= x < (mid+1)**2:
             return mid 
-        elif x < mid**2:
+        elif x < mid**2: 
             right = mid 
         else:
             left = mid + 1 
@@ -182,6 +182,7 @@ def mySqrt(x):
 
 ##### Depth First Search
 ```python
+# Explores as far as possible along the branch and then backtracks
 # Recursion
 def dfsRecursive(root):
     if root != None:
@@ -204,6 +205,7 @@ def dfsIteration(root):
 
 ##### Breath First Search
 ```python
+# Explores each level first before moving to next level
 # Iteration
 def bfsIteration(root):
     queue = [root]
@@ -245,7 +247,8 @@ def detect(head):
 ---
 ##### Kadane's Algorithm
 ```python
-# Finds maximum subarray from left to right 
+# Update a continuous subset starting from left to right
+# In this problem, we find the largest continuous subarray possible
 def maxSubArray(nums):
     curr_sum = best_sum = nums[0]
     for num in nums[1:]:
@@ -253,3 +256,8 @@ def maxSubArray(nums):
         best_sum = max(best_sum, curr_sum)
     return best_sum
 ```
+
+##### Sliding Windows
+```python
+# Slides a window of size k starting from left to right
+# In this problem, 
