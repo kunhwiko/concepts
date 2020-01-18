@@ -248,7 +248,7 @@ def detect(head):
 ##### Kadane's Algorithm
 ```python
 # Update a continuous subset starting from left to right
-# In this problem, we find the largest continuous subarray possible
+# In this problem, find the largest continuous subarray possible
 def maxSubArray(nums):
     curr_sum = best_sum = nums[0]
     for num in nums[1:]:
@@ -260,4 +260,9 @@ def maxSubArray(nums):
 ##### Sliding Windows
 ```python
 # Slides a window of size k starting from left to right
-# In this problem, 
+# In this problem, slide a window through the array to find the max value of a size 3 subarray
+def maxSubArray(nums,k):
+    best = sum(nums[0:k])
+    for i in range(1,len(nums)-k+1):
+        best = max(best,sum(nums[i:i+k-1]))
+    return best
