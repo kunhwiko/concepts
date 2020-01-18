@@ -259,8 +259,8 @@ def maxSubArray(nums):
 
 ##### Sliding Windows
 ```python
-# Slides a window of size k starting from left to right
-# In this problem, slide a window through the array to find the max value of a size 3 subarray
+# Slides a window of size k through the array starting from left to right
+# In this problem, slide a window to find the max value of a size k subarray
 def maxSubArray(nums,k):
     best = sum(nums[0:k])
     for i in range(1,len(nums)-k+1):
