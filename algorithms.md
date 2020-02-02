@@ -29,62 +29,50 @@ def selectionSort(arr):
 ```java
 // Time Complexity : O(nlogn)  Space Complexity : O(n) 
 
-public class MergeSort{
-    public void sort(int arr[], int left, int right){
-        if(left < right){
-            int mid = (left+right)/2;
-            sort(arr,left,mid);
-            sort(arr,mid+1,right);
-            merge(arr,left,mid,right);
-        }
-    }
+def mergeSort(arr,left,right):
+    if left < right:
+        mid = (left+right)//2
+        mergeSort(arr,left,mid)
+        mergeSort(arr,mid+1,right)
+        merge(arr,left,mid,right)
 
-    public void merge(int arr[], int left, int mid, int right){
-        // find size of each half 
-        int size1 = mid-left+1;
-        int size2 = right-mid;
+def merge(arr,left,mid,right):
+    # find size of each half
+    size1 = mid-left+1
+    size2 = right-mid
 
-        // create array for each half
-        int L[] = new int[size1];
-        int R[] = new int[size2];
+    # create array for each half
+    L = [0]*size1
+    R = [0]*size2
 
-        // copy elements to each half
-        for(int i = 0; i < size1; i++){
-            L[i] = arr[left+i];
-        }
-        for(int j = 0; j < size2; j++){
-            R[j] = arr[mid+1+j];
-        }
+    # copy element for each half
+    for i in range(size1):
+        L[i] = arr[left+i]
+    for j in range(size2):
+        R[j] = arr[mid+1+j]
 
-        // merge L and R
-        int i = 0, j = 0;
-        int k = left;
-        while(i < size1 && j < size2){
-            if(L[i] <= R[j]){
-                arr[k] = L[i];
-                i++;
-            }else{
-                arr[k] = R[j];
-                j++;
-            }
-            k++;
-        }
+    # merge left and right
+    i,j,k = 0,0,left
+    while i < size1 and j < size2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i += 1
+        else:
+            arr[k] = R[j]
+            j += 1
+        k += 1
 
-        // Copy any remaining elements of L[]
-        while(i < size1){
-            arr[k] = L[i];
-            i++;
-            k++;
-        }
+    # Copy remaining elements of L
+    while i < size1:
+        arr[k] = L[i]
+        i += 1
+        k += 1
 
-        // Copy any remaining elements of R[]
-        while(j < size2){
-            arr[k] = R[j];
-            j++;
-            k++;
-        }
-    }
-}
+    # Copy remaining elements of R
+    while j < size2:
+        arr[k] = R[j]
+        j += 1
+        k += 1
 ```
 
 ##### Quick Sort 
