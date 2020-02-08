@@ -26,8 +26,8 @@ def selectionSort(arr):
 
 
 ##### Merge Sort
-```java
-// Time Complexity : O(nlogn)  Space Complexity : O(n) 
+```python
+# Time Complexity : O(nlogn)  Space Complexity : O(n) 
 
 def mergeSort(arr,left,right):
     if left < right:
@@ -76,41 +76,28 @@ def merge(arr,left,mid,right):
 ```
 
 ##### Quick Sort 
-```java
+```python
 
-// Time Complexity : O(nlogn), worst case -> O(n^2)  Space Complexity : O(n) 
-public class QuickSort{
-    public void sort(int[] arr, int left, int right){
-        if(left < right){
-            // partition index
-            int index = partition(arr,left,right);
+# Time Complexity : O(nlogn), worst case -> O(n^2) 
+# Space Complexity : O(logn) (in place sorting, space is used for recursive calls) 
+def quickSort(arr,left,right):
+    if left < right:
+        # index to partition
+        index = partition(arr,left,right)
+        quickSort(arr,left,index-1)
+        quickSort(arr,index+1,right)
 
-            sort(arr,left,index-1);
-            sort(arr,index+1,right);
-        }
-    }
-
-    public int partition(int arr[], int left, int right){
-        // quick sort version that takes "last element" as pivot
-        int pivot = arr[right];
-        int i = left;
-        while(left < right){
-            if(arr[left] < pivot){
-                int tmp = arr[i];
-                arr[i] = arr[left];
-                arr[left] = tmp;
-                i++;
-            }
-            left++;
-        }
-
-        int tmp = arr[i];
-        arr[i] = arr[right];
-        arr[right] = tmp;
-
-        return i;
-    }
-}
+def partition(arr,left,right):
+    # set pivot as the right-most element
+    pivot = arr[right]
+    i = left
+    while left < right:
+        if arr[left] < pivot:
+            arr[i],arr[left] = arr[left],arr[i]
+            i += 1
+        left += 1
+    arr[i],arr[right] = arr[right],arr[i]
+    return i
 ```
 
 ##### Quick Select
