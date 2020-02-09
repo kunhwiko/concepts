@@ -119,7 +119,7 @@ def quickSelect(arr,left,right,k):
     index = partition(arr,left,right)
     if index > k:
         return quickSelect(arr,left,index-1,k)
-    else if index < k:
+    elif index < k:
         return quickSelect(arr,index+1,right,k)
     else:
         return arr[index]
