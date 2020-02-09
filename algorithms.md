@@ -101,38 +101,28 @@ def partition(arr,left,right):
 ```
 
 ##### Quick Select
-```java
-// A change in quick sort, only sorts needed parts and not the entire array 
-public class QuickSelect{
-    public int partition(int arr[], int left, int right){
-        // quick sort version that takes "last element" as pivot
-        int pivot = arr[right];
-        int i = left;
-        while(left < right){
-            if(arr[left] < pivot){
-                int tmp = arr[i];
-                arr[i] = arr[left];
-                arr[left] = tmp;
-                i++;
-            }
-            left++;
-        }
+```python
+# A change in quick sort, only sorts needed parts and not the entire array 
+def partition(arr,left,right):
+    pivot = arr[right]
+    i = left
 
-        int tmp = arr[i];
-        arr[i] = arr[right];
-        arr[right] = tmp;
+    while left < right:
+        if arr[left] < pivot:
+            arr[i],arr[left] = arr[left],arr[i]
+            i += 1
+        left +=1 
+    arr[right],arr[i] = arr[i],arr[right]
+    return i 
 
-        return i;
-    }
- 
-    // k is the index of the array 
-    public int select(int[] arr, int left, int right,int k){
-        int index = partition(arr,left,right);
-        if(index > k) {return select(arr,left,index-1,k);}
-        else if(index < k) {return select(arr,index+1,right,k);}
-        else{ return arr[index]; }
-    }
-}
+def quickSelect(arr,left,right,k):
+    index = partition(arr,left,right)
+    if index > k:
+        return quickSelect(arr,left,index-1,k)
+    else if index < k:
+        return quickSelect(arr,index+1,right,k)
+    else:
+        return arr[index]
 ```
 
 
