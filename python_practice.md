@@ -15,26 +15,11 @@
 ```python
 arr.sort(key=len, reverse=True)              # Sorts by length, from longest to shortest
 arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
-arr[::-1]                                    # Reversing
 ```
 
 ##### Searching
 ```python
 max(arr,key=len)    # Find the longest element in list
-```
-
-##### Boyer Moore's Voting Algorithm
-```python
-# Keeps track of majority key and value in O(n) time and O(1) space
-def majorityElement(nums):
-    candidate = None
-    counter = 0
-        
-    for num in nums:
-        if counter == 0:
-            candidate = num
-        counter += (1 if num == candidate else -1)
-    return candidate
 ```
 
 ##### Multiple Assignment
