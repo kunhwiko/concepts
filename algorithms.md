@@ -231,3 +231,20 @@ def maxSubArray(nums,k):
     for i in range(1,len(nums)-k+1):
         best = max(best,sum(nums[i:i+k-1]))
     return best
+```
+
+### Other Algorithms
+---
+##### Boyer Moore's Voting Algorithm
+```python
+# Keeps track of majority key and value in O(n) time and O(1) space
+def majorityElement(nums):
+    candidate = None
+    counter = 0
+        
+    for num in nums:
+        if counter == 0:
+            candidate = num
+        counter += (1 if num == candidate else -1)
+    return candidate
+```
