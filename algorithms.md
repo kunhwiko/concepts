@@ -248,3 +248,13 @@ def majorityElement(nums):
         counter += (1 if num == candidate else -1)
     return candidate
 ```
+
+##### % for Index Finding
+---
+```python
+# % can be used to find indices in arrays, circular queues
+nums = [4,5,0,1,2,3]
+l, r = 0, len(nums)
+mid = (l+r)//2
+index = (mid+2)%len(nums)
+```
