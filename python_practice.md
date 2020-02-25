@@ -97,6 +97,13 @@ for i in zip(a,b):
     print(i)     # [(1,4),(2,5),(3,6)]
 ```
 
+##### *
+```python
+board = [[1,2,3],[4,5,6]]
+*board                     # unpacks values
+zip(*board)                # zip unpacked values
+```
+
 ##### Map
 ```python
 nums = [1,2,3,4]
