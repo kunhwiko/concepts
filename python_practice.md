@@ -19,7 +19,10 @@ arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
 
 ##### Searching
 ```python
-max(arr,key=len)    # Find the longest element in list
+max(arr,key=len)                             # Find the longest element in list
+
+for i in range(len(nums)-1,-1,-1)            # Following two are equivalent
+for i in reversed(range(len(nums))
 ```
 
 ##### Multiple Assignment
