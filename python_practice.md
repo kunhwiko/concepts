@@ -100,6 +100,13 @@ for i in zip(a,b):
     print(i)     # [(1,4),(2,5),(3,6)]
 ```
 
+##### Map
+```python
+nums = [1,2,3,4]
+k = map(lambda x : x**2, nums)
+print(list(k))     # [1,4,9,16]
+```
+
 ##### *
 ```python
 board = [[1,2,3],[4,5,6],[7,8,9]]
@@ -107,13 +114,7 @@ board = [[1,2,3],[4,5,6],[7,8,9]]
 zip(*board)                          # zip unpacked values
 def rotate(board):
     board[:] = zip(*board)           # must dereference as board[:], think about stack
-```
-
-##### Map
-```python
-nums = [1,2,3,4]
-k = map(lambda x : x**2, nums)
-print(list(k))     # [1,4,9,16]
+    board[:] = map(list,zip(*board)) # converts the tuples to lists
 ```
 
 ### Logic Operations / Bit Manipulation 
