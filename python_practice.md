@@ -106,7 +106,7 @@ board = [[1,2,3],[4,5,6],[7,8,9]]
 *board                               # unpacks values
 zip(*board)                          # zip unpacked values
 def rotate(board):
-    board[:] = zip(*board)           # 
+    board[:] = zip(*board)           # must dereference as board[:], think about stack
 ```
 
 ##### Map
