@@ -102,9 +102,11 @@ for i in zip(a,b):
 
 ##### *
 ```python
-board = [[1,2,3],[4,5,6]]
-*board                     # unpacks values
-zip(*board)                # zip unpacked values
+board = [[1,2,3],[4,5,6],[7,8,9]]
+*board                               # unpacks values
+zip(*board)                          # zip unpacked values
+def rotate(board):
+    board[:] = zip(*board)           # 
 ```
 
 ##### Map
