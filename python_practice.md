@@ -45,7 +45,7 @@ max(counter.keys(), key = counter.get)     # Find the highest value out of keys
 
 ### "String"
 ---
-##### Changing
+##### Manipulating
 ```python
 s = s.replace("h","w",3)      # Creates a copy and replaces first 3 "h"s to "w"
 s = s[:1] + "r" + s[2:]  # Since strings are not mutable, s[1] = "r" is not allowed 
@@ -90,6 +90,13 @@ while p1 != p2:
 while p1 != p2:
     p1 = p1.next if p1 else headB   # p1 = headB if not p1 else p1.next
     p2 = p2.next if p2 else headA   # p2 = headA if not p2 else p2.next
+```
+
+##### Split / Join
+```python
+strs = "hello there"    
+strs = strs.split(" ")              # ["hello","there"]
+strs = " ".join(strs)               # "hello there"
 ```
 
 ##### Zip
