@@ -15,6 +15,8 @@
 ```python
 arr.sort(key=len, reverse=True)              # Sorts by length, from longest to shortest
 arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
+
+arr.sort(key=lambda x : x[0])                # [(10,15),(3,4),(5,11)] -> [(3,4),(5,11),(10,15)]
 ```
 
 ##### Searching
