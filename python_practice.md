@@ -55,8 +55,8 @@ queue.popleft()
 ##### Replace / Find / Count
 ```python
 s = s.replace("h","w",3)      # Creates a copy of string and replaces first 3 "h"s to "w"
-s.find("ll",5)       # Returns the index of where "ll" is in string after index 5
-s.lower().count("e")   # Creates a copy as lowercases and then counts number of "e"s
+s.find("ll",5)                # Returns the index of where "ll" is in string after index 5
+s.lower().count("e")          # Creates a copy as lowercases and then counts number of "e"s
 ```
 
 
@@ -138,8 +138,8 @@ sign * random_num * (random_num<500)  # Get result only if random_num is below 5
 
 ##### int vs integer division
 ```python
--5 // 2 = -3   # looks at left integer on number line 
-int(-5//2) = -2  # looks closer to zero
+-5 // 2 = -3       # looks at left integer on number line 
+int(-5//2) = -2    # looks at integer closer to zero
 ```
 
 ##### Bitwise Comparison
