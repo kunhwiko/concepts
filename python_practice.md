@@ -14,7 +14,7 @@
 ##### Sorting
 ```python
 arr.sort(key=len, reverse=True)              # Sorts by length, from longest to shortest
-arr.sort(key=lambda x: len(x), reverse=True) # Same but utilizing lambda
+arr.sort(key=lambda x: len(x), reverse=True) # Utilizing lambda
 
 arr.sort(key=lambda x : x[0])                # [(10,15),(3,4),(5,11)] -> [(3,4),(5,11),(10,15)]
 ```
@@ -29,9 +29,6 @@ for i in reversed(range(len(nums))
 
 ##### Multiple Assignment
 ```python
-i[1],i[2],i[3] = i[3],i[2],i[1]             # i[1] = i[3] ...
-val1 = val2 = i[1]                          # val1 and val2 become i[1]
-
 results = [1] * 10                         
 results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 
@@ -44,20 +41,24 @@ results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 max(counter.keys(), key = counter.get)     # Find the highest value out of keys
 ```
 
+### {Queue}
+---
+##### Basics
+```python
+queue = collections.deque([1,2,3])
+queue.append(4)
+queue.popleft()
+```
 
 ### "String"
 ---
-##### Manipulating
+##### Replace / Find / Count
 ```python
-s = s.replace("h","w",3)      # Creates a copy and replaces first 3 "h"s to "w"
-s = s[:1] + "r" + s[2:]  # Since strings are not mutable, s[1] = "r" is not allowed 
-```
-
-##### Find / Count
-```python
+s = s.replace("h","w",3)      # Creates a copy of string and replaces first 3 "h"s to "w"
 s.find("ll",5)       # Returns the index of where "ll" is in string after index 5
 s.lower().count("e")   # Creates a copy as lowercases and then counts number of "e"s
 ```
+
 
 ##### Operations
 ```python
@@ -134,7 +135,13 @@ sign = (x>0) - (x<0)                  # Can easily find sign
 sign = (x<0) == (y<0)                 # Can easily compare signs 
 sign * random_num * (random_num<500)  # Get result only if random_num is below 500
 ```
- 
+
+##### int vs integer division
+```python
+-5 // 2 = -3   # looks at left integer on number line 
+int(-5//2) = -2  # looks closer to zero
+```
+
 ##### Bitwise Comparison
 ```python
 ~5                       # Not
