@@ -132,6 +132,12 @@ def rotate(board):
     board[:] = map(list,zip(*board)) # converts the tuples to lists
 ```
 
+##### Comparator
+```python
+array.sort(cmp = comparator)                       # python
+array.sort(key = functools.cmp_to_key(comparator)) # python3
+```
+
 ### Logic Operations / Bit Manipulation 
 ---
 ##### Boolean Logic
