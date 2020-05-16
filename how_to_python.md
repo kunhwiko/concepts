@@ -95,6 +95,11 @@ while p1 != p2:
     p2 = p2.next if p2 else headA   # p2 = headA if not p2 else p2.next
 ```
 
+##### Multiple Inheritance
+```python
+class ArcticBear(Arctic, Bear, Land):
+```
+
 ##### Split / Join
 ```python
 strs = "hello there"    
