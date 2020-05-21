@@ -17,6 +17,8 @@ arr.sort(key=len, reverse=True)              # Sorts by length, from longest to 
 arr.sort(key=lambda x: len(x), reverse=True) # Utilizing lambda
 
 arr.sort(key=lambda x : x[0])                # [(10,15),(3,4),(5,11)] -> [(3,4),(5,11),(10,15)]
+
+random.shuffle(nums)                         # randomly shuffles array
 ```
 
 ##### Searching
@@ -31,7 +33,6 @@ for i in reversed(range(len(nums))
 ```python
 results = [1] * 10                         
 results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
-
 ```
 
 ### {Dictionary}
@@ -41,13 +42,21 @@ results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 max(counter.keys(), key = counter.get)     # Find the highest value out of keys
 ```
 
-### {Queue}
+### [Other Data Structures]
 ---
-##### Basics
+##### Queue
 ```python
 queue = collections.deque([1,2,3])
 queue.append(4)
 queue.popleft()
+```
+
+##### Min Heap
+```python
+arr = []
+for num in nums:
+    heapq.heappush(arr,num)
+    heapq.heappop(arr)
 ```
 
 ### "String"
