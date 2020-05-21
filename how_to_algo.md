@@ -1,4 +1,4 @@
-### Sorting Algorithms
+### Sorting
 ---
 ##### Bubble Sort
 ```python
@@ -23,7 +23,6 @@ def selectionSort(arr):
                 minIndex = j
         arr[i],arr[minIndex] = arr[minIndex],arr[i]      
 ```
-
 
 ##### Merge Sort
 ```python
@@ -100,7 +99,7 @@ def partition(arr,left,right):
     return i
 ```
 
-##### Quick Select
+##### Quick Select (Modify quick sort)
 ```python
 # A change in quick sort, only sorts needed parts and not the entire array 
 def partition(arr,left,right):
@@ -116,6 +115,7 @@ def partition(arr,left,right):
     return i 
 
 def quickSelect(arr,left,right,k):
+    # if l < r condition is not needed as there is a new base case
     index = partition(arr,left,right)
     if index > k:
         return quickSelect(arr,left,index-1,k)
