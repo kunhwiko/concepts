@@ -42,6 +42,10 @@ results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 max(counter.keys(), key = counter.get)     # Find the highest value out of keys
 ```
 
+#### Deleting mappings
+```python
+del dict[some_item]
+```
 ### [Other Data Structures]
 ---
 ##### Queue
