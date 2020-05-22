@@ -145,6 +145,8 @@ def mySqrt(x):
             left = mid + 1 
 ```              
 
+### Tree/Graph Algorithms
+---
 ##### Depth First Search
 ```python
 # Explores as far as possible along the branch and then backtracks
