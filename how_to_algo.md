@@ -1,4 +1,4 @@
-### Sorting
+### Sorting 
 ---
 ##### Bubble Sort
 ```python
