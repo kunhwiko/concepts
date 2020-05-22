@@ -99,6 +99,26 @@ def partition(arr,left,right):
     return i
 ```
 
+
+
+### Search Algorithms
+---
+##### Binary Search 
+```python
+# Search with two pointers to converge faster than one pointer
+def mySqrt(x):
+    left, right = 0, x
+        
+    while left <= right:
+        mid = (left + right)//2
+        if mid**2 <= x < (mid+1)**2:
+            return mid 
+        elif x < mid**2: 
+            right = mid 
+        else:
+            left = mid + 1 
+```              
+
 ##### Quick Select (Modify quick sort)
 ```python
 # A change in quick sort, only sorts needed parts and not the entire array 
@@ -124,26 +144,6 @@ def quickSelect(arr,left,right,k):
     else:
         return arr[index]
 ```
-
-
-
-### Search Algorithms
----
-##### Binary Search 
-```python
-# Search with two pointers to converge faster than one pointer
-def mySqrt(x):
-    left, right = 0, x
-        
-    while left <= right:
-        mid = (left + right)//2
-        if mid**2 <= x < (mid+1)**2:
-            return mid 
-        elif x < mid**2: 
-            right = mid 
-        else:
-            left = mid + 1 
-```              
 
 ### Tree/Graph Algorithms
 ---
