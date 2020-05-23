@@ -115,7 +115,7 @@ def binary(arr):
         elif arr[mid] > target:
             right = mid - 1
         else:
-            return true
+            return True
     return False
 ```              
 
