@@ -100,23 +100,23 @@ def partition(arr,left,right):
 ```
 
 
-
 ### Search Algorithms
 ---
 ##### Binary Search 
 ```python
 # Search with two pointers to converge faster than one pointer
-def mySqrt(x):
-    left, right = 0, x
-        
-    while left <= right:
-        mid = (left + right)//2
-        if mid**2 <= x < (mid+1)**2:
-            return mid 
-        elif x < mid**2: 
-            right = mid 
+def binary(arr):
+    left, right = 0, len(arr)-1
+
+    while l <= r:
+        mid = (l+r)//2
+        if arr[mid] < target:
+            left = mid + 1
+        elif arr[mid] > target:
+            right = mid - 1
         else:
-            left = mid + 1 
+            return true
+    return False
 ```              
 
 ##### Quick Select (Modify quick sort)
