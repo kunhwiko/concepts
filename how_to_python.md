@@ -29,6 +29,13 @@ for i in range(len(nums)-1,-1,-1)            # Following two are equivalent
 for i in reversed(range(len(nums))
 ```
 
+##### Operations
+```python
+arr.insert(index,element)
+del arr[index]
+arr.remove(element)
+```
+
 ##### Multiple Assignment
 ```python
 results = [1] * 10                         
