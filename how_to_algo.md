@@ -192,6 +192,17 @@ def bfsIteration(root):
 
 ### Other Algorithms
 ---
+##### Kadane's Algorithm
+```python
+# Update the largest continguous sum of a subarray
+def maxSubArray(nums):
+    curr = best = nums[0]
+    for i in range(1,len(nums)):
+        curr = max(nums[i], curr + nums[i])
+        best = max(curr, best)
+    return best
+```
+
 ##### Boyer Moore's Voting Algorithm
 ```python
 # Keeps track of majority key and value in O(n) time and O(1) space
@@ -229,17 +240,6 @@ def detect(head):
     return head    
 ```
 
-##### Kadane's Algorithm
-```python
-# Update a continuous subset starting from left to right
-# In this problem, find the largest continuous subarray possible
-def maxSubArray(nums):
-    curr_sum = best_sum = nums[0]
-    for num in nums[1:]:
-        curr_sum = max(num, curr_sum + num)
-        best_sum = max(best_sum, curr_sum)
-    return best_sum
-```
 
 ##### Sliding Windows
 ```python
