@@ -227,7 +227,7 @@ def majorityElement(nums):
 # relation of fast and slow : a+b+c+a = 2 * (a+b) -> c = a
 def detect(head):
     slow = fast = head 
-    while fast != None and fast.next != None:
+    while fast and fast.next:
         fast = fast.next.next
         slow = slow.next 
         if slow == fast:
