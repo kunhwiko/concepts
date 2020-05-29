@@ -203,20 +203,6 @@ def maxSubArray(nums):
     return best
 ```
 
-##### Boyer Moore's Voting Algorithm
-```python
-# Keeps track of majority key and value in O(n) time and O(1) space
-def majorityElement(nums):
-    candidate = None
-    counter = 0
-        
-    for num in nums:
-        if counter == 0:
-            candidate = num
-        counter += (1 if num == candidate else -1)
-    return candidate
-```
-
 ##### Floyd's Cycle Detection 
 ```python
 # Finds beginning of cycle, if one exists
@@ -238,6 +224,20 @@ def detect(head):
         head = head.next
         fast = fast.next
     return head    
+```
+
+##### Boyer Moore's Voting Algorithm
+```python
+# Keeps track of majority key and value in O(n) time and O(1) space
+def majorityElement(nums):
+    candidate = None
+    counter = 0
+        
+    for num in nums:
+        if counter == 0:
+            candidate = num
+        counter += (1 if num == candidate else -1)
+    return candidate
 ```
 
 
