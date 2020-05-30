@@ -17,8 +17,6 @@ arr.sort(key=len, reverse=True)              # Sorts by length, from longest to 
 arr.sort(key=lambda x: len(x), reverse=True) # Utilizing lambda
 
 arr.sort(key=lambda x : x[0])                # [(10,15),(3,4),(5,11)] -> [(3,4),(5,11),(10,15)]
-
-random.shuffle(nums)                         # randomly shuffles array
 ```
 
 ##### Searching
@@ -156,6 +154,12 @@ def rotate(board):
 ```python
 array.sort(cmp = comparator)                       # python
 array.sort(key = functools.cmp_to_key(comparator)) # python3
+```
+
+##### Random
+```python
+random.shuffle(nums)                         # randomly shuffles array
+random.randint(1,3)                          # random number out of 1,2,3
 ```
 
 ### Logic Operations / Bit Manipulation 
