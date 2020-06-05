@@ -32,6 +32,12 @@ for i in reversed(range(len(nums))
 arr.insert(index,element)
 del arr[index]
 arr.remove(element)
+
+nums = nums[::-1]                 # nums changes its reference
+nums[:] = arr[:k] + arr[k:]       # nums changes the array its referencing
+
+nums[::-1]                        # nums creates a new copy of a reversed version
+nums.reverse()                    # nums reverses the array its referencing
 ```
 
 ##### Multiple Assignment
