@@ -173,7 +173,7 @@ def dfsIteration(root):
             stack.append(node.left)
 ```
 
-##### Breath First Search
+##### Breadth First Search
 ```python
 # Explores each level first before moving to next level
 # Iteration
@@ -190,11 +190,11 @@ def bfsIteration(root):
             queue.append(node.right)
 ```
 
-### Other Algorithms
+### Useful Algorithms
 ---
 ##### Kadane's Algorithm
 ```python
-# Update the largest continguous sum of a subarray
+# Update the largest continguous sum/product of a subarray
 def maxSubArray(nums):
     curr = best = nums[0]
     for i in range(1,len(nums)):
@@ -226,21 +226,6 @@ def detect(head):
     return head    
 ```
 
-##### Boyer Moore's Voting Algorithm
-```python
-# Keeps track of majority key and value in O(n) time and O(1) space
-def majorityElement(nums):
-    candidate = None
-    counter = 0
-        
-    for num in nums:
-        if counter == 0:
-            candidate = num
-        counter += (1 if num == candidate else -1)
-    return candidate
-```
-
-
 ##### Sliding Windows
 ```python
 # Slides a window of size k through the array starting from left to right
@@ -250,4 +235,42 @@ def maxSubArray(nums,k):
     for i in range(1,len(nums)-k+1):
         best = max(best,sum(nums[i:i+k-1]))
     return best
+```
+
+### Question Specific Algorithms
+---
+##### Boyer Moore's Voting Algorithm
+```python
+# The number of majority will be larger than the rest  
+def majorityElement(nums):
+    candidate = None
+    counter = 0
+        
+    for num in nums:
+        if counter == 0:
+            candidate = num
+        if num == candidate:
+            counter += 1
+        else:
+            counter -= 1
+    return candidate
+```
+
+##### Dutch National Flag
+```python
+# Sort a series of 0,1,2s in order   
+def sortColor(nums):
+    p0, p2 = 0, len(nums)-1
+    curr = 0
+        
+    while curr <= p2:
+        if nums[curr] == 0:
+            nums[curr],nums[p0] = nums[p0],nums[curr]
+            p0 += 1
+            curr += 1
+        elif nums[curr] == 2:
+            nums[curr],nums[p2] = nums[p2],nums[curr]
+            p2 -= 1
+        else:
+            curr += 1
 ```
