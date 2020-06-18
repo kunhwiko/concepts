@@ -274,3 +274,36 @@ def sortColor(nums):
         else:
             curr += 1
 ```
+
+##### Tarjan's Algorithm
+```python
+class Solution:
+    def criticalConnections(self, n, connections):
+        self.graph = [[] for _ in range(n)]
+        self.disc = [0] * n
+        self.low = [0] * n
+        self.visited = [False] * n
+        self.res = []
+        
+        for con in connections:
+            self.graph[con[0]].append(con[1])
+            self.graph[con[1]].append(con[0])
+        
+        self.dfs(0,-1,0)
+        return self.res
+        
+    def dfs(self,curr,parent,time):
+        self.visited[curr] = True
+        self.low[curr] = time 
+        
+        for neighbor in self.graph[curr]:
+            if neighbor == parent:
+                continue 
+            
+            if not self.visited[neighbor]:
+                self.dfs(neighbor,curr,time+1)
+                
+            self.low[curr] = min(self.low[curr],self.low[neighbor])
+            if self.disc[curr] < self.low[neighbor]:
+                self.res.append([curr,neighbor])
+```
