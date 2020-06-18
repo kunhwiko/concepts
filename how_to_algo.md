@@ -277,10 +277,12 @@ def sortColor(nums):
 
 ##### Tarjan's Algorithm
 ```python
+# low array will show the lowest rank the node can get to by 2 or more non-overlapping means
+# if discovery[curr] < low[neighbor], curr-neighbor has no other means of connecting back to the graph 
 class Solution:
     def criticalConnections(self, n, connections):
         self.graph = [[] for _ in range(n)]
-        self.disc = [0] * n
+        self.discovery = [0] * n
         self.low = [0] * n
         self.visited = [False] * n
         self.res = []
@@ -294,7 +296,7 @@ class Solution:
         
     def dfs(self,curr,parent,time):
         self.visited[curr] = True
-        self.low[curr] = time 
+        self.discovery[curr] = self.low[curr] = time 
         
         for neighbor in self.graph[curr]:
             if neighbor == parent:
@@ -304,6 +306,6 @@ class Solution:
                 self.dfs(neighbor,curr,time+1)
                 
             self.low[curr] = min(self.low[curr],self.low[neighbor])
-            if self.disc[curr] < self.low[neighbor]:
+            if self.discovery[curr] < self.low[neighbor]:
                 self.res.append([curr,neighbor])
 ```
