@@ -1,3 +1,5 @@
+This page will have a huge update starting July 1, 2020!
+
 ### Sorting Algorithms
 ---
 ##### Bubble Sort
