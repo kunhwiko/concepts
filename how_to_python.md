@@ -59,6 +59,12 @@ del dict[some_item]
 ```
 ### [Other Data Structures]
 ---
+##### Set
+```python
+set.add(4)
+set.union(set2)
+```
+
 ##### Queue
 ```python
 queue = collections.deque([1,2,3])
