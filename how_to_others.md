@@ -46,3 +46,8 @@ Advantages :
   3) Can easily switch out different dependencies to the class 
   4) Can use the dependencies in other classes 
 ```
+
+##### Object Relational Mapping
+```
+Maps class objects to relational database 
+```
