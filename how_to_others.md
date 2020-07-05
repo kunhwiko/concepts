@@ -1,4 +1,4 @@
-### Object Oriented Programming Basics
+### Object Oriented Programming
 ---
 ##### Inheritance
 ```
