@@ -1,14 +1,13 @@
-The following section is on OOPS
------
-
-Inheritance
+Object Oriented Programming Basics
 ---
 
+Inheritance
+'''
 parent class : Dog 
 child class : Retriever 
 
 child class can inherit all data fields and methods of parent class, while defining its own fields or methods 
-
+'''
 
 Polymorphism
 ---
