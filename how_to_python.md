@@ -65,10 +65,12 @@ set.add(4)
 set.union(set2)
 ```
 
-##### Queue
+##### Double Ended Queue
 ```python
-queue = collections.deque([1,2,3])
+queue = collections.deque([2,3])
 queue.append(4)
+queue.appendleft(1)
+queue.pop()
 queue.popleft()
 ```
 
@@ -79,6 +81,33 @@ for num in nums:
     heapq.heappush(arr,num)
     heapq.heappop(arr)
 ```
+
+##### Monotonic Queue 
+```python
+# Monotonic queue preserves increasing or decreasing order such that a[n+1] >= a[n] (or vice versa)
+# Monotonic queues are great for finding a maximum or minimum within a given set or area in O(1) time
+#[2,3,1,4]
+# --> [1,2,3,4] is in increasing order, but is not monotonic
+# --> [2,3,1,4] is in time sequence, but not in increasing order 
+# --> [2,3,4] is monotonic increasing 
+
+class Monoqueue():
+    def __init__(self):
+        self.monoqueue = collections.deque()
+    
+    def push(self,n):
+        while self.monoqueue and self.monoqueue[-1] < n:
+            self.monoqueue.pop()
+        self.monoqueue.append(n)
+    
+    def peek(self):
+        return self.monoqueue[0]
+    
+    def pop(self,n):
+        if self.monoqueue[0] == n:
+            return self.monoqueue.popleft()
+```
+
 
 ### "String"
 ---
