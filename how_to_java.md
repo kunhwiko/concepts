@@ -126,6 +126,8 @@ s1.length()                                // find string length
 Character.isLetterOrDigit(s1.charAt(0));   // determine if alphabet or number
 Character.toLowerCase(s1.charAt(0));       // char to lower case, does not mutate string
 s1.toCharArray()                           // converts string into a character array
+s1.contains(s2)                            // see if s1 contains s2
+s1.indexOf(s2)				   // check index of s2 inside s1
 ```
 
 
