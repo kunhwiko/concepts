@@ -130,6 +130,15 @@ s1.contains(s2)                            // see if s1 contains s2
 s1.indexOf(s2)				   // check index of s2 inside s1
 ```
 
+##### StringBuilder Operations
+```java
+StringBuilder sb = new StringBuilder("abbcd");
+for (int i = 0; i < sb.length(); i++) {
+    sb.delete(1,3);                        // delete index 1 and 2
+    System.out.println(i);                 // unlike Python, sb.length() will change to 4 during the for loop
+}
+```
+
 
 
 ### Java Things 
