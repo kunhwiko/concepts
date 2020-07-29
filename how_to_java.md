@@ -202,6 +202,11 @@ Arrays.sort(arr, new Comparator<int[]>(){
 });
 ```
 
+##### Synchronized
+```java
+public synchronized void main () {}   // only allows 1 thread to use the function at the same time 
+```
+
 ### I/O Controls
 ---
 ##### Input
