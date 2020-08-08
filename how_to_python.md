@@ -228,7 +228,8 @@ int(-5//2) = -2    # looks at integer closer to zero
 a&0xffffffff             # Mask to unsigned integer
 ```
 
-##### Changing integer to binary
+##### Changing integer to different formats
 ```python
 bin(x)    # Returns integer x as a string of binary numbers
+hex(x)    # Returns integer x as a string of hex (0xffff format)
 ```
