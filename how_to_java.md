@@ -176,8 +176,8 @@ LinkedList<String> list = new LinkedList<>();
 Iterator<String> iter = list.iterator();             // starting from head
 Iterator<String> iter2 = list.descendingIterator();  // starting from tail
 while(iter.hasNext()){
-	String s = iter.next();
-	System.out.println(s);
+    String s = iter.next();
+    System.out.println(s);
 }
 ```
 
@@ -185,20 +185,20 @@ while(iter.hasNext()){
 ```java
 // Note the difference of Comparator and Comparable interface
 Comparator<String> cmp = new Comparator<>() {
-	public int compare(String o1, String o2) {
-		// return negative int : o1 goes left
-		// return positive int : o1 goes right
-		return o2.compareTo(o1);               // descending order
-	}
+    public int compare(String o1, String o2) {
+        // return negative int : o1 goes left
+	// return positive int : o1 goes right
+	return o2.compareTo(o1);               // descending order
+    }
 };
 TreeSet<String> res = new TreeSet<>(cmp);
 res.add("C"); res.add("B"); res.add("A");
 
 // Second example [(5,10),(3,14)] -> [(3,14),(5,10)] 
 Arrays.sort(arr, new Comparator<int[]>(){
-	public int compare(int[] i1, int[] i2){
-		return i1[0] - i2[0];
-	}
+    public int compare(int[] i1, int[] i2){
+	return i1[0] - i2[0];
+    }
 });
 ```
 
@@ -230,16 +230,16 @@ public class Hello {
 
 public class HelloButton {
     public void start() {
-	Button button = new Button();
+        Button button = new Button();
 	button.setText("Press Me");
 		
 	// EventHandler interface must be implemented with a new class 
 	// Instead, use anonymous class to quickly implement the interface without having to declare a new class
 	button.setAction(new EventHandler<ActionEvent>() {
-		@Override
-		public void handle(ActionEvent event) {
-			System.out.println("Hello!");
-		}
+	    @Override
+	    public void handle(ActionEvent event) {
+	        System.out.println("Hello!");
+	    }
 	});
     }
 }
