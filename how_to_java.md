@@ -230,18 +230,18 @@ public class Hello {
 
 public class HelloButton {
     public void start() {
-		Button button = new Button();
-		button.setText("Press Me");
+	Button button = new Button();
+	button.setText("Press Me");
 		
-		// EventHandler interface must be implemented with a new class 
-		// Instead, use anonymous class to quickly implement the interface without having to declare a new class
-		button.setAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				System.out.println("Hello!");
-			}
-		});
-	}
+	// EventHandler interface must be implemented with a new class 
+	// Instead, use anonymous class to quickly implement the interface without having to declare a new class
+	button.setAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent event) {
+			System.out.println("Hello!");
+		}
+	});
+    }
 }
 ```
 
