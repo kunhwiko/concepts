@@ -49,5 +49,33 @@ Advantages :
 
 ##### Object Relational Mapping
 ```
-Maps class objects to relational database 
+Converting data between relational databases and OOP languages such that they become compatible with each other
+Query database using an object-oriented paradigm (graph of objects) instead of SQL (tabular format) 
+```
+
+### Testing
+---
+##### Environments
+```
+Development Environment --> User Acceptance Testing (UAT) Environment --> Production Environment 
+
+UAT allows for beta testing before production, and to use actual production data to test results 
+```
+
+##### Regression Testing
+```
+testing to confirm that recent program change does not impact existing functionality 
+```
+
+##### Automated Testing
+```
+reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
+ex) QTP, Rational Robot, Selenium
+```
+
+### Language Specifics
+---
+##### HTML/CSS/XML/XSLT
+```
+HTML : static language used to display data 
 ```
