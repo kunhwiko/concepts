@@ -24,6 +24,9 @@ Agile
 CI / CD
   1) continous integration, continous delivery 
   2) bridges gap between development and operations through automation to allow DevOps procedures
+  
+ETL 
+  1) extract, transform, and load one database to another
 ```
 
 ### Object Oriented Programming
