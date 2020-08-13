@@ -7,12 +7,13 @@ load balancing : process of distributing tasks over resources efficiently
 latency : time between stimulation and response 
 
 synchronous : statements in sequence
-
 asynchronous : statements executing at different times 
 
 TCP : defines how applications create means of communication across network and breaks message to smaller packets before reassembling 
-
 IP : defines how to route each packet to proper destination 
+
+kernel : core of operating system that controls tasks 
+shell : interface to communicate with kernel 
 ```
 
 ##### Methodology
