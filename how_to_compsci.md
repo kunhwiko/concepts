@@ -86,7 +86,7 @@ Query database using an object-oriented paradigm (graph of objects) instead of S
 
 ### Servers and Testing
 ---
-##### Web/Application Server
+##### Servers
 ```
 client <--> web server <--> database
 client <--> web server <--> application server <--> database
@@ -94,6 +94,8 @@ client <--> web server <--> application server <--> database
 Web server : return content of file following HTTP protocols (Apache HTTP)
 
 Application server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
+
+DNS server : phonebook of the Internet responsible for finding the IP address of sites
 
 API
   1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
