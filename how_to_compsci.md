@@ -14,6 +14,10 @@ IP : defines how to route each packet to proper destination
 
 kernel : core of operating system that controls tasks 
 shell : interface to communicate with kernel 
+
+compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
+interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
+dynamic typing : type is checked during runtime
 ```
 
 ##### Methodology
