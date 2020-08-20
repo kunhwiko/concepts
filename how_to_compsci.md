@@ -107,6 +107,12 @@ API
   2) way of communicating between applications 
 ```
 
+##### Databases 
+```
+SQL : relational, structured/predefined, table-based
+NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects)
+```
+
 ##### Microservices 
 ```
 architectural design that breaks a monolithic application into smaller pieces, which communicate through HTTP/API
