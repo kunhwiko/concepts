@@ -34,6 +34,8 @@ ETL
   1) extract, transform, and load one database to another
 ```
 
+
+
 ### Object Oriented Programming
 ---
 ##### Inheritance
@@ -89,6 +91,8 @@ Converting data between relational databases and OOP languages such that they be
 Query database using an object-oriented paradigm (graph of objects) instead of SQL (tabular format) 
 ```
 
+
+
 ### Servers and Testing
 ---
 ##### Servers
@@ -109,8 +113,8 @@ API
 
 ##### Databases 
 ```
-SQL : relational, structured/predefined, table-based
-NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects)
+SQL : relational, structured/predefined, table-based, less scalability
+NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability (database can be scattered into distributed systems)
 ```
 
 ##### Microservices 
@@ -148,6 +152,8 @@ testing to confirm that recent program change does not impact existing functiona
 reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
 ex) QTP, Rational Robot, Selenium
 ```
+
+
 
 ### Language Specifics
 ---
