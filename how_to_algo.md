@@ -180,11 +180,10 @@ def dfsIteration(root):
 # Explores each level first before moving to next level
 # Iteration
 def bfsIteration(root):
-    queue = [root]
+    queue = collections.deque([root])
     
     while queue:
-        node = queue[0]
-        queue.remove(node)
+        node = queue.popleft()
         print(node.val)
         if node.left:
             queue.append(node.left)
