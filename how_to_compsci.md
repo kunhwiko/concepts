@@ -18,7 +18,9 @@ vertical scaling : increase performance of existing hardware
 
 round robin : start at the first item of a list of servers, sequentially look for available servers 
 weighted round robin : ability to weigh different servers based on how powerful they are, and distribute work based on weight 
-
+load based server selection : monitor the performance and load for each server and dynamically allocate based on calculations 
+IP hash based selection : hash IP address to determine where to send request (useful for geographical servers or when servers cache requests)
+service based selection : different servers handle different services 
 ```
 
 ##### Systems
