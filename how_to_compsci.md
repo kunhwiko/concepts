@@ -11,6 +11,9 @@ Protocol : set of rules and structures for how computers communicate
 
 ##### Definitions
 ```
+disk storage : permanent/ persistent storage (hard disk)
+memory storage : temporary / transient storage (RAM) 
+
 load balancing : process of distributing tasks over resources efficiently 
 
 latency : time between stimulation and response 
