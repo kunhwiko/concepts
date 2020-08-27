@@ -1,5 +1,14 @@
-### Basic Concepts
+### Systems Concepts
 ---
+##### Protocols 
+```
+Protocol : set of rules and structures for how computers communicate 
+
+1) IP : obtains the address of where packets come from and where they should be sent 
+2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
+3) HTTP : set of rules for how request-response works in the web 
+```
+
 ##### Definitions
 ```
 load balancing : process of distributing tasks over resources efficiently 
@@ -8,9 +17,6 @@ latency : time between stimulation and response
 
 synchronous : statements in sequence
 asynchronous : statements executing at different times 
-
-TCP : defines how applications create means of communication across network and breaks message to smaller packets before reassembling 
-IP : defines how to route each packet to proper destination 
 
 kernel : core of operating system that controls tasks 
 shell : interface to communicate with kernel 
