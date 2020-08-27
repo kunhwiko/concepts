@@ -25,6 +25,14 @@ availability : uptime in a given ammount of time
 SLA : an assurance for the uptime of a service 
 redundancy : having an alternative when a failure happens 
 
+caching : save certain data/results to retrieve faster 
+1) CDNs cache website contents
+2) Browsers cache HTML/JS/image files
+3) DNS servers cache DNS records 
+
+proxy : a server that acts as a middleman between a client and another server
+1) forward proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
+2) reverse proxy : acts on the behalf of the server (load balancer) 
 
 load balancing : process of distributing tasks over resources efficiently 
 
