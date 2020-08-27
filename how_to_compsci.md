@@ -15,15 +15,15 @@ disk storage : permanent/ persistent storage with high latency (hard disk)
 memory storage : temporary / transient storage with low latency (RAM)
 
 latency : time between stimulation and response 
-availability : uptime in a given ammount of time 
 throughput : how much a machine or system can output 
 bottleneck : constraint of a system (system is only as fast as the server with minimum throughput) 
 
 horizontal scaling : increase number of hardware
 vertical scaling : increase performance of existing hardware 
 
-
-
+availability : uptime in a given ammount of time 
+SLA : an assurance for the uptime of a service 
+redundancy : having an alternative when a failure happens 
 
 
 load balancing : process of distributing tasks over resources efficiently 
