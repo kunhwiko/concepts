@@ -2,11 +2,23 @@
 ---
 ##### Protocols 
 ```
-Protocol : set of rules and structures for how computers communicate 
+protocol : set of rules and structures for how computers communicate 
 
 1) IP : obtains the address of where packets come from and where they should be sent 
 2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
 3) HTTP : set of rules for how request-response works in the web 
+```
+
+#### Load Balancing
+```
+load balancer : balances and allocates request load to servers to maintain availability and throughput 
+
+horizontal scaling : increase number of hardware
+vertical scaling : increase performance of existing hardware 
+
+round robin : start at the first item of a list of servers, sequentially look for available servers 
+weighted round robin : ability to weigh different servers based on how powerful they are, and distribute work based on weight 
+
 ```
 
 ##### Systems
@@ -17,9 +29,6 @@ memory storage : temporary / transient storage with low latency (RAM)
 latency : time between stimulation and response 
 throughput : how much a machine or system can output 
 bottleneck : constraint of a system (system is only as fast as the server with minimum throughput) 
-
-horizontal scaling : increase number of hardware
-vertical scaling : increase performance of existing hardware 
 
 availability : uptime in a given ammount of time 
 SLA : an assurance for the uptime of a service 
@@ -33,8 +42,8 @@ caching : save certain data/results to retrieve faster
 proxy : a server that acts as a middleman between a client and another server
 1) forward proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
 2) reverse proxy : acts on the behalf of the server (load balancer) 
+ 
 
-load balancing : process of distributing tasks over resources efficiently 
 
 
 synchronous : statements in sequence
