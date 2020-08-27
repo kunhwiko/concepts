@@ -9,14 +9,25 @@ Protocol : set of rules and structures for how computers communicate
 3) HTTP : set of rules for how request-response works in the web 
 ```
 
-##### Definitions
+##### Systems
 ```
-disk storage : permanent/ persistent storage (hard disk)
-memory storage : temporary / transient storage (RAM) 
+disk storage : permanent/ persistent storage with high latency (hard disk)
+memory storage : temporary / transient storage with low latency (RAM)
+
+latency : time between stimulation and response 
+availability : uptime in a given ammount of time 
+throughput : how much a machine or system can output 
+bottleneck : constraint of a system (system is only as fast as the server with minimum throughput) 
+
+horizontal scaling : increase number of hardware
+vertical scaling : increase performance of existing hardware 
+
+
+
+
 
 load balancing : process of distributing tasks over resources efficiently 
 
-latency : time between stimulation and response 
 
 synchronous : statements in sequence
 asynchronous : statements executing at different times 
