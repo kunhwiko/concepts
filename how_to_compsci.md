@@ -3,7 +3,6 @@
 ##### Protocols 
 ```
 protocol : set of rules and structures for how computers communicate 
-
 1) IP : obtains the address of where packets come from and where they should be sent 
 2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
 3) HTTP : set of rules for how request-response works in the web 
@@ -16,11 +15,27 @@ load balancer : balances and allocates request load to servers to maintain avail
 horizontal scaling : increase number of hardware
 vertical scaling : increase performance of existing hardware 
 
-round robin : start at the first item of a list of servers, sequentially look for available servers 
-weighted round robin : ability to weigh different servers based on how powerful they are, and distribute work based on weight 
-load based server selection : monitor the performance and load for each server and dynamically allocate based on calculations 
-IP hash based selection : hash IP address to determine where to send request (useful for geographical servers or when servers cache requests)
-service based selection : different servers handle different services 
+Methods of load balancing 
+1) round robin : start at the first item of a list of servers, sequentially look for available servers 
+2) weighted round robin : ability to weigh different servers based on how powerful they are, and distribute work based on weight 
+3) load based server selection : monitor the performance and load for each server and dynamically allocate based on calculations 
+4) IP hash based selection : hash IP address to determine where to send request (useful for geographical servers or when servers cache requests)
+5) service based selection : different servers handle different services 
+```
+
+##### Hashing
+```
+hashing : convert an input into a fixed size value 
+collision : when two values are consistently hashed to the same value 
+
+problems : 
+1) if a server fails, hashing might still allocate requests to the failed server 
+2) when new servers are added and hashing formula changes, previous keys will be remapped, making previous caches become useless
+
+consistent hashing : 
+uses a hash ring where servers can be distributed more than once throughout the ring 
+after hashing a request, the request will go to the nearest server on the hash ring 
+this does not solve but greatly reduces the problem of previous keys being remapped 
 ```
 
 ##### Systems
