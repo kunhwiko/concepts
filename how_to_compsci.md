@@ -115,7 +115,8 @@ alerting : alert of significant changes in data
 
 ```
 
-##### Update below Aug 29
+### Updating Below Aug 29
+---
 web server : return content of file following HTTP protocols (Apache HTTP)
 application server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
 DNS server : phonebook of the Internet responsible for finding the IP address of sites
