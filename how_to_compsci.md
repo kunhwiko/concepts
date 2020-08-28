@@ -100,19 +100,22 @@ NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), 
 
 ##### Other Concepts
 ```
+Publisher-Subscriber Model : publisher sends info to a topic, and subscribers to the topic can consume the information
+1) saves time for the publisher to have to maintain a roster queue or independently sending messages to subscriber
+2) solves the problem of publisher failing to send messages to everyone due to an interference 
+
 Leader Election : situation in which you want to specify one server to be responsible for a request 
 
-polling : sending a request for updated data (packets) in regular intervals (cycle of requests/responses)
-streaming : sending a request that opens a channel using "sockets" (single request/response)
+Polling : sending a request for updated data (packets) in regular intervals (cycle of requests/responses)
+Streaming : sending a request that opens a channel using "sockets" (single request/response)
 
-endpoint protection : protect system from too many operations 
-1) rate limiting : limit number of operations (weak against DDOS)
+Endpoint Protection : protect system from too many operations 
+1) Rate Limiting : limit number of operations (weak against DDOS)
 
-logging : the collection of data to use for analytics
-monitoring : analyze data for insights
-alerting : alert of significant changes in data 
-
-
+Usages for data
+1) Logging : the collection of data to use for analytics
+2) Monitoring : analyze data for insights
+3) Alerting : alert of significant changes in data 
 ```
 
 ### Updating Below Aug 29
