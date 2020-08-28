@@ -83,7 +83,37 @@ eventual consistency : becomes consistent eventually, offers low latency but ris
 ```
 Leader Election : situation in which you want to specify one server to be responsible for a request 
 
-strong consistency : 
+polling : sending a request for updated data (packets) in regular intervals (cycle of requests/responses)
+streaming : sending a request that opens a channel using "sockets" (single request/response)
+
+endpoint protection : protect system from too many operations 
+1) rate limiting : limit number of operations (weak against DDOS)
+
+web server : return content of file following HTTP protocols (Apache HTTP)
+application server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
+DNS server : phonebook of the Internet responsible for finding the IP address of sites
+
+API
+  1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
+  2) way of communicating between applications 
+```
+
+##### Microservices 
+```
+architectural design that breaks a monolithic application into smaller pieces, which communicate through HTTP/API
+
+pros 
+  1) independent services with ability to use different programming languages
+  2) easier to understand codebase and modify 
+  3) when failure arises, only particular service goes down
+  4) easier to scale specific process / service
+  5) less commitment to a tech stack and able to change to new tech faster 
+
+cons 
+  1) testing can be complicated and managing the whole product becomes more difficult 
+  2) information barriers between different services
+  3) must implement means of communicating between services
+  4) large upfront investment in automation as manual deployment becomes more difficult 
 ```
 
 
@@ -173,60 +203,15 @@ Query database using an object-oriented paradigm (graph of objects) instead of S
 
 
 
-### Servers and Testing
+### Testing
 ---
-##### Servers
+
+##### Testing
 ```
-client <--> web server <--> database
-client <--> web server <--> application server <--> database
-
-Web server : return content of file following HTTP protocols (Apache HTTP)
-
-Application server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
-
-DNS server : phonebook of the Internet responsible for finding the IP address of sites
-
-API
-  1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
-  2) way of communicating between applications 
-```
-
-##### Microservices 
-```
-architectural design that breaks a monolithic application into smaller pieces, which communicate through HTTP/API
-
-pros 
-  1) independent services with ability to use different programming languages
-  2) easier to understand codebase and modify 
-  3) when failure arises, only particular service goes down
-  4) easier to scale specific process / service
-  5) less commitment to a tech stack and able to change to new tech faster 
-
-cons 
-  1) testing can be complicated and managing the whole product becomes more difficult 
-  2) information barriers between different services
-  3) must implement means of communicating between services
-  4) large upfront investment in automation as manual deployment becomes more difficult 
-```
-
-##### Environments
-```
-Development Environment --> User Acceptance Testing (UAT) Environment --> Production Environment 
-
-UAT allows for beta testing before production, and to use actual production data to test results 
-```
-
-##### Regression Testing
-```
-testing to confirm that recent program change does not impact existing functionality 
-```
-
-##### Automated Testing
-```
-reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
+1) Regression Testing : testing to confirm that recent program change does not impact existing functionality 
+2) Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
 ex) QTP, Rational Robot, Selenium
 ```
-
 
 
 ### Language Specifics
