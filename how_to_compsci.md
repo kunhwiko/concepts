@@ -1,8 +1,8 @@
-### Systems Concepts
+### Systems Design
 ---
 ##### Protocols 
 ```
-protocol : set of rules and structures for how computers communicate 
+Protocol : set of rules and structures for how computers communicate 
 1) IP : obtains the address of where packets come from and where they should be sent 
 2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
 3) HTTP : set of rules for how request-response works in the web 
@@ -10,52 +10,68 @@ protocol : set of rules and structures for how computers communicate
 
 ##### Systems
 ```
-disk storage : permanent/ persistent storage with high latency (hard disk)
-memory storage : temporary / transient storage with low latency (RAM)
+Storage
+1) Disk Storage : permanent/ persistent storage with high latency (hard disk)
+2) Memory Storage : temporary / transient storage with low latency (RAM)
 
-latency : time between stimulation and response 
-throughput : how much a machine or system can output 
-bottleneck : constraint of a system (system is only as fast as the server with minimum throughput) 
+Capacity
+1) Latency : time between stimulation and response 
+2) Throughput : actual output of a system or machine 
+3) Bottleneck : constraint of a system 
 
-availability : uptime in a given ammount of time 
-SLA : an assurance for the uptime of a service 
-redundancy : having an alternative when a failure happens 
+Availability : uptime in a given amount of time 
+1) SLA : an assurance for the uptime of a service 
+2) Redundancy : having an alternative when a failure happens 
+
+Proxy : a server that acts as a middleman between a client and another server
+1) Forward Proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
+2) Reverse Proxy : acts on the behalf of the server (load balancer) 
 
 caching : save certain data/results to retrieve faster 
 1) CDNs cache website contents
 2) Browsers cache HTML/JS/image files
 3) DNS servers cache DNS records 
-
-proxy : a server that acts as a middleman between a client and another server
-1) forward proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
-2) reverse proxy : acts on the behalf of the server (load balancer) 
 ```
 
 ##### Load Balancing
 ```
-load balancer : balances and allocates request load to servers to maintain availability and throughput 
+Load Balancer : balances and allocates requests to servers/databases to maintain availability and throughput 
 
-horizontal scaling : increase number of hardware
-vertical scaling : increase performance of existing hardware 
+Horizontal Scaling : increase number of hardware
+Vertical Scaling : increase performance of existing hardware 
 
-Methods of load balancing 
-1) round robin : start at the first item of a list of servers, sequentially look for available servers 
-2) weighted round robin : ability to weigh different servers based on how powerful they are, and distribute work based on weight 
-3) load based server selection : monitor the performance and load for each server and dynamically allocate based on calculations 
-4) IP hash based selection : hash IP address to determine where to send request (useful for geographical servers or when servers cache requests)
-5) service based selection : different servers handle different services 
+Rules for load balancing 
+1) Round Robin : start at the first item of a list of servers, sequentially look for available servers 
+2) Weighted Round Robin : ability to weigh different servers based on how powerful they are, and distribute work based on weight 
+3) Load Based Server Selection : monitor the performance and load for each server and dynamically allocate based on calculations 
+4) IP Hash Based Selection : hash IP address to determine where to send request (useful for geographical servers or when servers cache requests)
+5) Service Based Selection : different servers handle different services 
+```
+
+##### Caching
+```
+Caching : save certain data/files/results in a caching layer to retrieve them faster 
+
+Examples
+1) CDNs cache website contents and static files such as images or HTML files 
+2) Browsers cache HTML/JS/image files 
+3) DNS servers cache DNS records 
+
+Content Delivery Network (CDN)
+1) Pull : when a file is accessed for the first time, load it to the CDN, and will be cached thereafter (initially slow)
+2) Push : put files into the CDN to be cached (initially fast but some files may never be used)
 ```
 
 ##### Hashing
 ```
-hashing : convert an input into a fixed size value 
-collision : when two values are consistently hashed to the same value 
+Hashing : convert an input into a fixed size value 
+Collision : when two values are consistently hashed to the same value 
 
 problems : 
 1) if a server fails, hashing might still allocate requests to the failed server 
 2) when new servers are added and hashing formula changes, previous keys will be remapped, making previous caches become useless
 
-consistent hashing : 
+Consistent Hashing : 
 uses a hash ring where servers can be distributed more than once throughout the ring 
 after hashing a request, the request will go to the nearest server on the hash ring 
 this does not solve but greatly reduces the problem of previous keys being remapped 
@@ -63,20 +79,23 @@ this does not solve but greatly reduces the problem of previous keys being remap
 
 ##### Databases 
 ```
+read problems : as tables grow, it becomes harder to read information that reader needs 
+Indexing : allow for short cuts to data by specifying matching values (query by date, age, id)
+
+failure problems : what if database fails (too much load) and you cannot access the database?
+Replication : makes copies of the database for backup purposes
+Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
+
+Consistency : read request for any of the copies should return the same data
+1) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
+2) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
+
+write problems : what if there are too many write requests to master server? how can we solve latency issues of replicating large amounts of data?
+Sharding : splitting the data across multiple machines 
+
 SQL : relational, structured/predefined, table-based, less scalability
 NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability (database can be scattered into distributed systems)
 
-indexing : short cutting to the record with matching values (query by age)
-replication : makes copies of the database (backup purposes)
-
-problems : 
-1) replicating large amounts of data may be harmful for latency issues
-
-sharding : breaks a database into smaller chunks, allowing for portions of the database to be replicated
-
-consistency : read request for any of the copies should return the same data 
-strong consistency : must become consistent immediately, offers updated data indefinitely at higher latency
-eventual consistency : becomes consistent eventually, offers low latency but risks returning non-updated data 
 ```
 
 ##### Servers
