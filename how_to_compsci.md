@@ -8,7 +8,30 @@ protocol : set of rules and structures for how computers communicate
 3) HTTP : set of rules for how request-response works in the web 
 ```
 
-#### Load Balancing
+##### Systems
+```
+disk storage : permanent/ persistent storage with high latency (hard disk)
+memory storage : temporary / transient storage with low latency (RAM)
+
+latency : time between stimulation and response 
+throughput : how much a machine or system can output 
+bottleneck : constraint of a system (system is only as fast as the server with minimum throughput) 
+
+availability : uptime in a given ammount of time 
+SLA : an assurance for the uptime of a service 
+redundancy : having an alternative when a failure happens 
+
+caching : save certain data/results to retrieve faster 
+1) CDNs cache website contents
+2) Browsers cache HTML/JS/image files
+3) DNS servers cache DNS records 
+
+proxy : a server that acts as a middleman between a client and another server
+1) forward proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
+2) reverse proxy : acts on the behalf of the server (load balancer) 
+```
+
+##### Load Balancing
 ```
 load balancer : balances and allocates request load to servers to maintain availability and throughput 
 
@@ -38,31 +61,34 @@ after hashing a request, the request will go to the nearest server on the hash r
 this does not solve but greatly reduces the problem of previous keys being remapped 
 ```
 
-##### Systems
+##### Databases 
 ```
-disk storage : permanent/ persistent storage with high latency (hard disk)
-memory storage : temporary / transient storage with low latency (RAM)
+SQL : relational, structured/predefined, table-based, less scalability
+NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability (database can be scattered into distributed systems)
 
-latency : time between stimulation and response 
-throughput : how much a machine or system can output 
-bottleneck : constraint of a system (system is only as fast as the server with minimum throughput) 
+indexing : short cutting to the record with matching values (query by age)
+replication : makes copies of the database (backup purposes)
 
-availability : uptime in a given ammount of time 
-SLA : an assurance for the uptime of a service 
-redundancy : having an alternative when a failure happens 
+problems : 
+1) replicating large amounts of data may be harmful for latency issues
 
-caching : save certain data/results to retrieve faster 
-1) CDNs cache website contents
-2) Browsers cache HTML/JS/image files
-3) DNS servers cache DNS records 
+sharding : breaks a database into smaller chunks, allowing for portions of the database to be replicated
 
-proxy : a server that acts as a middleman between a client and another server
-1) forward proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
-2) reverse proxy : acts on the behalf of the server (load balancer) 
- 
+consistency : read request for any of the copies should return the same data 
+strong consistency : must become consistent immediately, offers updated data indefinitely at higher latency
+eventual consistency : becomes consistent eventually, offers low latency but risks returning non-updated data 
+```
+
+##### Servers
+```
+Leader Election : situation in which you want to specify one server to be responsible for a request 
+
+strong consistency : 
+```
 
 
-
+##### Concepts 
+```
 synchronous : statements in sequence
 asynchronous : statements executing at different times 
 
@@ -163,12 +189,6 @@ DNS server : phonebook of the Internet responsible for finding the IP address of
 API
   1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
   2) way of communicating between applications 
-```
-
-##### Databases 
-```
-SQL : relational, structured/predefined, table-based, less scalability
-NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability (database can be scattered into distributed systems)
 ```
 
 ##### Microservices 
