@@ -26,11 +26,6 @@ Availability : uptime in a given amount of time
 Proxy : a server that acts as a middleman between a client and another server
 1) Forward Proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
 2) Reverse Proxy : acts on the behalf of the server (load balancer) 
-
-caching : save certain data/results to retrieve faster 
-1) CDNs cache website contents
-2) Browsers cache HTML/JS/image files
-3) DNS servers cache DNS records 
 ```
 
 ##### Load Balancing
@@ -90,15 +85,20 @@ Consistency : read request for any of the copies should return the same data
 1) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
 2) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
 
-write problems : what if there are too many write requests to master server? how can we solve latency issues of replicating large amounts of data?
+write problems : 
+1) what if there are too many write requests to master server (replicas are read-only)? 
+2) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
 Sharding : splitting the data across multiple machines 
+1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
+2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
+3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
 
-SQL : relational, structured/predefined, table-based, less scalability
-NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability (database can be scattered into distributed systems)
-
+Types
+SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
+NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
 ```
 
-##### Servers
+##### Other Concepts
 ```
 Leader Election : situation in which you want to specify one server to be responsible for a request 
 
@@ -108,6 +108,14 @@ streaming : sending a request that opens a channel using "sockets" (single reque
 endpoint protection : protect system from too many operations 
 1) rate limiting : limit number of operations (weak against DDOS)
 
+logging : the collection of data to use for analytics
+monitoring : analyze data for insights
+alerting : alert of significant changes in data 
+
+
+```
+
+##### Update below Aug 29
 web server : return content of file following HTTP protocols (Apache HTTP)
 application server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
 DNS server : phonebook of the Internet responsible for finding the IP address of sites
@@ -115,7 +123,7 @@ DNS server : phonebook of the Internet responsible for finding the IP address of
 API
   1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
   2) way of communicating between applications 
-```
+
 
 ##### Microservices 
 ```
@@ -138,10 +146,6 @@ cons
 
 ##### Concepts 
 ```
-logging : the collection of data to use for analytics
-monitoring : analyze data for insights
-alerting : alert of significant changes in data 
-
 synchronous : statements in sequence
 asynchronous : statements executing at different times 
 
