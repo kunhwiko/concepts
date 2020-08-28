@@ -119,6 +119,10 @@ cons
 
 ##### Concepts 
 ```
+logging : the collection of data to use for analytics
+monitoring : analyze data for insights
+alerting : alert of significant changes in data 
+
 synchronous : statements in sequence
 asynchronous : statements executing at different times 
 
