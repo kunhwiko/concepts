@@ -6,6 +6,7 @@ Protocol : set of rules and structures for how computers communicate
 1) IP : obtains the address of where packets come from and where they should be sent 
 2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
 3) HTTP : set of rules for how request-response works in the web 
+4) HTTPS : encrypted HTTP 
 ```
 
 ##### Systems
