@@ -98,9 +98,23 @@ SQL : relational, structured/predefined, table-based, less scalability, better f
 NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
 ```
 
+##### SQL vs NoSQL
+```
+ACID principles for SQL 
+1) Atomicity : guarantee that when one operation fails, all other following operations fails 
+2) Consistency : each transaction ensures that the database moves from one valid state to another valid state (does not corrupt data)
+3) Isolation : when you run operations concurrently, the result will be as if you ran the operations in sequence
+4) Durability : once the data is stored in the database, it will remain to do so
+
+BASE principles for NoSQL
+1) Basically Available : system guarantees availability
+2) Soft State : state of system and replicas might change over time even without input 
+3) Eventual Consistency 
+```
+
 ##### Other Concepts
 ```
-Publisher-Subscriber Model : publisher sends info to a topic, and subscribers to the topic can consume the information
+Pub/Sub Model : publisher sends info to a topic, and subscribers to the topic can consume the information
 1) saves time for the publisher to have to maintain a roster queue or independently sending messages to subscriber
 2) solves the problem of publisher failing to send messages to everyone due to an interference 
 
@@ -139,6 +153,24 @@ cons
 
 ### Computer Science Concepts
 ---
+##### OS 
+```
+synchronous : statements in sequence
+asynchronous : statements executing at different times 
+
+process : program that is being executed (heavy, isolated memory, takes time to switch)
+threads : segments of a process (light, shared memory, fast switch times)  
+locks : prevents race conditions between threads 
+deadlocks : processes are blocked because each process holds the resource needed for the other to go further
+
+kernel : core of operating system that controls tasks 
+shell : interface to communicate with kernel 
+
+compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
+interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
+dynamic typing : type is checked during runtime
+```
+
 ##### Servers 
 ```
 Web Server : return content of file following HTTP protocols (Apache HTTP)
@@ -155,19 +187,6 @@ API
 1) Regression Testing : testing to confirm that recent program change does not impact existing functionality 
 2) Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
 ex) QTP, Rational Robot, Selenium
-```
-
-##### Concepts 
-```
-synchronous : statements in sequence
-asynchronous : statements executing at different times 
-
-kernel : core of operating system that controls tasks 
-shell : interface to communicate with kernel 
-
-compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
-interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
-dynamic typing : type is checked during runtime
 ```
 
 ##### Methodology
