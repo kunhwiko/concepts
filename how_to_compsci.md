@@ -118,17 +118,6 @@ Usages for data
 3) Alerting : alert of significant changes in data 
 ```
 
-### Updating Below Aug 29
----
-web server : return content of file following HTTP protocols (Apache HTTP)
-application server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
-DNS server : phonebook of the Internet responsible for finding the IP address of sites
-
-API
-  1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
-  2) way of communicating between applications 
-
-
 ##### Microservices 
 ```
 architectural design that breaks a monolithic application into smaller pieces, which communicate through HTTP/API
@@ -147,6 +136,26 @@ cons
   4) large upfront investment in automation as manual deployment becomes more difficult 
 ```
 
+
+### Computer Science Concepts
+---
+##### Servers 
+```
+Web Server : return content of file following HTTP protocols (Apache HTTP)
+Application Server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
+DNS Server : phonebook of the Internet responsible for finding the IP address of sites
+
+API
+  1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
+  2) way of communicating between applications 
+```
+
+##### Testing
+```
+1) Regression Testing : testing to confirm that recent program change does not impact existing functionality 
+2) Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
+ex) QTP, Rational Robot, Selenium
+```
 
 ##### Concepts 
 ```
@@ -167,7 +176,7 @@ Agile
   1) approach to break development into stages and constantly collaborate with end users
   2) advocates adaptive planning, evolutionary development, early delivery, and continual improvement 
   
-CI / CD
+CI/CD
   1) continous integration, continous delivery 
   2) bridges gap between development and operations through automation to allow DevOps procedures
   
@@ -232,17 +241,6 @@ Converting data between relational databases and OOP languages such that they be
 Query database using an object-oriented paradigm (graph of objects) instead of SQL (tabular format) 
 ```
 
-
-
-### Testing
----
-
-##### Testing
-```
-1) Regression Testing : testing to confirm that recent program change does not impact existing functionality 
-2) Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
-ex) QTP, Rational Robot, Selenium
-```
 
 
 ### Language Specifics
