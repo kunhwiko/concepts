@@ -185,6 +185,8 @@ DNS Server : phonebook of the Internet responsible for finding the IP address of
 API
   1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
   2) way of communicating between applications 
+  3) allows for servers/systems to communicate such that automation is possible 
+  4) allows information to be shared as a service 
   
 REST principles 
   1) verbs : GET (read), POST (create), PUT/PATCH (update entire/partial), DELETE (delete)
