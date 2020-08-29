@@ -149,7 +149,7 @@ cons
   3) must implement means of communicating between services
   4) large upfront investment in automation as manual deployment becomes more difficult 
 ```
-
+&nbsp
 
 ### Computer Science Concepts
 ---
@@ -205,7 +205,7 @@ CI/CD
 ETL 
   1) extract, transform, and load one database to another
 ```
-
+&nbsp
 
 
 ### Object Oriented Programming
@@ -262,7 +262,7 @@ Advantages :
 Converting data between relational databases and OOP languages such that they become compatible with each other
 Query database using an object-oriented paradigm (graph of objects) instead of SQL (tabular format) 
 ```
-
+&nbsp
 
 
 ### Language Specifics
