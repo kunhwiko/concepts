@@ -3,30 +3,30 @@
 ##### Protocols 
 ```
 Protocol : set of rules and structures for how computers communicate 
-1) IP : obtains the address of where packets come from and where they should be sent 
-2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
-3) HTTP : set of rules for how request-response works in the web 
-4) HTTPS : encrypted HTTP 
+  1) IP : obtains the address of where packets come from and where they should be sent 
+  2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
+  3) HTTP : set of rules for how request-response works in the web 
+  4) HTTPS : encrypted HTTP 
 ```
 
 ##### Systems
 ```
 Storage
-1) Disk Storage : permanent/ persistent storage with high latency (hard disk)
-2) Memory Storage : temporary / transient storage with low latency (RAM)
+  1) Disk Storage : permanent/ persistent storage with high latency (hard disk)
+  2) Memory Storage : temporary / transient storage with low latency (RAM)
 
 Capacity
-1) Latency : time between stimulation and response 
-2) Throughput : actual output of a system or machine 
-3) Bottleneck : constraint of a system 
+  1) Latency : time between stimulation and response 
+  2) Throughput : actual output of a system or machine 
+  3) Bottleneck : constraint of a system 
 
 Availability : uptime in a given amount of time 
-1) SLA : an assurance for the uptime of a service 
-2) Redundancy : having an alternative when a failure happens 
+  1) SLA : an assurance for the uptime of a service 
+  2) Redundancy : having an alternative when a failure happens 
 
 Proxy : a server that acts as a middleman between a client and another server
-1) Forward Proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
-2) Reverse Proxy : acts on the behalf of the server (load balancer) 
+  1) Forward Proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
+  2) Reverse Proxy : acts on the behalf of the server (load balancer) 
 ```
 
 ##### Load Balancing
@@ -49,9 +49,9 @@ Rules for load balancing
 Caching : save certain data/files/results in a caching layer to retrieve them faster 
 
 Examples
-1) CDNs cache website contents and static files such as images or HTML files 
-2) Browsers cache HTML/JS/image files 
-3) DNS servers cache DNS records 
+  1) CDNs cache website contents and static files such as images or HTML files 
+  2) Browsers cache HTML/JS/image files 
+  3) DNS servers cache DNS records 
 
 Content Delivery Network (CDN)
 1) Pull : when a file is accessed for the first time, load it to the CDN, and will be cached thereafter (initially slow)
@@ -64,8 +64,8 @@ Hashing : convert an input into a fixed size value
 Collision : when two values are consistently hashed to the same value 
 
 problems : 
-1) if a server fails, hashing might still allocate requests to the failed server 
-2) when new servers are added and hashing formula changes, previous keys will be remapped, making previous caches become useless
+  1) if a server fails, hashing might still allocate requests to the failed server 
+  2) when new servers are added and hashing formula changes, previous keys will be remapped, making previous caches become useless
 
 Consistent Hashing : 
 uses a hash ring where servers can be distributed more than once throughout the ring 
@@ -83,16 +83,16 @@ Replication : makes copies of the database for backup purposes
 Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
 
 Consistency : read request for any of the copies should return the same data
-1) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
-2) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
+  1) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
+  2) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
 
 write problems : 
-1) what if there are too many write requests to master server (replicas are read-only)? 
-2) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
+  1) what if there are too many write requests to master server (replicas are read-only)? 
+  2) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
 Sharding : splitting the data across multiple machines 
-1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
-2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
-3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
+  1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
+  2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
+  3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
 
 Types
 SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
@@ -116,8 +116,8 @@ BASE principles for NoSQL
 ##### Other Concepts
 ```
 Pub/Sub Model : publisher sends info to a topic, and subscribers to the topic can consume the information
-1) saves time for the publisher to have to maintain a roster queue or independently sending messages to subscriber
-2) solves the problem of publisher failing to send messages to everyone due to an interference 
+  1) saves time for the publisher to have to maintain a roster queue or independently sending messages to subscriber
+  2) solves the problem of publisher failing to send messages to everyone due to an interference 
 
 Leader Election : situation in which you want to specify one server to be responsible for a request 
 
@@ -125,12 +125,12 @@ Polling : sending a request for updated data (packets) in regular intervals (cyc
 Streaming : sending a request that opens a channel using "sockets" (single request/response)
 
 Endpoint Protection : protect system from too many operations 
-1) Rate Limiting : limit number of operations (weak against DDOS)
+  1) Rate Limiting : limit number of operations (weak against DDOS)
 
 Usages for data
-1) Logging : the collection of data to use for analytics
-2) Monitoring : analyze data for insights
-3) Alerting : alert of significant changes in data 
+  1) Logging : the collection of data to use for analytics
+  2) Monitoring : analyze data for insights
+  3) Alerting : alert of significant changes in data 
 ```
 
 ##### Microservices 
@@ -185,6 +185,9 @@ DNS Server : phonebook of the Internet responsible for finding the IP address of
 API
   1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
   2) way of communicating between applications 
+  
+REST principles 
+  1) verbs : GET (read), POST (create), PUT/PATCH (update entire/partial), DELETE (delete)
 ```
 
 ##### Testing
