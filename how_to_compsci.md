@@ -187,6 +187,7 @@ API
   2) way of communicating between applications 
   3) allows for servers/systems to communicate such that automation is possible 
   4) allows information to be shared as a service 
+  5) APIs are broken into endpoint(site) + path(topic) + parameter(condition)  
   
 REST principles 
   1) verbs : GET (read), POST (create), PUT/PATCH (update entire/partial), DELETE (delete)
