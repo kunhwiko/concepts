@@ -83,9 +83,9 @@ Replication : makes copies of the database for backup purposes
 Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
 
 Consistency : read request for any of the copies should return the same data 
-(data consistency can be achieved through locks so that one user can write/update a certain part of the database at a time) 
-  1) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
-  2) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
+  1) Locks : a method to keep data consistent by allowing only certain users to update the database at a time  
+  2) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
+  3) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
 
 write problems : 
   1) what if there are too many write requests to master server (replicas are read-only)? 
@@ -125,7 +125,7 @@ Leader Election : situation in which you want to specify one server to be respon
 Polling : sending a request for updated data (packets) in regular intervals (cycle of requests/responses)
 Streaming : sending a request that opens a channel using "sockets" (single request/response)
 
-Endpoint Protection : protect system from too many operations 
+Endpoint Protection : protect system from too many operations (strong against DOS)
   1) Rate Limiting : limit number of operations (weak against DDOS)
 
 Usages for data
