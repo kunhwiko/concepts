@@ -82,7 +82,8 @@ failure problems : what if database fails (too much load) and you cannot access 
 Replication : makes copies of the database for backup purposes
 Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
 
-Consistency : read request for any of the copies should return the same data
+Consistency : read request for any of the copies should return the same data 
+(data consistency can be achieved through locks so that one user can write/update a certain part of the database at a time) 
   1) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
   2) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
 
