@@ -152,6 +152,65 @@ cons
   4) large upfront investment in automation as manual deployment becomes more difficult 
 ```
 
+### API Design
+---
+##### What is API
+```
+1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
+2) way of communicating between applications 
+3) allows for servers/systems to communicate such that automation is possible 
+4) allows information to be shared as a service 
+```
+
+##### REST Principles
+```
+REST principles 
+  1) verbs : GET (read), POST (create), PUT/PATCH (update entire/partial), DELETE (delete)
+  
+REST parameters
+broken into endpoint(site) + path(topic) + query parameter(condition)  
+ex) api.com/cars?type=SUV&year=2019
+```
+
+##### REST Practices
+```
+Use "nouns" and not "verbs"
+Use "plural" for list of items 
+Use "camel case"
+
+GET || List of items || individual item
+
+POST || Create item || Error
+
+PUT || Replace items || Replace certain item
+
+DELETE || Delete items || Delete certain item 
+```
+
+##### REST Mappings
+```
+One-To-Many Mapping
+api.com/tickets/145/messages/4 --> find 4th message for 145th ticket 
+a single ticket has N unique messages associated with that ticket
+
+Many-To-Many Mapping
+api.com/groups/200/users/56 --> find user of id 56 in 200th group
+a user might also be in different groups    
+```
+
+##### Status Codes
+```
+1xx : Request received and understood 
+2xx : Request by client was received, understood, and accepted 
+  1) 201 Resource Created (for POST methods)
+  2) 202 Accepted 
+  3) 204 No content (for DELETE methods)
+3xx : Client must take additional actions 
+4xx : Client screwed up (for wrong GET,DELETE requests)
+5xx : Server screwed up
+  1) 500 Internal Server Error
+  2) 504 Gateway Timeout
+```
 
 
 ### Computer Science Concepts
@@ -181,17 +240,7 @@ dynamic typing : type is checked during runtime
 ```
 Web Server : return content of file following HTTP protocols (Apache HTTP)
 Application Server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
-DNS Server : phonebook of the Internet responsible for finding the IP address of sites
-
-API
-  1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
-  2) way of communicating between applications 
-  3) allows for servers/systems to communicate such that automation is possible 
-  4) allows information to be shared as a service 
-  5) APIs are broken into endpoint(site) + path(topic) + parameter(condition)  
-  
-REST principles 
-  1) verbs : GET (read), POST (create), PUT/PATCH (update entire/partial), DELETE (delete)
+DNS Server : phonebook of the Internet responsible for finding the IP address of sites 
 ```
 
 ##### Testing
