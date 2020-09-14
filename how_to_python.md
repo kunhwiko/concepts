@@ -34,15 +34,13 @@ del arr[index]
 arr.remove(element)
 
 nums = nums[::-1]                 # nums changes its reference
-nums[:] = arr[:k] + arr[k:]       # nums changes the array its referencing
-
-nums[::-1]                        # nums creates a new copy of a reversed version
 nums.reverse()                    # nums reverses the array its referencing
 ```
 
 ##### Multiple Assignment
 ```python
-results = [1] * 10                         
+results = [1] * 10
+results = [1 for _ in range(10)]
 results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 ```
 
@@ -57,6 +55,7 @@ max(counter.keys(), key = counter.get)     # Find the highest value out of keys
 ```python
 del dict[some_item]
 ```
+
 ### [Other Data Structures]
 ---
 ##### Set
@@ -130,28 +129,9 @@ s.isnumeric()           # Checks numeric
 
 ### Python Things
 ---
-##### Pythonic
+##### List Comprehension
 ```python
-# Step 1
-while p1 != p2:
-    if p1 != None:
-        p1 = p1.next
-    else:
-        p1 = headB
-    if p2 != None:
-        p2 = p2.next
-    else:
-        p2 = headA
-
-# Step 2
-while p1 != p2:
-    p1 = p1.next if p1 != None else headB
-    p2 = p2.next if p2 != None else headA
-
-# Step 3
-while p1 != p2:
-    p1 = p1.next if p1 else headB   # p1 = headB if not p1 else p1.next
-    p2 = p2.next if p2 else headA   # p2 = headA if not p2 else p2.next
+l = [i for i in range(5)]
 ```
 
 ##### Multiple Inheritance
@@ -195,6 +175,32 @@ def rotate(board):
 ```python
 array.sort(cmp = comparator)                       # python
 array.sort(key = functools.cmp_to_key(comparator)) # python3
+
+def comparator(o1,o2):
+    ...
+```
+
+##### Iterator
+```python
+nums = [1,2,3,4,5]
+it = iter(nums)
+print(next(it))
+```
+
+##### Generator
+```python
+allows functions to behave like iterators
+use yield keyword to automatically return a generator 
+
+less code than a standard iterator 
+avoids storing entire sequences into memory 
+
+def create():
+    for _ in range(10):
+        yield random.randint(1,10)
+
+for num in create():
+    print(num)
 ```
 
 ##### Random
