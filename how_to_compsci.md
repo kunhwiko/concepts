@@ -1,6 +1,6 @@
 ### Systems Design
 ---
-##### Systems Fundamentals
+##### Networking
 ```
 Protocol : set of rules and structures for how computers communicate 
   1) IP : address of where packets come from and where they should be sent  
@@ -9,7 +9,8 @@ Protocol : set of rules and structures for how computers communicate
   3) DNS Server : phonebook for finding the IP address of sites 
   4) HTTP : set of rules for how request-response works in the web 
   5) HTTPS : encrypted HTTP 
-  
+
+
 Networking : 
   Packets : small segments of data of a larger message 
     * IP Packet Header : holds the source and destination address
@@ -24,6 +25,7 @@ Ports :
   2) how multiple programs listen for new network connections on the same machine without collision  
   3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
 
+
 Client-Server Model 
 Step 1)
   Client makes a DNS query, retrieves the IP address of some domain, and contacts the server  
@@ -34,8 +36,10 @@ Step 2)
   
 Step 3)
   Server listens to requests on ports, and sends HTML/CSS/JS files to source address 
-  
+```
 
+##### Fundamentals
+```
 Storage
   1) Disk Storage : permanent/ persistent storage with high latency (hard disk)
   2) Memory Storage : temporary / transient storage with low latency (RAM)
