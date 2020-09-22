@@ -1,16 +1,41 @@
 ### Systems Design
 ---
-##### Protocols 
+##### Systems Fundamentals
 ```
 Protocol : set of rules and structures for how computers communicate 
-  1) IP : obtains the address of where packets come from and where they should be sent 
-  2) TCP : responsible for breaking data into packets and delivering/reassembling the packets
-  3) HTTP : set of rules for how request-response works in the web 
-  4) HTTPS : encrypted HTTP 
-```
+  1) IP : address of where packets come from and where they should be sent  
+    * IPv4, IPv6
+  2) TCP : responsible for breaking data into packets, delivering/reassembling the packets, checks for corruption
+  3) DNS Server : phonebook for finding the IP address of sites 
+  4) HTTP : set of rules for how request-response works in the web 
+  5) HTTPS : encrypted HTTP 
+  
+Networking : 
+  Packets : small segments of data of a larger message 
+    * IP Packet Header : holds the source and destination address
+    * TCP Packet Header : order of how packets should be reassembled
+    * IP Packet Data : holds the data of the packet 
+  
+  Handshake : TCP sends requests by sending packets to destination server asking for a connection
+    
+    
+Ports : 
+  1) docking point for where information is received or sent
+  2) how multiple programs listen for new network connections on the same machine without collision  
+  3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
 
-##### Systems
-```
+Client-Server Model 
+Step 1)
+  Client makes a DNS query, retrieves the IP address of some domain, and contacts the server  
+  IP addresses can be granted by cloud providers where you can run your server  
+  
+Step 2)
+  Sends HTTP request to Server along with source address (address of sender)
+  
+Step 3)
+  Server listens to requests on ports, and sends HTML/CSS/JS files to source address 
+  
+
 Storage
   1) Disk Storage : permanent/ persistent storage with high latency (hard disk)
   2) Memory Storage : temporary / transient storage with low latency (RAM)
@@ -240,7 +265,6 @@ dynamic typing : type is checked during runtime
 ```
 Web Server : return content of file following HTTP protocols (Apache HTTP)
 Application Server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
-DNS Server : phonebook of the Internet responsible for finding the IP address of sites 
 ```
 
 ##### Testing
