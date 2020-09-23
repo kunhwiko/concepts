@@ -43,21 +43,58 @@ Step 3)
 Storage
   1) Disk Storage : permanent / persistent storage with high latency (hard disk)
   2) Memory Storage : temporary / transient storage with low latency (RAM)
-
+ 
+ 
 Capacity
   1) Latency : time between stimulation and response 
   2) Throughput : actual output of a system or machine in a given time / how many requests are handled  
   3) Bandwidth : theoretical output of a system or machine in a given time 
   4) Bottleneck : constraint of a system 
 
-Availability : uptime in a given amount of time 
-  1) SLA : an assurance for the uptime of a service 
-  2) Redundancy : having an alternative when a failure happens 
+
+Availability : uptime in a given amount of time (usually per year)
+  1) SLA (Service Level Agreement) : an assurance for the uptime of a service 
+  2) Redundancy : having alternatives when a failure happens 
+    * Passive Redundancy : Uses excess capacity to reduce failures 
+    * Active Redundancy : Monitors and reconfigures capacity in downtimes 
+
 
 Proxy : a server that acts as a middleman between a client and another server
   1) Forward Proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
-  2) Reverse Proxy : acts on the behalf of the server (load balancer) 
+  2) Reverse Proxy : acts on the behalf of the server (load balancer, cache, filter, logging) 
 ```
+
+##### Caching
+```
+Caching : save certain data/files/results in a caching layer to retrieve them faster 
+
+
+Read Examples
+  1) Servers cache results retrieved from databases 
+  2) Clients cache computationally heavy operation 
+  3) Browsers cache HTML / JS / image files 
+  4) DNS servers cache DNS records
+  5) CDNs cache website contents and static files such as images or HTML files
+
+
+Content Delivery Network (CDN)
+  1) Pull : when a file is accessed for the first time, load it to the CDN, and will be cached thereafter (initially slow)
+  2) Push : put files into the CDN to be cached (initially fast but some files may never be used)
+  
+  
+Write Examples
+  1) Write Through Cache : posts are saved to both cache and database at the same time 
+  2) Write Back Cache : posts are saved to cache, and asynchronously updates database 
+  
+  
+Problems of Caching :
+  Caching becomes difficult for mutable data as this might result in displaying stale (outdated) data to certain users
+  
+
+Caching Eviction :
+  Rules to evict cached data (LRU Cache, LFU Cache, FIFO Cache)
+```
+
 
 ##### Load Balancing
 ```
@@ -72,20 +109,6 @@ Rules for load balancing
 3) Load Based Server Selection : monitor the performance and load for each server and dynamically allocate based on calculations 
 4) IP Hash Based Selection : hash IP address to determine where to send request (useful for geographical servers or when servers cache requests)
 5) Service Based Selection : different servers handle different services 
-```
-
-##### Caching
-```
-Caching : save certain data/files/results in a caching layer to retrieve them faster 
-
-Examples
-  1) CDNs cache website contents and static files such as images or HTML files 
-  2) Browsers cache HTML/JS/image files 
-  3) DNS servers cache DNS records 
-
-Content Delivery Network (CDN)
-1) Pull : when a file is accessed for the first time, load it to the CDN, and will be cached thereafter (initially slow)
-2) Push : put files into the CDN to be cached (initially fast but some files may never be used)
 ```
 
 ##### Hashing
