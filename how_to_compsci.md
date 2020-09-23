@@ -46,8 +46,9 @@ Storage
 
 Capacity
   1) Latency : time between stimulation and response 
-  2) Throughput : actual output of a system or machine in a given time  
-  3) Bottleneck : constraint of a system 
+  2) Throughput : actual output of a system or machine in a given time / how many requests are handled  
+  3) Bandwidth : theoretical output of a system or machine in a given time 
+  4) Bottleneck : constraint of a system 
 
 Availability : uptime in a given amount of time 
   1) SLA : an assurance for the uptime of a service 
