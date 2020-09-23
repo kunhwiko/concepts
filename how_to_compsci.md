@@ -41,12 +41,12 @@ Step 3)
 ##### Fundamentals
 ```
 Storage
-  1) Disk Storage : permanent/ persistent storage with high latency (hard disk)
+  1) Disk Storage : permanent / persistent storage with high latency (hard disk)
   2) Memory Storage : temporary / transient storage with low latency (RAM)
 
 Capacity
   1) Latency : time between stimulation and response 
-  2) Throughput : actual output of a system or machine 
+  2) Throughput : actual output of a system or machine in a given time  
   3) Bottleneck : constraint of a system 
 
 Availability : uptime in a given amount of time 
