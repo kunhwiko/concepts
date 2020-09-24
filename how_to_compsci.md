@@ -98,33 +98,86 @@ Caching Eviction :
 
 ##### Load Balancing
 ```
-Load Balancer : balances and allocates requests to servers/databases to maintain availability and throughput 
+Load Balancer : balances and allocates requests to DNS/servers/databases to maintain availability and throughput 
+
 
 Horizontal Scaling : increase number of hardware
 Vertical Scaling : increase performance of existing hardware 
+
 
 Rules for load balancing 
 1) Round Robin : start at the first item of a list of servers, sequentially look for available servers 
 2) Weighted Round Robin : ability to weigh different servers based on how powerful they are, and distribute work based on weight 
 3) Load Based Server Selection : monitor the performance and load for each server and dynamically allocate based on calculations 
-4) IP Hash Based Selection : hash IP address to determine where to send request (useful for geographical servers or when servers cache requests)
+4) IP Hash Based Selection : hash IP address to determine where to send request (useful for geographical servers and when servers cache requests)
 5) Service Based Selection : different servers handle different services 
+
+
+Tools to imitate systems:
+  1) NGINX : Reverse Proxy / Load Balancer
+  2) Express.js : Server, Cache
+  3) Redis : Cache
 ```
 
 ##### Hashing
 ```
 Hashing : convert an input into a fixed size value 
 Collision : when two values are consistently hashed to the same value 
+SHA (Secure Hash Algorithms) : cryptographic hash functions
+
 
 problems : 
   1) if a server fails, hashing might still allocate requests to the failed server 
   2) when new servers are added and hashing formula changes, previous keys will be remapped, making previous caches become useless
 
+
 Consistent Hashing : 
-uses a hash ring where servers can be distributed more than once throughout the ring 
-after hashing a request, the request will go to the nearest server on the hash ring 
+uses a hash ring where servers are distributed via a hash function (can be distributed more than once!)
+after hashing a request, the request will move clockwise/counter-clockwise to the nearest server 
 this does not solve but greatly reduces the problem of previous keys being remapped 
+
+
+Rendezvous Hashing (Highest Ranking Hashing) : 
+clients rank servers by ranking and get distributed to the highest ranking server 
+when a server gets deleted, clients who lost their highest ranking server will redistribute to the next highest server
+also solves the problem of previous keys being remapped 
 ```
+
+##### Database Types
+```
+Why not write scripts to query data?
+You must potentially load all the data into memory when running on Python/Java. 
+
+
+Relational Database : Data stored in table(relations) form and organized in a strict, predefined way (usually supports SQL)  
+Non-relational Database : Flexible (non-tabular) form not precisely organized in a predefined way 
+
+
+ACID principles for SQL 
+  1) Atomicity : guarantee that when one operation fails(succeeds), all other following operations fails(succeeds) 
+  2) Consistency : each transaction ensures that the database moves from one valid state to another valid state (does not corrupt data)
+  3) Isolation : when you run operations concurrently, the result will be as if you ran the operations in sequence
+  4) Durability : once the data is stored in the database, it will remain to do so
+
+
+BASE principles for NoSQL
+  1) Basically Available : system guarantees availability
+  2) Soft State : state of system and replicas might change over time even without input 
+  3) Eventual Consistency 
+
+
+Consistency : read request for any of the copies should return the same data 
+  1) Locks : a method to keep data consistent by allowing only certain users to update the database at a time  
+  2) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
+  3) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
+  
+
+Considerations : 
+  1) Do we want strong vs eventual consistency?
+  2) Do we want in-memory (caching) vs disk storage?
+
+```
+
 
 ##### Databases 
 ```
@@ -134,11 +187,6 @@ Indexing : allow for short cuts to data by specifying matching values (query by 
 failure problems : what if database fails (too much load) and you cannot access the database?
 Replication : makes copies of the database for backup purposes
 Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
-
-Consistency : read request for any of the copies should return the same data 
-  1) Locks : a method to keep data consistent by allowing only certain users to update the database at a time  
-  2) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
-  3) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
 
 write problems : 
   1) what if there are too many write requests to master server (replicas are read-only)? 
@@ -151,20 +199,6 @@ Sharding : splitting the data across multiple machines
 Types
 SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
 NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
-```
-
-##### SQL vs NoSQL
-```
-ACID principles for SQL 
-1) Atomicity : guarantee that when one operation fails, all other following operations fails 
-2) Consistency : each transaction ensures that the database moves from one valid state to another valid state (does not corrupt data)
-3) Isolation : when you run operations concurrently, the result will be as if you ran the operations in sequence
-4) Durability : once the data is stored in the database, it will remain to do so
-
-BASE principles for NoSQL
-1) Basically Available : system guarantees availability
-2) Soft State : state of system and replicas might change over time even without input 
-3) Eventual Consistency 
 ```
 
 ##### Other Concepts
