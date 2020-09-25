@@ -176,6 +176,13 @@ Considerations :
   1) Do we want strong vs eventual consistency?
   2) Do we want in-memory (caching) vs disk storage?
 
+
+Storage Types :
+  1) Key-Value Storage : Specializes in storing as a key/value pair (MongoDB)
+  2) Blob Store : Specializes in storing massive amounts of unstructured data (Google Cloud Storage, S3, Azure)
+  3) Time Series Database : Specializes in time series data / monitoring (InfluxDB)
+  4) Graph Database : Stores in a graph form rather than a tabular form, specializes in relations between data (Neo4j)
+  5) Spatial Database : Stores data that represents some space (Quad-tree) 
 ```
 
 
