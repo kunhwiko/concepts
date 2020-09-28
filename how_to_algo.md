@@ -1,4 +1,11 @@
-This page will have a huge update starting July 1, 2020!
+### Master Theorem :
+```
+T(n) = a T(n/b) + O(n^c)
+
+if log_b{a} < c --> O(n^c)
+if log_b{a} = c --> O(n^c * logn)
+if log_b{a} > c --> O(n^log_b{a})
+```
 
 ### Sorting Algorithms
 ---
@@ -149,6 +156,7 @@ def quickSelect(arr,left,right,k):
     else:
         return arr[index]
 ```
+
 
 ### Tree/Graph Algorithms
 ---
