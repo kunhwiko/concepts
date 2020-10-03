@@ -10,15 +10,13 @@ Protocol : set of rules and structures for how computers communicate
   4) HTTP : set of rules for how request-response works in the web 
   5) HTTPS : encrypted HTTP 
 
-
 Networking : 
   Packets : small segments of data of a larger message 
     * IP Packet Header : holds the source and destination address
     * TCP Packet Header : order of how packets should be reassembled
     * IP Packet Data : holds the data of the packet 
   
-  Handshake : TCP sends requests by sending packets to destination server asking for a connection
-    
+Handshake : TCP sends requests by sending packets to destination server asking for a connection
     
 Ports : 
   1) docking point for where information is received or sent
@@ -43,21 +41,18 @@ Step 3)
 Storage
   1) Disk Storage : permanent / persistent storage with high latency (hard disk)
   2) Memory Storage : temporary / transient storage with low latency (RAM)
- 
- 
+  
 Capacity
   1) Latency : time between stimulation and response 
   2) Throughput : actual output of a system or machine in a given time / how many requests are handled  
   3) Bandwidth : theoretical output of a system or machine in a given time 
   4) Bottleneck : constraint of a system 
 
-
 Availability : uptime in a given amount of time (usually per year)
   1) SLA (Service Level Agreement) : an assurance for the uptime of a service 
   2) Redundancy : having alternatives when a failure happens 
     * Passive Redundancy : Uses excess capacity to reduce failures 
     * Active Redundancy : Monitors and reconfigures capacity in downtimes 
-
 
 Proxy : a server that acts as a middleman between a client and another server
   1) Forward Proxy : acts on the behalf of the client, could mask the identity of client (VPNs) 
@@ -68,7 +63,6 @@ Proxy : a server that acts as a middleman between a client and another server
 ```
 Caching : save certain data/files/results in a caching layer to retrieve them faster 
 
-
 Read Examples
   1) Servers cache results retrieved from databases 
   2) Clients cache computationally heavy operation 
@@ -76,21 +70,17 @@ Read Examples
   4) DNS servers cache DNS records
   5) CDNs cache website contents and static files such as images or HTML files
 
-
 Content Delivery Network (CDN)
   1) Pull : when a file is accessed for the first time, load it to the CDN, and will be cached thereafter (initially slow)
   2) Push : put files into the CDN to be cached (initially fast but some files may never be used)
-  
-  
+    
 Write Examples
   1) Write Through Cache : posts are saved to both cache and database at the same time 
   2) Write Back Cache : posts are saved to cache, and asynchronously updates database 
-  
-  
+    
 Problems of Caching :
   Caching becomes difficult for mutable data as this might result in displaying stale (outdated) data to certain users
   
-
 Caching Eviction :
   Rules to evict cached data (LRU Cache, LFU Cache, FIFO Cache)
 ```
@@ -100,10 +90,8 @@ Caching Eviction :
 ```
 Load Balancer : balances and allocates requests to DNS/servers/databases to maintain availability and throughput 
 
-
 Horizontal Scaling : increase number of hardware
 Vertical Scaling : increase performance of existing hardware 
-
 
 Rules for load balancing 
 1) Round Robin : start at the first item of a list of servers, sequentially look for available servers 
@@ -111,7 +99,6 @@ Rules for load balancing
 3) Load Based Server Selection : monitor the performance and load for each server and dynamically allocate based on calculations 
 4) IP Hash Based Selection : hash IP address to determine where to send request (useful for geographical servers and when servers cache requests)
 5) Service Based Selection : different servers handle different services 
-
 
 Tools to imitate systems:
   1) NGINX : Reverse Proxy / Load Balancer
@@ -125,17 +112,14 @@ Hashing : convert an input into a fixed size value
 Collision : when two values are consistently hashed to the same value 
 SHA (Secure Hash Algorithms) : cryptographic hash functions
 
-
 problems : 
   1) if a server fails, hashing might still allocate requests to the failed server 
   2) when new servers are added and hashing formula changes, previous keys will be remapped, making previous caches become useless
-
 
 Consistent Hashing : 
 uses a hash ring where servers are distributed via a hash function (can be distributed more than once!)
 after hashing a request, the request will move clockwise/counter-clockwise to the nearest server 
 this does not solve but greatly reduces the problem of previous keys being remapped 
-
 
 Rendezvous Hashing (Highest Ranking Hashing) : 
 clients rank servers by ranking and get distributed to the highest ranking server 
@@ -148,10 +132,10 @@ also solves the problem of previous keys being remapped
 Why not write scripts to query data?
 You must potentially load all the data into memory when running on Python/Java. 
 
-
 Relational Database : Data stored in table(relations) form and organized in a strict, predefined way (usually supports SQL)  
 Non-relational Database : Flexible (non-tabular) form not precisely organized in a predefined way 
-
+SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
+NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
 
 ACID principles for SQL 
   1) Atomicity : guarantee that when one operation fails(succeeds), all other following operations fails(succeeds) 
@@ -159,23 +143,19 @@ ACID principles for SQL
   3) Isolation : when you run operations concurrently, the result will be as if you ran the operations in sequence
   4) Durability : once the data is stored in the database, it will remain to do so
 
-
 BASE principles for NoSQL
   1) Basically Available : system guarantees availability
   2) Soft State : state of system and replicas might change over time even without input 
   3) Eventual Consistency 
-
 
 Consistency : read request for any of the copies should return the same data 
   1) Locks : a method to keep data consistent by allowing only certain users to update the database at a time  
   2) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
   3) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
   
-
 Considerations : 
   1) Do we want strong vs eventual consistency?
   2) Do we want in-memory (caching) vs disk storage?
-
 
 Storage Types :
   1) Key-Value Storage : Specializes in storing as a key/value pair (MongoDB)
@@ -186,26 +166,25 @@ Storage Types :
 ```
 
 
-##### Databases 
+##### Database Scalability
 ```
 read problems : as tables grow, it becomes harder to read information that reader needs 
 Indexing : allow for short cuts to data by specifying matching values (query by date, age, id)
 
-failure problems : what if database fails (too much load) and you cannot access the database?
+load problems : what if database has too much requests or failures result in inaccessible databases?
 Replication : makes copies of the database for backup purposes
 Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
 
 write problems : 
   1) what if there are too many write requests to master server (replicas are read-only)? 
-  2) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
+  2) what if the database has tons of data, is it necessary to replicate all this data?
+  3) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
 Sharding : splitting the data across multiple machines 
   1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
   2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
   3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
 
-Types
-SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
-NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
+Normally good to have a reverse proxy (load balancer) to process client requests and match to databases/shards 
 ```
 
 ##### Other Concepts
