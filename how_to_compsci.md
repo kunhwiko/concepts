@@ -169,7 +169,7 @@ Storage Types :
 ##### Database Scalability
 ```
 read problems : as tables grow, it becomes harder to read information that reader needs 
-Indexing : allow for short cuts to data by specifying matching values (query by date, age, id)
+Indexing : uses additional memory to maintain a lookup for faster querying (imagine glossary page) 
   1) Tree Indexing : Allows us to do fast range queries 
   2) Hash Indexing : Allows us to do fast exact queries 
 
