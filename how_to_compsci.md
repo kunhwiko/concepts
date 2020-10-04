@@ -170,6 +170,8 @@ Storage Types :
 ```
 read problems : as tables grow, it becomes harder to read information that reader needs 
 Indexing : allow for short cuts to data by specifying matching values (query by date, age, id)
+  1) Tree Indexing : Allows us to do fast range queries 
+  2) Hash Indexing : Allows us to do fast exact queries 
 
 load problems : what if database has too much requests or failures result in inaccessible databases?
 Replication : makes copies of the database for backup purposes
