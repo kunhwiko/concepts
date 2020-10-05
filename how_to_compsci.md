@@ -192,6 +192,7 @@ Normally good to have a reverse proxy (load balancer) to process client requests
 ##### Other Concepts
 ```
 What if we introduce redundancy to servers but we would like to ensure that only one server does a particular request (payments)? 
+
 Leader Election : specify one server to be responsible for a request (replicas will take over if the leader fails)
 Consensus Algorithms : complicated algorithms that help select a leader among servers (Zookeeper) 
 
@@ -199,6 +200,7 @@ Consensus Algorithms : complicated algorithms that help select a leader among se
 What if a server is sending data to thousands of machines? By the time the server is done sending, it might have to send again..or even be late!
 If we have multiple servers, then we need to replicate the same data to all the servers..
 If we shard the data, then we end up with a server sending data to thousands of machines again...
+
 Peer-to-Peer Networks : 
   1) data to send is broken into many pieces, and instead of sending 1000GB to "1" machine at a time, we send 1GB to "1000" machines
   2) peers communicate and send missing data to other peers AS the server is sending over data
