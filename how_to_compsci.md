@@ -208,12 +208,13 @@ Gossip Protocol : protocol for peers to communicate to each other and spread inf
 Distributed Hash Table (DHT) : hash table that holds information on what peers hold what data 
 
 
+Polling : sending a request for updated data (packets) in regular intervals (cycle of requests/responses)
+Streaming : client opens a channel using "sockets" for servers to send data (client listens on server)
+
+
 Pub/Sub Model : publisher sends info to a topic, and subscribers to the topic can consume the information
   1) saves time for the publisher to have to maintain a roster queue or independently sending messages to subscriber
   2) solves the problem of publisher failing to send messages to everyone due to an interference 
-
-Polling : sending a request for updated data (packets) in regular intervals (cycle of requests/responses)
-Streaming : sending a request that opens a channel using "sockets" (single request/response)
 
 Endpoint Protection : protect system from too many operations (strong against DOS)
   1) Rate Limiting : limit number of operations (weak against DDOS)
