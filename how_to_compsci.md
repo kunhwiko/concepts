@@ -212,12 +212,21 @@ Polling : sending a request for updated data (packets) in regular intervals (cyc
 Streaming : client opens a channel using "sockets" for servers to send data (client listens on server)
 
 
+Configurations : "settings" for codebases written normally in JSON or YAML
+Static Configuration : Configurations are packaged with codebase, must deploy entire code to test, can create test cases during deployment
+Dynamic Configuration : Configurations outside the codebase, takke immediate change, but harder to test 
+
+
+Rate Limiting : limit number of operations, possibly in different tiers (strong against DoS attacks)
+  1) Criteria : Request frequency, User/IP Address, Region, Server (10,000 requests at a time)
+  2) Typically use another database/cache to check for rate limiting (Redis) because in-memory cache at the server level becomes 
+     less useful when clients get redirected to another server
+
+
 Pub/Sub Model : publisher sends info to a topic, and subscribers to the topic can consume the information
   1) saves time for the publisher to have to maintain a roster queue or independently sending messages to subscriber
   2) solves the problem of publisher failing to send messages to everyone due to an interference 
 
-Endpoint Protection : protect system from too many operations (strong against DOS)
-  1) Rate Limiting : limit number of operations (weak against DDOS)
 
 Usages for data
   1) Logging : the collection of data to use for analytics
