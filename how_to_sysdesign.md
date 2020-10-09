@@ -1,6 +1,6 @@
-### Systems Design
+### Network
 ---
-##### Networking
+##### Fundamentals 
 ```
 Protocol : set of rules and structures for how computers communicate 
   1) IP : address of where packets come from and where they should be sent  
@@ -36,6 +36,8 @@ Step 3)
   Server listens to requests on ports, and sends HTML/CSS/JS files to source address 
 ```
 
+### Systems Design
+---
 ##### Fundamentals
 ```
 Storage
@@ -189,14 +191,16 @@ Sharding : splitting the data across multiple machines
 Normally good to have a reverse proxy (load balancer) to process client requests and match to databases/shards 
 ```
 
-##### Other Concepts
+##### Leader Election
 ```
 What if we introduce redundancy to servers but we would like to ensure that only one server does a particular request (payments)? 
 
 Leader Election : specify one server to be responsible for a request (replicas will take over if the leader fails)
 Consensus Algorithms : complicated algorithms that help select a leader among servers (Zookeeper) 
+```
 
-
+##### Peer-to-Peer Networks
+```
 What if a server is sending data to thousands of machines? By the time the server is done sending, it might have to send again..or even be late!
 If we have multiple servers, then we need to replicate the same data to all the servers..
 If we shard the data, then we end up with a server sending data to thousands of machines again...
@@ -206,8 +210,10 @@ Peer-to-Peer Networks :
   2) peers communicate and send missing data to other peers AS the server is sending over data
 Gossip Protocol : protocol for peers to communicate to each other and spread information
 Distributed Hash Table (DHT) : hash table that holds information on what peers hold what data 
+```
 
-
+##### Polling & Streaming/Configurations/Logging & Montoring
+```
 Polling : sending a request for updated data (packets) in regular intervals (cycle of requests/responses)
 Streaming : client opens a channel using "sockets" for servers to send data (client listens on server)
 
@@ -217,30 +223,60 @@ Static Configuration : Configurations are packaged with codebase, must deploy en
 Dynamic Configuration : Configurations outside the codebase, takke immediate change, but harder to test 
 
 
+Usages for data
+  1) Logging : the collection of data to use for recording/finding errors/analytics
+  2) Monitoring : having transparent ways to analyze data for insights
+  3) Alerting : alert of significant changes in data 
+```
+
+##### Rate Limiting
+```
 How do we prevent malicious requests (DoS attacks?)
 
 Rate Limiting : limit number of operations, possibly in different tiers 
   1) Criteria : Request frequency, User/IP Address, Region, Server (10,000 requests at a time)
   2) Typically use another database/cache to check for rate limiting (Redis) because in-memory cache at the server level becomes 
      less useful when clients get redirected to another server
+```     
      
-     
- Usages for data
-  1) Logging : the collection of data to use for recording/finding errors/analytics
-  2) Monitoring : having transparent ways to analyze data for insights
-  3) Alerting : alert of significant changes in data 
-
-
+##### Pub/Sub Model
+```
 What if a client was streaming for data and the server goes down. What if really important data doesn't get sent due to interferance?
 
 Pub/Sub Model : publisher sends messages (info) to a topic (channel), and subscribers to the topic can consume the information
   1) servers becomes independent of communicating with clients
   2) clients are guaranteed "at least once delivery" of messages, if a topic loses connection to a subscriber, it will attempt to resend messages 
   3) messages are sent using a queue (guarantees ordering)
-  4) subscribers are able to replay messages or filter their subscriptions  
+  4) subscribers are able to replay messages or filter their subscriptions 
+  
 Idempotency : a characteristic where the outcome is always the same no matter how many times an operation is performed
   1) Did the subscriber receive the message? (Idempotent)   Increment Youtube View Counter (Non-idempotent)
+```
 
+##### MapReduce 
+```
+MapReduce : Framework for processing large datasets that are split up in distributed systems 
+
+Map : function that takes the data that is spread out and transforms it to key-value pairs
+Shuffle : takes key-value pairs and routes them to relevant machines 
+Reduce : functions that takes shuffled pairs and transforms them into meaningful data 
+
+Assumptions : 
+  1) Distributed file system where large data is spread out across different machines 
+  2) Central system that knows where the data resides, how to communicate to make map/reduce work, and knows where the output will reside
+  3) MapReduce will run on different databases locally, and will not move the data to somewhere else 
+  4) MapReduce is idempotent and fault-tolerant, if a server breaks, MapReduce will re-run on the failed chunk 
+  
+What do we have to know?
+  1) We have to specify what our map function will be 
+  2) Understand what sort of data is being mapped
+  3) Understand what our key-value pairs will look like
+  4) We have to specify what our reduce function will be 
+  5) Understand what our output will look like
+  
+Example cases:
+  1) Get the count of views on YouTube per channel 
+  2) Count number of payments made per month using logs  
 ```
 
 ##### Microservices 
