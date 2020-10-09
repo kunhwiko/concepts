@@ -1,4 +1,4 @@
-### Network
+### Networking
 ---
 ##### Fundamentals 
 ```
@@ -277,6 +277,8 @@ What do we have to know?
 Example cases:
   1) Get the count of views on YouTube per channel 
   2) Count number of payments made per month using logs  
+  
+Distributed File System : cluster of machines that allow them to work as one large file system (Google File System, Hadoop)
 ```
 
 ##### Microservices 
