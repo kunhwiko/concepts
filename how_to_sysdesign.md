@@ -331,12 +331,56 @@ cons
 
 ### API Design
 ---
-##### What is API
+##### What is an API
 ```
-1) interface that defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
+1) defines interactions between software such as types of calls/requests, how they are made, data formats, conventions 
 2) way of communicating between applications 
-3) allows for servers/systems to communicate such that automation is possible 
+3) allows for servers/systems to communicate with one another such that automation is possible 
 4) allows information to be shared as a service 
+```
+
+##### API Design
+```
+CRUD operations : Create, Read, Update, Delete
+
+Examples of Entity Definitions 
+1) Payment
+  - id : uuid 
+  - customer_id : uuid 
+  - restaurant_id : uuid 
+  - amount : integer 
+  - status : enum ["success", "pending", "failed"]
+
+2) Restaurant 
+  - id : uuid 
+  - name : string 
+  - address : string 
+  - account : Account 
+ 
+Example of Payment.json and Payment object
+{id : "abac1123-bfsdg", customer_id : "bdfsx-123cvxc", restaurant-id : "bac1123-bfsdg", amount : 2000, status : pending}
+
+Example of Restaurant.json and Restaurant object 
+{id : "abac1123-bfsdg", name : "Papa Johns", address : "4005 Chestnut Street", account : {Bank : ___, Account No. ___}}
+
+
+Example of Endpoint Definitions 
+1) Payment
+  - Payment createPayment(payment: Payment)
+    path : POST /v1/payments
+  - Payment getPayment(id: uuid)
+    path : GET /v1/payments/id 
+  - Payment updatePayment(id: uuid, updatedPayment: Payment) 
+    path : UPDATE /v1/payments/id
+  - Payment[] listPayments(offset: int, limit: int) --> Pagination 
+    path : GET /v1/payments
+
+2) Restaurant
+  - Restaurant createRestaurant(restaurant: Restaurant)
+  - Restaurant getRestaurant(id: uuid)
+  - Restaurant deleteRestaurant(id: uuid)
+  
+Pagination : limit the response of a potentially larger response, usually when retrieving huge lists  
 ```
 
 ##### REST Principles
@@ -345,23 +389,13 @@ REST principles
   1) verbs : GET (read), POST (create), PUT/PATCH (update entire/partial), DELETE (delete)
   
 REST parameters
-broken into endpoint(site) + path(topic) + query parameter(condition)  
+broken into endpoint(site) + query parameter(condition)  
 ex) api.com/cars?type=SUV&year=2019
-```
 
-##### REST Practices
-```
-Use "nouns" and not "verbs"
-Use "plural" for list of items 
-Use "camel case"
-
-GET || List of items || individual item
-
-POST || Create item || Error
-
-PUT || Replace items || Replace certain item
-
-DELETE || Delete items || Delete certain item 
+REST practices
+1) Use "nouns" and not "verbs"
+2) Use "plural" for list of items 
+3) Use "camel case"
 ```
 
 ##### REST Mappings
@@ -387,139 +421,4 @@ a user might also be in different groups
 5xx : Server screwed up
   1) 500 Internal Server Error
   2) 504 Gateway Timeout
-```
-
-
-### Computer Science Concepts
----
-##### OS 
-```
-synchronous : statements in sequence
-asynchronous : statements executing at different times 
-
-process : program that is being executed (heavy, isolated memory, takes time to switch)
-threads : segments of a process (light, shared memory, fast switch times)  
-locks : prevents race conditions between threads 
-deadlocks : processes are blocked because each process holds the resource needed for the other to go further
-
-kernel : core of operating system that controls tasks 
-shell : interface to communicate with kernel 
-```
-
-##### Compilers
-```
-compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
-interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
-dynamic typing : type is checked during runtime
-```
-
-##### Servers 
-```
-Web Server : return content of file following HTTP protocols (Apache HTTP)
-Application Server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
-```
-
-##### Testing
-```
-1) Regression Testing : testing to confirm that recent program change does not impact existing functionality 
-2) Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
-ex) QTP, Rational Robot, Selenium
-```
-
-##### Methodology
-```
-Agile
-  1) approach to break development into stages and constantly collaborate with end users
-  2) advocates adaptive planning, evolutionary development, early delivery, and continual improvement 
-  
-CI/CD
-  1) continous integration, continous delivery 
-  2) bridges gap between development and operations through automation to allow DevOps procedures
-  
-ETL 
-  1) extract, transform, and load one database to another
-```
-
-
-
-### Object Oriented Programming
----
-##### Inheritance
-```
-parent class : Dog 
-child class : Retriever 
-
-child class can inherit all data fields and methods of parent class, while defining its own fields or methods 
-
-Advantages : 
-  1) Reusability : Do not have to write already existing lines of code 
-```
-
-##### Polymorphism
-```
-Triangle shape = new Triangle() 
-Shape shape = new Triangle()           class triangle is a part of class shape (polymorphism)
-Shape shape = new Circle()             class circle is a part of class shape 
-Triangle shape = new Shape()           a triangle is a shape, but a shape is not a triangle (invalid)
-
-public void run(Shape shape) {}        classes shape, triangle, and circle and all be passed to the parameter
-
-Advantages :
-  1) Flexibility 
-```
-
-##### Dependency Injection 
-```
-Suppose you have a class car and you must also instantiate classes wheel, company, material
-
-class Car {
-  Company company = new Company("Audi");
-}
-
-Wheel, company, and material are 'dependencies' of car because car uses these classes
-
-What if we want to create multiple objects of car, but with different wheels, companies, and materials?
-
-Instead of instantiating and setting dependencies within the class, one can create a dependency from the outside 
-
-This exterior dependency (e.g. wheel) can then be injected into the class car  
-
-Advantages :
-  1) Makes testing easier as dependency classes do not have to be instantiated 
-  2) Allows for independent development of classes 
-  3) Can easily switch out different dependencies to the class 
-  4) Can use the dependencies in other classes 
-```
-
-##### Object Relational Mapping
-```
-Converting data between relational databases and OOP languages such that they become compatible with each other
-Query database using an object-oriented paradigm (graph of objects) instead of SQL (tabular format) 
-```
-
-
-
-### Language Specifics
----
-##### HTML/CSS/XML/XSLT
-```
-HTML
-  1) static language used to display data
-  2) hypertext language : defines links between web pages 
-  3) markup language : defines text within tags that defines structures of web pages 
-  
-CSS : style sheet for HTML 
-
-XML
-  1) dynamic language used to transfer data 
-  2) markup language
-  3) able to define new tags 
-
-XSL : style sheet for XML
-
-XSLT : transforms XML to other documents like HTML
-  
-XPath : navigate through an XML tree  
-  
-XQuery : queries through XML using XPath
 ```
