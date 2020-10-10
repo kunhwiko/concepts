@@ -348,7 +348,7 @@ Examples of Entity Definitions
   - id : uuid 
   - customer_id : uuid 
   - restaurant_id : uuid 
-  - amount : integer 
+  - amount : int
   - status : enum ["success", "pending", "failed"]
 
 2) Restaurant 
@@ -361,7 +361,7 @@ Example of Payment.json and Payment object
 {id : "abac1123-bfsdg", customer_id : "bdfsx-123cvxc", restaurant-id : "bac1123-bfsdg", amount : 2000, status : pending}
 
 Example of Restaurant.json and Restaurant object 
-{id : "abac1123-bfsdg", name : "Papa Johns", address : "4005 Chestnut Street", account : {Bank : ___, Account No. ___}}
+{id : "bac1123-bfsddg", name : "Papa Johns", address : "4005 Chestnut Street", account : {Bank : ___, Account No. ___}}
 
 
 Example of Endpoint Definitions 
