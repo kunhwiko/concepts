@@ -1,12 +1,7 @@
-
-
-### Computer Science Concepts
+### Fundamental Concepts
 ---
 ##### OS 
 ```
-synchronous : statements in sequence
-asynchronous : statements executing at different times 
-
 process : program that is being executed (heavy, isolated memory, takes time to switch)
 threads : segments of a process (light, shared memory, fast switch times)  
 locks : prevents race conditions between threads 
@@ -16,11 +11,15 @@ kernel : core of operating system that controls tasks
 shell : interface to communicate with kernel 
 ```
 
-##### Compilers
+##### Types
 ```
 compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
 interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
+
 dynamic typing : type is checked during runtime
+
+declarative programming : tell program specifically what you want it to do (this is A, this is B made from A, return C made from B)
+imperative programming : tell program how you would like it to do something (this is A, we will go through this loop, we check this, if B, return A')
 ```
 
 ##### Servers 
@@ -51,7 +50,6 @@ ETL
 ```
 
 
-
 ### Object Oriented Programming
 ---
 ##### Inheritance
@@ -78,21 +76,37 @@ Advantages :
   1) Flexibility 
 ```
 
+##### Composition 
+```
+defines a has-a relationship
+public class Point3D {
+  public Point3D(int x, int y, int z) {
+    p = new Point2D(x,y);
+  }
+}
+```
+
 ##### Dependency Injection 
 ```
-Suppose you have a class car and you must also instantiate classes wheel, company, material
+Suppose you have a class that depends on another object 
 
-class Car {
-  Company company = new Company("Audi");
+public Car() {
+  Wheel wheel = new CanadianWheel();
+  Windows window = new CanadianWindow();
 }
 
-Wheel, company, and material are 'dependencies' of car because car uses these classes
+Wheel and windows are 'dependencies' of car because they are needed to construct the car 
 
 What if we want to create multiple objects of car, but with different wheels, companies, and materials?
 
 Instead of instantiating and setting dependencies within the class, one can create a dependency from the outside 
 
 This exterior dependency (e.g. wheel) can then be injected into the class car  
+
+public Car(Wheel wh, Windows wi) {
+  this.wheel = wh;
+  this.windows = wi;
+}
 
 Advantages :
   1) Makes testing easier as dependency classes do not have to be instantiated 
