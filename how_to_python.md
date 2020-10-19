@@ -154,11 +154,15 @@ for i in zip(a,b):
     print(i)     # [(1,4),(2,5),(3,6)]
 ```
 
-##### Map
+##### Map / Filter 
 ```python
 nums = [1,2,3,4]
 k = map(lambda x : x**2, nums)
 print(list(k))     # [1,4,9,16]
+
+nums = [1,2,3,4]
+k = filter(lambda x: x%2 == 0, nums)
+print(list(k)) 
 ```
 
 ##### *
