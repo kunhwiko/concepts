@@ -77,8 +77,10 @@ queue.popleft()
 ```python
 arr = []
 for num in nums:
-    heapq.heappush(arr,num)
-    heapq.heappop(arr)
+    heapq.heappush(arr,num)   # O(logn)
+    heapq.heappop(arr)        # O(logn)
+
+heapq.heapify(arr)            # O(n)
 ```
 
 ##### Monotonic Queue 
