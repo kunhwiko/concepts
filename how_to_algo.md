@@ -26,7 +26,7 @@ bubbleSort(arr):
 ```
 
 ##### Selection Sort
-```python
+```
 # Finds minimum element and places them in the beginning 
 # Time Complexity : O(n^2)   Space Complexity : O(1)
 selectionSort(arr):
