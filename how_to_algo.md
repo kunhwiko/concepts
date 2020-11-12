@@ -1,6 +1,10 @@
-### Master Theorem :
+### Master Theorem and Recurrence 
 ```
 T(n) = a T(n/b) + O(n^c)
+
+a : number of subproblems in recursion 
+b : factor by how much subproblem size is reduced for each recursion step 
+c : time complexity for each subproblem  
 
 if log_b{a} < c --> O(n^c)
 if log_b{a} = c --> O(n^c * logn)
@@ -10,27 +14,26 @@ if log_b{a} > c --> O(n^log_b{a})
 ### Sorting Algorithms
 ---
 ##### Bubble Sort
-```python
+```
 # Swaps adjacent elements if they are in wrong order 
 # Time Complexity : O(n^2)   Space Complexity : O(1)
-def bubbleSort(arr):
-    for i in range(len(arr)-1):
-        for j in range(len(arr)-1-i):
-            if arr[j] > arr[j+1]:
-                arr[j],arr[j+1] = arr[j+1],arr[j]
+bubbleSort(arr):
+    // we can do n, but the last iteration is unnecessary
+    for i --> 0 to n-1
+        for j --> 0 to n-i-1
+            if arr[j] > arr[j+1]
+                swap(arr[j], arr[j+1])
 ```
 
 ##### Selection Sort
 ```python
 # Finds minimum element and places them in the beginning 
 # Time Complexity : O(n^2)   Space Complexity : O(1)
-def selectionSort(arr):
-    for i in range(len(arr)-1):
-        minIndex = i
-        for j in range(i+1,len(arr)):
-            if arr[j] < arr[minIndex]:
-                minIndex = j
-        arr[i],arr[minIndex] = arr[minIndex],arr[i]      
+selectionSort(arr):
+    // we can do n, but the last iteration is unnecessary 
+    for i --> 0 to n-1 
+        minIndex = index of min element in A[i:n]
+        swap(arr[i], arr[minIndex])
 ```
 
 ##### Merge Sort
@@ -218,8 +221,9 @@ def maxSubArray(nums):
 # a = distance from head to start of cycle
 # b = distance from start of cycle to where slow,fast meet
 # c = distance from where slow,fast meet to start of cycle
-# distance fast moved = a + b + c + a, distance slow moved = a + b
-# relation of fast and slow : a+b+c+a = 2 * (a+b) -> c = a
+# distance fast moved = a + b + c + b, distance slow moved = a + b
+# relation of fast and slow : a+b+c+b = 2 * (a+b) -> c = a
+
 def detect(head):
     slow = fast = head 
     while fast and fast.next:
@@ -244,44 +248,6 @@ def maxSubArray(nums,k):
     for i in range(1,len(nums)-k+1):
         best = max(best,sum(nums[i:i+k-1]))
     return best
-```
-
-### Question Specific Algorithms
----
-##### Boyer Moore's Voting Algorithm
-```python
-# The number of majority will be larger than the rest  
-def majorityElement(nums):
-    candidate = None
-    counter = 0
-        
-    for num in nums:
-        if counter == 0:
-            candidate = num
-        if num == candidate:
-            counter += 1
-        else:
-            counter -= 1
-    return candidate
-```
-
-##### Dutch National Flag
-```python
-# Sort a series of 0,1,2s in order   
-def sortColor(nums):
-    p0, p2 = 0, len(nums)-1
-    curr = 0
-        
-    while curr <= p2:
-        if nums[curr] == 0:
-            nums[curr],nums[p0] = nums[p0],nums[curr]
-            p0 += 1
-            curr += 1
-        elif nums[curr] == 2:
-            nums[curr],nums[p2] = nums[p2],nums[curr]
-            p2 -= 1
-        else:
-            curr += 1
 ```
 
 ##### Tarjan's Algorithm
@@ -318,3 +284,19 @@ class Solution:
             if self.discovery[curr] < self.low[neighbor]:
                 self.res.append([curr,neighbor])
 ```
+
+
+### Question Specific Algorithms
+---
+##### Algorithms 
+```python
+Boyer Moore's Voting Algorithm
+    --> used to find the majority element where the majority element is more than 50% of total elements 
+
+Dutch National Flag Algorithm 
+    --> used to sort 0,1,2s in O(n) time and O(1) memory 
+
+
+```
+
+
