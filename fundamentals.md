@@ -1,54 +1,53 @@
-### Fundamental Concepts
+### Operating Systems 
 ---
-##### OS 
+##### Basics 
 ```
-process : program that is being executed (heavy, isolated memory, takes time to switch)
-threads : segments of a process (light, shared memory, fast switch times)  
-locks : prevents race conditions between threads 
-deadlocks : processes are blocked because each process holds the resource needed for the other to go further
+What does an OS do?
+1) process management, scheduling, and allow concurrency
+2) memory management and allocation 
+3) I/O management 
+4) allow different files to share storage 
+5) network, security, and access control 
 
-kernel : core of operating system that controls tasks 
-shell : interface to communicate with kernel 
-```
-
-##### Types
-```
-compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
-interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
-
-dynamic typing : type is checked during runtime
-
-declarative programming : tell program specifically what you want it to do (this is A, this is B made from A, return C made from B)
-imperative programming : tell program how you would like it to do something (this is A, we will go through this loop, we check this, if B, return A')
+Kernel vs Shell
+1) kernel : core of operating system that controls tasks 
+2) shell : interface to communicate with kernel 
 ```
 
-##### Servers 
+###### Concurrency 
 ```
-Web Server : return content of file following HTTP protocols (Apache HTTP)
-Application Server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
-```
+Process vs Thread 
+1) process : program that is being executed (heavy, isolated memory, takes time to switch)
+2) threads : segments of a process (light, shares memory allocated to the process, fast switch times)  
 
-##### Testing
-```
-1) Regression Testing : testing to confirm that recent program change does not impact existing functionality 
-2) Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
-ex) QTP, Rational Robot, Selenium
-```
+Dispatching 
+1) process control block : data structure to store info on processes
+  a) save execution state of each thread (running, blocked, waiting)
+  b) track scheduling information 
+  c) track memory usage and open files 
+2) dispatcher : performs context switching 
+3) context switching : saves state of thread/process, then loads state of new thread/process
 
-##### Methodology
-```
-Agile
-  1) approach to break development into stages and constantly collaborate with end users
-  2) advocates adaptive planning, evolutionary development, early delivery, and continual improvement 
+Locks 
+1) synchronization : forces threads to run one at a time to prevent race conditions 
+2) mutual exclusion : using methods (e.g. locks) to achieve synchronization 
+3) locks : prevents race conditions between threads 
+4) deadlocks : processes are blocked because each process holds the resource needed for the other to go further
+
+Trap vs Interrupt 
+1) trap : events within current thread that causes state switches 
+  - illegal instructions, zero division error, page fault 
+2) interrupt : events outside current thread that causes state switches 
+  - completion of some operation 
+  - keyboard input 
   
-CI/CD
-  1) continous integration, continous delivery 
-  2) bridges gap between development and operations through automation to allow DevOps procedures
-  
-ETL 
-  1) extract, transform, and load one database to another
+Scheduling 
+1) scheduler : process that chooses what process to run and for how long 
+2) time slicing : divide CPU time between available threads 
+3) FIFO scheduling : run thread in FIFO order 
+4) round robin : run thread for one time slice, then move it back to queue 
+5) SRPT scheduling : run thread that will finish most quickly
 ```
-
 
 ### Object Oriented Programming
 ---
@@ -122,28 +121,42 @@ Query database using an object-oriented paradigm (graph of objects) instead of S
 ```
 
 
-
-### Language Specifics
+### Fundamental Concepts
 ---
-##### HTML/CSS/XML/XSLT
+##### Types
 ```
-HTML
-  1) static language used to display data
-  2) hypertext language : defines links between web pages 
-  3) markup language : defines text within tags that defines structures of web pages 
-  
-CSS : style sheet for HTML 
+compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
+interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
 
-XML
-  1) dynamic language used to transfer data 
-  2) markup language
-  3) able to define new tags 
+dynamic typing : type is checked during runtime
 
-XSL : style sheet for XML
+declarative programming : tell program specifically what you want it to do (this is A, this is B made from A, return C made from B)
+imperative programming : tell program how you would like it to do something (this is A, we will go through this loop, we check this, if B, return A')
+```
 
-XSLT : transforms XML to other documents like HTML
+##### Servers 
+```
+Web Server : return content of file following HTTP protocols (Apache HTTP)
+Application Server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
+```
+
+##### Testing
+```
+1) Regression Testing : testing to confirm that recent program change does not impact existing functionality 
+2) Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
+ex) QTP, Rational Robot, Selenium
+```
+
+##### Methodology
+```
+Agile
+  1) approach to break development into stages and constantly collaborate with end users
+  2) advocates adaptive planning, evolutionary development, early delivery, and continual improvement 
   
-XPath : navigate through an XML tree  
+CI/CD
+  1) continous integration, continous delivery 
+  2) bridges gap between development and operations through automation to allow DevOps procedures
   
-XQuery : queries through XML using XPath
+ETL 
+  1) extract, transform, and load one database to another
 ```
