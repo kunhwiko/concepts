@@ -22,9 +22,6 @@ arr.sort(key=lambda x : x[0])                # [(10,15),(3,4),(5,11)] -> [(3,4),
 ##### Searching
 ```python
 max(arr,key=len)                             # Find the longest element in list
-
-for i in range(len(nums)-1,-1,-1)            # Following two are equivalent
-for i in reversed(range(len(nums))
 ```
 
 ##### Operations
@@ -51,7 +48,7 @@ results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 max(counter.keys(), key = counter.get)     # Find the highest value out of keys
 ```
 
-#### Deleting mappings
+##### Deleting mappings
 ```python
 del dict[some_item]
 ```
@@ -133,12 +130,12 @@ s.isnumeric()           # Checks numeric
 ---
 ##### List Comprehension
 ```python
-l = [i for i in range(5)]
+l = [i for i in range(5) if i > 3]
 ```
 
 ##### Multiple Inheritance
 ```python
-class ArcticBear(Arctic, Bear, Land):
+class ArcticBear(Arctic, Bear, Land)
 ```
 
 ##### Split / Join
