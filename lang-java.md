@@ -1,34 +1,13 @@
 # Java Tips
-### Data Structures
----
-| Type          | mutable? ordered?| Notes                      |
-| ------------- |:-------------:   | :-----------------------:  |
-| Array         | Y/Y              | - O(1) lookup time         |
-|               |                  | - O(n) append time(if full)|
-|               |                  | - Static size              |
-|               |                  | - primitive/object data    |
-| ArrayList     | Y/Y              | - O(1) lookup time         |
-|               |                  | - O(1) append time(average)|
-|               |                  | - Dynamic size             |
-|               |                  | - object data              |
-| Stack/Queue   |                  | - Stack retrieval LIFO     |
-|               |                  | - Queue retrieval FIFO     |
-| Hash Map      | Y/N              | - O(1) lookup time         |
-| Linked List   | Y/Y              | - O(n) lookup time         |
-|               |                  | - O(1) insert time         |
-| Tree          | Y/Y              | - O(logn) lookup time      |
-|               |                  | - O(logn) insert time      |
-| String        | N/NA             |                            |
-
 
 ### {Array}
 ---
 ##### Initializing Arrays and Operations
 ```java
 // Declaration  = Initialization 
-String[] greetings = {"Hello","Hi","How are you"} ;
-String[] greetings = new String[5] ; 
-String[] greetings = new String[]{"Hello","Hi","How are you"} ; 
+String[] greetings = {"Hello","Hi","How are you"};
+String[] greetings = new String[5]; 
+String[] greetings = new String[]{"Hello","Hi","How are you"}; 
 
 // when returning value, no need for declaration
 return new int[]{0,1};
@@ -255,16 +234,4 @@ length = s1.nextInt();
 word = s2.next();
 ```
 
-### Logic Operations / Bit Manipulation 
----
-##### Bitwise Comparison
-```java
-~5                                 // not
-5&3                                // and
-5|3                                // or
-5^3                                // xor
-a^b^a == a^a^b == 0^b              // commutative rule 
-mask = 0xffffffff                  // masking
-```
-  
 
