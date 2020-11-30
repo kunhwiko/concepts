@@ -1,6 +1,15 @@
 # Python Tips 
-### Data Structures
+### Basics
 ---
+##### Overview 
+1) Strong / Dynamic Typing
+2) Interpreted / Object Oriented Language
+3) Built from C language (CPython)
+4) Pass by Object Reference (pass a copy of the reference), primitive values are Pass by Value 
+5) Reference Counting Garbage Collection (deletes objects with no references)
+6) Generational Garbage Collection (cycle algorithms to get rid of old unreachable objects)
+
+##### Data Structures 
 | Type          | mutable?      | ordered?    |
 | ------------- |:-------------:| ----------: |
 | List          | mutable       | ordered     |
@@ -8,6 +17,9 @@
 | Set           | mutable       | not ordered |
 | Dictionary    | mutable       | not ordered |
 | String / Int  | immutable     |             |
+
+
+<br />
 
 ### [List]
 ---
@@ -41,6 +53,8 @@ results = [1 for _ in range(10)]
 results[0:10:2] = [0]*len(results[0:10:2])  # [0,1,0,1,0,1,0,1,0,1]
 ```
 
+<br />
+
 ### {Dictionary}
 ---
 ##### Searching
@@ -52,6 +66,8 @@ max(counter.keys(), key = counter.get)     # Find the highest value out of keys
 ```python
 del dict[some_item]
 ```
+
+<br />
 
 ### [Other Data Structures]
 ---
@@ -106,6 +122,7 @@ class Monoqueue():
             return self.monoqueue.popleft()
 ```
 
+<br />
 
 ### "String"
 ---
@@ -125,6 +142,8 @@ s.isalpha()             # Checks alphabet character
 s.isdecimal()           # Checks decimal character
 s.isnumeric()           # Checks numeric
 ```
+
+<br />
 
 ### Python Things
 ---
@@ -211,6 +230,8 @@ for num in create():
 random.shuffle(nums)                         # randomly shuffles array
 random.randint(1,3)                          # random number out of 1,2,3
 ```
+
+<br />
 
 ### Logic Operations / Bit Manipulation 
 ---
