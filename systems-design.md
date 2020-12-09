@@ -9,11 +9,10 @@ Protocol : set of rules and structures for how computers communicate
   3) DNS Server : phonebook for finding the IP address of sites 
   4) HTTP : set of rules for how request-response works in the web 
 
-Networking : 
-  Packets : small segments of data of a larger message 
-    * IP Packet Header : holds the source and destination address
-    * TCP Packet Header : order of how packets should be reassembled
-    * IP Packet Data : holds the data of the packet 
+Packets : small segments of data of a larger message 
+  * IP Packet Header : holds the source and destination address
+  * TCP Packet Header : order of how packets should be reassembled
+  * IP Packet Data : holds the data of the packet 
   
 Handshake : TCP sends requests by sending packets to destination server asking for a connection
     
@@ -21,7 +20,6 @@ Ports :
   1) docking point for where information is received or sent
   2) how multiple programs listen for new network connections on the same machine without collision  
   3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
-
 
 Client-Server Model 
 Step 1)
@@ -65,6 +63,8 @@ Purpose of SSL Certificates
   1) MITM attacks can intercept server hellos and public keys, send their own public key, and establish a connection with client 
   2) SSL certificates guarantee where public keys come from
 ```
+
+<br /> 
 
 ### Systems Design
 ---
@@ -161,9 +161,6 @@ also solves the problem of previous keys being remapped
 
 ##### Database Types
 ```
-Why not write scripts to query data?
-You must potentially load all the data into memory when running on Python/Java. 
-
 Relational Database : Data stored in table(relations) form and organized in a strict, predefined way (usually supports SQL)  
 Non-relational Database : Flexible (non-tabular) form not precisely organized in a predefined way 
 SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
@@ -190,11 +187,17 @@ Considerations :
   2) Do we want in-memory (caching) vs disk storage?
 
 Storage Types :
-  1) Key-Value Storage : Specializes in storing as a key/value pair (MongoDB)
-  2) Blob Store : Specializes in storing massive amounts of unstructured data (Google Cloud Storage, S3, Azure)
-  3) Time Series Database : Specializes in time series data / monitoring (InfluxDB)
-  4) Graph Database : Stores in a graph form rather than a tabular form, specializes in relations between data (Neo4j)
-  5) Spatial Database : Stores data that represents some space (Quad-tree) 
+  1) Key-Value Store : Specializes in storing as a key/value pair (Apache HBase)
+    ex) id -> [name age experience]
+  2) Wide Column Store : Organizes related facts into "column families", 2-D Key-Value (BigTable, Cassandra)
+    ex) id -> [personal]  [professional] 
+               - name      - experience
+               - age 
+  3) Document Oriented Store : organized as documents, usually JSON format (MongoDB)
+    ex) {id : 1, name : __, experience : __}
+  4) Blob Store : Specializes in storing massive amounts of unstructured data (S3)
+  5) Time Series Store : Specializes in time series data / monitoring (InfluxDB)
+  6) Graph Store : Stores in a graph form rather than a tabular form, specializes in relations between data (Neo4j)
 ```
 
 
@@ -328,6 +331,8 @@ cons
   3) must implement means of communicating between services
   4) large upfront investment in automation as manual deployment becomes more difficult 
 ```
+
+<br />
 
 ### API Design
 ---
