@@ -168,8 +168,15 @@ NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), 
 
 ACID principles for SQL 
   1) Atomicity : guarantee that when one operation fails(succeeds), all other following operations fails(succeeds) 
+    a) read-copy-update : keep a copy of the original database before some query execution 
+    b) journaling : logs the updates, and reverses operations if failure arises 
   2) Consistency : each transaction ensures that the database moves from one valid state to another valid state (does not corrupt data)
   3) Isolation : when you run operations concurrently, the result will be as if you ran the operations in sequence
+   a) serialization : places a lock forcing one transaction to wait (slow, potential for deadlock)
+   b) snapshot isolation :
+      - copies and reads the last committed version (snapshot) of the database before the operation starts 
+      - will only commit if the operation does not conflict with concurrenct commits  
+      - low latency, but guarantees less consistency and uses more memory resources 
   4) Durability : once the data is stored in the database, it will remain to do so
 
 BASE principles for NoSQL
