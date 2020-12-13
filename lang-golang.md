@@ -4,10 +4,14 @@
 ##### Overview 
 ```
 1) Strong / Static Typing
-2) Compiled / Object Oriented Language
+2) Compiled / Object Oriented Language 
 3) Concurrency (built for multicores) + Compilation Efficient 
 4) Pass by Value, allows for Pass by Pointer 
 5) Automatic Garbage Collection 
+
+* although OOP aspects exist, note the following : 
+1) Go uses "types", not "classes"
+2) Go does not "instantiate", you create a "value of a type"  
 ```
 
 ##### Workspace 
@@ -99,6 +103,11 @@ const (
     a int8 = 48 
     b string = "Hello" 
 )
+
+// alternatively 
+var a, b int 
+a = 30 
+b = 30 
 ```
 
 ##### Looping
@@ -151,10 +160,31 @@ default:
 ```go
 // Array
 var x [5]int 
-len(x)
+y := [5]int{4, 5, 6, 7, 8}
+z := [5][5]int{}
 
-// Slices
-x := []int{4,5,6,7,8}
+// Slices (ArrayList)
+var x []int 
+y := []int{4, 5, 6, 7, 8}
+z := [][]int{{1,2,3,4}, {5,6,7,8}}
+
+// Slices with Make Function 
+// if a slice is full, append operations copy existing elements to a larger slice 
+// as this takes O(n) time, we can specify the capacity beforehand   
+x := make([]int, 10, 100)
+y := [][]int{x, x}
+
+// Length and Capacity 
+len(x)        // length is 10 
+cap(x)        // total capacity is 100 
+```
+
+##### Composite Literal 
+```
+any array, slice, map, struct initialized with type and braces of elements 
+[5]int{3,4,5,6}
+map[string]int{"x1" : 1}
+Person{first : "Alex", last : "Junior"}
 ```
 
 ##### Operations 
@@ -171,6 +201,91 @@ z := append(x, 77, 101, 123)
 k := append(x, z...)
 ```
 
+
+<br />
+
+
+{Map}
+---
+##### Initialization 
+```go 
+// maps in Go are unsorted, default maps  
+hm := map[string]int{"x1":1, "x2":-1, "x3":4} 
+hm["x1"]               // 1
+hm["x4"]               // 0 (does not give key error) 
+
+var hm2 map[string]int // hm2 currently points to nil 
+hm2["x1"] = 1          // entry to nil error 
+hm2 = make(map[string]int)  
+```
+
+##### Comma Ok Idiom 
+```go
+v, ok := hm["x4"]
+v     // the value mapping 
+ok    // whether or not the key is in the map 
+
+if v, ok := hm["x4"]; ok {
+  // do something 
+} 
+```
+
+##### Operations 
+```go
+for k, v := range hm {
+    // do something 
+}
+
+delete(hm, "x1")
+delete(hm, "x4")   // no error for deleting unknown key 
+```
+
+
+<br />
+
+
+### {Structs} 
+---
+##### Initialization 
+```go
+type Person struct {
+    first string 
+    last string 
+}
+
+p1 := Person{first : "Alex", last : "Junior"}
+p1.first 
+p1.last
+```
+
+##### Embedded Structs 
+```go
+type Student struct {
+    Person         // do not specify a field name 
+    school string 
+}
+
+s1 := Student{
+    Person : Person{first : "Alex", last : "Junior"},
+    school : "NYU",
+} 
+s1.Person.first    // returns Alex 
+s1.first           // also returns Alex 
+```
+
+##### Anonymous Structs 
+```go
+p1 := struct{
+    first string 
+    last string 
+}{
+    first : "Alex",
+    last : "Junior",
+}
+```
+
+
+<br />
 
 
 ### Golang Things 
