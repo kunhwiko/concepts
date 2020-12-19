@@ -1,6 +1,6 @@
 ### Operating Systems 
 ---
-##### Basics 
+##### Basic Terminology 
 ```
 What does an OS do?
 1) process management, scheduling, and allow concurrency
@@ -14,32 +14,43 @@ Kernel vs Shell
 2) shell : interface to communicate with kernel 
 ```
 
-###### Concurrency 
+##### Processes / Threads 
 ```
 Process vs Thread 
 1) process : program that is being executed (heavy, isolated memory, takes time to switch)
 2) threads : segments of a process (light, shares memory allocated to the process, fast switch times)  
 
 Dispatching 
-1) process control block : data structure to store info on processes
-  a) save execution state of each thread (running, blocked, waiting)
+1) process control block : data structure to store info of each process
+  a) save execution state of each thread/process (running, blocked, waiting)
   b) track scheduling information 
   c) track memory usage and open files 
 2) dispatcher : performs context switching 
-3) context switching : saves state of thread/process, then loads state of new thread/process
+3) context switching : saves state of the old thread/process, then loads the state of new thread/process
 
+Trap vs Interrupt 
+Makes the dispatcher run 
+1) trap : events within current thread that causes state switches 
+  - illegal instructions, zero division error, page fault 
+2) interrupt : events outside current thread that causes state switches 
+  - completion of some operation 
+  - keyboard input 
+  
+Process Creation 
+Step 1) Initialize a process control block
+Step 2) Load program into memory 
+Step 3) Create thread structures and initial value for the state of threads 
+Step 4) Make thread known to the dispatcher 
+```
+
+###### Concurrency / Scheduling
+```
 Locks 
 1) synchronization : forces threads to run one at a time to prevent race conditions 
 2) mutual exclusion : using methods (e.g. locks) to achieve synchronization 
 3) locks : prevents race conditions between threads 
 4) deadlocks : processes are blocked because each process holds the resource needed for the other to go further
 
-Trap vs Interrupt 
-1) trap : events within current thread that causes state switches 
-  - illegal instructions, zero division error, page fault 
-2) interrupt : events outside current thread that causes state switches 
-  - completion of some operation 
-  - keyboard input 
   
 Scheduling 
 1) scheduler : process that chooses what process to run and for how long 
@@ -47,6 +58,51 @@ Scheduling
 3) FIFO scheduling : run thread in FIFO order 
 4) round robin : run thread for one time slice, then move it back to queue 
 5) SRPT scheduling : run thread that will finish most quickly
+6) priority scheduling : supports a priority order 
+```
+
+##### Dynamic Linking / Memory Management  
+```
+When a program is loaded into memory and becomes a process, memory is divided into 4 sections 
+1) Text : current activity as represented by contents of the registers 
+2) Data : section for global and static variables 
+3) Stack : temporary data such as function parameters, addresses, local variables 
+4) Heap : dynamically allocated memory during runtime 
+
+Memory Allocation
+1) compiler : generate one object file for each source code file (may reference other source files)
+2) linker : combines all object files into a single executable file (re-organizes storage allocation)
+3) OS : loads executable files into memory and allows several processes to share memory at once 
+4) Runtime library : works with OS to execute dynamic allocation (malloc, free)
+
+Components of Object Files
+1) sections : distinct info such as text/data, starting addresses, and initial contents  
+2) symbol table : name and current location of each procedure or variable 
+3) relocation record : addresses in the object file that linker will adjust to a final memory allocation
+
+Linking Object Files (Static Linking)
+1) Read section and compute memory layout 
+2) Read symbols and construct a complete symbol table 
+3) Read relocation record, update addresses, write executable file 
+
+Dynamic Linking
+Instead of linking programs and resolving references beforehand, shared references are resolved during runtime
+1) copy shared libraries from persistent storage into RAM 
+2) read symbol table from libraries 
+3) fill a jump table with addresses for each function to "jump" to a function in the shared libraries 
+
+Memory Management 
+1) Stack Allocation
+  a) used when allocation and freeing is predictable 
+  b) all free spaces are stacked on top of one another and is very efficient for memory management 
+  
+2) Heap Allocation
+  a) used when allocation and freeing is unpredictable
+  b) spaces might not be contigously allocated
+  c) must keep track of storage that needs to be freed (potential for memory leak)
+
+3) Reference Counting / Generational Garbage Collection
+(reference the Python md file for more details)
 ```
 
 <br />
@@ -134,6 +190,7 @@ Converting data between relational databases and OOP languages such that they be
 Query database using an object-oriented paradigm (graph of objects) instead of SQL (tabular format) 
 ```
 
+<br />
 
 ### Terms in Software Engineering 
 ---
