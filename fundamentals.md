@@ -139,6 +139,32 @@ Allow processes to communicate with one another and synchronize actions
 2) Message Parsing Method : Establish a communication link and exchange messages 
 ```
 
+##### File Systems 
+```
+Goals 
+1) manage efficient use of disk space, fast access, and sharing between users
+2) information stored must be durable to survive failures 
+3) must guarantee isolation between users 
+
+Inode 
+- OS data structure that carries info about a particular file (file size, occupied space, access times, id)
+- stored on disk along with the file, and kept in memory when file is opened 
+- various representations of how disk can represent bytes of a file (linked list of 4096 byte "blocks", FAT)
+
+Directories : special structures used to map text names to inode id numbers (directories are organized as a tree structure) 
+Working Directory : OS remembers the inode number of the current directory 
+
+Block Cache : using LRU to retain recent disk blocks in main memory, any modifications are synchronously written to disk storage
+
+Disk Scheduling : order of executing I/O
+1) FIFO
+2) shortest positioning time first : chooses the request that is closest to the previous one 
+3) elevator algorithm / scan :  have head move in one direction serving all requests along the way, then move in opposite direction
+
+File System Crash Recovery 
+1) consistency check on reboot : restores consistency, but does not prevent information loss 
+2) logging : use a log entry to ensure consistency (refer to systems-design.md)
+```
 
 <br />
 
