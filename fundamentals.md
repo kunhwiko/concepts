@@ -41,6 +41,12 @@ Step 1) Initialize a process control block
 Step 2) Load program into memory 
 Step 3) Create thread structures and initial value for the state of threads 
 Step 4) Make thread known to the dispatcher 
+
+When a program is loaded into memory and becomes a process, memory is divided into 4 sections 
+1) Text : current activity as represented by contents of the registers 
+2) Data : section for global and static variables 
+3) Stack : temporary data such as function parameters, addresses, local variables 
+4) Heap : dynamically allocated memory during runtime 
 ```
 
 ###### Concurrency / Scheduling
@@ -51,7 +57,6 @@ Locks
 3) locks : prevents race conditions between threads 
 4) deadlocks : processes are blocked because each process holds the resource needed for the other to go further
 
-  
 Scheduling 
 1) scheduler : process that chooses what process to run and for how long 
 2) time slicing : divide CPU time between available threads 
@@ -63,16 +68,10 @@ Scheduling
 
 ##### Dynamic Linking / Memory Management  
 ```
-When a program is loaded into memory and becomes a process, memory is divided into 4 sections 
-1) Text : current activity as represented by contents of the registers 
-2) Data : section for global and static variables 
-3) Stack : temporary data such as function parameters, addresses, local variables 
-4) Heap : dynamically allocated memory during runtime 
-
-Memory Allocation
+Executing
 1) compiler : generate one object file for each source code file (may reference other source files)
 2) linker : combines all object files into a single executable file (re-organizes storage allocation)
-3) OS : loads executable files into memory and allows several processes to share memory at once 
+3) OS : loads executable files into memory (allows several different processes to share memory at once)
 4) Runtime library : works with OS to execute dynamic allocation (malloc, free)
 
 Components of Object Files
@@ -87,9 +86,16 @@ Linking Object Files (Static Linking)
 
 Dynamic Linking
 Instead of linking programs and resolving references beforehand, shared references are resolved during runtime
+Redundancy of loading the same shared libraries is replaced with shared memory 
 1) copy shared libraries from persistent storage into RAM 
 2) read symbol table from libraries 
 3) fill a jump table with addresses for each function to "jump" to a function in the shared libraries 
+
+Shared Memory 
+1) Multiple processes should be allowed inside memory at once
+2) No process should be aware that memory is being shared
+3) Processes must not corrupt one another 
+4) Efficiency should not be affected by sharing 
 
 Memory Management 
 1) Stack Allocation
@@ -107,12 +113,6 @@ Memory Management
 
 ##### Virtual Memory 
 ```
-Shared Memory 
-1) Multiple processes should be allowed inside memory at once
-2) No process should be aware that memory is being shared
-3) Processes must not corrupt one another 
-4) Efficiency should not be affected by sharing 
-
 Intuition 
 1) The amount of addressable/needed memory could be larger than the actual physical memory
 2) We don't need all processes to have data in physical memory, just the ones being executed
@@ -164,6 +164,19 @@ Disk Scheduling : order of executing I/O
 File System Crash Recovery 
 1) consistency check on reboot : restores consistency, but does not prevent information loss 
 2) logging : use a log entry to ensure consistency (refer to systems-design.md)
+```
+
+##### Miscellaneous 
+```
+Virtual Machines : "Hypervisor" allows the "host" computer to support "guests" by separating memory or processing resources
+
+Distributed File Systems 
+- client/server application where clients can access files from the server as if it were from the local machine 
+- server sends a copy of the file that gets cached into the client machine
+- typically has file/database replication across multiple servers to protect against failures 
+- must have a mechanism in place to organize updates across all replicas 
+
+Cloud Computing : outsourcing computing or sourcing power to a third party 
 ```
 
 <br />
