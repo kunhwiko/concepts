@@ -4,10 +4,11 @@
 ##### Overview 
 ```
 1) Strong / Static Typing
-2) Compiled / Object Oriented Language 
-3) Concurrency (built for multicores) + Compilation Efficient 
-4) Pass by Value, allows for Pass by Pointer 
-5) Automatic Garbage Collection 
+2) Compiled / Object Oriented Language* 
+3) Mixed Cap Convention
+4) Concurrency (built for multicores) + Compilation Efficient 
+5) Pass by Value, allows for Pass by Pointer 
+6) Automatic Garbage Collection 
 
 * although OOP aspects exist, note the following : 
 1) Go uses "types", not "classes"
@@ -99,7 +100,7 @@ const (
     a = 48 
     b = "Hello" 
 
-    // untyped constants 
+    // typed constants 
     a int8 = 48 
     b string = "Hello" 
 )
@@ -159,7 +160,8 @@ default:
 ##### Initialization
 ```go
 // Array
-var x [5]int 
+var x [5]int   
+var x [5]int{}
 y := [5]int{4, 5, 6, 7, 8}
 z := [5][5]int{}
 
@@ -214,7 +216,7 @@ hm := map[string]int{"x1":1, "x2":-1, "x3":4}
 hm["x1"]               // 1
 hm["x4"]               // 0 (does not give key error) 
 
-var hm2 map[string]int // hm2 currently points to nil 
+var hm2 map[string]int // hm2 is a type map that currently points to nil 
 hm2["x1"] = 1          // entry to nil error 
 hm2 = make(map[string]int)  
 ```
@@ -244,33 +246,40 @@ delete(hm, "x4")   // no error for deleting unknown key
 <br />
 
 
-### {Structs} 
+### {Structs / Interfaces} 
 ---
-##### Initialization 
+##### Reference Type 
+```
+Slices, Maps, Channels are reference types 
+Structs are NOT reference types 
+Try passing a struct into a function and change it 
+```
+
+##### Structs
 ```go
-type Person struct {
-    first string 
-    last string 
+type Rect struct {
+    width, height float64
 }
 
-p1 := Person{first : "Alex", last : "Junior"}
-p1.first 
-p1.last
+r := Rect{width: 3, height: 4}
+r.width
+r.height
 ```
 
 ##### Embedded Structs 
 ```go
-type Student struct {
-    Person         // do not specify a field name 
-    school string 
+type Coloredrect struct {
+    // anonymous field, may also do "variable_name Rect"
+    Rect       
+    color string 
 }
 
-s1 := Student{
-    Person : Person{first : "Alex", last : "Junior"},
-    school : "NYU",
+cr := Coloredrect{
+    Rect: Rect{2.3, 3.4},
+    color: "red",
 } 
-s1.Person.first    // returns Alex 
-s1.first           // also returns Alex 
+cr.Rect.width    // returns 2.3 
+cr.width         // also returns 2.3 
 ```
 
 ##### Anonymous Structs 
@@ -279,9 +288,125 @@ p1 := struct{
     first string 
     last string 
 }{
-    first : "Alex",
-    last : "Junior",
+    first: "Alex",
+    last: "Junior",
 }
+```
+
+##### Interfaces
+```
+type geometry interface {
+    area() float64
+    perim() float64
+}
+
+// to implement an interface, we implement all the methods 
+type rect struct {
+    width, height float64
+}
+func (r rect) area() float64 {
+    return r.width * r.height
+}
+func (r rect) perim() float64 {
+    return 2*r.width + 2*r.height
+}
+
+// polymorphism
+func measure(g geometry) {
+    fmt.Println(g, g.area(), g.perim())
+}
+measure(rect{width: 3, height: 4})
+```
+
+
+<br />
+
+
+### Function
+---
+##### Functions 
+```go
+func foo(parameter1 type, parameter2 type) (return_type1, return_type2) {
+
+}
+x, y := foo(argument1, argument2)
+
+// anonymous functions 
+func(x int) {
+    fmt.Println(x + 2)
+}(2)
+```
+
+##### First Class Citizen
+```go
+// function expressions 
+f := func(x int) int {
+    return x + 2
+}
+fmt.Println(f(2))
+
+// returning a function 
+func main() {
+    f := bar()
+    fmt.Printf("%T\n", f)    // func() string type
+    fmt.Printf("%T", f())    // string type 
+}
+
+func foo() string {
+    return "Hello World"
+}
+
+func bar() func() string {
+    return foo
+}
+```
+
+##### Variadic Parameter
+```go
+foo(2, 3, 4, 5, 6)
+foo([]int{2, 3, 4, 5, 6}...)
+
+// variadic means 0 or more int arguments can be passed 
+func foo(x ...int) {
+    fmt.Println(x)          // [2,3,4,5,6]
+    fmt.Println("%T\n", x)  // slice type 
+}
+
+// 0 params creates a slice type pointing to nil 
+foo()
+
+// variadic parameters must be at the end 
+func bar(s string, x...int) 
+```
+
+##### Methods 
+```go
+// a method is a function associated with an object (str.lower())
+func (receiver type) foo() {}
+
+p1.foo()      // method
+bar(p1)       // function
+
+func (p Person) foo() int {
+    return p.first + p.second + p.third 
+}
+
+func bar(p Person) int {
+    return p.first + p.second + p.third 
+}
+```
+
+##### Defer
+```go
+// delays the execution of a function, method, or anonymous method 
+// great for closing files (readability, multiple returns exist etc.)
+// for multiple defers, executes in LIFO order
+sum(1,2,3,4)
+defer sum(2,3,4,5)
+defer sum(1,2,3)
+sum(5,6,7,8)
+
+// --> 10, 26, 6, 14 
 ```
 
 
