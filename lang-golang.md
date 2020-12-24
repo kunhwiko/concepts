@@ -1,4 +1,4 @@
-# Golang Tips 
+# Go Programming
 ### About Go 
 ---
 ##### Overview 
@@ -97,7 +97,6 @@ rune = int32
 
 ##### Multiple Type Assignment 
 ```go
-// untyped constants 
 const (
     // untyped constants 
     a = 48 

@@ -1,15 +1,14 @@
-# Java Tips
-
+# Java Programming 
 ### {Array}
 ---
-##### Initializing Arrays and Operations
+##### Initializing Arrays
 ```java
 // Declaration  = Initialization 
 String[] greetings = {"Hello","Hi","How are you"};
 String[] greetings = new String[5]; 
 String[] greetings = new String[]{"Hello","Hi","How are you"}; 
 
-// when returning value, no need for declaration
+// at times, there is no need to declare the array 
 return new int[]{0,1};
 ```
 
@@ -21,10 +20,10 @@ Arrays.copyOfRange(arr,1,3)   // copies subarray from index 1 to 3
 
 ### {ArrayList}
 ---
-##### Initializing ArrayList
+##### Initializing ArrayLists
 ```java
-// Arrays.asList(arr) changes array to an arraylist
-ArrayList<String> arrlist = new ArrayList<>(Arrays.asList(greetings)) ;
+// Arrays.asList(arr) changes an array to an arraylist
+ArrayList<String> arrlist = new ArrayList<>(Arrays.asList(greetings));
 ```
 
 ##### Basic Operations
@@ -50,10 +49,12 @@ SortedMap<String,Integer> map = new TreeMap<>();  // SortedMap
 ##### Traversing through keys and values
 ```java
 // All key values in map
-for(String k : hashmap.keySet()) System.out.print(k);
+for(String k : hashmap.keySet()) 
+	System.out.print(k);
 
 // All value values in map
-for(String v : hashmap.values()) System.out.print(v);
+for(String v : hashmap.values()) 
+	System.out.print(v);
 ```
 
 ##### Basic Operations
@@ -67,6 +68,8 @@ map.containsValue(v);    // check if map contains the value
 map.getOrDefault(k,0);   // get value or if not existant 0 
 ```
 
+<br />
+
 ### "String and StringBuilder" 
 ---
 ##### String Multiplication 
@@ -76,7 +79,7 @@ map.getOrDefault(k,0);   // get value or if not existant 0
 // Create "printprintprintprint"
 StringBuilder sb = new StringBuilder();
 for(int i = 0; i < 4; i++){
-  sb.append("print");
+	sb.append("print");
 }
 sb.toString();
 ```
@@ -118,9 +121,9 @@ for (int i = 0; i < sb.length(); i++) {
 }
 ```
 
+<br />
 
-
-### Java Things 
+### Other Topics
 ---
 ##### Casting
 ```
@@ -135,7 +138,7 @@ String.valueOf(5);                   // changes to string
 
 ##### Switch
 ```java
-public int getValue(char c){
+public int getValue(char c) {
     switch(c){
         case 'I' : return 1;
         case 'V' : return 5;
@@ -166,8 +169,8 @@ while(iter.hasNext()){
 Comparator<String> cmp = new Comparator<>() {
     public int compare(String o1, String o2) {
         // return negative int : o1 goes left
-	// return positive int : o1 goes right
-	return o2.compareTo(o1);               // descending order
+	    // return positive int : o1 goes right
+	    return o2.compareTo(o1);    // descending order
     }
 };
 TreeSet<String> res = new TreeSet<>(cmp);
@@ -175,15 +178,18 @@ res.add("C"); res.add("B"); res.add("A");
 
 // Second example [(5,10),(3,14)] -> [(3,14),(5,10)] 
 Arrays.sort(arr, new Comparator<int[]>(){
-    public int compare(int[] i1, int[] i2){
-	return i1[0] - i2[0];
+    public int compare(int[] i1, int[] i2) {
+	    return i1[0] - i2[0];
     }
 });
 ```
 
 ##### Synchronized
 ```java
-public synchronized void main () {}   // only allows 1 thread to use the function at the same time 
+// only allows 1 thread to use the function at a given time 
+public synchronized void main () {
+
+}   
 ```
 
 ##### Anonymous 
@@ -194,32 +200,36 @@ public synchronized void main () {}   // only allows 1 thread to use the functio
 
 public class Hello {
     public void sayHello() {
-    	// local class method
+        // local class method
     	class EnglishGreetings implements Greetings {
-	    public void greet() { System.out.println("Hello there"); }
-	}
-	Greetings englishGreetings = new EnglishGreetings();
+            public void greet() { 
+                System.out.println("Hello there"); 
+            }
+        }
+        Greetings englishGreetings = new EnglishGreetings();
 	
-	// anonymous class method 
-	Greetings frenchGreetings = new Greetings() {
-	    public void greet() { System.out.println("Bonjour"); }
-	}
+        // anonymous class method 
+	    Greetings frenchGreetings = new Greetings() {
+	        public void greet() { 
+                System.out.println("Bonjour"); 
+            }
+	    }
     }
 }
 
 public class HelloButton {
     public void start() {
         Button button = new Button();
-	button.setText("Press Me");
+	    button.setText("Press Me");
 		
-	// EventHandler interface must be implemented with a new class 
-	// Instead, use anonymous class to quickly implement the interface without having to declare a new class
-	button.setAction(new EventHandler<ActionEvent>() {
-	    @Override
-	    public void handle(ActionEvent event) {
-	        System.out.println("Hello!");
-	    }
-	});
+	    // EventHandler interface must be implemented with a new class 
+	    // Instead, use an anonymous class to quickly implement the interface without having to declare a new class
+	    button.setAction(new EventHandler<ActionEvent>() {
+    	    @Override
+    	    public void handle(ActionEvent event) {
+    	        System.out.println("Hello!");
+    	    }
+	    });
     }
 }
 ```
@@ -233,5 +243,4 @@ Scanner s2 = new Scanner(System.in);
 length = s1.nextInt();
 word = s2.next();
 ```
-
 

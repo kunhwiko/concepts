@@ -1,4 +1,4 @@
-# Python Tips 
+# Python Programming
 ### Basics
 ---
 ##### Overview 
