@@ -34,14 +34,29 @@ go build <filename> : build an executable file in the current directory
 go install <filename> : build executable file on the bin path 
 ```
 
-##### Modules (learn more about modules, dependencies, packages)
+##### Packages 
 ```
-1) a way to manage different dependencies 
-2) collection of packages stored in a file tree with go.mod as the root 
+1) Convention is to use the directory name as the package name 
+2) Variables can only be exported if they start with upper case, otherwise private
+```
+
+##### Modules 
+```
+All dependency packages and installations are saved in GOPATH, 
+meaning the PATH must change when switching projects
+
+Modules are a way to manage different dependencies, and support the following
+- ability to work from any directory, not just the GOPATH
+- ability to install a precise version of a package
+- ability to import multiple versions of the same package 
+- ability to list all dependencies in a project  
+
+Modules are a collection of packages stored in a file tree with go.mod as the root 
 
 go.mod 
-1) defines the module path  
-2) defines dependency requirements 
+1) defines the module import path  
+2) defines dependencies used 
+3) go mod init github.com/example to initialize module and specify import path
 ```
 
 ##### Identifiers 
@@ -78,18 +93,6 @@ float numbers: float32, 64
 complex numbers : complex64, 128
 byte = uint8
 rune = int32
-```
-
-##### String Types
-```go
-s := "hello world"   // must use double quotes 
-s := `
-hello          // ` is equivalent of Python """
-world
-`
-
-c := 'A'             // ascii number for char A 
-b := []byte(s)       // ascii number for each char in s
 ```
 
 ##### Multiple Type Assignment 
@@ -155,6 +158,32 @@ default:
 <br />
 
 
+### "String"
+---
+##### String Types
+```go
+s := "hello world"           // must use double quotes 
+s := `hello world`           // ` is equivalent of Python """
+
+c := 'A'                     // ascii number for char A 
+b := []byte(s)               // ascii number for each char in s
+```
+
+##### String Operations 
+```go
+for i, v := range s {
+    fmt.Printf("%T\n", s[i]) // byte type 
+    fmt.Printf("%T\n", i)    // rune type 
+}
+
+// methods 
+strings.Repeat("string", 4)
+```
+
+
+<br />
+
+
 ### [Array/Slices]
 ---
 ##### Initialization
@@ -185,8 +214,8 @@ cap(x)        // total capacity is 100
 ```
 any array, slice, map, struct initialized with type and braces of elements 
 [5]int{3,4,5,6}
-map[string]int{"x1" : 1}
-Person{first : "Alex", last : "Junior"}
+map[string]int{"x1": 1}
+Person{first: "Alex", last: "Junior"}
 ```
 
 ##### Operations 
@@ -201,13 +230,17 @@ for i, v := range x {
 y := x[1:]
 z := append(x, 77, 101, 123)
 k := append(x, z...)
+
+// Packages 
+sort.Ints(arr) 
+sort.Strings(arr)
 ```
 
 
 <br />
 
 
-{Map}
+### {Map}
 ---
 ##### Initialization 
 ```go 
@@ -359,6 +392,19 @@ func foo() string {
 func bar() func() string {
     return foo
 }
+
+// passing a function (callback functions)
+func main() {
+    run(hello)
+}
+
+func hello() {
+    fmt.Println("Hello")
+}
+
+func run(f func()) {
+    f()
+}
 ```
 
 ##### Variadic Parameter
@@ -413,8 +459,168 @@ sum(5,6,7,8)
 <br />
 
 
+### *Pointer
+---
+##### Pointer
+```go
+// pointers are great for passing in addresses of large chunks of data 
+
+&a     // address 
+*int   // pointer to the address of an int 
+*a     // dereference an address 
+```
+
+##### Dereferencing Structs
+```go
+type ListNode struct {
+    Val int 
+    Next *ListNode
+}
+
+var ptr1 *ListNode
+(*ptr1).Next = p2    // this is what you would expect   
+ptr1.Next = p2       // but you can also just do this 
+```
+
+##### Method Set 
+```go
+// type *T can call methods with receiver type T and *T
+// type T can call methods with receiver type T, and if T is addressable, type *T
+// if type T is not addressable, cannot call methods with receiver type *T 
+
+// this is because 
+// for *T, we know exactly what T it is pointing to, enabling us to call methods with receiver T 
+// for T, we might have multiple *T's pointing to it, disabling us from calling methods with receiver *T 
+
+type circle struct {
+    radius float64
+}
+
+type shape interface {
+    area() float64
+}
+
+func (c *circle) area() float64 {
+    return 3.14 * c.radius * c.radius 
+}
+
+func getArea(s shape) {
+    fmt.Println(s.area())
+}
+
+func main() {
+    c := circle{5}
+    // if type T is not addressable, cannot call methods with receiver type *T 
+    getArea(c)
+
+    // if type T is addressable, can call methods with receiver type *T       
+    c.area()        
+}
+```
+
+
+<br />
+
+
+### Concurrency
+---
+##### Definitions
+```
+Parallelism: simultaneous execution of computation 
+Concurrency: a design pattern that potentially enables programs to run in parallel  
+```
+
+##### Goroutines
+```go
+// function or method that executes independently, every concurrent executing activity
+
+func sum(x ...int) int {
+    sum := 0
+    for _, v := range x {
+        sum += v
+    }
+    return sum 	
+}
+
+func main() {
+    go sum([]int{1,2,3,4,5}...) 
+}
+```
+
+##### WaitGroup
+```go
+// the routine above will likely not be executed because
+// when the program reaches the bottom of main()
+// all routines will be terminated  
+
+import "sync"
+
+func sum(wg *sync.WaitGroup, x ...int) int {
+    // decrement the number of waitgroups 
+    defer wg.Done()
+    sum := 0
+    for _, v := range x {
+        sum += v
+    }
+    return sum 	
+}
+
+func main() {
+    var wg sync.WaitGroup
+
+    for i := 0; i <= 5; i++ {
+        // increment the number of waitgroups 
+        wg.Add(1) 
+        go sum(&wg, []int{1,2,3,4,5}...) 
+    } 
+    // wait until waitgroup count drops to 0 
+    wg.Wait()
+}
+```
+
+##### Mutex Locks 
+```go
+// race conditions mean different routines are accessing the same resource
+// "go run -race main.go" command can find race conditions 
+  
+// we use mutex locks to lock out certain resources 
+
+var num = 0
+
+func main() {
+    var wg sync.WaitGroup 
+    var mu sync.Mutex 
+
+    wg.Add(100)
+    for i := 1; i <= 100; i++ {
+        go func(i int) {
+            mu.Lock()
+            num += i
+            fmt.Println(num)
+            mu.Unlock()
+            wg.Done()
+        }(i)
+    }
+    wg.Wait()
+}
+
+```
+
+
+<br />
+
+
 ### Golang Things 
 ---
+##### Creating Type
+```go
+type trythis int     // a type called "trythis"
+var a trythis = 123
+var b int = 123 
+
+b == int(a)          // Conversion 
+```
+
 ##### Printf 
 ```
 %d    : integer 
@@ -425,12 +631,20 @@ sum(5,6,7,8)
 %T    : type 
 ```
 
+##### Conversion 
+```go
+int(x)              // changing floats to int 
+string(x)           // changing byte to string 
 
-<br />
+strconv.Itoa(32)    // changing int to string
+strconv.Atoi("32")  // changing string to int (Atoi returns int, error)
+```
 
+##### Math
+```go
+math.Pow(2, 31)     // returns a float 
+```
 
-### Logic Operations / Bit Manipulation 
----
 ##### iota 
 ```go 
 // iota is only possible for constants, and auto increments by 1 
@@ -455,4 +669,61 @@ const (
     gb = 1 << (iota * 10)
 )
 ```
+
+##### JSON
+```go
+type Person struct {
+    First string
+    Last string 
+    Age int 
+}
+
+func main() {
+    // Marshal: creating a JSON object 
+    p1 := Person {"Alex", "Junior", 12}
+    p2 := Person {"Alex", "Senior", 32}
+    people := []Person{p1, p2}
+
+    data, err := json.Marshal(people)
+    if err != nil {
+        fmt.Println("Failed to convert")
+    }
+    // JSON object is array of bytes  
+    fmt.Println(string(data))   
+
+    // Unmarshal
+    err = json.Unmarshal(data, &people)
+    if err != nil {
+        fmt.Println("Failed to convert")
+    }
+    fmt.Println(people)
+}
+```
+
+##### Custom Sorting / Comparator 
+```go
+type Element struct {
+    Name string 
+    Cost int 
+}
+
+func main() {
+    e1 := Element{"Ruby", 32000}
+    e2 := Element{"Sapphire", 29000}
+    e3 := Element{"Silver", 5400}
+    e4 := Element{"Jade", 29000}
+
+    elements := []Element{e1, e2, e3, e4}
+    sort.SliceStable(elements, func(i, j int) bool {
+        if elements[i].Cost == elements[j].Cost {
+            return elements[i].Name < elements[j].Name
+        }
+        return elements[i].Cost < elements[j].Cost
+    })
+    fmt.Println(elements)
+}
+```
+
+
+
 
