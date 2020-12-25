@@ -163,75 +163,12 @@ while(iter.hasNext()){
 }
 ```
 
-##### Comparator
-```java
-// Note the difference of Comparator and Comparable interface
-Comparator<String> cmp = new Comparator<>() {
-    public int compare(String o1, String o2) {
-        // return negative int : o1 goes left
-	    // return positive int : o1 goes right
-	    return o2.compareTo(o1);    // descending order
-    }
-};
-TreeSet<String> res = new TreeSet<>(cmp);
-res.add("C"); res.add("B"); res.add("A");
-
-// Second example [(5,10),(3,14)] -> [(3,14),(5,10)] 
-Arrays.sort(arr, new Comparator<int[]>(){
-    public int compare(int[] i1, int[] i2) {
-	    return i1[0] - i2[0];
-    }
-});
-```
-
 ##### Synchronized
 ```java
 // only allows 1 thread to use the function at a given time 
 public synchronized void main () {
 
 }   
-```
-
-##### Anonymous 
-```java
-// locally defined classes that are not named
-// enable declaration + instantiation at the same time 
-// use when local class will only be used once 
-
-public class Hello {
-    public void sayHello() {
-        // local class method
-    	class EnglishGreetings implements Greetings {
-            public void greet() { 
-                System.out.println("Hello there"); 
-            }
-        }
-        Greetings englishGreetings = new EnglishGreetings();
-	
-        // anonymous class method 
-	    Greetings frenchGreetings = new Greetings() {
-	        public void greet() { 
-                System.out.println("Bonjour"); 
-            }
-	    }
-    }
-}
-
-public class HelloButton {
-    public void start() {
-        Button button = new Button();
-	    button.setText("Press Me");
-		
-	    // EventHandler interface must be implemented with a new class 
-	    // Instead, use an anonymous class to quickly implement the interface without having to declare a new class
-	    button.setAction(new EventHandler<ActionEvent>() {
-    	    @Override
-    	    public void handle(ActionEvent event) {
-    	        System.out.println("Hello!");
-    	    }
-	    });
-    }
-}
 ```
 
 ### I/O Controls

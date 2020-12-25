@@ -72,16 +72,15 @@ name used to identify a variable, function, and any other user-defined item
 ---
 ##### Declaring and Assigning 
 ```go
-// short declaration operator cannot be declared globally 
-func main() {
-    x := 3
-}
-
 // var can be declared globally 
-var y int8 = 1           // used to save memory space    
+var x int8 = 1     // int8 can be used to save memory 
 
 func main() {
-    var z = 1            // untyped variable  
+    // short declaration operator cannot be declared globally 
+    y := 3 
+
+    // untyped variable 
+    var z = 1 
 }
 ``` 
 
@@ -171,8 +170,8 @@ b := []byte(s)               // ascii number for each char in s
 ##### String Operations 
 ```go
 for i, v := range s {
-    fmt.Printf("%T\n", s[i]) // byte type 
-    fmt.Printf("%T\n", i)    // rune type 
+    fmt.Printf("%T\n", s[i])    // byte type 
+    fmt.Printf("%T\n", v)       // rune type 
 }
 
 // methods 
@@ -193,14 +192,16 @@ var x [5]int{}
 y := [5]int{4, 5, 6, 7, 8}
 z := [5][5]int{}
 
-// Slices (ArrayList)
+// Slices 
 var x []int 
 y := []int{4, 5, 6, 7, 8}
 z := [][]int{{1,2,3,4}, {5,6,7,8}}
 
 // Slices with Make Function 
+
 // if a slice is full, append operations copy existing elements to a larger slice 
-// as this takes O(n) time, we can specify the capacity beforehand   
+// as this takes O(n) time, we can specify the capacity beforehand 
+
 x := make([]int, 10, 100)
 y := [][]int{x, x}
 
@@ -230,7 +231,7 @@ y := x[1:]
 z := append(x, 77, 101, 123)
 k := append(x, z...)
 
-// Packages 
+// Sort Packages  
 sort.Ints(arr) 
 sort.Strings(arr)
 ```
@@ -260,7 +261,7 @@ v     // the value mapping
 ok    // whether or not the key is in the map 
 
 if v, ok := hm["x4"]; ok {
-  // do something 
+    // do something 
 } 
 ```
 
@@ -284,7 +285,6 @@ delete(hm, "x4")   // no error for deleting unknown key
 ```
 Slices, Maps, Channels are reference types 
 Structs are NOT reference types 
-Try passing a struct into a function and change it 
 ```
 
 ##### Structs
@@ -300,13 +300,12 @@ r.height
 
 ##### Embedded Structs 
 ```go
-type Coloredrect struct {
-    // anonymous field, may also do "variable_name Rect"
-    Rect       
+type ColoredRect struct {
+    Rect          // anonymous field, may also do "varName Rect"
     color string 
 }
 
-cr := Coloredrect{
+cr := ColoredRect{
     Rect: Rect{2.3, 3.4},
     color: "red",
 } 
@@ -347,7 +346,9 @@ func (r rect) perim() float64 {
 func measure(g geometry) {
     fmt.Println(g, g.area(), g.perim())
 }
-measure(rect{width: 3, height: 4})
+
+r := rect{width: 3, height: 4}
+measure(r)
 ```
 
 
@@ -358,10 +359,11 @@ measure(rect{width: 3, height: 4})
 ---
 ##### Functions 
 ```go
-func foo(parameter1 type, parameter2 type) (return_type1, return_type2) {
-
+// functions 
+func foo(x int, y string) (int, string) {
+    // functions in Go can have multiple returns 
+    return x+1, y
 }
-x, y := foo(argument1, argument2)
 
 // anonymous functions 
 func(x int) {
@@ -371,13 +373,17 @@ func(x int) {
 
 ##### First Class Citizen
 ```go
-// function expressions 
+// functions in Go are First-Class Citizens
+// they can be assigned to variables, returned, and passed
+
+// 1) function expressions 
 f := func(x int) int {
     return x + 2
 }
 fmt.Println(f(2))
 
-// returning a function 
+
+// 2) returning a function 
 func main() {
     f := bar()
     fmt.Printf("%T\n", f)    // func() string type
@@ -392,7 +398,8 @@ func bar() func() string {
     return foo
 }
 
-// passing a function (callback functions)
+
+// 3) callback functions 
 func main() {
     run(hello)
 }
@@ -408,16 +415,16 @@ func run(f func()) {
 
 ##### Variadic Parameter
 ```go
-foo(2, 3, 4, 5, 6)
-foo([]int{2, 3, 4, 5, 6}...)
-
 // variadic means 0 or more int arguments can be passed 
 func foo(x ...int) {
     fmt.Println(x)          // [2,3,4,5,6]
     fmt.Println("%T\n", x)  // slice type 
 }
 
-// 0 params creates a slice type pointing to nil 
+foo(2, 3, 4, 5, 6)
+foo([]int{2, 3, 4, 5, 6}...)
+
+// 0 params create a slice type pointing to nil 
 foo()
 
 // variadic parameters must be at the end 
@@ -443,10 +450,11 @@ func bar(p Person) int {
 
 ##### Defer
 ```go
-// delays the execution of a function, method, or anonymous method 
+// delays the execution of a function or method 
 // great for closing files (readability, multiple returns exist etc.)
+
 // for multiple defers, executes in LIFO order
-sum(1,2,3,4)
+sum(1,2,3,4)       
 defer sum(2,3,4,5)
 defer sum(1,2,3)
 sum(5,6,7,8)
@@ -458,7 +466,7 @@ sum(5,6,7,8)
 <br />
 
 
-### *Pointer
+### Pointer*
 ---
 ##### Pointer
 ```go
@@ -515,94 +523,6 @@ func main() {
     // if type T is addressable, can call methods with receiver type *T       
     c.area()        
 }
-```
-
-
-<br />
-
-
-### Concurrency
----
-##### Definitions
-```
-Parallelism: simultaneous execution of computation 
-Concurrency: a design pattern that potentially enables programs to run in parallel  
-```
-
-##### Goroutines
-```go
-// function or method that executes independently, every concurrent executing activity
-
-func sum(x ...int) int {
-    sum := 0
-    for _, v := range x {
-        sum += v
-    }
-    return sum 	
-}
-
-func main() {
-    go sum([]int{1,2,3,4,5}...) 
-}
-```
-
-##### WaitGroup
-```go
-// the routine above will likely not be executed because
-// when the program reaches the bottom of main()
-// all routines will be terminated  
-
-import "sync"
-
-func sum(wg *sync.WaitGroup, x ...int) int {
-    // decrement the number of waitgroups 
-    defer wg.Done()
-    sum := 0
-    for _, v := range x {
-        sum += v
-    }
-    return sum 	
-}
-
-func main() {
-    var wg sync.WaitGroup
-
-    for i := 0; i <= 5; i++ {
-        // increment the number of waitgroups 
-        wg.Add(1) 
-        go sum(&wg, []int{1,2,3,4,5}...) 
-    } 
-    // wait until waitgroup count drops to 0 
-    wg.Wait()
-}
-```
-
-##### Mutex Locks 
-```go
-// race conditions mean different routines are accessing the same resource
-// "go run -race main.go" command can find race conditions 
-  
-// we use mutex locks to lock out certain resources 
-
-var num = 0
-
-func main() {
-    var wg sync.WaitGroup 
-    var mu sync.Mutex 
-
-    wg.Add(100)
-    for i := 1; i <= 100; i++ {
-        go func(i int) {
-            mu.Lock()
-            num += i
-            fmt.Println(num)
-            mu.Unlock()
-            wg.Done()
-        }(i)
-    }
-    wg.Wait()
-}
-
 ```
 
 
@@ -667,36 +587,6 @@ const (
     mb = 1 << (iota * 10)
     gb = 1 << (iota * 10)
 )
-```
-
-##### JSON
-```go
-type Person struct {
-    First string
-    Last string 
-    Age int 
-}
-
-func main() {
-    // Marshal: creating a JSON object 
-    p1 := Person {"Alex", "Junior", 12}
-    p2 := Person {"Alex", "Senior", 32}
-    people := []Person{p1, p2}
-
-    data, err := json.Marshal(people)
-    if err != nil {
-        fmt.Println("Failed to convert")
-    }
-    // JSON object is array of bytes  
-    fmt.Println(string(data))   
-
-    // Unmarshal
-    err = json.Unmarshal(data, &people)
-    if err != nil {
-        fmt.Println("Failed to convert")
-    }
-    fmt.Println(people)
-}
 ```
 
 ##### Custom Sorting / Comparator 
