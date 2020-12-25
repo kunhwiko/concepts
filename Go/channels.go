@@ -1,5 +1,4 @@
-package Go
-
+package go
 import (
 	"fmt"
 	"sync"
@@ -9,6 +8,7 @@ import (
 // channels are pipelines that help connect goroutines with each other 
 // you can send values from one goroutine to another
 // important : sends and receives will block until both the sender/receiver are ready
+
 func bodyOne() {
     messages := make(chan string)
 
@@ -33,6 +33,7 @@ func bodyOne() {
 
 // Buffered Channels 
 // these are channels that allow pieces of data to sit in the channel
+
 func bodyTwo() {
     messages := make(chan string, 1)
 
@@ -49,6 +50,7 @@ func bodyTwo() {
 // Directional Channels 
 // send-only channels : messages := make(chan<- string)
 // receive-only channels : messages := make(<-chan string)
+
 func bodyThree() {
     c := make(chan string)
     cs := make(chan<- string)
@@ -61,6 +63,7 @@ func bodyThree() {
 
 
 // Closing and Ranging Channels
+
 func bodyFour() {
     c := make(chan int)
 
@@ -90,6 +93,7 @@ func bar1(c <-chan int) {
 
 
 // Select Keyword 
+
 func bodyFive() {
     even := make(chan int)
     odd := make(chan int)
@@ -132,6 +136,7 @@ func receive(e, o, q <-chan int) {
 // Design Patterns (Fan In & Fan Out)
 
 // 1) Fan In: act of combining multiple outputs into one channel  
+
 func receive1(even, odd <-chan int, fanin chan<- int) {
     var wg sync.WaitGroup
     wg.Add(2)
@@ -153,6 +158,7 @@ func receive1(even, odd <-chan int, fanin chan<- int) {
 } 
 
 // 2) Fan-Out: act of dividing into more goroutines 
+
 func fanOut(c1, c2 chan int) {
     var wg sync.WaitGroup
     for v := range c1 {

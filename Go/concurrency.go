@@ -1,4 +1,4 @@
-package Go
+package go
 
 import (
 	"fmt"
@@ -12,6 +12,7 @@ import (
 
 // Goroutines 
 // much like threads, allow functions or methods to execute independently
+
 func sum(x ...int) int {
     sum := 0
     for _, v := range x {
@@ -31,6 +32,7 @@ func body1() {
 // the code above will likely not get executed
 // this is because the program will likely reach the bottom of main() first
 // when it does, all goroutines are also terminated, so how do we fix this?
+
 func sum2(wg *sync.WaitGroup, x ...int) int {
     // Done() decrements the number of waitgroups 
     defer wg.Done()

@@ -1,5 +1,4 @@
-package Go 
-
+package go
 import (
     "fmt"
     "encoding/json"

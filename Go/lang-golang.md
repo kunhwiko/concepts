@@ -27,8 +27,12 @@ src : holds source files organized as packages
 go version : version check
 go env : environment check 
 go help : help tool 
+go doc : find the documentation in the current directory 
+
 go fmt : format a file 
 go fmt ./... : format all files under the current directory 
+golint : tells us mistakes that are not best practice 
+
 go run <filename> : run file 
 go build <filename> : build an executable file in the current directory
 go install <filename> : build executable file on the bin path 
@@ -57,6 +61,34 @@ go.mod
 1) defines the module import path  
 2) defines dependencies used 
 3) go mod init github.com/example to initialize module and specify import path
+```
+
+##### Documentation
+```
+go doc commands 
+1) go doc : documentation for current package 
+2) go doc Example : documentation for Example in the current package
+3) go doc fmt : high level documentation for the fmt package
+
+godoc commands 
+1) godoc -http=:8080 : see go documentations on local port without internet access 
+2) godoc fmt : thorough documentation for the fmt package
+3) godoc -src fmt Printf : see the implementation (not the documentation) of Printf
+
+writing documentations 
+1) comments without spaces above a package or function will generate documentations 
+2) by convention, we start the sentence with Package <package name> ... for package documentations  
+3) by convention, we start the sentence with capital letters for function documentations 
+
+// Example is a function that does not do anything.
+// It is simply meant to show an example of documenting.
+func example() {
+
+} 
+
+For thorough examples, check out 
+https://golang.org/pkg/errors/#pkg-overview
+https://golang.org/src/errors/errors.go?s=1875:1902#L48
 ```
 
 ##### Identifiers 
@@ -176,6 +208,7 @@ for i, v := range s {
 
 // methods 
 strings.Repeat("string", 4)
+strings.Join([]string{"My", "Name", "Is", "Jenny"}, " ")
 ```
 
 
