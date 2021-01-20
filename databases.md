@@ -1,0 +1,73 @@
+### Databases 
+---
+##### Database Types
+```
+Relational Database : Data stored in table(relations) form and organized in a strict, predefined way (usually supports SQL)  
+Non-relational Database : Flexible (non-tabular) form not precisely organized in a predefined way 
+SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
+NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
+
+ACID principles for SQL 
+  1) Atomicity : guarantee that when one operation fails(succeeds), all other following operations fails(succeeds) 
+    a) read-copy-update : keep a copy of the original database before some query execution 
+    b) journaling : logs the updates, and reverses operations if failure arises 
+  2) Consistency : each transaction ensures that the database moves from one valid state to another valid state (does not corrupt data)
+  3) Isolation : when you run operations concurrently, the result will be as if you ran the operations in sequence
+   a) serialization : places a lock forcing one transaction to wait (slow, potential for deadlock)
+   b) snapshot isolation :
+      - copies and reads the last committed version (snapshot) of the database before the operation starts 
+      - will only commit if the operation does not conflict with concurrenct commits  
+      - low latency, but guarantees less consistency and uses more memory resources 
+  4) Durability : once the data is stored in the database, it will remain to do so
+
+BASE principles for NoSQL
+  1) Basically Available : system guarantees availability
+  2) Soft State : state of system and replicas might change over time even without input 
+  3) Eventual Consistency 
+
+Consistency : read request for any of the copies should return the same data 
+  1) Locks : a method to keep data consistent by allowing only certain users to update the database at a time  
+  2) Strong Consistency : must become consistent immediately, offers updated data indefinitely at higher latency
+  3) Eventual Consistency : becomes consistent eventually, offers low latency but risks returning non-updated data
+  
+Considerations : 
+  1) Do we want strong vs eventual consistency?
+  2) Do we want in-memory (caching) vs disk storage?
+
+Storage Types :
+  1) Key-Value Store : Specializes in storing as a key/value pair (Apache HBase)
+    ex) id -> [name age experience]
+  2) Wide Column Store : Organizes related facts into "column families", 2-D Key-Value (BigTable, Cassandra)
+    ex) id -> [personal]  [professional] 
+               - name      - experience
+               - age 
+  3) Document Oriented Store : organized as documents, usually JSON format (MongoDB)
+    ex) {id : 1, name : __, experience : __}
+  4) Blob Store : Specializes in storing massive amounts of unstructured data (S3)
+  5) Time Series Store : Specializes in time series data / monitoring (InfluxDB)
+  6) Graph Store : Stores in a graph form rather than a tabular form, specializes in relations between data (Neo4j)
+```
+
+##### Database Scalability
+```
+read problems : as tables grow, it becomes harder to read information that reader needs 
+Indexing : uses additional memory to maintain a lookup for faster querying (imagine glossary page) 
+  1) Tree Indexing : Allows us to do fast range queries 
+  2) Hash Indexing : Allows us to do fast exact queries 
+
+load problems : what if database has too much requests or failures result in inaccessible databases?
+Replication : makes copies of the database for backup purposes
+Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
+
+write problems : 
+  1) what if there are too many write requests to master server (replicas are read-only)? 
+  2) what if the database has tons of data, is it necessary to replicate all this data?
+  3) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
+Sharding : splitting the data across multiple machines 
+  1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
+  2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
+  3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
+
+Normally good to have a reverse proxy (load balancer) to process client requests and match to databases/shards 
+```
+
