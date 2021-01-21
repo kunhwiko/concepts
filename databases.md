@@ -1,11 +1,31 @@
 ### Databases 
 ---
-##### Database Types
+##### Definitions 
 ```
-Relational Database : Data stored in table(relations) form and organized in a strict, predefined way (usually supports SQL)  
-Non-relational Database : Flexible (non-tabular) form not precisely organized in a predefined way 
+Database Management Systems (DBMS) 
+  1) a software package designed to manage databases
+  2) allows for reliability, recovery, data access, querying, updates 
+
+Database Benefits vs Programs/Files
+  1) users do not have to be concerned with low level details such as indexes, concurrency, disk speed, data structures 
+  2) scalable and efficient for large datasets by providing random access (for files, this requires scanning the entire document)
+  3) provides permanence, consistency even for concurrent actions 
+  
+Relational Database : data stored in tables(relations) organized in a strict, predefined way 
+Non-relational Database : data stored in a flexible form
 SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
 NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
+```
+
+##### Relational Databases / SQL 
+```
+Key : subset of columns that uniquely defines each record in a table 
+Foreign Key : a reference to a key in another table 
+
+Not Null : values in the column cannot be null 
+Primary Key : values in the column must be unique, specifies the key of the table, does not allow null values  
+Autoincrement : unique number if automatically generated through incrementation for new records 
+Unique : ensures values in a column are unique, many columns can be unique, allow null values   
 
 ACID principles for SQL 
   1) Atomicity : guarantee that when one operation fails(succeeds), all other following operations fails(succeeds) 
@@ -19,7 +39,10 @@ ACID principles for SQL
       - will only commit if the operation does not conflict with concurrenct commits  
       - low latency, but guarantees less consistency and uses more memory resources 
   4) Durability : once the data is stored in the database, it will remain to do so
+```
 
+##### NoSQL 
+```
 BASE principles for NoSQL
   1) Basically Available : system guarantees availability
   2) Soft State : state of system and replicas might change over time even without input 
