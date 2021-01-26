@@ -137,3 +137,15 @@ WHERE expected_grade > ANY (
 	FROM Takes 
 )
 ```
+
+##### EXISTS / NOT EXISTS 
+```sql
+/*  */
+SELECT supplier_name 
+FROM Suppliers s
+WHERE EXISTS (
+	SELECT product_name 
+	FROM Products p  
+	WHERE p.supplier_id = s.supplier_id 
+)
+```
