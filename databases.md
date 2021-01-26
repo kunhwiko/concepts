@@ -19,14 +19,6 @@ NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), 
 
 ##### Relational Databases / SQL 
 ```
-Key : subset of columns that uniquely defines each record in a table 
-Foreign Key : a reference to a key in another table 
-
-Not Null : values in the column cannot be null 
-Primary Key : values in the column must be unique, specifies the key of the table, does not allow null values  
-Autoincrement : unique number if automatically generated through incrementation for new records 
-Unique : ensures values in a column are unique, many columns can be unique, allow null values   
-
 ACID principles for SQL 
   1) Atomicity : guarantee that when one operation fails(succeeds), all other following operations fails(succeeds) 
     a) read-copy-update : keep a copy of the original database before some query execution 
