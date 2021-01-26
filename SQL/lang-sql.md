@@ -24,12 +24,13 @@ Unique : ensures values in a column are unique, many columns can be unique, allo
 
 ### Creating Databases
 ---
-##### Create
-```
+##### Setting Keys in Create Clause
+```sql
 /* Set primary keys and foreign keys */
 CREATE TABLE Student (
 	id INT,
 	name VARCHAR(30),
+	school VARCHAR(60),
 	graduation DATE,
 	PRIMARY KEY (id)
 )
@@ -46,8 +47,34 @@ CREATE TABLE Housing (
 )
 ```
 
-##### Insert
+<br />
+
+### Keywords 
+---
+##### DISTINCT
 ```sql
-INSERT INTO Student 
-VALUES (1, "Kevin", 2021), (2, "Jenny", 2022)
+/* Returns unique values */
+SELECT DISTINCT id
+FROM Student
+WHERE school = "University of Pennsylvania"
+```
+
+##### INTO
+```sql
+/* create a temporary table temp for the duration of the program */
+SELECT id INTO temp
+FROM Student
+WHERE school = "University of Pennsylvania"
+```
+
+##### WITH
+```sql
+WITH PennStudent AS (
+	SELECT *
+	FROM Student
+	WHERE school = "University of Pennsylvania"
+)
+SELECT P.name, P.graduation, H.building_name 
+FROM PennStudent P 
+JOIN Housing H ON P.id = H.resident_id 
 ```
