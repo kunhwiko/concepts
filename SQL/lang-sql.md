@@ -54,7 +54,7 @@ CREATE TABLE Housing (
 ##### DISTINCT
 ```sql
 /* Returns unique values */
-SELECT DISTINCT id
+SELECT DISTINCT name
 FROM Student
 WHERE school = "University of Pennsylvania"
 ```
@@ -77,4 +77,63 @@ WITH PennStudent AS (
 SELECT P.name, P.graduation, H.building_name 
 FROM PennStudent P 
 JOIN Housing H ON P.id = H.resident_id 
+```
+
+<br />
+
+### Set Operations 
+---
+##### UNION / ALL 
+```sql
+/* 
+	scehma must be the same for set operations 
+	since sets do not return duplicate values
+	we specify all to retain duplicates
+*/
+
+(SELECT name FROM Student)
+UNION ALL 
+(SELECT name FROM Professor)
+```
+
+##### Intersect 
+```sql
+(SELECT name FROM Student)
+INTERSECT 
+(SELECT name FROM Professor)
+```
+
+<br />
+
+### Boolean Operations 
+---
+##### IN / NOT IN 
+```sql
+SELECT *
+FROM Customers 
+WHERE Country IN (
+	SELECT Country 
+	FROM Suppliers
+)
+```
+
+##### ALL / ANY 
+```sql
+/* Return student_ids whose expected grades are
+   higher or equal to everyone in Takes  */
+SELECT DISTINCT student_id 
+FROM Takes 
+WHERE expected_grade >= ALL (
+	SELECT expected_grade 
+	FROM Takes 
+)
+
+/* Return student_ids whose expected grades are
+   at least higher than someone in Takes  */
+SELECT DISTINCT student_id 
+FROM Takes 
+WHERE expected_grade > ANY (
+	SELECT expected_grade 
+	FROM Takes 
+)
 ```
