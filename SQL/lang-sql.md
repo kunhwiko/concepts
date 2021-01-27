@@ -149,3 +149,17 @@ WHERE EXISTS (
     WHERE p.supplier_id = s.supplier_id 
 )
 ```
+
+<br />
+
+### Aggregate Operations 
+---
+##### HAVING 
+```sql
+/* HAVING is to GROUP BY, WHERE is to FROM */
+SELECT subject, COUNT(*) as num 
+FROM Course
+WHERE subject != "AI"
+GROUP BY subject 
+HAVING COUNT(*) > 1
+```
