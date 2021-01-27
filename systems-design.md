@@ -8,6 +8,17 @@
 ---
 ##### Fundamentals
 ```
+Client-Server Model 
+Step 1)
+  Client makes a DNS query, retrieves the IP address of some domain, and contacts the server  
+  IP addresses can be granted by cloud providers where you can run your server  
+  
+Step 2)
+  Sends HTTP request to Server along with source address (address of sender)
+  
+Step 3)
+  Server listens to requests on ports, and sends HTML/CSS/JS files to source address 
+  
 Storage
   1) Disk Storage : permanent / persistent storage with high latency (hard disk)
   2) Memory Storage : temporary / transient storage with low latency (RAM)

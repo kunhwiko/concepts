@@ -86,7 +86,7 @@ JOIN Housing H ON P.id = H.resident_id
 ##### UNION / ALL 
 ```sql
 /* 
-    scehma must be the same for set operations 
+    schema must be the same for set operations 
     since sets do not return duplicate values
     we specify all to retain duplicates
 */

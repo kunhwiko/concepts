@@ -1,6 +1,26 @@
 ### Networking & Security 
 ---
-##### Networking Fundamentals 
+##### Networking Terms 
+```
+Networks : system of links that interconnect computers to move data 
+
+Internet : networking infrastructure linking connected devices 
+
+Protocol : set of rules and structures that defines the syntax/semantics of how computers communicate 
+
+Ports : 
+  1) docking point for where information is received or sent
+  2) how multiple programs listen for new network connections on the same machine without collision  
+  3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
+
+Types of Devices 
+  1) Switches : machines that can decide on a port based on a forwarding table 
+  2) Routers : machines that can coordinate amongst themselves to decide on a forwarding table for each machine 
+```
+
+currently making changes beneath (fix by Feb 1, 2021)!
+
+##### Networking Processes
 ```
 Protocol : set of rules and structures for how computers communicate 
   1) IP : address of where packets come from and where they should be sent  
@@ -15,22 +35,6 @@ Packets : small segments of data of a larger message
   * IP Packet Data : holds the data of the packet 
   
 Handshake : TCP sends requests by sending packets to destination server asking for a connection
-    
-Ports : 
-  1) docking point for where information is received or sent
-  2) how multiple programs listen for new network connections on the same machine without collision  
-  3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
-
-Client-Server Model 
-Step 1)
-  Client makes a DNS query, retrieves the IP address of some domain, and contacts the server  
-  IP addresses can be granted by cloud providers where you can run your server  
-  
-Step 2)
-  Sends HTTP request to Server along with source address (address of sender)
-  
-Step 3)
-  Server listens to requests on ports, and sends HTML/CSS/JS files to source address 
 ```
 
 ###### Security Fundamentals 
