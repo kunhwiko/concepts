@@ -163,3 +163,23 @@ WHERE subject != "AI"
 GROUP BY subject 
 HAVING COUNT(*) > 1
 ```
+
+##### NULL 
+```
+Three State Logic 
+| AND           | OR            | NOT         |
+| ------------- |:-------------:| ----------: |
+| T AND T --> T | T OR U --> T  | NOT U --> U |
+| F AND U --> F | F OR F --> F  |             |
+| T AND U --> U | F OR U --> U  |             |
+| U AND U --> U | U OR U --> U  |             |
+
+1) if x = NULL, then x = "June" is UNKNOWN
+2) if x = NULL, then 3-x is NULL
+3) max(age) discards NULLs (if all values are NULL, then NULL)
+4) count(id) includes NULLs
+5) JOIN disregards matching NULLs
+6) SELECT DISTINCT treats NULLs as equals (there will only be one NULL)
+7) COUNT DISTINCT eliminates all NULLs before counting
+8) GROUP BY treats NULLs as equals 
+```
