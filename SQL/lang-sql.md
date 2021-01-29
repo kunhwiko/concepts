@@ -184,7 +184,7 @@ Three State Logic
 8) GROUP BY treats NULLs as equals 
 ```
 
-##### JOIN TYPES 
+##### JOIN Types 
 ```
 1) Inner Join: join on a particular key, both instances are kept 
 2) Natural Join: join on a particular key, only one instance of the key is kept 

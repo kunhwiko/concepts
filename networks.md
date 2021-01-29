@@ -7,6 +7,11 @@ Networks : system of links that interconnect computers to move data
 Internet : networking infrastructure linking connected devices 
 
 Protocol : set of rules and structures that defines the syntax/semantics of how computers communicate 
+  1) IP : address of where packets come from and where they should be sent  
+    * IPv4, IPv6
+  2) TCP : responsible for breaking data into packets, delivering/reassembling the packets, checks for corruption
+  3) DNS Server : phonebook for finding the IP address of sites 
+  4) HTTP : set of rules for how request-response works in the web 
 
 Ports : 
   1) docking point for where information is received or sent
@@ -18,24 +23,65 @@ Types of Devices
   2) Routers : machines that can coordinate amongst themselves to decide on a forwarding table for each machine 
 ```
 
-currently making changes beneath (fix by Feb 1, 2021)!
-
-##### Networking Processes
+##### Internet Architecture
 ```
-Protocol : set of rules and structures for how computers communicate 
-  1) IP : address of where packets come from and where they should be sent  
-    * IPv4, IPv6
-  2) TCP : responsible for breaking data into packets, delivering/reassembling the packets, checks for corruption
-  3) DNS Server : phonebook for finding the IP address of sites 
-  4) HTTP : set of rules for how request-response works in the web 
+Circuit Switching : 
+  1) the process of establishing circuits, transferring data, and then terminating upon finish 
+  2) resource allocation is inefficient, but potentially better for large data transfers 
+  3) guarantees data transfer while connected 
 
 Packets : small segments of data of a larger message 
   * IP Packet Header : holds the source and destination address
   * TCP Packet Header : order of how packets should be reassembled
   * IP Packet Data : holds the data of the packet 
-  
+
+Packet Switching :
+  1) packet headers contain addresses, routing protocols compute packet hops, no resources are pre-allocated 
+  2) no connection is required, minimal network assumptions 
+  3) easy to recover from errors 
+
+Internet Characteristics 
+  1) uses packet switching
+  2) decentralized / handles many users using existing networks
+  3) Fate Sharing  
+  4) provides heterogeneous services to different interfaces/devices/networks (low latency for calls, high quality for video streaming)
+
+Fate Sharing vs Replication
+  1) Replication
+    a) the networks hold replicas & are responsible for state 
+    b) fault tolerant only as long as replicas are fine 
+    c) concurrency / consistency issues exist 
+
+  2) Fate Sharing
+    a) end hosts responsible for state
+    b) fault tolerant is perfect as long as host is up 
+    c) hurts the end host performance      
+
 Handshake : TCP sends requests by sending packets to destination server asking for a connection
+
+Curse of the Narrow Waist : different protocols (FTP, HTTP, SMTP) all rely on IP, so switching/changing IP can be a huge problem  
 ```
+
+##### Layers 
+```
+Layering : ability to mix and match different protocols 
+
+OSI (formal layer): 
+  Layer 7) Application 
+  Layer 6) Presentation 
+  Layer 5) Session
+  Layer 4) Transport 
+  Layer 3) Network
+  Layer 2) Datalink
+  Layer 1) Physical 
+
+Internet (informal):
+	Layer 7) Application
+	Layer 4) Transport
+	Layer 3) Internet
+	Layer 1 & 2) Net Access/Physical
+```
+
 
 ###### Security Fundamentals 
 ```
