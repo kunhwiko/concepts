@@ -56,7 +56,7 @@ CREATE TABLE Housing (
 /* Returns unique values */
 SELECT DISTINCT name
 FROM Student
-WHERE school = "University of Pennsylvania"
+WHERE school = 'University of Pennsylvania'
 ```
 
 ##### INTO
@@ -64,7 +64,7 @@ WHERE school = "University of Pennsylvania"
 /* create a temporary table temp for the duration of the program */
 SELECT id INTO temp
 FROM Student
-WHERE school = "University of Pennsylvania"
+WHERE school = 'University of Pennsylvania'
 ```
 
 ##### WITH
@@ -72,7 +72,7 @@ WHERE school = "University of Pennsylvania"
 WITH PennStudent AS (
     SELECT *
     FROM Student
-    WHERE school = "University of Pennsylvania"
+    WHERE school = 'University of Pennsylvania'
 )
 SELECT P.name, P.graduation, H.building_name 
 FROM PennStudent P 
@@ -159,7 +159,7 @@ WHERE EXISTS (
 /* HAVING is to GROUP BY, WHERE is to FROM */
 SELECT subject, COUNT(*) as num 
 FROM Course
-WHERE subject != "AI"
+WHERE subject != 'AI'
 GROUP BY subject 
 HAVING COUNT(*) > 1
 ```
@@ -182,4 +182,13 @@ Three State Logic
 6) SELECT DISTINCT treats NULLs as equals (there will only be one NULL)
 7) COUNT DISTINCT eliminates all NULLs before counting
 8) GROUP BY treats NULLs as equals 
+```
+
+##### JOIN TYPES 
+```
+1) Inner Join: join on a particular key, both instances are kept 
+2) Natural Join: join on a particular key, only one instance of the key is kept 
+3) Left Outer Join: include tuples of left table even if there are no matches 
+4) Right Outer Join: include tuples of right table even if there are no matches 
+5) Full Outer Join: include tuples of both tables even if there are no matches    
 ```
