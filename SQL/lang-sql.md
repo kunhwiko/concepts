@@ -96,7 +96,7 @@ UNION ALL
 (SELECT name FROM Professor)
 ```
 
-##### Intersect 
+##### INTERSECT 
 ```sql
 (SELECT name FROM Student)
 INTERSECT 
@@ -191,4 +191,39 @@ Three State Logic
 3) Left Outer Join: include tuples of left table even if there are no matches 
 4) Right Outer Join: include tuples of right table even if there are no matches 
 5) Full Outer Join: include tuples of both tables even if there are no matches    
+```
+
+<br />
+
+### Views 
+---
+##### Basics
+```sql
+/* views can be computed upon request, and are therefore always up-to-date */
+CREATE VIEW Top_Students(sid, sname, gpa) AS 
+    SELECT s.sid, s.sname, s.gpa FROM Student s 
+    WHERE s.gpa >= 3.85 
+
+SELECT t.cid 
+FROM Top_Students ts, Takes t 
+WHERE ts.sid = t.sid 
+```
+
+##### Materialized Views 
+```sql
+/* views that are computed once and results are stored, but must be updated as underlying database changes */
+CREATE MATERIALIZED VIEW Top_Students(sid, sname, gpa) AS 
+    SELECT s.sid, s.sname, s.gpa FROM Student s 
+    WHERE s.gpa >= 3.85 
+```
+
+##### Updatable Views 
+```
+If the original table gets updated when views get updated, they are "updatable". 
+
+Views are updatable only if 
+  1. Defined on a single base table 
+  2. Uses only selection and projection 
+  3. No aggregates 
+  4. DISTINCT is not used  
 ```
