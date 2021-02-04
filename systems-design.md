@@ -29,6 +29,10 @@ Capacity
   3) Bandwidth : theoretical output of a system or machine in a given time 
   4) Bottleneck : constraint of a system 
 
+Time in Latency and Throughput are independent
+  1) latency is concerned with the time taken to deliver a message
+  2) throughput is concerned with how much data can be transmitted per time unit (frequency)  
+
 Availability : uptime in a given amount of time (usually per year)
   1) SLA (Service Level Agreement) : an assurance for the uptime of a service 
   2) Redundancy : having alternatives when a failure happens 

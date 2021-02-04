@@ -66,6 +66,9 @@ Curse of the Narrow Waist : different protocols (FTP, HTTP, SMTP) all rely on IP
 ```
 Layering : ability to mix and match different protocols 
 
+Protocol Stack : set of protocols that are currently in use, can mix and match for different situations
+ex) when using email, network can switch HTTP protocol layer for SMTP protocol layer 
+
 OSI (formal layer): 
   Layer 7) Application 
   Layer 6) Presentation 
@@ -80,7 +83,15 @@ Internet (informal):
 	Layer 4) Transport
 	Layer 3) Internet
 	Layer 1 & 2) Net Access/Physical
+
+Encapsulation
+  1) when sending over messages, start with the highest layer and move down to layer 1
+  2) for each layer, the lower layer "wraps" the current message from higher levels 
+  3) lower layers don't have to know what higher level layers actually do 
+  4) after sending over a message, switches and routers will decapsulate the message, then recapsulate before resending
+  5) this step is repeated until we reach the end user  
 ```
+
 
 
 ###### Security Fundamentals 
