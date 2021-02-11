@@ -21,6 +21,7 @@ Ports :
 Types of Devices 
   1) Switches : machines that can decide on a port based on a forwarding table 
   2) Routers : machines that can coordinate amongst themselves to decide on a forwarding table for each machine 
+  --> Switches and Routers make up modern Ethernet connections 
 ```
 
 ##### Internet Architecture
@@ -79,10 +80,10 @@ OSI (formal layer):
   Layer 1) Physical 
 
 Internet (informal):
-	Layer 7) Application
-	Layer 4) Transport
-	Layer 3) Internet
-	Layer 1 & 2) Net Access/Physical
+  Layer 7) Application
+  Layer 4) Transport
+  Layer 3) Internet
+  Layer 1 & 2) Net Access/Physical
 
 Encapsulation
   1) when sending over messages, start with the highest layer and move down to layer 1
@@ -92,9 +93,31 @@ Encapsulation
   5) this step is repeated until we reach the end user  
 ```
 
+##### Lower Level Layers
+```
+Physical Layer
+  a) concerned with how signals are used to transfer message bits 
+  b) network : physical bits  
+  c) message : bits 
+  d) upper interface : stream of bits 
+  e) lower interface : electrons 
 
+Data Link Layer
+  a) connects physical layers 
+  b) network : LAN
+  c) message : frames 
+  d) upper interface : packets of data 
+  e) lower interface : stream of bits 
 
-###### Security Fundamentals 
+Internet Layer 
+  a) connects data link layers 
+  b) network : Internet 
+  c) message : packets 
+  d) upper interface : segments of data 
+  e) lower interface : packets of data 
+```
+
+##### Security Fundamentals 
 ```
 Man-in-the-Middle(MITM) Attack : malicious activity to intercept or alter IP packets in an HTTP connection
 
