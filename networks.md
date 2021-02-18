@@ -19,10 +19,14 @@ Ports :
   3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
 
 Types of Devices 
-  1) Switches : machines that can decide on a port based on a forwarding table 
+  1) Switches : 
+       - machines that decide on a port based on a 'forwarding table' and where to send the message within an L2 network 
+       - connects L1 layers to form a network 
+       - switches must be aware of the different hosts in a given L2 network 
      (helps connect L1 layers and form a network)
-  2) Routers : machines that can coordinate amongst themselves to decide on a forwarding table for each machine 
-     (helps connect L2 layers to form the Internet) 
+  2) Routers : 
+       - machines that coordinate amongst themselves to decide on a 'routing table' for each machine 
+       - connects L2 networks to enable messages to travel beyond a certain L2 network (helps form the Internet)
   --> Switches and Routers make up modern Ethernet connections 
 ```
 
