@@ -4,13 +4,12 @@
 ```
 Networks : system of links that interconnect computers to move data 
 
-Internet : networking infrastructure linking connected devices 
-
 Protocol : set of rules and structures that defines the syntax/semantics of how computers communicate 
   1) IP : address of where packets come from and where they should be sent  
     * IPv4, IPv6
   2) TCP : responsible for breaking data into packets, delivering/reassembling the packets, checks for corruption
   3) DNS Server : phonebook for finding the IP address of sites 
+  4) ARP Table : table used to translate IP addresses into MAC addresses 
   4) HTTP : set of rules for how request-response works in the web 
 
 Ports : 
@@ -20,9 +19,10 @@ Ports :
 
 Types of Devices 
   1) Switches : 
-       - machines that decide on a port based on a 'forwarding table' and where to send the message within an L2 network 
-       - connects L1 layers to form a network 
+       - machines that decide on a port based on a 'forwarding table' and determines where to send the message in an L2 network 
        - switches must be aware of the different hosts in a given L2 network 
+       - switches broadcast to other switches in the L2 network to learn new MAC addresses   
+       - connects L1 layers to form a network 
      (helps connect L1 layers and form a network)
   2) Routers : 
        - machines that coordinate amongst themselves to decide on a 'routing table' for each machine 
@@ -32,15 +32,12 @@ Types of Devices
 
 ##### Internet Architecture
 ```
+Internet : networking infrastructure linking connected devices 
+
 Circuit Switching : 
   1) the process of establishing circuits, transferring data, and then terminating upon finish 
   2) resource allocation is inefficient, but potentially better for large data transfers 
   3) guarantees data transfer while connected 
-
-Packets : small segments of data of a larger message 
-  * IP Packet Header : holds the source and destination address
-  * TCP Packet Header : order of how packets should be reassembled
-  * IP Packet Data : holds the data of the packet 
 
 Packet Switching :
   1) packet headers contain addresses, routing protocols compute packet hops, no resources are pre-allocated 
@@ -117,8 +114,13 @@ Internet Layer
   c) message : packets 
 ```
 
-##### Packets 
+##### Packet Types 
 ```
+Packets : small segments of data of a larger message 
+  * IP Packet Header : holds the source and destination address
+  * TCP Packet Header : order of how packets should be reassembled
+  * IP Packet Data : holds the data of the packet 
+
 IPv4 : 32 bits broken into two parts (network and host address), network addresses are addresses common to some group of host addresses (geography, company)
 
 Classless Interdomain Routing
@@ -136,6 +138,22 @@ IPv6 : has more addresses, better functionality, but has been delayed as the ent
       Disadvantages 
         a) more difficult to distinguish devices 
         b) can't connect to hosts within the private network (address unknown) until they send a message first 
+```
+
+##### Communication
+```
+host name (www.github.com) --(DNS)--> IP Address --(ARP)--> MAC address 
+
+MAC address
+  a) physical unique address of a machine 
+  b) useful for local communications 
+  c) determines "who" the machine is 
+  d) difficult for the entire Internet to keep track of where all MAC addresses are 
+
+IP address 
+  a) determines "where" the machine is 
+  b) IP addresses can vary based on your location 
+  c) IP addresses will efficiently narrow down from L3 to the correct L2 network, where your computer can then be located through MAC addresses
 ```
 
 ##### Security Fundamentals 
