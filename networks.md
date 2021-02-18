@@ -20,7 +20,9 @@ Ports :
 
 Types of Devices 
   1) Switches : machines that can decide on a port based on a forwarding table 
+     (helps connect L1 layers and form a network)
   2) Routers : machines that can coordinate amongst themselves to decide on a forwarding table for each machine 
+     (helps connect L2 layers to form the Internet) 
   --> Switches and Routers make up modern Ethernet connections 
 ```
 
@@ -93,28 +95,43 @@ Encapsulation
   5) this step is repeated until we reach the end user  
 ```
 
-##### Lower Level Layers
+##### Low Level Layers
 ```
 Physical Layer
   a) concerned with how signals are used to transfer message bits 
   b) network : physical bits  
   c) message : bits 
-  d) upper interface : stream of bits 
-  e) lower interface : electrons 
 
 Data Link Layer
   a) connects physical layers 
   b) network : LAN
   c) message : frames 
-  d) upper interface : packets of data 
-  e) lower interface : stream of bits 
 
 Internet Layer 
   a) connects data link layers 
   b) network : Internet 
   c) message : packets 
-  d) upper interface : segments of data 
-  e) lower interface : packets of data 
+```
+
+##### Packets 
+```
+IPv4 : 32 bits broken into two parts (network and host address), network addresses are addresses common to some group of host addresses (geography, company)
+
+Classless Interdomain Routing
+  - 128.168.1.0/26 --> 26 bits for network addresses, 6 bits for host addresses (great if you have 50 computers in a common network)
+  - 192.168.1.0/24 --> 8 bits for host addresses (192.168.1.0 ~ 192.168.1.255)   
+
+IPv6 : has more addresses, better functionality, but has been delayed as the entire network must become IPv6 compatible 
+  - Tunneling (not popular) : encapsulating IPv6 packets as IPv4 packets to carry over IPv4 networks 
+  - Network Address Translation (popular) : tries to solve having too few address in IPv4
+      Steps 
+        a) within a common network, assign private IP addresses
+        b) NAT devices maps the private IP addresses to a single public IP address
+        c) send to destination address with mapped public IP address
+        d) when host at destination tries to send a packet to a host within the network, use demultiplexing IDs (L4 protocol) to find host 
+      Disadvantages 
+        a) more difficult to distinguish devices 
+        b) can't connect to hosts within the private network (address unknown) until they send a message first 
 ```
 
 ##### Security Fundamentals 
