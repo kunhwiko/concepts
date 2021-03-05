@@ -100,6 +100,14 @@ Encapsulation
   5) the message is then recapsulated before resending and the steps are repeated  
 ```
 
+##### Lower Level Layers 
+```
+Layer 1: Physical Layer
+  a) concerned with how signals are used to transfer message bits 
+  b) network: physical links 
+  c) message: bits 
+```
+
 
 
 Currently making updates (please come back on Mar 8)
@@ -115,24 +123,9 @@ Currently making updates (please come back on Mar 8)
 Handshake : TCP sends requests by sending packets to destination server asking for a connection
 ```
 
-##### Layers 
-```
-
-Encapsulation
-  1) when sending over messages, start with the highest layer and move down to layer 1
-  2) for each layer, the lower layer "wraps" the current message from higher levels 
-  3) lower layers don't have to know what higher level layers actually do 
-  4) after sending over a message, switches and routers will decapsulate the message, then recapsulate before resending
-  5) this step is repeated until we reach the end user  
-```
 
 ##### Low Level Layers
 ```
-Physical Layer
-  a) concerned with how signals are used to transfer message bits 
-  b) network : physical bits  
-  c) message : bits 
-
 Data Link Layer
   a) connects physical layers 
   b) network : LAN
