@@ -1,39 +1,54 @@
 ### Networking & Security 
 ---
+##### Getting Started
+```
+Networks: system of links that interconnect computers to move data 
+
+Internet: networking infrastructure linking connected devices 
+
+Protocol: set of rules and structures that define the syntax / semantics of how computers communicate 
+  1) IP: address of where packets come from and where they should be sent 
+  2) TCP: responsible for breaking data into packets, delivering / reassembling the packets, checks for corruption 
+  3) HTTP: set of rules for how request-response works in the web 
+
+Network Devices: specialized computers focusing on I/O that forward messages by connecting through network links 
+  1) Switches: 
+  		- decides on a port based on a 'forwarding table' to determine where to send messages in an L2 network 
+  		- switches must become aware of different hosts in a given L2 network
+  		- through broadcasting across the network, switches learn MAC addresses based on the source of the broadcast   
+  		- connects L1 layers to form a network 
+  2) Routers:
+  		- coordinate amongst themselves to decide on a 'forwarding table' for each router 
+  		- coordinate amongst themselves to decide on a 'routing table' for each router
+  		- connects L2 networks to form L3 networks 
+
+Tables:
+  1) Forwarding Table: maps a MAC address to a port to forward packets 
+  2) Routing Table: maps longest prefix matches on IPs to send packets over next hops (other L2 networks) 
+```
+
+
+
+
+
+
+Currently making updates (please come back on Mar 8)
+
 ##### Networking Terms 
 ```
-Networks : system of links that interconnect computers to move data 
 
-Protocol : set of rules and structures that defines the syntax/semantics of how computers communicate 
-  1) IP : address of where packets come from and where they should be sent  
-    * IPv4, IPv6
-  2) TCP : responsible for breaking data into packets, delivering/reassembling the packets, checks for corruption
   3) DNS Server : phonebook for finding the IP address of sites 
   4) ARP Table : table used to translate IP addresses into MAC addresses 
-  4) HTTP : set of rules for how request-response works in the web 
 
 Ports : 
   1) docking point for where information is received or sent
   2) how multiple programs listen for new network connections on the same machine without collision  
   3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
 
-Types of Devices 
-  1) Switches : 
-       - machines that decide on a port based on a 'forwarding table' and determines where to send the message in an L2 network 
-       - switches must be aware of the different hosts in a given L2 network 
-       - switches broadcast to other switches in the L2 network to learn new MAC addresses   
-       - connects L1 layers to form a network 
-     (helps connect L1 layers and form a network)
-  2) Routers : 
-       - machines that coordinate amongst themselves to decide on a 'routing table' for each machine 
-       - connects L2 networks to enable messages to travel beyond a certain L2 network (helps form the Internet)
-  --> Switches and Routers make up modern Ethernet connections 
 ```
 
 ##### Internet Architecture
 ```
-Internet : networking infrastructure linking connected devices 
-
 Circuit Switching : 
   1) the process of establishing circuits, transferring data, and then terminating upon finish 
   2) resource allocation is inefficient, but potentially better for large data transfers 
@@ -153,7 +168,7 @@ MAC address
 IP address 
   a) determines "where" the machine is 
   b) IP addresses can vary based on your location 
-  c) IP addresses will efficiently narrow down from L3 to the correct L2 network, where your computer can then be located through MAC addresses
+  c) IP addresses will efficiently narrow down from L3 to the correct L2 network, where computers can then be located through MAC addresses  
 ```
 
 ##### Security Fundamentals 
