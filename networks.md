@@ -25,33 +25,18 @@ Network Devices: specialized computers focusing on I/O that forward messages by 
 Tables:
   1) Forwarding Table: maps a MAC address to a port to forward packets 
   2) Routing Table: maps longest prefix matches on IPs to send packets over next hops (other L2 networks) 
-```
-
-
-
-
-
-
-Currently making updates (please come back on Mar 8)
-
-##### Networking Terms 
-```
-
-  3) DNS Server : phonebook for finding the IP address of sites 
-  4) ARP Table : table used to translate IP addresses into MAC addresses 
 
 Ports : 
   1) docking point for where information is received or sent
   2) how multiple programs listen for new network connections on the same machine without collision  
   3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
-
 ```
 
-##### Internet Architecture
+##### Internet Architecture 
 ```
-Circuit Switching : 
+Circuit Switching:
   1) the process of establishing circuits, transferring data, and then terminating upon finish 
-  2) resource allocation is inefficient, but potentially better for large data transfers 
+  2) resource allocation is inefficient, but fast for large data transfers 
   3) guarantees data transfer while connected 
 
 Packet Switching :
@@ -59,31 +44,35 @@ Packet Switching :
   2) no connection is required, minimal network assumptions 
   3) easy to recover from errors 
 
-Internet Characteristics 
-  1) uses packet switching
-  2) decentralized / handles many users using existing networks
-  3) Fate Sharing  
-  4) provides heterogeneous services to different interfaces/devices/networks (low latency for calls, high quality for video streaming)
+Internet Characteristics
+  1) uses packet switching 
+  2) decentralized  
+  3) Fate Sharing 
+  4) provides heterogeneous services to different devices/networks
+      - latency for calls vs high quality for video streaming
+      - possible due to "layering", or mix and matching different protocols as needed  
 
-Fate Sharing vs Replication
-  1) Replication
-    a) the networks hold replicas & are responsible for state 
+Fate Sharing vs Replication 
+  1) Replication 
+    a) networks hold replicas and are responsible for state 
     b) fault tolerant only as long as replicas are fine 
-    c) concurrency / consistency issues exist 
+    c) concurrency / consistency issues might exist 
+    d) hard to engineer 
 
   2) Fate Sharing
     a) end hosts responsible for state
     b) fault tolerant is perfect as long as host is up 
-    c) hurts the end host performance      
+    c) hurts the end host performance, but ends up working fine 
 
-Handshake : TCP sends requests by sending packets to destination server asking for a connection
-
-Curse of the Narrow Waist : different protocols (FTP, HTTP, SMTP) all rely on IP, so switching/changing IP can be a huge problem  
+Curse of the Narrow Waist 
+  - the Internet provides heterogeneous services and mixes and matches various protocols
+  - those protocols eventually had to agree on IP/TCP/HTTP 
+  - since various protocols rely on IP/TCP/HTTP, switching / changing IP/TCP/HTTP causes a chain of problems   
 ```
 
 ##### Layers 
 ```
-Layering : ability to mix and match different protocols 
+Layering: ability to mix and match different protocols 
 
 Protocol Stack : set of protocols that are currently in use, can mix and match for different situations
 ex) when using email, network can switch HTTP protocol layer for SMTP protocol layer 
@@ -102,6 +91,32 @@ Internet (informal):
   Layer 4) Transport
   Layer 3) Internet
   Layer 1 & 2) Net Access/Physical
+
+Encapsulation 
+  1) when sending over messages, start with the highest layer and move down to layer 1
+  2) for each layer, the lower layer "wraps" the current message from higher levels to create protocol stacks 
+  3) lower layers don't have to know what higher level layers actually do 
+  4) after sending over a message, switches and routers will decapsulate the message from lowest to highest layer 
+  5) the message is then recapsulated before resending and the steps are repeated  
+```
+
+
+
+Currently making updates (please come back on Mar 8)
+
+##### Networking Terms 
+```
+  3) DNS Server : phonebook for finding the IP address of sites 
+  4) ARP Table : table used to translate IP addresses into MAC addresses 
+```
+
+##### Internet Architecture
+```   
+Handshake : TCP sends requests by sending packets to destination server asking for a connection
+```
+
+##### Layers 
+```
 
 Encapsulation
   1) when sending over messages, start with the highest layer and move down to layer 1
