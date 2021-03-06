@@ -1,6 +1,6 @@
 ### Networking & Security 
 ---
-##### Getting Started
+##### Getting Started with Networks 
 ```
 Networks: system of links that interconnect computers to move data 
 
@@ -133,41 +133,35 @@ Packets : small segments of data of a larger message
   * IP Packet Header : holds the source and destination address
   * TCP Packet Header : order of how packets should be reassembled
   * IP Packet Data : holds the data of the packet  
-```
 
-
-
-Currently making updates (please come back on Mar 8)
-
-##### Networking Terms 
-```
-  3) DNS Server : phonebook for finding the IP address of sites 
-  4) ARP Table : table used to translate IP addresses into MAC addresses 
-```
-
-##### Internet Architecture
-```   
-Handshake : TCP sends requests by sending packets to destination server asking for a connection
-```
-
-##### Packet Types 
-```
-IPv6 : has more addresses, better functionality, but has been delayed as the entire network must become IPv6 compatible 
-  - Tunneling (not popular) : encapsulating IPv6 packets as IPv4 packets to carry over IPv4 networks 
+IPv6: has more addresses, better functionality, but has been delayed as the entire network must become IPv6 compatible 
+  - Tunneling (not popular) : encapsulating IPv6 packets as IPv4 packets to carry over IPv4 networks
   - Network Address Translation (popular) : tries to solve having too few address in IPv4
       Steps 
         a) within a common network, assign private IP addresses
         b) NAT devices maps the private IP addresses to a single public IP address
-        c) send to destination address with mapped public IP address
+        c) send to destination address with mapped public IP address as the source 
         d) when host at destination tries to send a packet to a host within the network, use demultiplexing IDs (L4 protocol) to find host 
       Disadvantages 
         a) more difficult to distinguish devices 
-        b) can't connect to hosts within the private network (address unknown) until they send a message first 
+        b) can't connect to hosts within the private network (address unknown) until they send a message first   
 ```
 
-##### Communication
+##### Discovery 
 ```
 host name (www.github.com) --(DNS)--> IP Address --(ARP)--> MAC address 
+
+Processes of Discovery 
+  Step 1) Host begins only knowing its source MAC address 
+  Step 2) Must discover its source IP address (DHCP)
+  Step 3) Must discover the destination's IP address (DNS)
+  Step 4) Longest prefix match on the IP to determine if the message should go to a router or a local machine 
+  Step 5) Move to a router (another L2 network) or a local machine (current L2 network) (ARP) 
+
+IP address 
+  a) determines "where" the machine is 
+  b) IP addresses can vary based on your location 
+  c) IP addresses will efficiently narrow down from L3 to the correct L2 network, where computers can then be located through MAC addresses  
 
 MAC address
   a) physical unique address of a machine 
@@ -175,13 +169,26 @@ MAC address
   c) determines "who" the machine is 
   d) difficult for the entire Internet to keep track of where all MAC addresses are 
 
-IP address 
-  a) determines "where" the machine is 
-  b) IP addresses can vary based on your location 
-  c) IP addresses will efficiently narrow down from L3 to the correct L2 network, where computers can then be located through MAC addresses  
+DNS Server: phonebook for finding the IP addresses of sites, DNS servers are replicated for availability, and caches popular addresses 
+
+DHCP Server: 
+  1) host broadcasts a DHCP discovery network, DHCP servers respond with an offer response, host sends a request message specifying the DHCP it wants
+  2) DHCP helps a machine learn its own IP address, IP addresses of local DNS servers, gateway routers, and prefix length 
+
+ARP Table: table used to translate IP addresses into MAC addresses 
 ```
 
-##### Security Fundamentals 
+
+
+Currently making updates (please come back on Mar 8)
+
+##### Internet Architecture
+```   
+Handshake : TCP sends requests by sending packets to destination server asking for a connection
+```
+
+
+##### Getting Started with Security 
 ```
 Man-in-the-Middle(MITM) Attack : malicious activity to intercept or alter IP packets in an HTTP connection
 

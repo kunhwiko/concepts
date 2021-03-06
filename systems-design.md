@@ -68,6 +68,10 @@ Problems of Caching :
   
 Caching Eviction :
   Rules to evict cached data (LRU Cache, LFU Cache, FIFO Cache)
+
+Negative Caching : 
+  1) caching for things such as misspellings (might take a long time to fail the first time)
+  2) great for failures taking less time 
 ```
 
 
