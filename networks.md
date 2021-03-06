@@ -106,6 +106,12 @@ Layer 1: Physical Layer
   a) concerned with how signals are used to transfer message bits 
   b) network: physical links 
   c) message: bits 
+
+Layer 2: Link Layer 
+  a) takes physical layers and connects them 
+  b) network: LAN 
+  c) message: frames 
+  d) framing: convert stream of bits into messages 
 ```
 
 
@@ -126,10 +132,6 @@ Handshake : TCP sends requests by sending packets to destination server asking f
 
 ##### Low Level Layers
 ```
-Data Link Layer
-  a) connects physical layers 
-  b) network : LAN
-  c) message : frames 
 
 Internet Layer 
   a) connects data link layers 
