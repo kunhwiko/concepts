@@ -110,8 +110,29 @@ Layer 1: Physical Layer
 Layer 2: Link Layer 
   a) takes physical layers and connects them 
   b) network: LAN 
-  c) message: frames 
+  c) message: frames (holds the MAC src and dest address)
   d) framing: convert stream of bits into messages 
+
+Layer 3: Network Layer 
+  a) takes link layers and connects them 
+  b) network: Internet 
+  c) message: packets 
+```
+
+##### Network Layer 
+```
+IPv4: 32 bits broken into two parts (network and host addresses)
+  - network addresses are common to groups of host addresses (geography / company)
+
+Classless Interdomain Routing 
+  - 128.168.1.0/26 --> 26 bits for network addresses, 6 bits for host addresses (great if you have 50 computers in a common network)
+  - 192.168.1.0/24 --> 8 bits for host addresses (192.168.1.0 ~ 192.168.1.255) 
+  - routers do a longest prefix match on these "prefixes" to route packets   
+
+Packets : small segments of data of a larger message 
+  * IP Packet Header : holds the source and destination address
+  * TCP Packet Header : order of how packets should be reassembled
+  * IP Packet Data : holds the data of the packet  
 ```
 
 
@@ -129,29 +150,8 @@ Currently making updates (please come back on Mar 8)
 Handshake : TCP sends requests by sending packets to destination server asking for a connection
 ```
 
-
-##### Low Level Layers
-```
-
-Internet Layer 
-  a) connects data link layers 
-  b) network : Internet 
-  c) message : packets 
-```
-
 ##### Packet Types 
 ```
-Packets : small segments of data of a larger message 
-  * IP Packet Header : holds the source and destination address
-  * TCP Packet Header : order of how packets should be reassembled
-  * IP Packet Data : holds the data of the packet 
-
-IPv4 : 32 bits broken into two parts (network and host address), network addresses are addresses common to some group of host addresses (geography, company)
-
-Classless Interdomain Routing
-  - 128.168.1.0/26 --> 26 bits for network addresses, 6 bits for host addresses (great if you have 50 computers in a common network)
-  - 192.168.1.0/24 --> 8 bits for host addresses (192.168.1.0 ~ 192.168.1.255)   
-
 IPv6 : has more addresses, better functionality, but has been delayed as the entire network must become IPv6 compatible 
   - Tunneling (not popular) : encapsulating IPv6 packets as IPv4 packets to carry over IPv4 networks 
   - Network Address Translation (popular) : tries to solve having too few address in IPv4
