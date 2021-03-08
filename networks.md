@@ -112,15 +112,15 @@ Layer 2: Link Layer
   b) network: LAN 
   c) message: frames (holds the MAC src and dest address)
   d) framing: convert stream of bits into messages 
-
-Layer 3: Network Layer 
-  a) takes link layers and connects them 
-  b) network: Internet 
-  c) message: packets 
 ```
 
 ##### Network Layer 
 ```
+Layer 3: Network Layer 
+  a) takes link layers and connects them 
+  b) network: Internet 
+  c) message: packets 
+
 IPv4: 32 bits broken into two parts (network and host addresses)
   - network addresses are common to groups of host addresses (geography / company)
 
@@ -178,15 +178,24 @@ DHCP Server:
 ARP Table: table used to translate IP addresses into MAC addresses 
 ```
 
-
-
-Currently making updates (please come back on Mar 8)
-
-##### Internet Architecture
-```   
-Handshake : TCP sends requests by sending packets to destination server asking for a connection
+##### Transport Layer 
 ```
+Layer 4: Transport Layer 
+  a) provides the means for transferring variable length data in a reliable fashion 
+  b) on the host and typically not on the layer 
+  c) message: UDP / TCP  
 
+UDP 
+  a) a simply wrapper to IP that provides lightweight, fast delivery of data 
+  b) connection-less protocol
+  c) sends and receives chunks of data 
+
+TCP 
+  a) extensive error checking, provides recovery options, and reliable delivery of data 
+  b) connection-oriented (must request a handshake with the destination host first)
+  c) Handshake: TCP sends requests by sending packets to destination server asking for a connection
+  d) sends and receives a stream of bytes in segments that must be reorganized upon delivery 
+```
 
 ##### Getting Started with Security 
 ```
