@@ -1,6 +1,6 @@
 ### Databases 
 ---
-##### Definitions 
+##### Getting Started with Databases 
 ```
 Database Management Systems (DBMS) 
   1) a software package designed to manage databases
@@ -10,31 +10,40 @@ Database Benefits vs Programs/Files
   1) users do not have to be concerned with low level details such as indexes, concurrency, disk speed, data structures 
   2) scalable and efficient for large datasets by providing random access (for files, this requires scanning the entire document)
   3) provides permanence, consistency even for concurrent actions 
-  
-Relational Database : data stored in tables(relations) organized in a strict, predefined way 
-Non-relational Database : data stored in a flexible form
-SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
-NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency  
 ```
 
 ##### Relational Databases / SQL 
 ```
+Relational Database : data stored in tables(relations) organized in a strict, predefined way 
+SQL : relational, structured/predefined, table-based, less scalability, better for ranged queries, strong consistency  
+
 ACID principles for SQL 
   1) Atomicity : guarantee that when one operation fails(succeeds), all other following operations fails(succeeds) 
-    a) read-copy-update : keep a copy of the original database before some query execution 
-    b) journaling : logs the updates, and reverses operations if failure arises 
   2) Consistency : each transaction ensures that the database moves from one valid state to another valid state (does not corrupt data)
   3) Isolation : when you run operations concurrently, the result will be as if you ran the operations in sequence
-   a) serialization : places a lock forcing one transaction to wait (slow, potential for deadlock)
-   b) snapshot isolation :
-      - copies and reads the last committed version (snapshot) of the database before the operation starts 
-      - will only commit if the operation does not conflict with concurrenct commits  
-      - low latency, but guarantees less consistency and uses more memory resources 
   4) Durability : once the data is stored in the database, it will remain to do so
+
+Atomicity 
+  a) read-copy-update : keep a copy of the original database before some query execution 
+  b) journaling : logs the updates, and reverses operations if failure arises 
+
+Isolation 
+  a) Serial Execution vs Interleave Execution 
+  	  - Serial Execution: queries executed in sequential order 
+  	  - Interleave Execution: queries executed concurrently (can cause conflicts)
+  	 Serializable: good executions are those that are equal to some serial execution
+  b) Modern databases implement locks to prevent bad access to data and ensure serialization 
+  c) Snapshot Isolation
+      - copies and reads the last committed version (snapshot) of the database before the operation starts 
+      - will only commit if the operation does not conflict with concurrent commits  
+      - low latency, but guarantees less consistency and uses more memory resources 
 ```
 
-##### NoSQL 
+##### Non-relational Database / NoSQL 
 ```
+Non-relational Database : data stored in a flexible form
+NoSQL : non-relational, unstructured/flexible, key-value paired (JSON objects), better scalability, eventual consistency 
+
 BASE principles for NoSQL
   1) Basically Available : system guarantees availability
   2) Soft State : state of system and replicas might change over time even without input 
