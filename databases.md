@@ -28,15 +28,17 @@ Atomicity
   b) journaling : logs the updates, and reverses operations if failure arises 
 
 Isolation 
-  a) Serial Execution vs Interleave Execution 
+  a) Serialization 
+    1) Serial Execution vs Interleave Execution 
   	  - Serial Execution: queries executed in sequential order 
   	  - Interleave Execution: queries executed concurrently (can cause conflicts)
-  	 Serializable: good executions are those that are equal to some serial execution
-  b) Modern databases implement locks to prevent bad access to data and ensure serialization 
-  c) Snapshot Isolation
-      - copies and reads the last committed version (snapshot) of the database before the operation starts 
-      - will only commit if the operation does not conflict with concurrent commits  
-      - low latency, but guarantees less consistency and uses more memory resources 
+  	2) Serializable: good executions are those that are equal to some serial execution
+    3) Modern databases implement locks to prevent bad access to data and ensure serialization 
+    4) Deadlocks can happen, in which DBMS must detect and abort one of the conflicting transactions 
+  b) Snapshot Isolation
+    1) copies and reads the last committed version (snapshot) of the database before the operation starts 
+    2) will only commit if the operation does not conflict with concurrent commits  
+    3) low latency, but guarantees less consistency and uses more memory resources 
 ```
 
 ##### Non-relational Database / NoSQL 
