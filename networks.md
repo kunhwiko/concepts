@@ -195,6 +195,12 @@ TCP
   b) connection-oriented (must request a handshake with the destination host first)
   c) Handshake: TCP sends requests by sending packets to destination server asking for a connection
   d) sends and receives a stream of bytes in segments that must be reorganized upon delivery 
+
+How does TCP ensure reliable delivery?
+  a) checksum: checks for bit errors 
+  b) ack/nack: acknowledges if receiver received the message 
+  c) sequence number: checks which packets receiver already received 
+  d) timeout: resends if there is no response 
 ```
 
 ##### Getting Started with Security 
