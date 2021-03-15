@@ -26,19 +26,38 @@ ACID principles for SQL
 Atomicity 
   a) read-copy-update : keep a copy of the original database before some query execution 
   b) journaling : logs the updates, and reverses operations if failure arises 
+```
 
-Isolation 
-  a) Serialization 
-    1) Serial Execution vs Interleave Execution 
-  	  - Serial Execution: queries executed in sequential order 
-  	  - Interleave Execution: queries executed concurrently (can cause conflicts)
-  	2) Serializable: good executions are those that are equal to some serial execution
-    3) Modern databases implement locks to prevent bad access to data and ensure serialization 
-    4) Deadlocks can happen, in which DBMS must detect and abort one of the conflicting transactions 
-  b) Snapshot Isolation
-    1) copies and reads the last committed version (snapshot) of the database before the operation starts 
-    2) will only commit if the operation does not conflict with concurrent commits  
-    3) low latency, but guarantees less consistency and uses more memory resources 
+##### Isolation Levels of DBMS 
+```
+Serialization 
+  1) Serial Execution vs Interleave Execution 
+      - Serial Execution: queries executed in sequential order 
+      - Interleave Execution: queries executed concurrently (can cause conflicts)
+  2) Serializable: good executions are those that are equal to some serial execution
+  3) Modern databases implement locks to prevent bad access to data and ensure serialization 
+  4) Deadlocks can happen, in which DBMS must detect and abort one of the conflicting transactions 
+
+Undesired Phenomena 
+  1) Overwrite Uncommitted Data: T1 updates, T2 updates-->commits, T1 commits
+  2) Dirty Read: 
+       - reading from data that has not yet been committed in another transaction 
+       - if the uncommitted data fails to commit, we have read the wrong information 
+  3) Unrepeatable Read: reads the same item twice and gets different values 
+  4) Phantom Read: 
+       - retrieve collections of rows and see different results, although these collections are not modified
+       - this might happen if some rows are inserted/deleted
+
+Isolation Levels
+  1) Serializable: ensures total isolation 
+  2) Repeatedable Read: allows phantom reads 
+  3) Read Committed: allows phantom reads + unrepeatedable reads 
+  4) Read Uncommitted: allows phantom reads + unrepeatedable reads + dirty reads (read-only application)
+
+Snapshot Isolation 
+  1) copies and reads the last committed version (snapshot) of the database before the operation starts 
+  2) will only commit if the operation does not conflict with concurrent commits  
+  3) low latency, but guarantees less consistency and uses more memory resources   
 ```
 
 ##### Non-relational Database / NoSQL 
