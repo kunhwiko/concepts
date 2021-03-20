@@ -60,6 +60,52 @@ Snapshot Isolation
   3) low latency, but guarantees less consistency and uses more memory resources   
 ```
 
+##### Database Costs 
+```
+Page: unit of storage in main memory ("block" in disk storage)
+
+e.g.)
+Student(id int, name char(40), major char(4), hobby char(30))
+  - size of row: 4+40+4+30 = 78(bytes)
+  - page size: 8,000 
+  - number of rows: 10,000
+floor(8000/78) = 102 (student rows per page)
+ceiling(10000/102) = 98 (pages to store all student records)
+
+File Storages 
+  1) Heap: unordered data
+       - find: O(n), insert: O(1), delete: O(n)
+  2) Sorted
+       - find: O(logn), insert: O(1), delete: O(n)
+       - great for ranged queries 
+  3) Hashed
+       - find: O(1), insert: O(1), delete: O(1)
+```
+
+##### Database Scalability
+```
+read problems : as tables grow, it becomes harder to read information that reader needs 
+Indexing : uses additional memory to maintain a lookup for faster querying (imagine glossary page) 
+  1) Tree Indexing : Allows us to do fast range queries 
+  2) Hash Indexing : Allows us to do fast exact queries 
+
+load problems : what if database has too much requests or failures result in inaccessible databases?
+Replication : makes copies of the database for backup purposes
+Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
+
+write problems : 
+  1) what if there are too many write requests to master server (replicas are read-only)? 
+  2) what if the database has tons of data, is it necessary to replicate all this data?
+  3) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
+Sharding : splitting the data across multiple machines 
+  1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
+  2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
+  3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
+
+Normally good to have a reverse proxy (load balancer) to process client requests and match to databases/shards 
+```
+
+
 ##### Non-relational Database / NoSQL 
 ```
 Non-relational Database : data stored in a flexible form
@@ -92,27 +138,3 @@ Storage Types :
   5) Time Series Store : Specializes in time series data / monitoring (InfluxDB)
   6) Graph Store : Stores in a graph form rather than a tabular form, specializes in relations between data (Neo4j)
 ```
-
-##### Database Scalability
-```
-read problems : as tables grow, it becomes harder to read information that reader needs 
-Indexing : uses additional memory to maintain a lookup for faster querying (imagine glossary page) 
-  1) Tree Indexing : Allows us to do fast range queries 
-  2) Hash Indexing : Allows us to do fast exact queries 
-
-load problems : what if database has too much requests or failures result in inaccessible databases?
-Replication : makes copies of the database for backup purposes
-Master-Slave Model : slaves are replicas that are read-only to lessen the load on the master server
-
-write problems : 
-  1) what if there are too many write requests to master server (replicas are read-only)? 
-  2) what if the database has tons of data, is it necessary to replicate all this data?
-  3) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
-Sharding : splitting the data across multiple machines 
-  1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
-  2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
-  3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
-
-Normally good to have a reverse proxy (load balancer) to process client requests and match to databases/shards 
-```
-
