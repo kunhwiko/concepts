@@ -86,8 +86,13 @@ File Storages
 ```
 read problems: as tables grow, it becomes harder to read information that reader needs 
 Indexing: uses additional memory to maintain a lookup for faster querying (imagine glossary/aisle numbers) 
-  1) Tree-based Indexing : Allows us to do fast range queries 
+  1) Tree-based Indexing : Allows us to do fast range queries (typically with B+ trees)
   2) Hash-based Indexing : Allows us to do fast exact queries 
+
+B+ tree: 
+  - tree where parent nodes are index entries that can quickly point to the next index
+  - keep traversing down to the next index until we reach a leaf node, where typically data is stored 
+  - leaf nodes are typically connected like a linked list  
 
 load problems : what if database has too much requests or failures result in inaccessible databases?
 Replication : makes copies of the database for backup purposes
