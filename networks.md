@@ -195,7 +195,7 @@ TCP
   b) connection-oriented (must request a handshake with the destination host first)
   c) Handshake: TCP sends requests by sending packets to destination server asking for a connection
   d) sends and receives a stream of bytes in segments that must be reorganized upon delivery 
-  e) controls flow/speed of packets 
+  e) controls flow of packets (sending/receiving) 
 
 How does TCP ensure reliable delivery?
   a) checksum: checks for bit errors 
@@ -205,7 +205,8 @@ How does TCP ensure reliable delivery?
 
 How does TCP control flow of packets?
   Problem: What if Netflix sends a 4K video, can a computer handle all the packets at once?
-  TCP allows us to control the flow at which packets arrive through a sliding window process
+  1) TCP allows us to control the flow rate of packets by advertising an available window in our buffer
+  2) TCP sends more packets when receiving an acknowledgment and sends less when a packet loss occurs. 
 ```
 
 ##### Getting Started with Security 
