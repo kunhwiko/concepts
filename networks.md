@@ -209,6 +209,22 @@ How does TCP control flow of packets?
   2) TCP sends more packets when receiving an acknowledgment and sends less when a packet loss occurs. 
 ```
 
+##### HTTP
+```
+Base Structure of HTTP
+  1) synchronous request/reply protocol (before HTTP/2)
+  2) on top of TCP/IP (before HTTP/3)
+  3) stateless (server does not recognize same client) (before HTTP/1.1)
+  4) ASCII format (before HTTP/2)
+
+Stateless
+  Pros: improves scalability / resource availability on server side 
+  Cons: some applications need persistent state (shopping carts, usage tracking)
+  Cookies:
+    1) sets a key-value pair that a website can store in the browser 
+    2) the cookie is sent in subsequent requests so server can recognize clients 
+```
+
 ##### Getting Started with Security 
 ```
 Man-in-the-Middle(MITM) Attack : malicious activity to intercept or alter IP packets in an HTTP connection
