@@ -190,7 +190,10 @@ Three State Logic
 2) Natural Join: join on a particular key, only one instance of the key is kept 
 3) Left Outer Join: include tuples of left table even if there are no matches 
 4) Right Outer Join: include tuples of right table even if there are no matches 
-5) Full Outer Join: include tuples of both tables even if there are no matches    
+5) Full Outer Join: include tuples of both tables even if there are no matches 
+
+Optimizing Joins 
+  we typically use smaller tables on the outer side because we can match on less tuples    
 ```
 
 <br />
