@@ -209,7 +209,7 @@ How does TCP control flow of packets?
   2) TCP sends more packets when receiving an acknowledgment and sends less when a packet loss occurs. 
 ```
 
-##### HTTP
+##### HTTP (Application Layer)
 ```
 Base Structure of HTTP
   1) synchronous request/reply protocol (before HTTP/2)
@@ -223,7 +223,20 @@ Stateless
   Cookies:
     1) sets a key-value pair that a website can store in the browser 
     2) the cookie is sent in subsequent requests so server can recognize clients 
+
+HTTP 1.1
+  1) persistent connection: maintain TCP connections across multiple requests 
+  2) state 
+
+HTTP 2
+  1) binary framing: 
+       - instead of sending stream of ASCII characters, messages are formatted into stream of packets 
+       - this allows to interleave different messages based on priority 
+
+HTTP 3
+  1) moving to build a UDP based protocol: custom TLS handshake, custom congestion control 
 ```
+
 
 ##### Getting Started with Security 
 ```
