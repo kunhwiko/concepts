@@ -104,7 +104,7 @@ write problems :
   3) after writing to the master, how can we solve latency issues of replicating all the data to the slaves?
 Sharding : splitting the data across multiple machines 
   1) Vertical Sharding : partitioning master server by feature (profiles, messages, customer support) --> one table might become large
-  2) Hash Based Sharding : partitioning through hashing some value (ID) --> same problems with hashing
+  2) Hash Based Sharding : horizontally partitioning through hashing some value (ID) --> same problems with hashing
   3) Directory Based Sharding : a lookup table maintains where data can be found --> lookup table can fail or overload 
 
 Normally good to have a reverse proxy (load balancer) to process client requests and match to databases/shards 
