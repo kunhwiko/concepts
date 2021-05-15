@@ -1,4 +1,35 @@
 # Java Programming 
+
+### Basics 
+---
+##### Overview
+```
+  1. Pass by value 
+  2. Compiler transforms code to bytecode, which is then read by JVM
+  3. Garbage collection removes unreachable items 
+  4. All references for a JVM will have same size regardless of object 
+```
+
+### Variables 
+---
+##### Key Notes 
+```
+  1. Boolean and integers are incompatible 
+  2. Local variables do not have a default value
+```
+
+##### Pre and Post Increment 
+```java
+int x = 0; int z = x++;       // z is 0 
+int x = 0; int z = ++x;       // z is 1  
+```
+
+##### Random
+```java
+Math.random() * 5      // number from 0 to 4.999..
+```
+
+
 ### {Array}
 ---
 ##### Initializing Arrays
