@@ -10,6 +10,14 @@
   4. All references for a JVM will have same size regardless of object 
 ```
 
+### Packages
+```
+Every class in Java library belongs to a package 
+  1. Help organize project or library by grouping into different functionalities 
+  2. Name-scoping to prevent same class name collisions in a project 
+  3. Provide security where only other classes in the same package can access written code  
+```
+
 ### Variables 
 ---
 ##### Key Notes 
@@ -22,6 +30,12 @@
 ```java
 int x = 0; int z = x++;       // z is 0 
 int x = 0; int z = ++x;       // z is 1  
+```
+
+##### Short Circuits 
+```java
+&&               // if left side is false, the right side will not be evaluated 
+&                // both sides must be evaluated, even if the left side is false
 ```
 
 ##### Random

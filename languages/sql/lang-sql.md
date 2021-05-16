@@ -26,15 +26,6 @@ Unique : ensures values in a column are unique, many columns can be unique, allo
 ---
 ##### Setting Keys in Create Clause
 ```sql
-/* Set primary keys and foreign keys */
-CREATE TABLE Student (
-    id INT,
-    name VARCHAR(30),
-    school VARCHAR(60),
-    graduation DATE,
-    PRIMARY KEY (id)
-)
-
 /* Primary keys can be multiple columns if they make up the unique identifer, 
    Here, building_no and room_no together make up one unique identifier for each tuple */
 CREATE TABLE Housing (
