@@ -7,15 +7,26 @@
   1. Pass by value 
   2. Compiler transforms code to bytecode, which is then read by JVM
   3. Garbage collection removes unreachable items 
-  4. All references for a JVM will have same size regardless of object 
+  4. All references for a JVM will have same size regardless of object
 ```
 
-### Packages
+##### Packages
 ```
 Every class in Java library belongs to a package 
   1. Help organize project or library by grouping into different functionalities 
   2. Name-scoping to prevent same class name collisions in a project 
   3. Provide security where only other classes in the same package can access written code  
+```
+
+##### Security
+```
+Preventing subclasses / inheritance
+  1. non-public classes (no such thing as a private class) can be subclassed only by classes in the same package
+  2. final classes to make methods always work the way they are intended to (no method overriding)
+  3. classes with only private constructors  
+
+Preventing method overrides 
+  1. declare method as final 
 ```
 
 ### Variables 

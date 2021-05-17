@@ -19,21 +19,22 @@ child class : Retriever
 
 child class can inherit all data fields and methods of parent class, while defining its own fields or methods 
 
-Advantages : 
+Advantages: 
   1) Reusability : Do not have to write already existing lines of code 
+  2) Define common protocol for group of classes
 ```
 
 ##### Polymorphism
 ```
 Triangle shape = new Triangle() 
-Shape shape = new Triangle()           class triangle is a part of class shape
-Shape shape = new Circle()             class circle is a part of class shape 
-Triangle shape = new Shape()           a triangle is a shape, but a shape is not a triangle (invalid)
+Shape shape = new Triangle()           triangle is a shape 
+Shape shape = new Circle()             circle is a shape  
+Triangle shape = new Shape()           triangle is a shape, but a shape is not a triangle (invalid)
 
-public void run(Shape shape) {}        classes shape, triangle, and circle can all be passed to the parameter
+public void run(Shape shape) {}        objects with type shape, triangle, and circle can all be passed to the parameter
 
-Advantages :
-  1) Flexibility 
+Advantages:
+  1) Flexibility : ability to not have to rewrite code when a new subclass is defined 
 ```
 
 ##### Composition 
