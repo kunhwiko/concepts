@@ -4,12 +4,12 @@
 ```
 hide all but important features to reduce complexity and think about things at a higher level
 
-ex) create an object TV to focus on a higher level, rather than the specifics/internals of a TV
+ex) think about instance variables and methods of a TV at a higher level, rather than the specific/internals of a TV 
 ``` 
 
 ##### Encapsulation 
 ```
-bundling data fields as private to prevent open access and change  
+bundling data fields as private to prevent open access and changes  
 ```
 
 ##### Inheritance
@@ -17,7 +17,7 @@ bundling data fields as private to prevent open access and change
 parent class : Dog 
 child class : Retriever 
 
-child class can inherit all data fields and methods of parent class, while defining its own fields or methods 
+child class can inherit all instance variables and methods of parent class, while defining its own fields or methods 
 
 Advantages: 
   1) Reusability : Do not have to write already existing lines of code 
@@ -40,6 +40,7 @@ Advantages:
 ##### Composition 
 ```
 defines a has-a relationship
+
 public class Point3D {
   public Point3D(int x, int y, int z) {
     p = new Point2D(x,y);
@@ -78,8 +79,9 @@ Advantages :
 
 ##### Object Relational Mapping
 ```
-Converting data between relational databases and OOP languages such that they become compatible with each other
-Query database using an object-oriented paradigm (graph of objects) instead of SQL (tabular format) 
+Ability to write relational database queries through OOP languages by making them compatible with each other. 
+
+ex) SELECT * FROM users WHERE type = "test"; --> var user = orm("users").where({type: "test"});
 ```
 
 <br />
@@ -122,9 +124,9 @@ functional programming :
 ##### Terms 
 ```
 Web Server : return content of file following HTTP protocols (Apache HTTP)
-Application Server : execute and display results of file following various protocols (Oracle WebLogic, Apache Tomcat)
+Application Server : dynamically changes and displays content of files following various protocols (Oracle WebLogic, Apache Tomcat)
 
-Regression Testing : testing to confirm that recent program change does not impact existing functionality 
+Regression Testing : testing to confirm that recent program changes do not impact existing functionality 
 Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
   ex) QTP, Rational Robot, Selenium
 ```
