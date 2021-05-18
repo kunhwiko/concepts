@@ -3,11 +3,10 @@
 ##### Basic Terminology 
 ```
 What does an OS do?
-1) process management, scheduling, and allow concurrency
-2) memory management and allocation 
+1) process management : scheduling, allow concurrency
+2) memory management : memory allocation, allow different files to share storage  
 3) I/O management 
-4) allow different files to share storage 
-5) network, security, and access control 
+4) security : network, security, and access control 
 
 Kernel vs Shell
 1) kernel : core of operating system that controls tasks 
@@ -76,7 +75,7 @@ Executing
 
 Components of Object Files
 1) sections : distinct info such as text/data, starting addresses, and initial contents  
-2) symbol table : name and current location of each procedure or variable 
+2) symbol table : name and current location of each variable 
 3) relocation record : addresses in the object file that linker will adjust to a final memory allocation
 
 Linking Object Files (Static Linking)
@@ -131,7 +130,7 @@ Step 2) locate the virtual page needed and allocates to a free page frame
 
 Page Replacement : determine which pages to throw out of memory (FIFO, Random, LRU, Clock Algorithm)
 Page Fetching : determine when to bring pages into memory 
-  - demand fetching : start process with no pages loaded, and load pages into memory when it gets referenced 
+  - demand paging : start process with no pages loaded, and load pages into memory when it gets referenced 
   
 Inter-Process Communication
 Allow processes to communicate with one another and synchronize actions
@@ -139,7 +138,7 @@ Allow processes to communicate with one another and synchronize actions
 2) Message Parsing Method : Establish a communication link and exchange messages 
 ```
 
-##### File Systems 
+##### File Systems and I/O
 ```
 Goals 
 1) manage efficient use of disk space, fast access, and sharing between users
@@ -149,14 +148,12 @@ Goals
 Inode 
 - OS data structure that carries info about a particular file (file size, occupied space, access times, id)
 - stored on disk along with the file, and kept in memory when file is opened 
-- various representations of how disk can represent bytes of a file (linked list of 4096 byte "blocks", FAT)
+- various representations of how disk can represent bytes of a file (linked list of 4096 byte "blocks")
 
 Directories : special structures used to map text names to inode id numbers (directories are organized as a tree structure) 
 Working Directory : OS remembers the inode number of the current directory 
 
-Block Cache : using LRU to retain recent disk blocks in main memory, any modifications are synchronously written to disk storage
-
-Disk Scheduling : order of executing I/O
+I/O or Disk Scheduling : order of executing I/O
 1) FIFO
 2) shortest positioning time first : chooses the request that is closest to the previous one 
 3) elevator algorithm / scan :  have head move in one direction serving all requests along the way, then move in opposite direction
