@@ -3,8 +3,9 @@ package oop;
 // subclass "extends" superclass 
 public class Lion extends Animal {
 	
-    public Lion(int legs) {
-		super(legs);
+    public Lion() {
+    	// pass in parameters to the super constructor
+		super(4);
 	}
 
 	public void countLegs() {

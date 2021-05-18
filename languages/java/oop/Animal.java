@@ -7,7 +7,7 @@ abstract class Animal {
     // instance variables 
     private int legs; 
     
-    // double constructors
+    // overloaded constructors (multiple constructors)
     public Animal() {
     	this.legs = 0;
     }

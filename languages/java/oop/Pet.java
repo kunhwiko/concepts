@@ -7,7 +7,7 @@ package oop;
  	Interfaces make all methods abstract, and multiple interfaces can be implemented  
  	All interface methods are implicitly public and abstract 
  	Interface methods cannot collide since there is no specific implementation, 
- 	and must be implemented on the subclass method side  
+ 	and must be implemented by the subclass
  	
  	Both abstract classes and interfaces act as necessary blueprints and also 
  	is great for polymorphism (we can pass in a parameter of type Pet rather than a specific type) 
