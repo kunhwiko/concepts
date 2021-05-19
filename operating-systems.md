@@ -112,25 +112,31 @@ Memory Management
 
 ##### Virtual Memory 
 ```
-Intuition 
+Intuition
 1) The amount of addressable/needed memory could be larger than the actual physical memory
 2) We don't need all processes to have data in physical memory, just the ones being executed
 3) For processes being executed, we just need parts that are currently being used 
 
-Paging / Dynamic Memory Allocation
-Virtual (addressable) memory is broken into pages 
+Virtual Memory
+1) Memory-Management Unit (MMU) gives each program its own virtual address space
+2) Maps executing programs into memory and idle programs into disk, but give illusion that everything is in memory
+
+Paging
+  - virtual (addressable) memory is broken into pages 
   - pages in use reside in physical memory and are called "frames"
-  - other pages reside in a backing store/hard disk 
+  - other pages reside in a backing store/hard disk
   - page table : maps virtual pages into page frames in physical memory 
-  
+  - demand paging : brings programs from disk into physical memory when needed  
+
 Page Fault : causes trap to OS when accessing memory not in physical memory (RAM) but in the backing store 
 Resolving page faults 
 Step 1) save current instruction states and register content 
 Step 2) locate the virtual page needed and allocates to a free page frame 
 
 Page Replacement : determine which pages to throw out of memory (FIFO, Random, LRU, Clock Algorithm)
+
 Page Fetching : determine when to bring pages into memory 
-  - demand paging : start process with no pages loaded, and load pages into memory when it gets referenced 
+  - start process with no pages loaded, and use demand paging to load pages into memory when it gets referenced 
   
 Inter-Process Communication
 Allow processes to communicate with one another and synchronize actions
