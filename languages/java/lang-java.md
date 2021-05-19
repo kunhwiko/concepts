@@ -23,7 +23,7 @@ Every class in Java library belongs to a package
 Preventing subclasses / inheritance
   1. non-public classes (no such thing as a private class) can be subclassed only by classes in the same package
   2. final classes to make methods always work the way they are intended to (no method overriding)
-  3. classes with only private constructors  
+  3. classes with only private constructors (this prevents instantiating the class)  
 
 Preventing method overrides 
   1. declare method as final 
@@ -54,6 +54,90 @@ int x = 0; int z = ++x;       // z is 1
 Math.random() * 5      // number from 0 to 4.999..
 ```
 
+##### Casting
+```java
+float f = 5/2f;
+(int)f;
+
+Integer.toString(someint);           // changes integer to string
+Integer.parseInt(stringint);         // changes string to integer
+Double.parseDouble(stringdouble);    // changes double to integer
+String.valueOf(5);                   // changes to string
+```
+
+##### Format
+```java
+String s = String.format("%,d", 1000000000);           // change to 1,000,000,000
+s = String.format("%,.2f bugs to fix", 4501.123);      // change to 4,501.12
+```
+
+##### Static 
+```java
+/* 
+   Allows for a method to run without an instance of the class
+   Static means behavior is not dependent on an instance variable 
+ */
+
+// Math class is a good example of "private constructor" with "static methods" 
+Math m = new Math();                  // this is impossible because Math only has private constructors 
+
+m.random();                           // assuming Math can be instantiated, we can call random the normal way
+Math.random();                        // or even like this 
+```
+
+```
+Static methods CANNOT refer to any instance variables or non-static method.
+
+However, non-static methods can still access static methods or static variables 
+```
+
+```java
+// static variables are initialized when the class is loaded, not when a new instance is made
+// one value per class, rather than one value per instance 
+
+public class Rabbit {
+  // all Rabbit instances share the count variable 
+  private static int count = 0;
+
+  public Rabbit() { count++; }
+
+  public static int getCount() { return Rabbit.count; }
+}
+```
+
+##### Final 
+```java
+// final means the variable cannot change 
+public class Foo {
+  // final static variables must be initialized in one of the two ways below
+  // final static variables have the following naming convention 
+  public static final double PI = 3.1415;
+  public static final int PI_INT;
+
+  static {
+    PI_INT = 3;
+  }
+}
+
+/*
+   final variable: cannot change value 
+   final method: cannot override the method 
+   final class: cannot be extended 
+ */
+
+public final class Bar {
+  // final variables must be initialized in one of the two ways below
+  final int x = 3;
+  final int y;
+
+  public Bar() { y = 4; }
+
+  public final int getX() { return x; }
+    
+  // can't modify str within the method
+  public final int doStuff(final String str) { return y; }
+}
+```
 
 ### {Array}
 ---
@@ -76,6 +160,13 @@ Arrays.copyOfRange(arr,1,3)   // copies subarray from index 1 to 3
 
 ### {ArrayList}
 ---
+##### Autoboxing
+```
+Arraylists and hash maps support non-primitive objects. Post Java 5.0, primitive objects are automatically converted to wrapper objects. 
+
+ArrayList<Integer> arr = new ArrayList<Integer>();
+arr.add(3); --> primitive int type is converted to Integer type
+```
 ##### Initializing ArrayLists
 ```java
 // Arrays.asList(arr) changes an array to an arraylist
@@ -181,17 +272,6 @@ for (int i = 0; i < sb.length(); i++) {
 
 ### Other Topics
 ---
-##### Casting
-```
-float f = 5/2f;
-(int)f
-
-Integer.toString(someint);           // changes integer to string
-Integer.parseInt(stringint);         // changes string to integer
-Double.parseDouble(stringdouble);    // changes double to integer
-String.valueOf(5);                   // changes to string
-```
-
 ##### Switch
 ```java
 public int getValue(char c) {
