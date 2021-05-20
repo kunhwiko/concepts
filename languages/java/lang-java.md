@@ -288,12 +288,66 @@ public int getValue(char c) {
 }
 ```
 
+##### Exception
+```
+For any method that could throw an exception, you must handle the exception (e.g. wrap a try/catch clause).
+
+The only exception to this rule is RuntimeException (e.g. NullPointerException, NumberFormatException, DivideByZero). You may or may not decide to handle these errors. 
+
+This is because "unchecked exceptions" are typically faults in code logic, rather than things like missing files, server failure etc.  
+```
+
+```
+Superclass of an exception can catch all subclasses of the exception. 
+
+This means superclass "Exception" can be used to catch all exceptions, but just using this isn't the best convention. 
+
+Order your exceptions from those lower in the inheritance tree, up to those higher in the tree. 
+```
+
+```java
+// exception throwing code (method that throws)
+public void turnOven() throws StartFireException {
+	if (thisStartsFire) {
+		throw new StartFireException();
+	}
+}
+
+// method that uses exception throwing code (method that catches)
+public String cook() {
+	try {
+    System.out.println("This will still run");  
+		this.turnOven();
+    System.out.println("This will not run"); 
+    return "Done here";                       
+	} catch (StartFireException ex) {
+    // all exceptions inherit this method, at least use this when you can't recover from an exception 
+		ex.printStackTrace();
+    return "Ouch";                      
+	} finally {
+    // this is where you put code that must run regardless of exception 
+    // important: finally will still run even if try and catch block has a return statement! 
+    this.turnOffOven();
+  }
+}
+```
+
+```java
+// you can decide to not handle the exception with try/catch
+// but rather just simply toss another "throws exception"
+// now this becomes the NEW risky method 
+public void cook() throws StartFireException {
+  this.turnOven();
+}
+```
+
 ##### Iterator
 ```java
 LinkedList<String> list = new LinkedList<>();
 Iterator<String> iter = list.iterator();             // starting from head
 Iterator<String> iter2 = list.descendingIterator();  // starting from tail
-while(iter.hasNext()){
+
+while (iter.hasNext()) {
     String s = iter.next();
     System.out.println(s);
 }
