@@ -371,3 +371,31 @@ length = s1.nextInt();
 word = s2.next();
 ```
 
+##### Serializable 
+```java
+// if output file will be used by the Java program, serialization can optimize I/O
+// otherwise, just create a plain text file  
+public class Box implements Serializable { 
+	// used for version control 
+	// when deserializing, this makes sure no changes have been made since serialization 
+	// if changes (deleting instance variable, changing non-transient to transient) exists, JVM stops deserialization 
+	static final long serialVersionUID = 512312516L;
+
+	// class Present must also implement Serializable 
+    private Present present = new Present();
+
+    // transient ignores this object during the serialization process 
+    transient Tag tag = new Tag();
+}
+```
+
+##### BufferedWriter 
+```java
+// FileWriter writes each thing you pass to the file each time 
+// BufferedWriter reduces that overhead by passing only when the buffer is full 
+
+BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
+// used to send data before buffer is full 
+writer.flush();
+```
