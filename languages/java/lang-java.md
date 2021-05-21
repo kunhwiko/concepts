@@ -263,8 +263,8 @@ s1.indexOf(s2)				   // check index of s2 inside s1
 ```java
 StringBuilder sb = new StringBuilder("abbcd");
 for (int i = 0; i < sb.length(); i++) {
-    sb.delete(1,3);                        // delete index 1 and 2
-    System.out.println(i);                 // unlike Python, sb.length() will change to 4 during the for loop
+  sb.delete(1,3);                        // delete index 1 and 2
+  System.out.println(i);                 // unlike Python, sb.length() will change to 4 during the for loop
 }
 ```
 
@@ -275,16 +275,16 @@ for (int i = 0; i < sb.length(); i++) {
 ##### Switch
 ```java
 public int getValue(char c) {
-    switch(c){
-        case 'I' : return 1;
-        case 'V' : return 5;
-        case 'X' : return 10;
-        case 'L' : return 50;
-        case 'C' : return 100;
-        case 'D' : return 500;
-        case 'M' : return 1000;
-    }
-    throw new IllegalArgumentException("Letter does not exist");
+  switch(c){
+    case 'I' : return 1;
+    case 'V' : return 5;
+    case 'X' : return 10;
+    case 'L' : return 50;
+    case 'C' : return 100;
+    case 'D' : return 500;
+    case 'M' : return 1000;
+  }
+  throw new IllegalArgumentException("Letter does not exist");
 }
 ```
 
@@ -348,8 +348,8 @@ Iterator<String> iter = list.iterator();             // starting from head
 Iterator<String> iter2 = list.descendingIterator();  // starting from tail
 
 while (iter.hasNext()) {
-    String s = iter.next();
-    System.out.println(s);
+  String s = iter.next();
+  System.out.println(s);
 }
 ```
 
@@ -373,19 +373,25 @@ word = s2.next();
 
 ##### Serializable 
 ```java
-// if output file will be used by the Java program, serialization can optimize I/O
-// otherwise, just create a plain text file  
+/* 
+   if output file will be used by the Java program, serialization can optimize I/O
+   otherwise, just create a plain text file  
+
+   read official documentations on ObjectOutputStream and writeObject()
+*/
 public class Box implements Serializable { 
-	// used for version control 
-	// when deserializing, this makes sure no changes have been made since serialization 
-	// if changes (deleting instance variable, changing non-transient to transient) exists, JVM stops deserialization 
+  /* 
+     used for version control 
+     when deserializing, this makes sure no changes have been made since serialization 
+     if changes (deleting instance variable, changing non-transient to transient) exists, JVM stops deserialization 
+  */
 	static final long serialVersionUID = 512312516L;
 
 	// class Present must also implement Serializable 
-    private Present present = new Present();
+  private Present present = new Present();
 
-    // transient ignores this object during the serialization process 
-    transient Tag tag = new Tag();
+  // transient ignores this object during the serialization process 
+  transient Tag tag = new Tag();
 }
 ```
 

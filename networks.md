@@ -203,10 +203,14 @@ How does TCP ensure reliable delivery?
   c) sequence number: checks which packets receiver already received 
   d) timeout: resends if there is no response 
 
-How does TCP control flow of packets?
+TCP Flow Control: end hosts controlling packet traffic 
   Problem: What if Netflix sends a 4K video, can a computer handle all the packets at once?
   1) TCP allows us to control the flow rate of packets by advertising an available window in our buffer
   2) TCP sends more packets when receiving an acknowledgment and sends less when a packet loss occurs. 
+
+TCP Congestion Control: routers controlling packet traffic 
+  Problem: What if there are too many packets in the network? 
+  1) routers tell hosts that the network is congested 
 ```
 
 ##### HTTP (Application Layer)
@@ -226,12 +230,17 @@ Stateless
 
 HTTP 1.1
   1) persistent connection: maintain TCP connections across multiple requests 
-  2) state 
+  2) understands state (server recognizes client) 
+
+Reducing page load times 
+  1) CDNs 
 
 HTTP 2
   1) binary framing: 
        - instead of sending stream of ASCII characters, messages are formatted into stream of packets 
-       - this allows to interleave different messages based on priority 
+       - this allows interleaving different messages based on priority 
+  2) compressed headers 
+  3) promises: send files that the client did not explicitly request, but might need as deemed by the server  
 
 HTTP 3
   1) moving to build a UDP based protocol: custom TLS handshake, custom congestion control 
