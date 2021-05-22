@@ -1,9 +1,3 @@
-##### For networking and security, reference the networks.md file 
-
-##### For database, reference the databases.md 
-
-<br />
-
 ### Systems Design
 ---
 ##### Fundamentals
@@ -11,10 +5,10 @@
 Client-Server Model 
 Step 1)
   Client makes a DNS query, retrieves the IP address of some domain, and contacts the server  
-  IP addresses can be granted by cloud providers where you can run your server  
+  When running a server through cloud providers, the providers can grant you IP addresses
   
 Step 2)
-  Sends HTTP request to Server along with source address (address of sender)
+  Sends HTTP request to server along with source address (address of sender)
   
 Step 3)
   Server listens to requests on ports, and sends HTML/CSS/JS files to source address 
@@ -145,7 +139,7 @@ Streaming : client opens a channel using "sockets" for servers to send data (cli
 
 Configurations : "settings" for codebases written normally in JSON or YAML
 Static Configuration : Configurations are packaged with codebase, must deploy entire code to test, can create test cases during deployment
-Dynamic Configuration : Configurations outside the codebase, takke immediate change, but harder to test 
+Dynamic Configuration : Configurations outside the codebase, takes immediate change, but harder to test 
 
 
 Usages for data
