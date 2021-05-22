@@ -353,14 +353,6 @@ while (iter.hasNext()) {
 }
 ```
 
-##### Synchronized
-```java
-// only allows 1 thread to use the function at a given time 
-public synchronized void main () {
-
-}   
-```
-
 ### I/O Controls
 ---
 ##### Input
