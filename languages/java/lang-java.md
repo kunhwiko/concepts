@@ -29,6 +29,13 @@ Preventing method overrides
   1. declare method as final 
 ```
 
+##### Data Structures 
+```
+TreeSet : keep elements sorted, remove duplicates 
+LinkedList : makes it easy to build stacks / queues 
+LinkedHashMap : hash map that remembers the order in which elements were inserted 
+```
+
 ### Variables 
 ---
 ##### Key Notes 
@@ -338,6 +345,38 @@ public String cook() {
 // now this becomes the NEW risky method 
 public void cook() throws StartFireException {
   this.turnOven();
+}
+```
+
+##### Generics 
+```
+Generics allows users to create type-safe collections, classes, methods, variables in a flexible way.
+
+With ArrayList<Object>, we can put any object into the arraylist. 
+We don't want that, but we shouldn't go around creating ArrayList<Fish>, ArrayList<Car> for each object. 
+
+Generics act as a placeholder for the object you want to use.    
+```
+
+```java
+// Generics act as a placeholder for the object you want to use
+
+// 'E' is declared by class declaration 
+// 'E' will be replaced by whatever the user inputs 
+public class ArrayList<E> extends AbstractList<E> implements List<E> {
+	// you can declare 'E' here only because it's been declared by the class 
+	public boolean add(E o)
+
+	// this is to declare something NOT defined in class declaration 
+	// 'T' must be a subtype of Animal
+	public <T extends Animal> void something(ArrayList<T> arrList)
+
+	/* 
+       By polymorphism, Dog is an Animal 
+       ArrayList<Dog> is not an ArrayList<Animal> 
+       therefore, we cannot pass Animal<Dog> into the parameter
+	*/
+	public void otherthing(ArrayList<Animal> arrList)
 }
 ```
 
