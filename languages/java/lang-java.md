@@ -31,7 +31,7 @@ Preventing method overrides
 
 ##### Data Structures 
 ```
-TreeSet : keep elements sorted, remove duplicates 
+TreeSet : keep elements sorted, remove duplicates, elements must implement comparable  
 LinkedList : makes it easy to build stacks / queues 
 LinkedHashMap : hash map that remembers the order in which elements were inserted 
 ```
@@ -372,9 +372,14 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 	public <T extends Animal> void something(ArrayList<T> arrList)
 
 	/* 
-       By polymorphism, Dog is an Animal 
-       ArrayList<Dog> is not an ArrayList<Animal> 
-       therefore, we cannot pass Animal<Dog> into the parameter
+       By polymorphism, Dog can be passed to Animal, Dog[] can be passed to Animal[] 
+       However, ArrayList<Dog> cannot be passed to ArrayList<Animal> 
+       
+       This is because at runtime, JVM will check for array types
+       If you add Cat to Dog[], the JVM will catch it during runtime 
+
+       Collection types are only checked during compile time
+       If you allowed Cat to be added to ArrayList<Dog>, the JVM will fail to catch it   
 	*/
 	public void otherthing(ArrayList<Animal> arrList)
 }

@@ -1,4 +1,4 @@
-// what are anonymous classes? (or perhaps even functions?)
+// what are anonymous classes/functions?
 
 // locally defined classes that are not named
 // enables declaration + instantiation at the same time 
@@ -7,7 +7,7 @@
 public class Hello {
     public void sayHello() {
         // local class method
-        // here, class EnglishGreetings is instantiated 
+        // here, class EnglishGreetings is defined and implements Greetings
         class EnglishGreetings implements Greetings {
             public void greet() { 
                 System.out.println("Hello there"); 
@@ -16,7 +16,7 @@ public class Hello {
         Greetings englishGreetings = new EnglishGreetings();
     
         // anonymous class method 
-        // here, we keep things simplier
+        // here, we keep things simplier by not defining a new class but still implements Greetings
         // however, the class cannot be reused 
         Greetings frenchGreetings = new Greetings() {
             public void greet() { 
