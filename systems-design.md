@@ -160,13 +160,14 @@ Rate Limiting : limit number of operations, possibly in different tiers
      
 ##### Pub/Sub Model
 ```
-What if a client was streaming for data and the server goes down. What if really important data doesn't get sent due to interferance?
+What if a client was streaming for data and the server goes down. What if really important data doesn't get sent due to interference?
 
-Pub/Sub Model : publisher sends messages (info) to a topic (channel), and subscribers to the topic can consume the information
-  1) servers becomes independent of communicating with clients
-  2) clients are guaranteed "at least once delivery" of messages, if a topic loses connection to a subscriber, it will attempt to resend messages 
-  3) messages are sent using a queue (guarantees ordering)
-  4) subscribers are able to replay messages or filter their subscriptions 
+Pub/Sub Model : publisher sends messages (data) to a topic, and subscribers send back an ACK to tell topic that information has been consumed
+  1) servers becomes independent of communicating with clients and do not need to waste memory on saving state 
+  2) topic effectively acts as a database solution 
+  3) clients are guaranteed "at least once delivery" of messages, if a topic does not receive an ACK (e.g. loses connection), it will resend messages 
+  4) messages are sent using a queue (guarantees ordering)
+  5) subscribers are able to replay messages or filter their subscriptions 
   
 Idempotency : a characteristic where the outcome is always the same no matter how many times an operation is performed
   1) Did the subscriber receive the message? (Idempotent)   Increment Youtube View Counter (Non-idempotent)
