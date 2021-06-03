@@ -20,6 +20,12 @@ Every class in Java library belongs to a package
 
 ##### Security
 ```
+Access Levels
+  1. public: code can be accessed anywhere 
+  2. protected: code in the same package has access and allows subclasses outside the package to inherit protected things 
+  3. default: code in the same package has access 
+  4. private: code in the same class 
+
 Preventing subclasses / inheritance
   1. non-public classes (no such thing as a private class) can be subclassed only by classes in the same package
   2. final classes to make methods always work the way they are intended to (no method overriding)
@@ -348,7 +354,7 @@ public void cook() throws StartFireException {
 }
 ```
 
-##### Generics 
+##### Generics & Wildcards 
 ```
 Generics allows users to create type-safe collections, classes, methods, variables in a flexible way.
 
@@ -365,23 +371,34 @@ Generics act as a placeholder for the object you want to use.
 // 'E' will be replaced by whatever the user inputs 
 public class ArrayList<E> extends AbstractList<E> implements List<E> {
 	// you can declare 'E' here only because it's been declared by the class 
-	public boolean add(E o)
-
-	// this is to declare something NOT defined in class declaration 
-	// 'T' must be a subtype of Animal
-	public <T extends Animal> void something(ArrayList<T> arrList)
+	public boolean add(E o) {}
 
 	/* 
-       By polymorphism, Dog can be passed to Animal, Dog[] can be passed to Animal[] 
-       However, ArrayList<Dog> cannot be passed to ArrayList<Animal> 
-       
-       This is because at runtime, JVM will check for array types
-       If you add Cat to Dog[], the JVM will catch it during runtime 
+     By polymorphism, Dog can be passed to Animal, Dog[] can be passed to Animal[] 
+     However, ArrayList<Dog> cannot be passed to ArrayList<Animal> 
+     
+     This is because at runtime, JVM will check for array types
+     If you add Cat to Dog[], the JVM will catch it during runtime 
 
-       Collection types are only checked during compile time
-       If you allowed Cat to be added to ArrayList<Dog>, the JVM will fail to catch it   
+     Collection types are only checked during compile time
+     If you allowed Cat to be added to ArrayList<Dog>, the JVM will fail to catch it   
 	*/
-	public void otherthing(ArrayList<Animal> arrList)
+	public void badExample(ArrayList<Animal> arrList) {}
+
+  /* 
+     So how do you take advantage of polymorphism for collections? 
+     You can pass in ArrayList<Dog> using generics or wildcards 
+
+     There's still the danger of being able to add Cat to ArrayList<Dog>
+     Therefore, JVM prevents adding elements when using generics or wildcards 
+  */
+
+  // this is to declare something NOT defined in class declaration 
+  // 'T' must be a subtype of Animal
+  public <T extends Animal> void goodExampleOne(ArrayList<T> arrList) {}
+
+  // another way of saying the same thing as above using "wildcards" 
+  public void goodExampleTwo(ArrayList<? extends Animal> arrList) {}
 }
 ```
 

@@ -6,8 +6,7 @@
 
 public class Hello {
     public void sayHello() {
-        // local class method
-        // here, class EnglishGreetings is defined and implements Greetings
+        // inner class method
         class EnglishGreetings implements Greetings {
             public void greet() { 
                 System.out.println("Hello there"); 
