@@ -78,12 +78,6 @@ Double.parseDouble(stringdouble);    // changes double to integer
 String.valueOf(5);                   // changes to string
 ```
 
-##### Format
-```java
-String s = String.format("%,d", 1000000000);           // change to 1,000,000,000
-s = String.format("%,.2f bugs to fix", 4501.123);      // change to 4,501.12
-```
-
 ##### Static 
 ```java
 /* 
@@ -149,6 +143,17 @@ public final class Bar {
     
   // can't modify str within the method
   public final int doStuff(final String str) { return y; }
+}
+```
+
+##### Enumerations
+```java
+// set of constant values 
+public enum Members { KEVIN, ALICE, JENNY };
+public Members aMember;
+
+if (aMember == Members.ALICE) {
+	// do something 
 }
 ```
 
@@ -422,6 +427,12 @@ Scanner s1 = new Scanner(System.in);
 Scanner s2 = new Scanner(System.in);
 length = s1.nextInt();
 word = s2.next();
+```
+
+##### Format
+```java
+String s = String.format("%,d", 1000000000);           // change to 1,000,000,000
+s = String.format("%,.2f bugs to fix", 4501.123);      // change to 4,501.12
 ```
 
 ##### Serializable 
