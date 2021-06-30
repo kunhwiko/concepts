@@ -7,7 +7,6 @@
   1. Pass by value 
   2. Compiler transforms code to bytecode, which is then read by JVM
   3. Garbage collection removes unreachable items 
-  4. All references for a JVM will have same size regardless of object
 ```
 
 ##### Packages
@@ -24,7 +23,7 @@ Access Levels
   1. public: code can be accessed anywhere 
   2. protected: code in the same package has access and allows subclasses outside the package to inherit protected things 
   3. default: code in the same package has access 
-  4. private: code in the same class 
+  4. private: code in the same class has access 
 
 Preventing subclasses / inheritance
   1. non-public classes (no such thing as a private class) can be subclassed only by classes in the same package
@@ -47,13 +46,13 @@ LinkedHashMap : hash map that remembers the order in which elements were inserte
 ##### Key Notes 
 ```
   1. Boolean and integers are incompatible 
-  2. Local variables do not have a default value
+  2. Local variables do not have default values
 ```
 
 ##### Pre and Post Increment 
 ```java
-int x = 0; int z = x++;       // z is 0 
-int x = 0; int z = ++x;       // z is 1  
+int x = 0; int z = x++;       // z is 0, x becomes 1 
+int x = 0; int z = ++x;       // x becomes 1, z is 1  
 ```
 
 ##### Short Circuits 
@@ -74,15 +73,15 @@ float f = 5/2f;
 
 Integer.toString(someint);           // changes integer to string
 Integer.parseInt(stringint);         // changes string to integer
-Double.parseDouble(stringdouble);    // changes double to integer
+Double.parseDouble(stringdouble);    // changes string to double 
 String.valueOf(5);                   // changes to string
 ```
 
 ##### Static 
 ```java
 /* 
-   Allows for a method to run without an instance of the class
-   Static means behavior is not dependent on an instance variable 
+  Allows for a method to run without an instance of the class
+  Static means behavior is not dependent on an instance variable 
  */
 
 // Math class is a good example of "private constructor" with "static methods" 
@@ -127,9 +126,9 @@ public class Foo {
 }
 
 /*
-   final variable: cannot change value 
-   final method: cannot override the method 
-   final class: cannot be extended 
+  final variable: cannot change value 
+  final method: cannot override the method 
+  final class: cannot be extended 
  */
 
 public final class Bar {
@@ -140,7 +139,7 @@ public final class Bar {
   public Bar() { y = 4; }
 
   public final int getX() { return x; }
-    
+
   // can't modify str within the method
   public final int doStuff(final String str) { return y; }
 }
@@ -162,18 +161,18 @@ if (aMember == Members.ALICE) {
 ##### Initializing Arrays
 ```java
 // Declaration  = Initialization 
-String[] greetings = {"Hello","Hi","How are you"};
+String[] greetings = {"Hello", "Hi", "How are you"};
 String[] greetings = new String[5]; 
-String[] greetings = new String[]{"Hello","Hi","How are you"}; 
+String[] greetings = new String[]{"Hello", "Hi", "How are you"}; 
 
 // at times, there is no need to declare the array 
-return new int[]{0,1};
+return new int[]{0, 1};
 ```
 
 ##### Basic Operations
 ```java
-arr.length                    // length
-Arrays.copyOfRange(arr,1,3)   // copies subarray from index 1 to 3
+arr.length                      // length
+Arrays.copyOfRange(arr, 1, 3)   // copies subarray from index 1 to 3
 ```
 
 ### {ArrayList}
@@ -183,8 +182,9 @@ Arrays.copyOfRange(arr,1,3)   // copies subarray from index 1 to 3
 Arraylists and hash maps support non-primitive objects. Post Java 5.0, primitive objects are automatically converted to wrapper objects. 
 
 ArrayList<Integer> arr = new ArrayList<Integer>();
-arr.add(3); --> primitive int type is converted to Integer type
+arr.add(3); --> primitive int type is converted tao Integer type
 ```
+
 ##### Initializing ArrayLists
 ```java
 // Arrays.asList(arr) changes an array to an arraylist
@@ -193,13 +193,13 @@ ArrayList<String> arrlist = new ArrayList<>(Arrays.asList(greetings));
 
 ##### Basic Operations
 ```java
-arrlist.size()                            // length
-arrlist.get(1)                            // find element 
-arrlist.add(5,"new element")              // add new element to index 5
-arrlist.remove(1)                         // remove index 1
-arrlist.indexOf("Hello")                  // find the index of where "Hello" is
-arrlist.contains("Hello")                 // check to see if "Hello" exists  
-arrlist.toArray(new arr[arrlist.size()])  // change arraylist to array type
+arrlist.size()                               // length
+arrlist.get(1)                               // find element 
+arrlist.add(5,"new element")                 // add new element to index 5
+arrlist.remove(1)                            // remove index 1
+arrlist.indexOf("Hello")                     // find the index of where "Hello" is
+arrlist.contains("Hello")                    // check to see if "Hello" exists  
+arrlist.toArray(new String[arrlist.size()])  // change arraylist to array type
 ```
 
 
@@ -207,18 +207,18 @@ arrlist.toArray(new arr[arrlist.size()])  // change arraylist to array type
 ---
 ##### Initializing Hash/Sorted Maps
 ```java
-Map<Integer, Integer> map = new HashMap<>();      // HashMap
-SortedMap<String,Integer> map = new TreeMap<>();  // SortedMap
+Map<Integer, Integer> map = new HashMap<>();       // HashMap
+SortedMap<String, Integer> map = new TreeMap<>();  // SortedMap
 ```
 
 ##### Traversing through keys and values
 ```java
 // All key values in map
-for(String k : hashmap.keySet()) 
+for (String k : hashmap.keySet()) 
 	System.out.print(k);
 
 // All value values in map
-for(String v : hashmap.values()) 
+for (String v : hashmap.values()) 
 	System.out.print(v);
 ```
 
@@ -243,7 +243,7 @@ map.getOrDefault(k,0);   // get value or if not existant 0
 
 // Create "printprintprintprint"
 StringBuilder sb = new StringBuilder();
-for(int i = 0; i < 4; i++){
+for (int i = 0; i < 4; i++){
 	sb.append("print");
 }
 sb.toString();
@@ -274,7 +274,7 @@ Character.isLetterOrDigit(s1.charAt(0));   // determine if alphabet or number
 Character.toLowerCase(s1.charAt(0));       // char to lower case, does not mutate string
 s1.toCharArray()                           // converts string into a character array
 s1.contains(s2)                            // see if s1 contains s2
-s1.indexOf(s2)				   // check index of s2 inside s1
+s1.indexOf(s2)				               // check index of s2 inside s1
 ```
 
 ##### StringBuilder Operations
@@ -293,7 +293,7 @@ for (int i = 0; i < sb.length(); i++) {
 ##### Switch
 ```java
 public int getValue(char c) {
-  switch(c){
+  switch(c) {
     case 'I' : return 1;
     case 'V' : return 5;
     case 'X' : return 10;
@@ -350,15 +350,6 @@ public String cook() {
 }
 ```
 
-```java
-// you can decide to not handle the exception with try/catch
-// but rather just simply toss another "throws exception"
-// now this becomes the NEW risky method 
-public void cook() throws StartFireException {
-  this.turnOven();
-}
-```
-
 ##### Generics & Wildcards 
 ```
 Generics allows users to create type-safe collections, classes, methods, variables in a flexible way.
@@ -375,27 +366,29 @@ Generics act as a placeholder for the object you want to use.
 // 'E' is declared by class declaration 
 // 'E' will be replaced by whatever the user inputs 
 public class ArrayList<E> extends AbstractList<E> implements List<E> {
-	// you can declare 'E' here only because it's been declared by the class 
-	public boolean add(E o) {}
+  // you can declare 'E' here only because it's been declared by the class 
+  public boolean add(E o) {}
 
 	/* 
-     By polymorphism, Dog can be passed to Animal, Dog[] can be passed to Animal[] 
-     However, ArrayList<Dog> cannot be passed to ArrayList<Animal> 
-     
-     This is because at runtime, JVM will check for array types
-     If you add Cat to Dog[], the JVM will catch it during runtime 
+    By polymorphism, Dog can be passed to Animal, Dog[] can be passed to Animal[] 
+    However, ArrayList<Dog> cannot be passed to ArrayList<Animal> 
 
-     Collection types are only checked during compile time
-     If you allowed Cat to be added to ArrayList<Dog>, the JVM will fail to catch it   
+    This is because at runtime, JVM will check for array types
+    Imagine the parameter is Animal[], and you pass Dog[]
+    If you add a Cat object, the JVM will catch it during runtime 
+
+    Collection types are only checked during compile time
+    Imagine the parameter is ArrayList<Animal>, and you pass ArrayList<Dog>
+    If you could add a Cat object, the JVM will fail to catch it   
 	*/
 	public void badExample(ArrayList<Animal> arrList) {}
 
   /* 
-     So how do you take advantage of polymorphism for collections? 
-     You can pass in ArrayList<Dog> using generics or wildcards 
+    So how do you take advantage of polymorphism for collections? 
+    You can pass in ArrayList<Dog> using generics or wildcards 
 
-     There's still the danger of being able to add Cat to ArrayList<Dog>
-     Therefore, JVM prevents adding elements when using generics or wildcards 
+    There's still the danger of being able to add Cat to ArrayList<Dog>
+    Therefore, JVM prevents adding elements when using generics or wildcards 
   */
 
   // this is to declare something NOT defined in class declaration 
@@ -438,16 +431,16 @@ s = String.format("%,.2f bugs to fix", 4501.123);      // change to 4,501.12
 ##### Serializable 
 ```java
 /* 
-   if output file will be used by the Java program, serialization can optimize I/O
-   otherwise, just create a plain text file  
+  if output file will be used by the Java program, serialization can optimize I/O
+  otherwise, just create a plain text file  
 
-   read official documentations on ObjectOutputStream and writeObject()
+  read official documentations on ObjectOutputStream and writeObject()
 */
 public class Box implements Serializable { 
   /* 
-     used for version control 
-     when deserializing, this makes sure no changes have been made since serialization 
-     if changes (deleting instance variable, changing non-transient to transient) exists, JVM stops deserialization 
+    used for version control 
+    when deserializing, this makes sure no changes have been made since serialization 
+    if changes (deleting instance variable, changing non-transient to transient) exists, JVM stops deserialization 
   */
 	static final long serialVersionUID = 512312516L;
 
