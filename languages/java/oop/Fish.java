@@ -8,8 +8,7 @@ public class Fish extends Animal implements Pet {
 	  	Constructor Chaining: calls ALL constructors up the hierarchy
 	  	
 	  	superclass constructors are built before subclass constructors 
-	  	child cannot exist before the parent 
-	  	
+	  	child cannot exist before the parent  	
 	  	super() MUST be the first statement in each constructor 
 	 */
     public Fish() {

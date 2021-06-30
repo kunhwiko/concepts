@@ -12,9 +12,6 @@ package oop;
  	Both abstract classes and interfaces act as necessary blueprints and also 
  	is great for polymorphism (we can pass in a parameter of type Pet rather than a specific type) 
  	
- 	For class inheritance, only subclasses can be of superclass type A 
- 	For interfaces, any class that implements the interface will become interface type A
- 	
  	Use an abstract class: need to define a template for a group of subclasses 
  	and have some implementation code all subclasses can use 
  	

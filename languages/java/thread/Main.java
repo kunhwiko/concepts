@@ -1,6 +1,5 @@
 package thread;
 
-
 /* 
  * In Java, multiple programs aren't actually running in parallel
  * JVM just switches between threads very quickly 
