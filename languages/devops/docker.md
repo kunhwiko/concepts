@@ -74,3 +74,14 @@ docker container start -ai kunko
 docker container exec -it kunko bash 
     --> open a "new" process with a bash CLI for a running container 
 ```
+
+##### Networks
+```
+docker container port <container id>
+    --> inspect host and container port 
+
+Docker Networks 
+    1. containers are connected to private virtual networks 
+    2. each virtual network routes to NAT firewall so they can get out to the Internet or other networks 
+    3. best practice is to create a new virtual network for each app 
+```
