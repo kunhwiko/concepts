@@ -15,11 +15,12 @@ Containers
 
 ##### Run / Start / Top 
 ```
-docker container run --publish 8080:80 --d --name kunko nginx 
-    --> starts image nginx
-    --> opens port 8080 on host IP and forward traffic to port 80 on container IP
-    --> "--d" starts the image on the background 
+docker container run -p 8080:80 -d --name kunko -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+    --> starts image mysql
+    --> "-p" (--publish) opens port 8080 on host IP and forward traffic to port 80 on container IP
+    --> "-d" (--detach) starts the image on the background 
     --> "--name kunko" names the container "kunko"
+    --> "-e" (--env) passes in settings 
 
 docker container start 
     --> starts an existing stopped container
