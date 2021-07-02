@@ -80,8 +80,33 @@ docker container exec -it kunko bash
 docker container port <container id>
     --> inspect host and container port 
 
+docker container inspect --format '{{ .NetworkSettings.IPAddress }}' <container id> 
+    --> get IP address of container 
+
 Docker Networks 
     1. containers are connected to private virtual networks 
     2. each virtual network routes to NAT firewall so they can get out to the Internet or other networks 
     3. best practice is to create a new virtual network for each app 
+
+Network (Driver) Types 
+    1. bridge: default virtual networks that receive and send info to the host 
+    2. host: 
+        --> skips the virtual networking of Docker and containers attach to host interface
+        --> attaching containers here improve performance but at the risk of security 
+    3. null: network not attached to anything  
+
+docker network ls 
+    --> see all virtual networks 
+
+docker network inspect <network id>
+    --> see all containers connected in the network 
+
+docker network create my_app
+    --> create a new network called "my_app"
+
+docker container run -d --name kunko --network my_app nginx 
+    --> add nginx container to my_app network 
+
+docker network connect <network id> <container id>
+    --> connect existing container to network 
 ```
