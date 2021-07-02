@@ -15,10 +15,10 @@ Containers
 
 ##### Run / Start / Top 
 ```
-docker container run --publish 8080:80 --detach --name kunko nginx 
+docker container run --publish 8080:80 --d --name kunko nginx 
     --> starts image nginx
     --> opens port 8080 on host IP and forward traffic to port 80 on container IP
-    --> "--detach" starts the image on the background 
+    --> "--d" starts the image on the background 
     --> "--name kunko" names the container "kunko"
 
 docker container start 
