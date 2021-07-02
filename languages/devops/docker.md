@@ -26,13 +26,16 @@ docker container start
     --> starts an existing stopped container
 ```
 
-##### Top / Log
+##### Top / Log / Inspect
 ```
 docker container top <container id>
-    --> check running processes on container 
+    --> check running processes inside a container 
 
 docker container logs <container id>
-    --> check logs on container 
+    --> check logs in a container 
+
+docker container inspect <container id>
+    --> retrieve configs of a container 
 ```
 
 ##### List / Stop
