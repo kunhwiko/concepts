@@ -1,4 +1,4 @@
-### Docker
+### Docker Basics
 ---
 ##### Images vs Containers 
 ```
@@ -75,7 +75,9 @@ docker container exec -it kunko bash
     --> open a "new" process with a bash CLI for a running container 
 ```
 
-##### Networks
+### Docker Networks 
+---
+##### Network Basics 
 ```
 docker container port <container id>
     --> inspect host and container port 
@@ -93,8 +95,14 @@ Network (Driver) Types
     2. host: 
         --> skips the virtual networking of Docker and containers attach to host interface
         --> attaching containers here improve performance but at the risk of security 
-    3. null: network not attached to anything  
+    3. null: network not attached to anything
 
+DNS 
+    1. DNS is built-in when opening custom networks so containers in a network can communicate with one another 
+```
+
+##### Connect to Networks 
+```  
 docker network ls 
     --> see all virtual networks 
 
