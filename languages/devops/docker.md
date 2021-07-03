@@ -75,6 +75,7 @@ docker container exec -it kunko bash
     --> open a "new" process with a bash CLI for a running container 
 ```
 
+
 ### Docker Networks 
 ---
 ##### Network Basics 
@@ -118,3 +119,17 @@ docker container run -d --name kunko --network my_app nginx
 docker network connect <network id> <container id>
     --> connect existing container to network 
 ```
+
+
+### Docker Images
+---
+Image Layers
+    1. Images are built as a series of layers, users only need to copy over layers they don't have 
+    2. If changes are made, a new layer is built on top of existing layers 
+    3. If two different changes are made on top of the same existing layers, 
+       two side by side layers are built on top of existing layers, 
+       instead of duplicating the existing layers 
+
+Container Layers 
+    1. Containers continue to build layers on top of base images 
+    2. Containers are just single read/write layers on top of base images 
