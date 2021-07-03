@@ -123,6 +123,8 @@ docker network connect <network id> <container id>
 
 ### Docker Images
 ---
+##### Layers
+```
 Image Layers
     1. Images are built as a series of layers, users only need to copy over layers they don't have 
     2. If changes are made, a new layer is built on top of existing layers 
@@ -133,3 +135,21 @@ Image Layers
 Container Layers 
     1. Containers continue to build layers on top of base images 
     2. Containers are just single read/write layers on top of base images 
+```
+
+###### Tags
+```
+Tags
+    1. Pointer to an image commit / version of an image 
+    2. Multiple tags can refer to the same commit, so they have the same image ID 
+
+docker pull <repo>:<tag>
+    --> pull request image 
+
+docker image tag <source image repo>:<tag> <target image repo>:<tag>
+    --> create a new tag for some image commit 
+    --> this does not post to Docker Hub yet 
+
+docker image push <repo>:<tag> 
+    --> push layers that haven't been pushed yet to your repo 
+```
