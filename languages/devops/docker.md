@@ -151,5 +151,16 @@ docker image tag <source image repo>:<tag> <target image repo>:<tag>
     --> this does not post to Docker Hub yet 
 
 docker image push <repo>:<tag> 
-    --> push layers that haven't been pushed yet to your repo 
+    --> push layers that haven't been pushed yet to your Docker Hub repo 
+```
+
+##### Build 
+```
+Dockerfile 
+    1. used to build images
+    2. caches steps to make rebuilding faster   
+
+docker image build -t <tag> .
+    1. "-t": add tag name 
+    2. ".": build image in current directory using Dockerfile 
 ```
