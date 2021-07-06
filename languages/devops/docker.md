@@ -195,7 +195,7 @@ Volume
 
 docker container run -d --name kunko -e MYSQL_RANDOM_ROOT_PASSWORD=yes -v mysql-db:/var/lib/mysql mysql
     --> "-v": specifies volume specs 
-    --> names volume mysql-db 
+    --> names volume mysql-db and mounts to container 
     --> var/lib/mysql is the path where the file/directory are mounted in the container 
     --> actual data will reside in /var/lib/docker/volumes/mysql-db...
 
