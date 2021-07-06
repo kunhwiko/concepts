@@ -6,20 +6,23 @@ Image: application we want to run
 Container: instance of an image running as a process 
 ```
 
-##### Container vs Virtual Machine 
+##### More on Containers
 ```
 Containers 
-    --> containers run as a process on the host machine 
-    --> containers do not come with operating systems 
-    --> container are lightweight 
+    1. unlike VMs, containers run as a process on the host machine 
+    2. unlike VMs, containers do not come with operating systems 
+    3. unlike VMs, containers tend to be more lightweight
+    4. docker runs a lightweight Linux VM on Windows/Mac, which saves the containers, volumes, etc. 
+    5. docker runs its own file system independently from the host file system  
 ```
 
 ##### Run / Start / Top 
 ```
 docker container run -p 8080:80 -d --name kunko -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
     --> starts a new mysql container named "kunko"
+    --> caches the mysql image to image cache if it does not exist 
     --> "-p" (--publish): opens port 8080 on host and forwards traffic to port 80 on container
-    --> "-d" (--detach): starts the image on the background 
+    --> "-d" (--detach): starts the container on the background 
     --> "-e" (--env): passes in settings 
 
 docker container start <container id>
@@ -87,15 +90,15 @@ docker container inspect --format '{{ .NetworkSettings.IPAddress }}' <container 
     --> get IP address of container 
 
 Docker Networks 
-    1. containers are connected to private virtual networks 
-    2. each virtual network routes to NAT firewall so they can get out to the Internet or other networks 
+    1. containers are connected via private virtual networks linked to host  
+    2. each virtual network routes to NAT firewall/host so they can get out to the Internet or other networks 
     3. best practice is to create a new virtual network for each app 
 
 Network (Driver) Types 
     1. bridge: default virtual networks that receive and send info to the host 
     2. host: 
-        --> skips the virtual networking of Docker and containers attach to host interface
-        --> attaching containers here improve performance but at the risk of security 
+        1. skips the virtual networking of Docker and containers attach to host interface
+        2. attaching containers here improve performance but at the risk of security 
     3. null: network not attached to anything
 
 DNS 
@@ -137,14 +140,14 @@ Container Layers
     2. Containers are just single read/write layers on top of base images 
 ```
 
-###### Tags
+##### Tags
 ```
 Tags
     1. Pointer to an image commit / version of an image 
     2. Multiple tags can refer to the same commit, so they have the same image ID 
 
 docker pull <repo>:<tag>
-    --> pull request image 
+    --> pull request an image to the image cache 
 
 docker image tag <source image repo>:<tag> <target image repo>:<tag>
     --> create a new tag for some image commit 
@@ -163,4 +166,43 @@ Dockerfile
 docker image build -t <tag> .
     1. "-t": add tag name 
     2. ".": build image in current directory using Dockerfile 
+```
+
+### Container Lifetime 
+---
+##### Persistent Data
+```
+Best Practices 
+    1. changes should be made to source app, and then containers should be redeployed
+    2. changes should not be made directly to containers as the results will not be reproducible
+    3. separation of concerns 
+
+Separation of Concerns 
+    1. containers should not contain unique data as they might have to be redeployed 
+    2. unique data should be stored in some "persistent data" storage 
+
+Uses of Volumes & Bind Mounts 
+    1. separates storage from containers 
+    2. allows data to be shared among different containers
+    3. allows storages to persist 
+```
+
+##### Persistent Data 
+```
+Volume 
+    1. assign volume directory using Dockerfiles 
+    2. volumes will not be deleted when a container is removed 
+
+docker container run -d --name kunko -e MYSQL_RANDOM_ROOT_PASSWORD=yes -v mysql-db:/var/lib/mysql mysql
+    --> "-v": specifies volume specs 
+    --> names volume mysql-db 
+    --> var/lib/mysql is the path where the file/directory are mounted in the container 
+    --> actual data will reside in /var/lib/docker/volumes/mysql-db...
+
+Bind Mounts 
+    1. maps host files/directories to a container file/directories
+    2. unlike volumes, is not specified in a Dockerfile   
+
+docker container run -d --name kunko -e MYSQL_RANDOM_ROOT_PASSWORD=yes -v $(pwd):/var/lib/mysql mysql 
+    --> mounts the files in the host directory to the /var/lib/mysql container directory 
 ```
