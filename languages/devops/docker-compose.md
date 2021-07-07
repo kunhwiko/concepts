@@ -11,6 +11,12 @@
 ```
 docker-compose.yml consists of:
     1. descriptions of containers / networks / volumes 
+
+docker-compose up 
+    --> setup and start all containers
+
+docker-compose down
+    --> stop all containers and remove containers/volumes/networks 
 ```
 
 ##### Docker Example
