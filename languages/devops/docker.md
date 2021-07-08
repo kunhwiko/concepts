@@ -143,7 +143,7 @@ Container Layers
 ##### Tags
 ```
 Tags
-    1. Pointer to an image commit / version of an image 
+    1. Pointer to a particular image commit / version of an image 
     2. Multiple tags can refer to the same commit, so they have the same image ID 
 
 docker pull <repo>:<tag>

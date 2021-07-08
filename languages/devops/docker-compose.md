@@ -19,6 +19,18 @@ docker-compose down
     --> stop all containers and remove containers
 ```
 
+##### More Commands 
+```
+docker-compose up -d 
+    --> run in background  
+
+docker-compose top 
+    --> check running processes in all containers   
+
+docker-compose down -v 
+    --> also get rid of volumes 
+```
+
 ##### Docker Example
 ```bash
 docker run -p 80:4000 -v $(pwd):/var/lib/nginx kunko/nginx 
@@ -29,7 +41,7 @@ docker run -p 80:4000 -v $(pwd):/var/lib/nginx kunko/nginx
 version: '2'
 
 services:
-  nginx:
+  nginx:                         # service name: this will be the name of DNS 
     image: kunko/nginx
     volumes: 
       - .:/var/lib/nginx         # "." prints current directory / this is a bind mount
@@ -64,3 +76,5 @@ volumes:
   drupal-sites:
   drupal-themes:
 ```
+
+##### 
