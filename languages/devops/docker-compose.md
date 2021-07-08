@@ -31,6 +31,8 @@ docker-compose down -v
     --> also get rid of volumes 
 ```
 
+### Docker Compose Examples
+---
 ##### Docker Example
 ```bash
 docker run -p 80:4000 -v $(pwd):/var/lib/nginx kunko/nginx 
@@ -77,4 +79,19 @@ volumes:
   drupal-themes:
 ```
 
-##### 
+##### Build with Docker Compose 
+```yaml 
+version: '2'
+
+services:
+  proxy:
+    build:                                 
+      context: .
+      dockerfile: nginx.Dockerfile            # specifies the docker file to build the image 
+    ports:
+      - '80:80'
+  web:
+    image: httpd
+    volumes:
+      - ./html:/usr/local/apache2/htdocs/
+```
