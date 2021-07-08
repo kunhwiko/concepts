@@ -16,23 +16,51 @@ docker-compose up
     --> setup and start all containers
 
 docker-compose down
-    --> stop all containers and remove containers/volumes/networks 
+    --> stop all containers and remove containers
 ```
 
 ##### Docker Example
-```
+```bash
 docker run -p 80:4000 -v $(pwd):/var/lib/nginx kunko/nginx 
 ```
 
 ##### Docker Compose Example
-```
+```yaml
 version: '2'
 
 services:
   nginx:
     image: kunko/nginx
     volumes: 
-      - .:/var/lib/nginx
+      - .:/var/lib/nginx         # "." prints current directory / this is a bind mount
     ports:
-      - '80:4000'
+      - "80:4000"
+```
+
+##### Multiple Docker Compose Example
+```yaml
+version: '2'
+
+services:
+  drupal:
+    image: drupal
+    ports:
+      - "8080:80"
+    volumes:
+      # this is a named volume 
+      - drupal-modules:/var/www/html/modules 
+      - drupal-profiles:/var/www/html/profiles
+      - drupal-sites:/var/www/html/sites
+      - drupal-themes:/var/www/html/themes
+  postgres:
+    image: postgres
+    environment:
+     - POSTGRES_PASSWORD=randompassword
+
+# this is used to define named volumes 
+volumes:
+  drupal-modules:
+  drupal-profiles:
+  drupal-sites:
+  drupal-themes:
 ```
