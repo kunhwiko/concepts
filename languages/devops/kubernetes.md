@@ -15,41 +15,66 @@ Orchestration deals with certain problems:
 K8s: abbreviation for Kubernetes 
 Kubectl (Kube Control): CLI for K8s
 
-Cluster: set of nodes that run containerized apps 
-Control Plane: set of master nodes that manage K8s cluster
+Cluster: set of Nodes that run containerized apps 
+Control Plane: set of master Nodes that manage K8s cluster
 Node: individual workers in a K8s cluster
-Kubelet: agents on each node that allows nodes to talk with control plane, makes sure containers run in Pods 
+Kubelet: agents on each Node that allows Nodes to talk with control plane, makes sure containers run in Pods 
 
-Pod
-    - encapsulates one or more containers to be assigned to a node 
-    - contain shared resources such as volumes, network configs, info on how to run containers 
-    - basic unit of deployment 
+Raft protocol
+    - odd number of master Nodes exist for consensus to be possible 
+```
 
-Controller Manager
-    - control loop that oversees the cluster through the apiserver and moves current state to desired state
-    - Deployments: 
+##### Pods 
+```
+1) encapsulates one or more containers to be assigned to a Node 
+2) contain shared resources such as volumes, network configs, info on how to run containers 
+3) basic unit of deployment 
+```
+
+##### Controller Manager
+```
+1) control loop that oversees the cluster through the apiserver and moves current state to desired state
+
+Types
+    1) Deployments: 
         * defines a desired state for Pods and ReplicaSets 
         * enables users to scale number of replicas, control rollout of updates, rollback to previous deployments 
         * enables users to check or update status of Pods  
-    - ReplicaSets:
+    2) ReplicaSets:
         * ensures that a specified number of Pod replicas are running at a given time 
+```
 
-Service
-    - provides a DNS entry to easily locate a group of Pods even if changes exist
-    - allows for load balancing between Pods   
+##### Service
+```
+1) means to connect Pods to external services 
+2) provides a DNS entry to a group of Pods that persists even if some Pods update 
+3) allows for load balancing between Pods   
 
-Raft protocol
-    - odd number of master nodes exist for consensus to be possible 
+Types
+    1) ClusterIP:
+        * default Service type 
+        * exposes Service on an internal IP in the cluster 
+        * reachable only from within the cluster 
+    2) NodePort 
+        * exposes Service on the same port of each selected Node using NAT 
+        * makes a Service accessible outside the cluster using <NodeIP>:<NodePort>
+    3) LoadBalancer
+        * mostly used with cloud services 
+        * sets up clusterIPs / NodePorts and a great means to get external traffic to come into Service 
+        * creates an external load balancer and assigns a fixed, external IP to the Service 
+    4) ExternalName
+        * means to get traffic out to an external source
+        * adds CNAME DNS record to CoreDNS 
 ```
 
 ##### Master Container Components
 ```
 1) some container such as Docker 
 2) etcd: distributed key-value store to back cluster data 
-3) kube-apiserver: means for control plane and nodes to communicate with one another 
-4) kube-scheduler: assigns Pods to nodes 
+3) kube-apiserver: means for control plane and Nodes to communicate with one another 
+4) kube-scheduler: assigns Pods to Nodes 
 5) kube-controller-manager
-6) coreDNS: functions as DNS in cluster 
+6) coreDNS: functions as DNS server in cluster 
 ```
 
 ##### Node Container Components
