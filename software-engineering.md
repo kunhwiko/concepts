@@ -102,8 +102,8 @@ dynamic typing : type is checked during runtime
 
 ##### Programming Paradigms 
 ```
-declarative programming : tell program specifically what you want it to do (this is A, this is B made from A, return C made from B)
-imperative programming : tell program how you would like it to do something (this is A, we will go through this loop, we check this, if B, return A)
+declarative programming : tell program specifically what you want it to do (may sometimes omit the specific implementation details)
+imperative programming : specify to program how you would like it to do something (implementation details are given)
 
 functional programming :
   1) paradigm where programs are composed of functions that are independent of outside states 
