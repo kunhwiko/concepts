@@ -84,7 +84,7 @@ Types
         * adds CNAME DNS record to CoreDNS 
 ```
 
-### Kubernetes Commands 
+### Kubernetes Commands (Not Recommended)
 ---
 ##### Basic Commands
 ```
@@ -140,12 +140,15 @@ kubectl expose deployment <deployment name> --port=8888 --name=test --type=NodeP
     --> you can curl into the high ports (30000 - 32767) to access the K8s cluster 
 ```
 
-### YAML configurations
+### YAML configurations (Recommended)
 ---
 ##### Apply
 ```
 kubectl apply -f filename.yml
     --> applies changes based on YAML file configs 
+
+kubectl diff -f filename.yml
+    --> finds diff of YAML file and previously applied configuration
 ```
 
 ##### Reference
