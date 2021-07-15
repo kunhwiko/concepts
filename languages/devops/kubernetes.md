@@ -24,6 +24,23 @@ Raft protocol
     - odd number of master Nodes exist for consensus to be possible 
 ```
 
+##### Master Container Components
+```
+1) some container such as Docker 
+2) etcd: distributed key-value store to back cluster data 
+3) kube-apiserver: means for control plane and Nodes to communicate with one another 
+4) kube-scheduler: assigns Pods to Nodes 
+5) kube-controller-manager
+6) coreDNS: functions as DNS server in cluster 
+```
+
+##### Node Container Components
+```
+1) some container such as Docker
+2) kubelet
+3) kube-proxy: implements networking rules 
+```
+
 ##### Pods 
 ```
 1) encapsulates one or more containers to be assigned to a Node 
@@ -67,23 +84,6 @@ Types
         * adds CNAME DNS record to CoreDNS 
 ```
 
-##### Master Container Components
-```
-1) some container such as Docker 
-2) etcd: distributed key-value store to back cluster data 
-3) kube-apiserver: means for control plane and Nodes to communicate with one another 
-4) kube-scheduler: assigns Pods to Nodes 
-5) kube-controller-manager
-6) coreDNS: functions as DNS server in cluster 
-```
-
-##### Node Container Components
-```
-1) some container such as Docker
-2) kubelet
-3) kube-proxy: implements networking rules 
-```
-
 ### Kubernetes Commands 
 ---
 ##### Basic Commands
@@ -119,7 +119,7 @@ kubectl delete deployment <deployment name>
 ##### Scale / Describe
 ```
 kubectl scale deployment kunko --replicas 3
-    --> create 3 Pods in the kunko deployment 
+    --> create 3 replica Pods in the kunko deployment 
 
 kubectl describe pod <pod name>
     --> get details on Pod 
@@ -138,4 +138,12 @@ kubectl expose deployment <deployment name> --port=8888 --name=test --type=NodeP
     --> start NodePort named test 
     --> Deployment listens on port 8888, Node listens to external sources on port 30000 - 32767
     --> you can curl into the high ports (30000 - 32767) to access the K8s cluster 
+```
+
+### YAML configurations
+---
+##### Kubernetes
+```
+kubectl apply -f filename.yml
+    --> applies changes based on YAML file configs 
 ```
