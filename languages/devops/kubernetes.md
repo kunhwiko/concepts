@@ -142,8 +142,23 @@ kubectl expose deployment <deployment name> --port=8888 --name=test --type=NodeP
 
 ### YAML configurations
 ---
-##### Kubernetes
+##### Apply
 ```
 kubectl apply -f filename.yml
     --> applies changes based on YAML file configs 
 ```
+
+##### Reference
+```
+kubectl api-resources
+    --> quick lookup for names, versions, and kind for YAML file 
+
+kubectl explain services/deployment/pods --recursive
+    --> quick way to remind yourself how to build YAML files for a specific kind 
+
+kubectl explain services.spec.<subfield1>.<subfield2>
+    --> spec is a subfield of services
+    --> add and remove subfields with dot notations to modify what you want to see 
+```
+
+
