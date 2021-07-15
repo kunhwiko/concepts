@@ -127,3 +127,15 @@ kubectl describe pod <pod name>
 kubectl describe deployment <deployment name>
     --> get details on Deployment
 ```
+
+##### Expose
+```
+kubectl expose deployment <deployment name> --port=8888
+    --> start ClusterIP
+    --> Deployment listens on port 8888
+
+kubectl expose deployment <deployment name> --port=8888 --name=test --type=NodePort 
+    --> start NodePort named test 
+    --> Deployment listens on port 8888, Node listens to external sources on port 30000 - 32767
+    --> you can curl into the high ports (30000 - 32767) to access the K8s cluster 
+```
