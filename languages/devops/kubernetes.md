@@ -61,6 +61,9 @@ Types
         * enables users to check or update status of Pods  
     2) ReplicaSets:
         * ensures that a specified number of Pod replicas are running at a given time 
+    3) StatefulSets:
+        * used when Pods need a persistent storage volume in the cluster (see "Storage" section below)
+        * guarantees ordering / uniqueness of Pods and stable network identifiers 
 ```
 
 ##### Service
@@ -171,5 +174,29 @@ kubectl explain services.spec.<subfield1>.<subfield2>
     --> spec is a subfield of services
     --> add and remove subfields with dot notations to modify what you want to see 
 ```
+
+### Miscellaneous
+---
+##### Labels / Annotations / Selectors
+```
+Annotations: comments that provide extra context 
+
+Labels: used to identify, select, and group Pods (or other objects) together based on some criteria  
+
+Selectors: chooses objects based on some criteria 
+```
+
+##### Storage
+```
+Kubernetes is designed to keep containers ephemeral, immutable, and replaceable. Typically, we want a cloud based database to store our data instead of having a K8s cluster keep the state of our data.  
+
+Sometimes stateful workloads are inevitable, so we use StatefulSets. 
+
+StatefulSets allow you to create "persistent volumes", or volumes that outlive Pods. 
+
+Use StatefulSets if 
+    1. Pods need access to the same volume when restarted / redeployed 
+    2. App needs to communicate with replicas using predefined network identifiers     
+``` 
 
 
