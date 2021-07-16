@@ -188,15 +188,21 @@ Selectors: chooses objects based on some criteria
 
 ##### Storage
 ```
-Kubernetes is designed to keep containers ephemeral, immutable, and replaceable. Typically, we want a cloud based database to store our data instead of having a K8s cluster keep the state of our data.  
+Kubernetes is designed to:
+    - keep containers ephemeral, immutable, replaceable 
+    - we want a cloud based database to store data 
+    - we do not want our cluster to be stateful 
 
-Sometimes stateful workloads are inevitable, so we use StatefulSets. 
+Sometimes stateful workloads are inevitable, so we use StatefulSets or Persistent Volumes. 
 
-StatefulSets allow you to create "persistent volumes", or volumes that outlive Pods. 
+Use Persistent Volumes if
+    1. you need volumes that outlive the life of Pods 
 
 Use StatefulSets if 
-    1. Pods need access to the same volume when restarted / redeployed 
-    2. App needs to communicate with replicas using predefined network identifiers     
+    1. Pods need access to the same persistent volume when restarted / redeployed 
+    2. App needs to communicate with replicas using predefined network identifiers  
+
+Read this [article](https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4) to learn more about the different controllers, states, persistent volumes and more   
 ``` 
 
 
