@@ -92,7 +92,7 @@ Types
 ##### Ports 
 ```
 NodePort vs Port vs TargetPort 
-    - reference this [link](https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html)
+    - reference: https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
 ### Kubernetes Commands (Not Recommended)
@@ -202,7 +202,8 @@ Use StatefulSets if
     1. Pods need access to the same persistent volume when restarted / redeployed 
     2. App needs to communicate with replicas using predefined network identifiers  
 
-Read this [article](https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4) to learn more about the different controllers, states, persistent volumes and more   
+To learn more about the different controllers, states, persistent volumes and more:
+https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4    
 ``` 
 
 
