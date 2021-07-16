@@ -18,25 +18,27 @@ Kubectl (Kube Control): CLI for K8s
 Cluster: set of Nodes that run containerized apps 
 Control Plane: set of master Nodes that manage K8s cluster
 Node: individual workers in a K8s cluster
-Kubelet: agents on each Node that allows Nodes to talk with control plane, makes sure containers run in Pods 
+Kubelet: 
+    - agents on each Node that allows Nodes to talk with Control Plane
+    - makes sure containers run in Pods 
 
 Raft protocol
     - odd number of master Nodes exist for consensus to be possible 
 ```
 
-##### Master Container Components
+##### Control Plane Components
 ```
 1) some container such as Docker 
 2) etcd: distributed key-value store to back cluster data 
-3) kube-apiserver: means for control plane and Nodes to communicate with one another 
+3) kube-apiserver: means for Control Plane and Nodes to communicate with one another 
 4) kube-scheduler: assigns Pods to Nodes 
 5) kube-controller-manager
 6) coreDNS: functions as DNS server in cluster 
 ```
 
-##### Node Container Components
+##### Node Components
 ```
-1) some container such as Docker
+1) Pods 
 2) kubelet
 3) kube-proxy: implements networking rules 
 ```
@@ -73,7 +75,7 @@ Types
         * exposes Service on an internal IP in the cluster 
         * reachable only from within the cluster 
     2) NodePort 
-        * exposes Service on the same port of each selected Node using NAT 
+        * using NATs, exposes Service on the same port of each selected Node
         * makes a Service accessible outside the cluster using <NodeIP>:<NodePort>
     3) LoadBalancer
         * mostly used with cloud services 
@@ -82,6 +84,12 @@ Types
     4) ExternalName
         * means to get traffic out to an external source
         * adds CNAME DNS record to CoreDNS 
+```
+
+##### Ports 
+```
+NodePort vs Port vs TargetPort 
+    - reference this [link](https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html)
 ```
 
 ### Kubernetes Commands (Not Recommended)
