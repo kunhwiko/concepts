@@ -18,9 +18,6 @@ Kubectl (Kube Control): CLI for K8s
 Cluster: set of Nodes that run containerized apps 
 Control Plane: set of master Nodes that manage K8s cluster
 Node: individual workers in a K8s cluster
-Kubelet: 
-    - agents on each Node that allows Nodes to talk with Control Plane
-    - makes sure containers run in Pods 
 
 Raft protocol
     - odd number of master Nodes exist for consensus to be possible 
@@ -40,7 +37,10 @@ Raft protocol
 ```
 1) Pods 
 2) kubelet
-3) kube-proxy: implements networking rules 
+    - agents on each Node that registers Nodes to the kube-apiserver allowing Nodes to talk with the Control Plane
+    - makes sure containers run in Pods in a healthy state 
+3) kube-proxy:
+    - implements networking rules that allow network communication to Pods from network sessions inside / outside the cluster
 ```
 
 ##### Pods 
