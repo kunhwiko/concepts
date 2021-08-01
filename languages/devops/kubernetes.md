@@ -26,8 +26,12 @@ Raft protocol
 ##### Control Plane Components
 ```
 1) some container such as Docker 
-2) etcd: distributed key-value store to back cluster data (e.g. configuration, state, metadata)
-3) kube-apiserver: means for Control Plane and Nodes to communicate with one another 
+2) etcd: 
+     - distributed key-value store to back cluster data (e.g. configuration, state, metadata)
+     - a means to restore K8s cluster by recording past snapshots of the cluster 
+3) kube-apiserver: 
+     - means for Control Plane and Nodes to communicate with one another 
+     - a front end component that opens access to a K8s cluster (e.g. access via CLI) 
 4) kube-scheduler: assigns Pods to Nodes 
 5) kube-controller-manager
 6) coreDNS: functions as DNS server in cluster 
