@@ -210,4 +210,20 @@ To learn more about the different controllers, states, persistent volumes and mo
 https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4    
 ``` 
 
+##### RBAC Authorization
+```
+ClusterRole 
+    - allows users to access namespaced/cluster-wide resources 
+    
+Role 
+    - allows users to access namespaced resources   
+    
+ClusterRoleBinding
+    - grants permissions granted Roles/ClusterRoles cluster-wide 
+    
+RoleBinding
+    - grants permissions granted by Roles/ClusterRoles within a specific namespace 
+    
+```
+
 
