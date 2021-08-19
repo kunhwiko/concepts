@@ -19,10 +19,11 @@ Cluster: set of Nodes that run containerized apps
 Control Plane: set of master Nodes that manage K8s cluster
 Node: individual workers in a K8s cluster
 
-Raft protocol
-    - odd number of master Nodes exist for consensus to be possible 
+Raft protocol: odd number of master Nodes exist for consensus to be possible 
 ```
 
+### Kubernetes Components
+---
 ##### Control Plane Components
 ```
 1) some container such as Docker 
@@ -35,6 +36,22 @@ Raft protocol
 4) kube-scheduler: assigns Pods to Nodes 
 5) kube-controller-manager
 6) coreDNS: functions as DNS server in cluster 
+```
+
+##### Controller Manager
+```
+1) control loop that oversees the cluster through the apiserver and moves current state to desired state
+
+Types
+    1) Deployments: 
+        * defines a desired state for Pods and ReplicaSets 
+        * enables users to scale number of replicas, control rollout of updates, rollback to previous deployments 
+        * enables users to check or update status of Pods  
+    2) ReplicaSets:
+        * ensures that a specified number of Pod replicas are running at a given time 
+    3) StatefulSets:
+        * used when Pods need a persistent storage volume in the cluster (see "Storage" section below)
+        * guarantees ordering / uniqueness of Pods and stable network identifiers 
 ```
 
 ##### Node Components
@@ -54,22 +71,9 @@ Raft protocol
 3) basic unit of deployment 
 ```
 
-##### Controller Manager
-```
-1) control loop that oversees the cluster through the apiserver and moves current state to desired state
 
-Types
-    1) Deployments: 
-        * defines a desired state for Pods and ReplicaSets 
-        * enables users to scale number of replicas, control rollout of updates, rollback to previous deployments 
-        * enables users to check or update status of Pods  
-    2) ReplicaSets:
-        * ensures that a specified number of Pod replicas are running at a given time 
-    3) StatefulSets:
-        * used when Pods need a persistent storage volume in the cluster (see "Storage" section below)
-        * guarantees ordering / uniqueness of Pods and stable network identifiers 
-```
-
+### Kubernetes Connections 
+---
 ##### Service
 ```
 1) means to connect Pods to external services 
@@ -99,7 +103,46 @@ NodePort vs Port vs TargetPort
     - reference: https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
-### Kubernetes Commands (Not Recommended)
+
+### Kubernetes Storages  
+---
+##### Storage
+```
+Kubernetes is designed to:
+    - keep containers ephemeral, immutable, replaceable 
+    - we want a cloud based database to store data 
+    - we do not want our cluster to be stateful 
+
+Sometimes stateful workloads are inevitable, so we use StatefulSets or Persistent Volumes. 
+
+Use Persistent Volumes if
+    1. you need volumes that outlive the life of Pods 
+
+Use StatefulSets if 
+    1. Pods need access to the same persistent volume when restarted / redeployed 
+    2. App needs to communicate with replicas using predefined network identifiers  
+
+To learn more about the different controllers, states, persistent volumes and more:
+https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4    
+``` 
+
+##### Ephemeral Volumes 
+```
+Ephemeral Volumes: volumes with the same lifetime of a Pod but persists beyond containers 
+    - mountPath: directory on the container to access the volume  
+    
+1) emptyDir: initially empty volume created when a Pod is assigned to a Node 
+
+2) configMap: mounts a configMap (configuration data) as a volume to inject into Pods  
+```
+
+##### Persistent Volumes
+```
+1) hostPath
+```
+
+
+### Kubernetes Commands  
 ---
 ##### Basic Commands
 ```
@@ -155,7 +198,8 @@ kubectl expose deployment <deployment name> --port=8888 --name=test --type=NodeP
     --> you can curl into the high ports (30000 - 32767) to access the K8s cluster 
 ```
 
-### YAML configurations (Recommended)
+
+### YAML configurations (also reference Helm Charts)
 ---
 ##### Apply
 ```
@@ -190,26 +234,6 @@ Labels: used to identify, select, and group Pods (or other objects) together bas
 Selectors: chooses objects based on some criteria 
 ```
 
-##### Storage
-```
-Kubernetes is designed to:
-    - keep containers ephemeral, immutable, replaceable 
-    - we want a cloud based database to store data 
-    - we do not want our cluster to be stateful 
-
-Sometimes stateful workloads are inevitable, so we use StatefulSets or Persistent Volumes. 
-
-Use Persistent Volumes if
-    1. you need volumes that outlive the life of Pods 
-
-Use StatefulSets if 
-    1. Pods need access to the same persistent volume when restarted / redeployed 
-    2. App needs to communicate with replicas using predefined network identifiers  
-
-To learn more about the different controllers, states, persistent volumes and more:
-https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4    
-``` 
-
 ##### RBAC Authorization
 ```
 ClusterRole 
@@ -223,7 +247,6 @@ ClusterRoleBinding
     
 RoleBinding
     - grants permissions granted by Roles/ClusterRoles within a specific namespace 
-    
 ```
 
 
