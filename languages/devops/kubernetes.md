@@ -138,7 +138,14 @@ Ephemeral Volumes: volumes with the same lifetime of a Pod but persists beyond c
 
 ##### Persistent Volumes
 ```
-1) hostPath
+1) persistentVolumeClaim
+    - used to mount PersistentVolumes into a Pod 
+    - mechanism to claim persistent storage without knowing details of the particular cloud environment 
+
+2) hostPath
+    - mounts directory from host Node's filesystem into a Pod 
+    - the above means the directory and Pod must be in the same Node
+    - not recommended as a means for persistent storage, but suitable for development/testing purposes 
 ```
 
 
