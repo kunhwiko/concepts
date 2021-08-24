@@ -1,4 +1,4 @@
-### Kubernetes Basics
+### Basics
 ---
 ##### Orchestration 
 ```
@@ -10,19 +10,18 @@ Orchestration deals with certain problems:
     5. How can we deal with security issues? 
 ```
 
-##### Kubernetes Terms
+##### Terms
 ```
 K8s: abbreviation for Kubernetes 
 Kubectl (Kube Control): CLI for K8s
 
-Cluster: set of Nodes that run containerized apps 
 Control Plane: set of master Nodes that manage K8s cluster
 Node: individual workers in a K8s cluster
 
 Raft protocol: odd number of master Nodes exist for consensus to be possible 
 ```
 
-### Kubernetes Components
+### Components
 ---
 ##### Control Plane Components
 ```
@@ -72,7 +71,7 @@ Types
 ```
 
 
-### Kubernetes Connections 
+### Networks 
 ---
 ##### Service
 ```
@@ -82,12 +81,12 @@ Types
 
 Types
     1) ClusterIP:
-        * default Service type 
         * exposes Service on an internal IP in the cluster 
         * reachable only from within the cluster 
     2) NodePort 
         * using NATs, exposes Service on the same port of each selected Node
         * makes a Service accessible outside the cluster using <NodeIP>:<NodePort>
+        * requests to NodePorts get routed to ClusterIP services  
     3) LoadBalancer
         * mostly used with cloud services 
         * sets up clusterIPs / NodePorts and a great means to get external traffic to come into Service 
@@ -104,7 +103,7 @@ NodePort vs Port vs TargetPort
 ```
 
 
-### Kubernetes Storages  
+### Storages  
 ---
 ##### Storage
 ```
@@ -149,7 +148,7 @@ Ephemeral Volumes: volumes with the same lifetime of a Pod but persists beyond c
 ```
 
 
-### Kubernetes Commands  
+### Commands  
 ---
 ##### Basic Commands
 ```
@@ -238,7 +237,7 @@ Annotations: comments that provide extra context
 
 Labels: used to identify, select, and group Pods (or other objects) together based on some criteria  
 
-Selectors: chooses objects based on some criteria 
+Selectors: chooses objects based on some criteria (two or more selectors imply selector1 AND selector2 instead of OR) 
 ```
 
 ##### RBAC Authorization
