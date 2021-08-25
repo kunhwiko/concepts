@@ -21,6 +21,8 @@ Node: individual workers in a K8s cluster
 Raft protocol: odd number of master Nodes exist for consensus to be possible 
 ```
 
+<br />
+
 ### Components
 ---
 ##### Control Plane Components
@@ -70,6 +72,7 @@ Types
 3) basic unit of deployment 
 ```
 
+<br />
 
 ### Networks 
 ---
@@ -102,6 +105,7 @@ NodePort vs Port vs TargetPort
     - reference: https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
+<br />
 
 ### Storages  
 ---
@@ -147,6 +151,7 @@ Ephemeral Volumes: volumes with the same lifetime of a Pod but persists beyond c
     - not recommended as a means for persistent storage, but suitable for development/testing purposes 
 ```
 
+<br />
 
 ### Commands  
 ---
@@ -175,6 +180,9 @@ kubectl create deployment kunko --image=nginx
 
 kubectl get pods 
     --> show pods 
+    
+kubectl rollout status <deployment name> 
+    --> waits until the deployment is ready 
 
 kubectl delete deployment <deployment name>
     --> deletes deployment
@@ -204,6 +212,7 @@ kubectl expose deployment <deployment name> --port=8888 --name=test --type=NodeP
     --> you can curl into the high ports (30000 - 32767) to access the K8s cluster 
 ```
 
+<br />
 
 ### YAML configurations (also reference Helm Charts)
 ---
@@ -228,6 +237,8 @@ kubectl explain services.spec.<subfield1>.<subfield2>
     --> spec is a subfield of services
     --> add and remove subfields with dot notations to modify what you want to see 
 ```
+
+<br />
 
 ### Miscellaneous
 ---
