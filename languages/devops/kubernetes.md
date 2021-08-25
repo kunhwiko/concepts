@@ -27,21 +27,20 @@ Raft protocol: odd number of master Nodes exist for consensus to be possible
 ---
 ##### Control Plane Components
 ```
-1) some container such as Docker 
-2) etcd: 
+1) etcd: 
      - distributed key-value store to back cluster data (e.g. configuration, state, metadata)
      - a means to restore K8s cluster by recording past snapshots of the cluster 
-3) kube-apiserver: 
+2) kube-apiserver: 
      - means for Control Plane and Nodes to communicate with one another 
      - a front end component that opens access to a K8s cluster (e.g. access via CLI) 
-4) kube-scheduler: assigns Pods to Nodes 
-5) kube-controller-manager
-6) coreDNS: functions as DNS server in cluster 
+3) kube-scheduler: assigns Pods to Nodes 
+4) kube-controller-manager
+5) coreDNS: functions as DNS server in cluster 
 ```
 
 ##### Controller Manager
 ```
-1) control loop that oversees the cluster through the apiserver and moves current state to desired state
+Controller Manager: control loop that oversees the cluster through the apiserver and moves current state to desired state
 
 Types
     1) Deployments: 
@@ -116,7 +115,7 @@ Kubernetes is designed to:
     - we want a cloud based database to store data 
     - we do not want our cluster to be stateful 
 
-Sometimes stateful workloads are inevitable, so we use StatefulSets or Persistent Volumes. 
+Sometimes stateful workloads are inevitable, so we use StatefulSets / Persistent Volumes. 
 
 Use Persistent Volumes if
     1. you need volumes that outlive the life of Pods 
@@ -149,6 +148,53 @@ Ephemeral Volumes: volumes with the same lifetime of a Pod but persists beyond c
     - mounts directory from host Node's filesystem into a Pod 
     - the above means the directory and Pod must be in the same Node
     - not recommended as a means for persistent storage, but suitable for development/testing purposes 
+```
+
+<br />
+
+### Miscellaneous
+---
+##### Labels / Annotations / Selectors
+```
+Annotations: comments that provide extra context 
+
+Labels: used to identify, select, and group Pods (or other objects) together based on some criteria  
+
+Selectors: chooses objects based on some criteria (two or more selectors imply selector1 AND selector2 instead of OR) 
+```
+
+```yaml
+kind: Deployment
+  spec:
+    # Deployments use the template field to create Pods with labels "app:test"
+    template:
+      metadata:
+        labels:
+          app: test 
+          
+    selector:
+      matchLabel:
+        # why do Deployments require Selectors?
+        
+        # Deployments use Selectors to know which Pods it needs to manage
+        # This field must be predefined (expect for version v1beta1) to 
+        # prevent mutation of what Pods the Deployments should manage  
+        app: test 
+```
+
+##### RBAC Authorization
+```
+ClusterRole 
+    - allows users to access namespaced/cluster-wide resources 
+    
+Role 
+    - allows users to access namespaced resources   
+    
+ClusterRoleBinding
+    - grants permissions granted Roles/ClusterRoles cluster-wide 
+    
+RoleBinding
+    - grants permissions granted by Roles/ClusterRoles within a specific namespace 
 ```
 
 <br />
@@ -237,33 +283,3 @@ kubectl explain services.spec.<subfield1>.<subfield2>
     --> spec is a subfield of services
     --> add and remove subfields with dot notations to modify what you want to see 
 ```
-
-<br />
-
-### Miscellaneous
----
-##### Labels / Annotations / Selectors
-```
-Annotations: comments that provide extra context 
-
-Labels: used to identify, select, and group Pods (or other objects) together based on some criteria  
-
-Selectors: chooses objects based on some criteria (two or more selectors imply selector1 AND selector2 instead of OR) 
-```
-
-##### RBAC Authorization
-```
-ClusterRole 
-    - allows users to access namespaced/cluster-wide resources 
-    
-Role 
-    - allows users to access namespaced resources   
-    
-ClusterRoleBinding
-    - grants permissions granted Roles/ClusterRoles cluster-wide 
-    
-RoleBinding
-    - grants permissions granted by Roles/ClusterRoles within a specific namespace 
-```
-
-
