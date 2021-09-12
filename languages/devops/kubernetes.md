@@ -18,7 +18,7 @@ Kubectl (Kube Control): CLI for K8s
 Control Plane: set of master Nodes that manage K8s cluster
 Node: individual workers in a K8s cluster
 
-Raft protocol: odd number of master Nodes exist for consensus to be possible 
+Raft protocol: odd number of Master Nodes exist for consensus to be possible 
 ```
 
 <br />
@@ -103,6 +103,8 @@ Types
     4) ExternalName
         * means to get traffic out to an external source
         * adds CNAME DNS record to CoreDNS 
+
+Also reference: https://www.ibm.com/cloud/blog/kubernetes-ingress
 ```
 
 ##### Ports 
@@ -147,10 +149,10 @@ Kubernetes is designed to:
 
 Sometimes stateful workloads are inevitable, so we use StatefulSets / Persistent Volumes. 
 
-Use Persistent Volumes if
-    1. you need volumes that outlive the life of Pods 
+Persistent Volumes are used to: 
+    1. outlive the life of Pods 
 
-Use StatefulSets if 
+StatefulSets are used for: 
     1. Pods need access to the same persistent volume when restarted / redeployed 
     2. App needs to communicate with replicas using predefined network identifiers  
 
