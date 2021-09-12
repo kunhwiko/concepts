@@ -1,28 +1,3 @@
-### Basics
----
-##### Orchestration 
-```
-Orchestration deals with certain problems:
-    1. How do we automate container life cycles?
-    2. How can we easily make our service scalable?
-    3. How do we make our system fault tolerant and replace containers without downtime?
-    4. How can we ensure containers run on trusted servers?
-    5. How can we deal with security issues? 
-```
-
-##### Terms
-```
-K8s: abbreviation for Kubernetes 
-Kubectl (Kube Control): CLI for K8s
-
-Control Plane: set of master Nodes that manage K8s cluster
-Node: individual workers in a K8s cluster
-
-Raft protocol: odd number of Master Nodes exist for consensus to be possible 
-```
-
-<br />
-
 ### Components
 ---
 ##### Getting Started
@@ -30,7 +5,19 @@ Raft protocol: odd number of Master Nodes exist for consensus to be possible
 Great source to read: https://www.ibm.com/cloud/learn/kubernetes
 ```
 
-##### Control Plane Components
+##### Terms
+```
+K8s: abbreviation for Kubernetes 
+Kubectl (Kube Control): CLI for K8s
+```
+
+##### Microservices
+```
+The first video explains how pods and services are used to build microservices in Kubernetes:
+https://www.ibm.com/cloud/blog/kubernetes-ingress
+```
+
+##### Control Plane (Master Node) Components
 ```
 1) etcd: 
      - distributed key-value store to back cluster data (e.g. configuration, state, metadata)
@@ -41,6 +28,8 @@ Great source to read: https://www.ibm.com/cloud/learn/kubernetes
 3) kube-scheduler: assigns Pods to Nodes 
 4) kube-controller-manager
 5) coreDNS: functions as DNS server in cluster 
+
+Raft protocol: odd number of Master Nodes exist for consensus to be possible 
 ```
 
 ##### Controller Manager
@@ -59,7 +48,7 @@ Types
         * guarantees ordering / uniqueness of Pods and stable network identifiers 
 ```
 
-##### Node Components
+##### Worker Node Components
 ```
 1) Pods 
 2) kubelet
@@ -133,7 +122,15 @@ Pros of Load Balancers
 ##### Load Balancer vs Ingress 
 ```
 Limitations of Load Balancers 
-    1. Each service exposed with a LoadBalancer costs money, and can be expensive with multiple LoadBalancers
+    1. One service is exposed per LoadBalancer, and with multiple services, this costs a lot of overhead
+
+Ingress Components
+    1. Load Balancer: performs the actual routing
+    2. Ingress Controller: enables controlled routing based on a set of predefined rules
+
+Ingress Pros
+    1. Enable routing to multiple services with a single load balancer 
+    2. Supports multiple protocols and authentication rules  
 ```
 
 <br />
