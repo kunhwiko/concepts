@@ -6,14 +6,9 @@ Image: application we want to run
 Container: instance of an image running as a process 
 ```
 
-##### More on Containers
+##### Containers vs VM vs Traditional Infrastructures
 ```
-Containers 
-    1. unlike VMs, containers run as a process on the host machine 
-    2. unlike VMs, containers do not come with operating systems 
-    3. unlike VMs, containers tend to be more lightweight
-    4. docker runs a lightweight Linux VM on Windows/Mac, which saves the containers, volumes, etc. 
-    5. docker runs its own file system independently from the host file system  
+Please reference: https://www.ibm.com/cloud/learn/kubernetes 
 ```
 
 ##### Run / Start / Top 

@@ -25,6 +25,11 @@ Raft protocol: odd number of master Nodes exist for consensus to be possible
 
 ### Components
 ---
+##### Getting Started
+```
+Great source to read: https://www.ibm.com/cloud/learn/kubernetes
+```
+
 ##### Control Plane Components
 ```
 1) etcd: 
