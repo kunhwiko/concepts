@@ -8,7 +8,12 @@ Container: instance of an image running as a process
 
 ##### Containers vs VM vs Traditional Infrastructures
 ```
-Please reference: https://www.ibm.com/cloud/learn/kubernetes 
+Please reference: https://www.ibm.com/cloud/learn/kubernetes
+
+Additionally, containers provide:
+    1. Environmental consistency 
+    2. Cloud / OS distribution portability 
+    3. Resource (container CPU, memory) isolation
 ```
 
 ##### Run / Start / Top 
