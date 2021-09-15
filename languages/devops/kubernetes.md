@@ -7,8 +7,8 @@ Great source to read: https://www.ibm.com/cloud/learn/kubernetes
 
 ##### Terms
 ```
-K8s: abbreviation for Kubernetes 
-Kubectl (Kube Control): CLI for K8s
+Cluster: collection of hosts that provide compute, memory, storage, and networking resources
+Node: a single host that could be a physical or virtual machine 
 ```
 
 ##### Microservices
@@ -17,7 +17,7 @@ The first video explains how pods and services are used to build microservices i
 https://www.ibm.com/cloud/blog/kubernetes-ingress
 ```
 
-##### Control Plane (Master Node) Components
+##### Control Plane (Master) Components
 ```
 1) etcd: 
      - distributed key-value store to back cluster data (e.g. configuration, state, metadata)
@@ -61,8 +61,8 @@ Types
 ##### Pods 
 ```
 1) encapsulates one or more containers to be assigned to a Node 
-2) contain shared resources such as volumes, network configs, info on how to run containers 
-3) basic unit of deployment 
+2) all containers in a Pod have the same IP address and port space 
+3) contain shared resources such as volumes, network configs, info on how to run containers 
 ```
 
 <br />
