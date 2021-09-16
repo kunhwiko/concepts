@@ -185,9 +185,11 @@ Ephemeral Volumes: volumes with the same lifetime of a Pod but persists beyond c
 ---
 ##### Labels / Annotations / Selectors
 ```
-Annotations: comments that provide extra context 
+Labels: 
+    - used to identify, select, and group Pods (or other objects) together based on some criteria
+    - not used for attaching arbitrary metadata to objects 
 
-Labels: used to identify, select, and group Pods (or other objects) together based on some criteria  
+Annotations: used to attach arbitrary metadata that Kubernetes does not care about 
 
 Selectors: chooses objects based on some criteria (two or more selectors imply selector1 AND selector2 instead of OR) 
 ```
