@@ -4,9 +4,9 @@
 ---
 ##### Overview
 ```
-  1. Pass by value 
-  2. Compiler transforms code to bytecode, which is then read by JVM
-  3. Garbage collection removes unreachable items 
+1. Pass by value 
+2. Compiler transforms code to bytecode, which is then read by JVM
+3. Garbage collection removes unreachable items 
 ```
 
 ##### Packages
@@ -14,7 +14,7 @@
 Every class in Java library belongs to a package 
   1. Help organize project or library by grouping into different functionalities 
   2. Name-scoping to prevent same class name collisions in a project 
-  3. Provide security where only other classes in the same package can access written code  
+  3. Provide security by only allowing other classes in the same package to access written code  
 ```
 
 ##### Security
@@ -45,8 +45,8 @@ LinkedHashMap : hash map that remembers the order in which elements were inserte
 ---
 ##### Key Notes 
 ```
-  1. Boolean and integers are incompatible 
-  2. Local variables do not have default values
+1. Boolean and integers are incompatible 
+2. Local variables do not have default values
 ```
 
 ##### Pre and Post Increment 
@@ -59,11 +59,6 @@ int x = 0; int z = ++x;       // x becomes 1, z is 1
 ```java
 &&               // if left side is false, the right side will not be evaluated 
 &                // both sides must be evaluated, even if the left side is false
-```
-
-##### Random
-```java
-Math.random() * 5      // number from 0 to 4.999..
 ```
 
 ##### Casting
@@ -119,7 +114,6 @@ public class Foo {
   // final static variables have the following naming convention 
   public static final double PI = 3.1415;
   public static final int PI_INT;
-
   static {
     PI_INT = 3;
   }
@@ -182,7 +176,7 @@ Arrays.copyOfRange(arr, 1, 3)   // copies subarray from index 1 to 3
 Arraylists and hash maps support non-primitive objects. Post Java 5.0, primitive objects are automatically converted to wrapper objects. 
 
 ArrayList<Integer> arr = new ArrayList<Integer>();
-arr.add(3); --> primitive int type is converted tao Integer type
+arr.add(3); --> primitive int type is converted to Integer type
 ```
 
 ##### Initializing ArrayLists
@@ -315,37 +309,29 @@ The only exception to this rule is RuntimeException (e.g. NullPointerException, 
 This is because "unchecked exceptions" are typically faults in code logic, rather than things like missing files, server failure etc.  
 ```
 
-```
-Superclass of an exception can catch all subclasses of the exception. 
-
-This means superclass "Exception" can be used to catch all exceptions, but just using this isn't the best convention. 
-
-Order your exceptions from those lower in the inheritance tree, up to those higher in the tree. 
-```
-
 ```java
 // exception throwing code (method that throws)
 public void turnOven() throws StartFireException {
-	if (thisStartsFire) {
-		throw new StartFireException();
+    if (thisStartsFire) {
+	    throw new StartFireException();
 	}
 }
 
 // method that uses exception throwing code (method that catches)
 public String cook() {
 	try {
-    System.out.println("This will still run");  
+        System.out.println("This will still run");  
 		this.turnOven();
-    System.out.println("This will not run"); 
-    return "Done here";                       
+        System.out.println("This will not run"); 
+        return "Done here";                       
 	} catch (StartFireException ex) {
-    // all exceptions inherit this method, at least use this when you can't recover from an exception 
+        // all exceptions inherit this method, at a minimum use this when you can't recover from an exception 
 		ex.printStackTrace();
-    return "Ouch";                      
+        return "Ouch";                      
 	} finally {
-    // this is where you put code that must run regardless of exception 
-    // important: finally will still run even if try and catch block has a return statement! 
-    this.turnOffOven();
+        // this is where you put code that must run regardless of exception 
+        // important: finally will still run even if try and catch block has a return statement! 
+        this.turnOffOven();
   }
 }
 ```
@@ -366,8 +352,8 @@ Generics act as a placeholder for the object you want to use.
 // 'E' is declared by class declaration 
 // 'E' will be replaced by whatever the user inputs 
 public class ArrayList<E> extends AbstractList<E> implements List<E> {
-  // you can declare 'E' here only because it's been declared by the class 
-  public boolean add(E o) {}
+    // you can declare 'E' here only because it's been declared by the class 
+    public boolean add(E o) {}
 
 	/* 
     By polymorphism, Dog can be passed to Animal, Dog[] can be passed to Animal[] 
@@ -383,20 +369,20 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
 	*/
 	public void badExample(ArrayList<Animal> arrList) {}
 
-  /* 
+    /* 
     So how do you take advantage of polymorphism for collections? 
     You can pass in ArrayList<Dog> using generics or wildcards 
 
     There's still the danger of being able to add Cat to ArrayList<Dog>
     Therefore, JVM prevents adding elements when using generics or wildcards 
-  */
+    */
 
-  // this is to declare something NOT defined in class declaration 
-  // 'T' must be a subtype of Animal
-  public <T extends Animal> void goodExampleOne(ArrayList<T> arrList) {}
+    // this is to declare something NOT defined in class declaration 
+    // 'T' must be a subtype of Animal
+    public <T extends Animal> void goodExampleOne(ArrayList<T> arrList) {}
 
-  // another way of saying the same thing as above using "wildcards" 
-  public void goodExampleTwo(ArrayList<? extends Animal> arrList) {}
+    // another way of saying the same thing as above using "wildcards" 
+    public void goodExampleTwo(ArrayList<? extends Animal> arrList) {}
 }
 ```
 
@@ -437,18 +423,18 @@ s = String.format("%,.2f bugs to fix", 4501.123);      // change to 4,501.12
   read official documentations on ObjectOutputStream and writeObject()
 */
 public class Box implements Serializable { 
-  /* 
+    /* 
     used for version control 
     when deserializing, this makes sure no changes have been made since serialization 
     if changes (deleting instance variable, changing non-transient to transient) exists, JVM stops deserialization 
-  */
+    */
 	static final long serialVersionUID = 512312516L;
 
 	// class Present must also implement Serializable 
-  private Present present = new Present();
+    private Present present = new Present();
 
-  // transient ignores this object during the serialization process 
-  transient Tag tag = new Tag();
+    // transient ignores this object during the serialization process 
+    transient Tag tag = new Tag();
 }
 ```
 
