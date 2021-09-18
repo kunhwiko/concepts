@@ -146,7 +146,7 @@ public enum Members { KEVIN, ALICE, JENNY };
 public Members aMember;
 
 if (aMember == Members.ALICE) {
-	// do something 
+  // do something 
 }
 ```
 
@@ -209,11 +209,11 @@ SortedMap<String, Integer> map = new TreeMap<>();  // SortedMap
 ```java
 // All key values in map
 for (String k : hashmap.keySet()) 
-	System.out.print(k);
+  System.out.print(k);
 
 // All value values in map
 for (String v : hashmap.values()) 
-	System.out.print(v);
+  System.out.print(v);
 ```
 
 ##### Basic Operations
@@ -238,7 +238,7 @@ map.getOrDefault(k,0);   // get value or if not existant 0
 // Create "printprintprintprint"
 StringBuilder sb = new StringBuilder();
 for (int i = 0; i < 4; i++){
-	sb.append("print");
+  sb.append("print");
 }
 sb.toString();
 ```
@@ -312,26 +312,26 @@ This is because "unchecked exceptions" are typically faults in code logic, rathe
 ```java
 // exception throwing code (method that throws)
 public void turnOven() throws StartFireException {
-    if (thisStartsFire) {
-	    throw new StartFireException();
-	}
+  if (thisStartsFire) {
+    throw new StartFireException();
+  }
 }
 
 // method that uses exception throwing code (method that catches)
 public String cook() {
-	try {
-        System.out.println("This will still run");  
-		this.turnOven();
-        System.out.println("This will not run"); 
-        return "Done here";                       
-	} catch (StartFireException ex) {
-        // all exceptions inherit this method, at a minimum use this when you can't recover from an exception 
-		ex.printStackTrace();
-        return "Ouch";                      
-	} finally {
-        // this is where you put code that must run regardless of exception 
-        // important: finally will still run even if try and catch block has a return statement! 
-        this.turnOffOven();
+  try {
+    System.out.println("This will still run");  
+    this.turnOven();
+    System.out.println("This will not run"); 
+    return "Done here";                       
+  } catch (StartFireException ex) {
+    // all exceptions inherit this method, at a minimum use this when you can't recover from an exception 
+    ex.printStackTrace();
+    return "Ouch";                      
+  } finally {
+    // this is where you put code that must run regardless of exception 
+    // important: finally will still run even if try and catch block has a return statement! 
+    this.turnOffOven();
   }
 }
 ```
@@ -352,10 +352,10 @@ Generics act as a placeholder for the object you want to use.
 // 'E' is declared by class declaration 
 // 'E' will be replaced by whatever the user inputs 
 public class ArrayList<E> extends AbstractList<E> implements List<E> {
-    // you can declare 'E' here only because it's been declared by the class 
-    public boolean add(E o) {}
+  // you can declare 'E' here only because it's been declared by the class 
+  public boolean add(E o) {}
 
-	/* 
+  /* 
     By polymorphism, Dog can be passed to Animal, Dog[] can be passed to Animal[] 
     However, ArrayList<Dog> cannot be passed to ArrayList<Animal> 
 
@@ -366,23 +366,23 @@ public class ArrayList<E> extends AbstractList<E> implements List<E> {
     Collection types are only checked during compile time
     Imagine the parameter is ArrayList<Animal>, and you pass ArrayList<Dog>
     If you could add a Cat object, the JVM will fail to catch it   
-	*/
-	public void badExample(ArrayList<Animal> arrList) {}
+  */
+  public void badExample(ArrayList<Animal> arrList) {}
 
-    /* 
+  /* 
     So how do you take advantage of polymorphism for collections? 
     You can pass in ArrayList<Dog> using generics or wildcards 
 
     There's still the danger of being able to add Cat to ArrayList<Dog>
     Therefore, JVM prevents adding elements when using generics or wildcards 
-    */
+  */
 
-    // this is to declare something NOT defined in class declaration 
-    // 'T' must be a subtype of Animal
-    public <T extends Animal> void goodExampleOne(ArrayList<T> arrList) {}
+  // this is to declare something NOT defined in class declaration 
+  // 'T' must be a subtype of Animal
+  public <T extends Animal> void goodExampleOne(ArrayList<T> arrList) {}
 
-    // another way of saying the same thing as above using "wildcards" 
-    public void goodExampleTwo(ArrayList<? extends Animal> arrList) {}
+  // another way of saying the same thing as above using "wildcards" 
+  public void goodExampleTwo(ArrayList<? extends Animal> arrList) {}
 }
 ```
 
@@ -423,18 +423,18 @@ s = String.format("%,.2f bugs to fix", 4501.123);      // change to 4,501.12
   read official documentations on ObjectOutputStream and writeObject()
 */
 public class Box implements Serializable { 
-    /* 
+  /* 
     used for version control 
     when deserializing, this makes sure no changes have been made since serialization 
     if changes (deleting instance variable, changing non-transient to transient) exists, JVM stops deserialization 
-    */
-	static final long serialVersionUID = 512312516L;
+  */
+  static final long serialVersionUID = 512312516L;
 
-	// class Present must also implement Serializable 
-    private Present present = new Present();
+  // class Present must also implement Serializable 
+  private Present present = new Present();
 
-    // transient ignores this object during the serialization process 
-    transient Tag tag = new Tag();
+  // transient ignores this object during the serialization process 
+  transient Tag tag = new Tag();
 }
 ```
 
