@@ -1,8 +1,10 @@
 // what are anonymous classes/functions?
 
-// locally defined classes that are not named
+// locally defined classes/functions that are not named
 // enables declaration + instantiation at the same time 
 // use when local class will only be used once 
+
+// also reference: https://medium.com/swlh/functionally-anonymous-lambda-expression-in-java-62a9f616b753
 
 public class Hello {
     public void sayHello() {
