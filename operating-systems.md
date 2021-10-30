@@ -178,6 +178,4 @@ Distributed File Systems
 - server sends a copy of the file that gets cached into the client machine
 - typically has file/database replication across multiple servers to protect against failures 
 - must have a mechanism in place to organize updates across all replicas 
-
-Cloud Computing : outsourcing computing or sourcing power to a third party 
 ```

@@ -26,7 +26,7 @@ Tables:
   1) Forwarding Table: maps a MAC address to a port to forward packets 
   2) Routing Table: maps longest prefix matches on IPs to send packets over next hops (other L2 networks) 
 
-Ports : 
+Ports: 
   1) docking point for where information is received or sent
   2) how multiple programs listen for new network connections on the same machine without collision  
   3) IP address is like a mailbox to an apartment complex, and ports are the specific apt number
@@ -249,7 +249,7 @@ HTTP 3
 
 ##### Getting Started with Security 
 ```
-Man-in-the-Middle(MITM) Attack : malicious activity to intercept or alter IP packets in an HTTP connection
+Man-in-the-Middle(MITM) Attack: malicious activity to intercept or alter IP packets in an HTTP connection
 
 Symmetric Encryption
   1) uses a single key to encrypt/decrypt data and is faster 
@@ -259,10 +259,10 @@ Asymmetric Encryption
   1) uses a public and private key and is slower  
   2) anyone can encrypt with public key, only private key can decrypt messages  
   
-HTTPS : HTTP over TLS 
-Transport Layer Security (TLS) : security protocol for secure communication 
+HTTPS: HTTP over TLS 
+Transport Layer Security (TLS): security protocol for secure communication 
 
-TLS Handshake : process to establish a secure connection between clients and server 
+TLS Handshake: process to establish a secure connection between clients and server 
   Step 1) 
     1) Client sends "client hello"
     2) Server responds with "server hello" + SSL certificate containing the public key

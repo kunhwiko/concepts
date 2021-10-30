@@ -163,7 +163,7 @@ Considerations :
   - styles : {id : 1, name : __, experience : __}
 
 4) Blob Store : Specializes in storing massive amounts of unstructured data
-  - examples : S3
+  - examples : S3, Azure Blob
 
 5) Time Series Store : Specializes in time series data / monitoring
   - examples : InfluxDB

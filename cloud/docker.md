@@ -16,79 +16,40 @@ Additionally, containers provide:
     3. Resource (container CPU, memory) isolation
 ```
 
-##### Run / Start / Top 
+##### Start / Stop
 ```
 docker container run -p 8080:80 -d --name kunko -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
     --> starts a new mysql container named "kunko"
-    --> caches the mysql image to image cache if it does not exist 
     --> "-p" (--publish): opens port 8080 on host and forwards traffic to port 80 on container
     --> "-d" (--detach): starts the container on the background 
     --> "-e" (--env): passes in settings 
 
-docker container start <container id>
+docker container start
     --> starts an existing stopped container
-```
 
-##### Top / Log / Inspect
-```
-docker container top <container id>
-    --> check running processes inside a container 
-
-docker container logs <container id>
-    --> check logs in a container 
-
-docker container inspect <container id>
-    --> retrieve configs of a container 
-```
-
-##### List / Stop
-```
-docker container ls 
-    --> view running containers  
-
-docker container ls -a 
-    --> view all containers 
-
-docker container stop <container id> 
+docker container stop 
     --> stops running container but doesn't remove it 
 ```
 
-##### Remove
+##### Inspect
 ```
-docker container rm <container id> 
-    --> remove non-running container 
+docker container top 
+    --> check running processes inside a container 
 
-docker container rm -f <container id> 
-    --> force remove container 
+docker container logs
+    --> check logs in a container 
+
+docker container inspect
+    --> retrieve configs of a container 
+
+docker container ls -a 
+    --> view all containers 
 ```
-
-##### Run Shell
-```
-docker container run -it --name kunko ubuntu
-    --> run "interactive" "tty" 
-    --> open a ubuntu container with a CLI 
-
-docker container run -it --name proxy nginx bash 
-    --> open an nginx container with a bash CLI
-
-docker container start -ai kunko 
-    --> restart kunko with CLI if it previously had one 
-
-docker container exec -it kunko bash 
-    --> open a "new" process with a bash CLI for a running container 
-```
-
 
 ### Docker Networks 
 ---
 ##### Network Basics 
 ```
-docker container port <container id>
-    --> inspect host and container port 
-
-docker container inspect --format '{{ .NetworkSettings.IPAddress }}' <container id> 
-    --> get IP address of container 
-
 Docker Networks 
     1. containers are connected via private virtual networks linked to host  
     2. each virtual network routes to NAT firewall/host so they can get out to the Internet or other networks 
@@ -103,6 +64,12 @@ Network (Driver) Types
 
 DNS 
     1. DNS is built-in when opening custom networks so containers in a network can communicate with one another 
+
+docker container port
+    --> inspect host and container port 
+
+docker container inspect --format '{{ .NetworkSettings.IPAddress }}' <container id> 
+    --> get IP address of container 
 ```
 
 ##### Connect to Networks 
@@ -110,7 +77,7 @@ DNS
 docker network ls 
     --> see all virtual networks 
 
-docker network inspect <network id>
+docker network inspect
     --> see all containers connected in the network 
 
 docker network create my_app
@@ -122,7 +89,6 @@ docker container run -d --name kunko --network my_app nginx
 docker network connect <network id> <container id>
     --> connect existing container to network 
 ```
-
 
 ### Docker Images
 ---
