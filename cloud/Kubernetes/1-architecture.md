@@ -50,10 +50,10 @@ Deployments:
 
 ReplicaSets:
    - ensures that a specified number of Pod replicas are running at a given time 
+   - allows for rollback to previous deployments
 
 StatefulSets:
-   - typically used when Pods need persistent storage (see "Storage")
-   - guarantees ordering / uniqueness of Pods and stable network identifiers 
+   - see 4-storage.md
 ```
 
 ##### Raft Protocol
