@@ -111,20 +111,3 @@ kind: Deployment
         # prevent mutation of what Pods the Deployments should manage  
         app: test 
 ```
-
-### Roles
----
-##### RBAC Authorization
-```
-ClusterRole 
-   - allows users to access namespaced/cluster-wide resources 
-    
-Role 
-   - allows users to access namespaced resources   
-    
-ClusterRoleBinding
-   - grants permissions granted Roles/ClusterRoles cluster-wide 
-    
-RoleBinding
-   - grants permissions granted by Roles/ClusterRoles within a specific namespace 
-```
