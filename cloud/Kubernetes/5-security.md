@@ -1,3 +1,13 @@
+### Secrets
+---
+##### Secrets
+```
+Secrets
+   - stores credentials and tokens that by default are stored as plaintext in etcd
+   - Pods can mount Secrets as files and same Secret can be mounted by multiple Pods
+   - Secrets in a Pod are mounted in-memory (ephemeral) for security purposes 
+```
+
 ### Roles
 ---
 ##### RBAC Authorization
