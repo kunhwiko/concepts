@@ -34,7 +34,7 @@ configMap:
 ##### Persistent Volumes
 ```
 persistentVolumeClaim
-   - mechanism to claim existing persistent volumes without knowing details of the particular cloud environment 
+   - mechanism to claim persistent volumes without knowing details of the particular cloud environment 
 
 hostPath
    - mounts directory from host Node's filesystem into a Pod 
