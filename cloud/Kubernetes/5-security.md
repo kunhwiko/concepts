@@ -27,13 +27,13 @@ RoleBinding
 
 ### Security Context
 ---
-##### Group ID 
+##### Groups 
 ```
 supplementalGroup: 
-   - ability to add additional GIDs 
+   - ability to supply additional GIDs 
 
 fsGroup:
-   - used to set the group that owns the pod volumes 
+   - provides a supplementalGroup to change ownership of Volumes to be owned by the Pod 
    - Kubernetes will change the permission of all files in the volumes to the GID 
    - could harm other processes that were accessing the volumes with a different GID 
    - could cause slow startup for large volumes as permissions need to be modified 
