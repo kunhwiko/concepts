@@ -1,4 +1,4 @@
-### Docker Basics
+### Containers
 ---
 ##### Images vs Containers 
 ```
@@ -16,6 +16,8 @@ Additionally, containers provide:
     3. Resource (container CPU, memory) isolation
 ```
 
+### Docker Basics
+---
 ##### Start / Stop
 ```
 docker container run -p 8080:80 -d --name kunko -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
