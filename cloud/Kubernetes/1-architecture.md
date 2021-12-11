@@ -39,8 +39,8 @@ etcd:
    - a means to restore K8s cluster by recording past snapshots of the cluster 
 
 API server: 
-   - means for Control Plane and Nodes to communicate with one another 
-   - front end component that opens access to a K8s cluster (e.g. access via CLI) 
+   - exposes Kubernetes REST API
+   - means for Control Plane and Worker Nodes to communicate with one another 
 
 Scheduler
    - assigns Pods to Nodes 
@@ -49,7 +49,8 @@ Controller Manager
    - refer below 
 
 coreDNS 
-   - functions as DNS server in cluster 
+   - a Pod that functions as DNS server in cluster
+   - Every service has a DNS name and Pods can receive DNS name too 
 ```
 
 ##### Controller Manager
@@ -76,20 +77,24 @@ Raft protocol: odd number of Master Nodes exist for consensus to be possible
 
 ### Worker Node
 ---
-##### Components
+##### Pods 
 ```
 Pods
    - encapsulates one or more containers to be assigned to a Node
    - all containers in a Pod have the same IP address and port
    - contain shared resources such as volumes, network configs, info on how to run containers
-
+```
+##### Components
+```
 kubelet
    - agents on each Node that registers Nodes to the API server so they can talk with the Control Plane
    - makes sure containers run in Pods in a healthy state 
+   - receives Pod specs, downloads secrets from API server, runs liveness probe, mounts volumes
    - interact Container Runtime Interface (CRI)
 
 kube-proxy:
    - implements networking rules that allow for network communication to Pods
+   - finds cluster IPs via environment variables or DNS
 ```
 
 ##### CRI
