@@ -5,16 +5,29 @@
 Great source to read: https://www.ibm.com/cloud/learn/kubernetes
 ```
 
+##### Distributed System Design Patterns
+```
+Sidecar Pattern
+   1. In the same Pod, create a separate container from the main application container
+   2. This separate container provides supplemental features such as logging aggregation or monitoring
+   3. Places less burden on application container
+
+Ambassador Pattern
+   1. Like the Sidecar Pattern, create a separate container from the main app container
+   2. This container acts as a proxy to the main app container that filters requests
+   3. Often used with legacy apps that are risky to modify to extend networking/security configurations
+   4. Able to update configurations of ambassador while keeping legacy code
+
+Adapter Pattern
+   1. Assume main application has been updated but generates output in a different format
+   2. Consumers of the output have not been upgraded to read in the new format
+   3. Adapter standardizes output until all consumers have been upgraded 
+```
+
 ##### Terms
 ```
 Cluster: collection of hosts that provide compute, memory, storage, and networking resources
 Node: a single host that could be a physical or virtual machine 
-```
-
-##### Microservices
-```
-The first video explains how pods and services are used to build microservices in Kubernetes:
-https://www.ibm.com/cloud/blog/kubernetes-ingress
 ```
 
 ### Control Plane (Master)
