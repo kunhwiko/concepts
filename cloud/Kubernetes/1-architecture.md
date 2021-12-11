@@ -86,9 +86,17 @@ Pods
 kubelet
    - agents on each Node that registers Nodes to the API server so they can talk with the Control Plane
    - makes sure containers run in Pods in a healthy state 
+   - interact Container Runtime Interface (CRI)
 
 kube-proxy:
    - implements networking rules that allow for network communication to Pods
+```
+
+##### CRI
+```
+CRI
+   - enables Kubernetes to support not only Docker containers but other ontainer runtimes as well
+   - uses gRPC framework to enable kubelet to interact with the CRI
 ```
 
 ### Labels and Selectors
