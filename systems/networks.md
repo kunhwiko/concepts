@@ -132,6 +132,12 @@ Classless Interdomain Routing
      - 8 bits for host addresses (192.168.1.0 ~ 192.168.1.255) 
   - routers do a longest prefix match on these "prefixes" to route packets   
 
+Subnets
+   - networks inside network
+   - uses "subnet mask" to send packet through the most efficient route
+   - send mail --> delivered to office --> delivered to department --> delivered to team --> delivered to person 
+   - for more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/
+
 IPv6: 
    - more addresses, better functionality
    - delayed as the entire network must become IPv6 compatible 
