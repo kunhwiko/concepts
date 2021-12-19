@@ -2,18 +2,25 @@
 ---
 ##### Images vs Containers 
 ```
-Image: application we want to run 
-Container: instance of an image running as a process 
+Image
+   - snapshot of an application along with necessary dependencies
+
+Container
+   - instance of an image running as a process 
 ```
 
-##### Containers vs VM vs Traditional Infrastructures
+##### Containers vs VM
 ```
-Please reference: https://www.ibm.com/cloud/learn/kubernetes
+Virtual Machines
+   - Hypervisors are used for emulating VMs and allocating resources
+   - environmental consistency
+   - ability to run different apps with different OS on the same physical server
 
 Additionally, containers provide:
-    1. Environmental consistency 
-    2. Cloud / OS distribution portability 
-    3. Resource (container CPU, memory) isolation
+   - whereas VMs are packaged with their own OS, containers share the host OS and run as a process
+   - removes overhead of hypervisor
+   - lightweight, portable, faster deployment and availability 
+   - reduces management of multiple OS to a single OS
 ```
 
 ### Docker Basics
