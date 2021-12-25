@@ -26,8 +26,8 @@ Adapter Pattern
 
 ##### Terms
 ```
-Cluster: collection of hosts that provide compute, memory, storage, and networking resources
-Node: a single host that could be a physical or virtual machine 
+Cluster : collection of hosts that provide compute, memory, storage, and networking resources
+Node    : a single host that could be a physical or virtual machine 
 ```
 
 ### Control Plane (Master)
@@ -38,7 +38,7 @@ etcd:
    - distributed key-value store to back cluster data (e.g. configuration, state, metadata)
    - a means to restore K8s cluster by recording past snapshots of the cluster 
 
-API server: 
+API Server: 
    - exposes Kubernetes REST API
    - means for Control Plane and Worker Nodes to communicate with one another 
 
@@ -75,6 +75,15 @@ StatefulSets:
 Raft protocol: odd number of Master Nodes exist for consensus to be possible 
 ```
 
+##### High Availability
+```
+To make Kubernetes cluster highly available:
+   - master components should be redundant
+   - etcd across nodes should be able to communicate and update cluster data
+   - API Server is stateless so there is no need for one to communicate with another
+   - multiple Schedulers and Controller Managers means chaos, so these should implement leader election
+```
+
 ### Worker Node
 ---
 ##### Pods 
@@ -87,9 +96,9 @@ Pods
 ##### Components
 ```
 kubelet
-   - agents on each Node that registers Nodes to the API server so they can talk with the Control Plane
+   - agents on each Node that registers Nodes to the API Server so they can talk with the Control Plane
    - makes sure containers run in Pods in a healthy state 
-   - receives Pod specs, downloads secrets from API server, runs liveness probe, mounts volumes
+   - receives Pod specs, downloads secrets from API Server, runs liveness probe, mounts volumes
    - interact Container Runtime Interface (CRI)
 
 kube-proxy:
