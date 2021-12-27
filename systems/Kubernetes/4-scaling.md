@@ -32,3 +32,45 @@ Downfalls
 ```
 Provisions a new Node when there are not enough resources in cluster
 ```
+
+### Live Updating
+---
+##### Rolling Update
+```
+Updates that gradually update components from the current version to the next
+
+Example
+   1. Deployment v1 --> Pod v1, Pod v1
+   2. Update to Deployment v2 
+   3. Deployment v2 --> Pod v1, Pod v1, Pod v2
+   4. Deployment v2 --> Pod v1, Pod v2, Pod v2
+   5. Deployment v2 --> Pod v2, Pod v2
+```
+
+##### Adapter Service
+```
+Translates requests/responses during an update
+
+Example
+   1. Pod A v1 depends on Pod B v1
+   2. Pod B v2 is introduced and is incompatible with Pod A
+   3. Introduce adapter that translates requests/responses between Pod A and B
+```
+
+##### Blue-green Deployments
+```
+Process
+   1. Prepare a copy of a production environment green with the new version
+   2. Use green to test active requests on existing environment blue
+   3. Assuming stateless components only, switch active environment to green
+   4. Roll back to blue if there are problems
+```
+
+##### Canary Deployments
+```
+More subtle process of Blue-green Deployments that changes little by little at a time
+
+Example
+   1. Replace 10% of production Pods to canary Pods (Pods hosting new feature)
+   2. Gradually increase number of canary Pods to production
+```
