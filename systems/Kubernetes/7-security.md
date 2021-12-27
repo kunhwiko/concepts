@@ -38,3 +38,10 @@ fsGroup:
    - could harm other processes that were accessing the volumes with a different GID 
    - could cause slow startup for large volumes as permissions need to be modified 
 ```
+
+### Namespace
+---
+##### Namespace
+```
+Provides a partition among users, and each namespace can sealed with credentials 
+```
