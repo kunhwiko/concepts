@@ -9,6 +9,16 @@ To make Kubernetes cluster highly available:
    - multiple Schedulers and Controller Managers means chaos, so these should implement leader election
 ```
 
+##### Systems Availability
+```
+Best Practices
+   - Provide redundancy for all systems
+   - Automate hot swapping for when components fail
+   - Robust logging, monitoring, alerting
+   - Testing
+   - Persist raw data in case processed data is corrupted (raw or old data can be kept in cheap storage)
+```
+
 ##### Horizontal Pod Autoscaling
 ```
 Increases number of Pods to handle more requests for a particular service
