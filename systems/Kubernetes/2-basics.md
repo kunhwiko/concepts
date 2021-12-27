@@ -93,6 +93,7 @@ Pods
    - all containers in a Pod have the same IP address and port
    - contain shared resources such as volumes, network configs, info on how to run containers
 ```
+
 ##### Components
 ```
 kubelet
