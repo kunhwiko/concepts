@@ -110,7 +110,7 @@ kube-proxy:
 ##### CRI
 ```
 CRI
-   - enables Kubernetes to support not only Docker containers but other ontainer runtimes as well
+   - enables Kubernetes to support not only Docker containers but other container runtimes as well
    - uses gRPC framework to enable kubelet to interact with the CRI
 ```
 
