@@ -42,6 +42,22 @@ fsGroup:
 Provides a partition among users, and each namespace can be sealed with credentials 
 ```
 
+##### Service Accounts
+```
+Namespace:
+   - provides a partition among users, and each namespace can be sealed with credentials
+   
+User Accounts:
+   - When a human tries to access a Kubernetes cluster, they are typically authenticated as a particular User Account
+   - Typically gives "admin" access, giving global access to all namespaces 
+   
+Service Accounts:
+   - When processes in containers inside Pods contact the API Server, they are authenticated via a Service Account
+   - When Pods are instantiated, they are assigned a Service Account
+   - Default Service Account is used if one is not assigned, which limits access to resources only in current namespace
+   - Service Accounts carry credentials that are mounted via a Secret volume 
+```
+
 ### Malicious Attacks
 ---
 ##### Node Attacks
