@@ -37,11 +37,6 @@ fsGroup:
    - could cause slow startup for large volumes as permissions need to be modified 
 ```
 
-##### Namespace
-```
-Provides a partition among users, and each namespace can be sealed with credentials 
-```
-
 ##### Service Accounts
 ```
 Namespace:
@@ -56,6 +51,15 @@ Service Accounts:
    - When Pods are instantiated, they are assigned a Service Account
    - Default Service Account is used if one is not assigned, which limits access to resources only in current namespace
    - Service Accounts carry credentials that are mounted via a Secret volume 
+   
+Service Account Admission Controller
+   - Assigns at Pod creation time a custom or default Service Account
+   - Ensures Pod has ImagePullSecrets when pulling from remote registry (if not specified in Pod spec, uses Service Account's ImagePullSecrets)
+   - Adds a volume with an API token for API access
+   - Ensures default Service Account exists in every namespace
+
+Token Controller
+   - Whenever a Service Account is created, creates and adds an API token to the secret volume
 ```
 
 ### Malicious Attacks
