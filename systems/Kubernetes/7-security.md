@@ -28,8 +28,17 @@ RoleBinding
    - grants permissions granted by Roles/ClusterRoles within a specific namespace 
 ```
 
-##### Groups 
+##### Security Context
 ```
+securityContext:
+   - applied at container level
+   - overrides podSecurityContext
+   - does not apply to volumes
+
+podSecurityContext:
+   - applies to all containers
+   - applies to volumes
+
 supplementalGroup: 
    - ability to supply additional GIDs 
 
