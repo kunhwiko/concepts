@@ -6,6 +6,9 @@ Secrets
    - stores credentials and tokens that by default are stored as plaintext in etcd
    - Pods can mount Secrets as files and same Secret can be mounted by multiple Pods
    - Secrets in a Pod are mounted in-memory (ephemeral) for security purposes 
+
+ImagePullSecrets
+   - keys to pull image from a private registry
 ```
 
 ### Roles & Security Context
@@ -19,7 +22,7 @@ Role
    - allows users to access namespaced resources   
     
 ClusterRoleBinding
-   - grants permissions granted Roles/ClusterRoles cluster-wide 
+   - grants permissions granted by Roles/ClusterRoles cluster-wide 
     
 RoleBinding
    - grants permissions granted by Roles/ClusterRoles within a specific namespace 
@@ -50,7 +53,7 @@ Service Accounts:
    - When processes in containers inside Pods contact the API Server, they are authenticated via a Service Account
    - When Pods are instantiated, they are assigned a Service Account
    - Default Service Account is used if one is not assigned, which limits access to resources only in current namespace
-   - Service Accounts carry credentials that are mounted via a Secret volume 
+   - Service Accounts carry credentials used to talk to the API server via a Secret volume mount 
    
 Service Account Admission Controller
    - Assigns at Pod creation time a custom or default Service Account
