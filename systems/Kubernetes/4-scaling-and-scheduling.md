@@ -84,3 +84,17 @@ Example
    1. Replace 10% of production Pods to canary Pods (Pods hosting new feature)
    2. Gradually increase number of canary Pods to production
 ```
+
+### Scheduling
+---
+##### Node Selector
+```
+Node Selector
+   - Pod spec that specifies which nodes to schedule to
+```
+
+##### Taint and Tolerations
+```
+Taint
+   - Taint a Kubernetes Node to prevent Pods from being scheduled onto that Node 
+```
