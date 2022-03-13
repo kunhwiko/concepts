@@ -96,5 +96,9 @@ Node Selector
 ##### Taint and Tolerations
 ```
 Taint
-   - Taint a Kubernetes Node to prevent Pods from being scheduled onto that Node 
+   - Taint a Kubernetes Node to prevent Pods from being scheduled onto that Node
+   - Nodes can have multiple taints
+
+Toleration
+   - Specify that a Pod can tolerate a specific taint
 ```
