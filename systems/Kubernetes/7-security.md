@@ -74,6 +74,16 @@ Token Controller
    - Whenever a Service Account is created, creates and adds an API token to the secret volume
 ```
 
+##### AppArmor
+```
+AppArmor
+   - Linux kernel security module that allows you to create profiles to do the following:
+      - restrict network access of processes in container
+      - restrict Linux capabilities of container
+      - restrict file permissions of container
+      - provide improved auditing through logs
+```
+
 ### Malicious Attacks
 ---
 ##### Node Attacks
