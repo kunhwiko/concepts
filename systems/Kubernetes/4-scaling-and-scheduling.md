@@ -87,10 +87,20 @@ Example
 
 ### Scheduling
 ---
-##### Node Selector
+##### Node Selector & Affinity
 ```
 Node Selector
    - Pod spec that specifies which nodes to schedule to
+
+Node Affinity
+   - more sophisticated selection criteria to assign Pods to particular Nodes
+   - ability to specify "preferred" requirements rather than hard requirements
+   - assigned Pods will not be evicted from Nodes where labels are changed to no longer satisfy node affinity
+
+Pod Affinity
+   - able to assign Pod based on labels of existing Pods
+   - can make sure to assign a Pod only if some other Pod co-exists
+   - can make sure that a Pod does not co-locate with some other Pod
 ```
 
 ##### Taint and Tolerations
