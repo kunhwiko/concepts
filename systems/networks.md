@@ -1,4 +1,4 @@
-### Networking & Security 
+### Networking
 ---
 ##### Getting Started with Networks 
 ```
@@ -15,9 +15,9 @@ Network Devices: specialized computers focusing on I/O that forward messages by 
    - Switches: 
       - connects L1 layers to form a network 
       - decides on a port based on a 'forwarding table' to determine where to send messages in an L2 network 
-  	  - switches must become aware of different hosts in a given L2 network
-  	  - through broadcasting across the network, switches learn MAC addresses based on the source of the broadcast   
-  2) Routers:
+  	   - switches must become aware of different hosts in a given L2 network
+  	   - through broadcasting across the network, switches learn MAC addresses based on the source of the broadcast   
+   - Routers:
   		- connects L2 networks to form L3 networks 
   		- coordinate amongst themselves to decide on a 'forwarding table' and 'routing table' for each router 
 
@@ -148,13 +148,13 @@ Tunneling
 
 NAT
    Steps 
-      a) assign private IP addresses within common network
-      b) NAT devices maps private IP addresses to a single public IP address
-      c) send to destination address with mapped public IP address as the source 
-      d) when host at destination tries to send a packet to a host within the network, use demultiplexing IDs (L4 protocol) to find host 
+      1) assign private IP addresses within common network
+      2) NAT devices maps private IP addresses to a single public IP address
+      3) send to destination address with mapped public IP address as the source 
+      4) when host at destination tries to send a packet to a host within the network, use demultiplexing IDs (L4 protocol) to find host 
    Disadvantages 
-      a) difficult to distinguish devices
-      b) can't connect to hosts within the private network (address unknown) until they send a message first
+      - difficult to distinguish devices
+      - can't connect to hosts within the private network (address unknown) until they send a message first
 ```
 
 ##### Discovery 
@@ -174,10 +174,10 @@ IP address
    - IP addresses will efficiently narrow down from L3 to the correct L2 network, where computers can then be located through MAC addresses  
 
 MAC address
-  a) physical unique address of a machine 
-  b) useful for local communications 
-  c) determines "who" the machine is 
-  d) difficult for the entire Internet to keep track of where all MAC addresses are 
+   - physical unique address of a machine 
+   - useful for local communications 
+   - determines "who" the machine is 
+   - difficult for the entire Internet to keep track of where all MAC addresses are 
 
 DNS Server: phonebook for finding the IP addresses of sites, DNS servers are replicated for availability, and caches popular addresses 
 
@@ -257,7 +257,9 @@ HTTP 3
 ```
 
 
-##### Getting Started with Security 
+### Getting Started with Security 
+---
+##### Encryptions
 ```
 Man-in-the-Middle(MITM) Attack: malicious activity to intercept or alter IP packets in an HTTP connection
 
@@ -268,22 +270,34 @@ Symmetric Encryption
 Asymmetric Encryption
    - uses a public and private key and is slower  
    - anyone can encrypt with public key, only private key can decrypt messages  
-  
+```
+
+##### TLS
+```
 HTTPS: HTTP over TLS 
 Transport Layer Security (TLS): security protocol for secure communication 
 
 TLS Handshake: process to establish a secure connection between clients and server 
-   1) 
+   Step 1) 
       - Client sends "client hello"
       - Server responds with "server hello" + SSL certificate containing the public key
-   2) 
+   Step 2) 
       - Client verifies SSL certificate and sends a "premaster secret" encrypted with the public key
       - Server decrypts the premaster secret using the private key
-   3) 
+   Step 3) 
       - client hello, server hello, premaster secret are used to create temporary symmetric keys for the session
       - Symmetric keys are used to figure out whether a connection was established or has failed 
 
 Purpose of SSL Certificates 
    - MITM attacks can intercept server hellos and public keys, send their own public key, and establish a connection with client 
    - SSL certificates guarantee where public keys come from
+```
+
+##### Authentication & Authorization
+```
+Authentication
+   - Act of validating that users are whom they claim to be 
+
+Authorization
+   - Act of verifying if the user has the ability to perform a certain function
 ```
