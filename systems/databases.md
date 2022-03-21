@@ -28,21 +28,6 @@ Atomicity
   b) journaling : logs the updates, and reverses operations if failure arises 
 ```
 
-##### SQL Examples
-```
-MySQL 
-  - excludes certain SQL features to prioritize speed and reliability 
-  - excellent for concurrent, read-only functions, could be slower for complicated write queries  
-  - relatively easy to set up 
-  - nested loop joins 
-
-PostgreSQL
-  - object-relational DBMS (ability to define objects, table inheritance) and supports NoSQL features  
-  - excellent for complicated read-write queries under heavy loads, could be slower for read-only queries 
-  - snapshot isolation and ACID compliant 
-  - nested loop joins / hash joins (when data is not sorted) / sort merge joins (when data is sorted)
-```
-
 ##### Isolation Levels of DBMS 
 ```
 Serialization 
@@ -144,30 +129,4 @@ Consistency : read request for any of the copies should return the same data
 Considerations : 
   1) Do we want strong vs eventual consistency?
   2) Do we want in-memory (caching) vs disk storage?
-```
-
-##### NoSQL Examples 
-```
-1) Key-Value Store : Specializes in storing as a key/value pair
-  - examples : Apache HBase
-  - styles : id -> [name age experience]
-
-2) Wide Column Store : Organizes related facts into "column families", 2-D Key-Value
-  - examples : BigTable, Cassandra 
-  - styles : id -> [personal]  [professional] 
-               - name      - experience
-               - age 
-
-3) Document Oriented Store : organized as documents, usually JSON format
-  - examples : MongoDB 
-  - styles : {id : 1, name : __, experience : __}
-
-4) Blob Store : Specializes in storing massive amounts of unstructured data
-  - examples : S3, Azure Blob
-
-5) Time Series Store : Specializes in time series data / monitoring
-  - examples : InfluxDB
-
-6) Graph Store : Stores in a graph form rather than a tabular form, specializes in relations between data
-  - examples : Neo4j
 ```
