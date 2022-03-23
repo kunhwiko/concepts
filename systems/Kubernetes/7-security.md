@@ -80,6 +80,20 @@ AppArmor : Linux kernel security module that allows you to create profiles to do
 Step 1
    a) users use keys and certificates to authenticate against the cluster over TLS
    b) cluster admins can choose what authentication strategy to use
+   c) if at least one authentication step succeeds, authentication is granted
+
+Impersonation
+   a) possible for users to impersonate different users (e.g. troubleshoot some issue for a different user)
+   b) requires passing impersonation headers to API request (e.g. kubectl --as / --as-group parameters)
+```
+
+##### Authorization
+```
+Step 2
+   a) authorization requests include info such as authenticated username and request verb
+   b) cluster admins can choose what authorization strategy to use
+   c) all authorization steps must succeed for authorization to be granted
+   d) kubectl auth can-i ... verifies whether user can perform certain actions
 ```
 
 ### Malicious Attacks
