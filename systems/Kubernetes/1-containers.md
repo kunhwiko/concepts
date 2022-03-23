@@ -24,8 +24,8 @@ Containers
 ```
 Image Layers
    a) Images are built as a series of layers, users only need to copy over layers they don't have 
-   b) If changes are made, a new layer is built on top of existing layers 
-   c) If two different changes are made on top of the same existing layers, 
+   b) if changes are made, a new layer is built on top of existing layers 
+   c) if two different changes are made on top of the same existing layers, 
       two side by side layers are built on top of existing layers, 
       instead of duplicating the existing layers 
 
@@ -34,8 +34,8 @@ Container Layers
    b) Containers are just single read/write layers on top of base images 
    
 Tags
-   a) Pointer to a particular image commit / version of an image 
-   b) Multiple tags can refer to the same commit, so they have the same image ID 
+   a) pointer to a particular image commit / version of an image 
+   b) multiple tags can refer to the same commit, so they have the same image ID 
 ```
 
 ##### Separation of Concerns
