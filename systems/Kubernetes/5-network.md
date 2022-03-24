@@ -72,3 +72,57 @@ Pros of Ingress
    a) enable routing to multiple services with a single load balancer 
    b) supports multiple protocols and authentication rules  
 ```
+
+### Network Policies
+---
+##### Network Policies
+```
+Network Policy
+   a) set of firewall rules
+   b) labels are used to define virtual network segments (more flexible than IP address range / subnet masking)
+
+Purposes
+   a) network segmentation allows for multi-tenancy and minimizes security breaches
+   b) maximize parts of system that don't need to talk to each other
+
+Scope
+  a) network policies are cluster-wide
+  b) rules are unified if multiple network policies exist
+```
+
+##### Examples
+```
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+spec: 
+  # what pods are targeted by this policy?
+  podSelector:
+    matchLabels:
+      role: app-backend
+  # namespace and pods with these labels can access target pods 
+  # current namespace is exempt and does not need to match labels here
+  ingress:
+    - from:
+      - namespaceSelector:
+          matchLabels:
+            project: test
+      - podSelector:
+          matchLabels:
+            role: app-frontend
+  # network protocol and ports that are allowed
+  ports:
+    - protocol: tcp
+      port: 8888
+```
+
+##### Whitelist
+```
+Whitelist
+   a) by default, all access is forbidden to a certain pod if targeted by at least one network policy
+   b) by default, all access is granted to a certain pod if targeted by no network policy
+```
+
+##### Egress
+```
+Egress : ability to control outbound traffic
+```
