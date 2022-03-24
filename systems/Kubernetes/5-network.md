@@ -1,58 +1,57 @@
-### Networks 
+### Service Types 
 ---
 ##### Service
 ```
 Service
-   - means to connect Pods to external services 
-   - provides a DNS entry to a group of Pods that persists even if some Pods update their IP 
-   - allows for load balancing between Pods  
-   - Service operates at layer 3 (UDP/TCP), Ingress operates at HTTP layer
+   a) means for a way to connect to Pods
+   b) provides a DNS entry to a group of Pods that persists even if some Pods update their IP 
+   c) allows for load balancing between Pods  
+   d) Service operates at layer 3 (UDP/TCP), Ingress operates at HTTP layer
 
-Services normally get published as either:
-   - environment variables that are picked up by Pods (e.g. SOME_NAME_SERVICE_HOST, SOME_NAME_SERVICE_PORT)
-   - discovery through CoreDNS
-   - more here: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
+Services normally get published as either
+   a) environment variables that are picked up by Pods (e.g. SOME_NAME_SERVICE_HOST, SOME_NAME_SERVICE_PORT)
+   b) discovery through CoreDNS
+   c) more here: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
 ```
 
 ##### Service Types
 ```
 Types
-   - ClusterIP:
-       * exposes Service on an internal IP in the cluster 
-       * reachable only from within the cluster 
-   - NodePort 
-       * using NATs, exposes Service on the same port of each selected Node
-       * makes a Service accessible outside the cluster using <NodeIP>:<NodePort>
-       * requests to NodePorts get routed to ClusterIP services  
-       * superset of ClusterIP
-   - LoadBalancer
-       * mostly used with cloud services 
-       * sets up clusterIPs / NodePorts and a great means to get external traffic to come into Service 
-       * creates an external load balancer and assigns a fixed, external IP to the Service 
-       * superset of NodePort
-   - ExternalName
-       * means to get traffic out to an external source
-       * adds CNAME DNS record to CoreDNS 
+   a) ClusterIP
+      * exposes Service on an internal IP in the cluster 
+      * reachable only from within the cluster 
+   b) NodePort 
+      * using NATs, exposes Service on the same port of each selected Node
+      * makes a Service accessible outside the cluster using <NodeIP>:<NodePort>
+      * requests to NodePorts get routed to ClusterIP services  
+      * superset of ClusterIP
+   c) LoadBalancer
+      * mostly used with cloud services 
+      * sets up clusterIPs / NodePorts and a great means to get external traffic to come into Service 
+      * creates an external load balancer and assigns a fixed, external IP to the Service 
+      * superset of NodePort
+   d) ExternalName
+      * means to get traffic out to an external source
+      * adds CNAME DNS record to CoreDNS 
 
-Also reference: https://www.ibm.com/cloud/blog/kubernetes-ingress
+Also reference : https://www.ibm.com/cloud/blog/kubernetes-ingress
 ```
 
 ##### Ports 
 ```
-NodePort vs Port vs TargetPort 
-   - reference: https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
+NodePort vs Port vs TargetPort : https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
 ##### NodePort vs Load Balancer
 ```
-Things to know:
-   - Nodes have publicly accessible IPs
-   - NodePorts will open the same port number on all Nodes
-   - <NodeIP>:<NodePort> will convert requests to <ClusterIP>:<Port>  
+Things to know
+   a) Nodes have publicly accessible IPs
+   b) NodePorts will open the same port number on all Nodes
+   c) <NodeIP>:<NodePort> will convert requests to <ClusterIP>:<Port>  
     
 Limitations of NodePorts  
-   - only exposes a single service per port 
-   - must maintain and know the NodeIP of the Node you're looking for, which is difficult when many Nodes exist / Nodes crash or update 
+   a) only exposes a single service per port 
+   b) must maintain and know the NodeIP of the Node you're looking for, which is difficult when many Nodes exist / crash
 
 Pros of Load Balancers 
    - only need to know the IP address of the Load Balancer 
@@ -63,13 +62,13 @@ Pros of Load Balancers
 ##### Load Balancer vs Ingress 
 ```
 Limitations of Load Balancers 
-   - one service is exposed per LoadBalancer, and with multiple services, this costs a lot of overhead
+   a) one service is exposed per LoadBalancer, and with multiple services, this costs a lot of overhead
 
 Ingress Components
-   - Load Balancer: performs the actual routing
-   - Ingress Controller: enables controlled routing based on a set of predefined rules
+   a) Load Balancer: performs the actual routing
+   b) Ingress Controller: enables controlled routing based on a set of predefined rules
 
-Ingress Pros
-   - enable routing to multiple services with a single load balancer 
-   - supports multiple protocols and authentication rules  
+Pros of Ingress
+   a) enable routing to multiple services with a single load balancer 
+   b) supports multiple protocols and authentication rules  
 ```
