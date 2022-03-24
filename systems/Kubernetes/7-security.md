@@ -96,6 +96,16 @@ Step 2
    d) kubectl auth can-i ... verifies whether user can perform certain actions
 ```
 
+##### Admission Control Plugins
+```
+Step 3
+   a) address global cluster concerns after all authorization steps pass
+   b) either validates (e.g. check violation/quota limits) or mutates (e.g. create namespace if it does not exist)
+   c) all admission control steps must succeed for request to succeed
+   d) cluster admins can choose what admission control plugins to use
+   e) possible to define a custom dynamic admission control (https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)
+```
+
 ### Malicious Attacks
 ---
 ##### Node Attacks
