@@ -54,9 +54,9 @@ Limitations of NodePorts
    b) must maintain and know the NodeIP of the Node you're looking for, which is difficult when many Nodes exist / crash
 
 Pros of Load Balancers 
-   - only need to know the IP address of the Load Balancer 
-   - transfers request of <LB IP>:<Port> to appropriate <NodeIP>:<NodePort>
-   - ability to open multiple ports and protocols per service 
+   a) only need to know the IP address of the Load Balancer 
+   b) transfers request of <LB IP>:<Port> to appropriate <NodeIP>:<NodePort>
+   c) ability to open multiple ports and protocols per service 
 ```
 
 ##### Load Balancer vs Ingress 

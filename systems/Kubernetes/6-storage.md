@@ -2,42 +2,39 @@
 ---
 ##### Storage
 ```
-Kubernetes is designed to:
-   - keep containers ephemeral, immutable, replaceable 
-   - we want a cloud based database to store data 
-   - we do not want our cluster to be stateful 
+Best Practices
+   a) keep containers ephemeral, immutable, replaceable 
+   b) cloud based database should be used to store data 
+   c) cluster should ideally not be stateful 
 
-Sometimes stateful workloads are inevitable, so we use StatefulSets + Persistent Volumes. 
+Sometimes stateful workloads are inevitable, so we use stateful sets & persistent volumes. 
 
-Persistent Volumes are used to: 
-   - outlive the life of Pods 
+Persistent Volumes are used to
+   a) outlive the life of pods 
 
-StatefulSets are used to:
-   - controller will guarantee the Pods are ordered and have a unique identifier 
-   - Pods will individually use their own PVCs instead of sharing
-   - each unique identifier will fetch data from its corresponding PVC  
-   - cannot roll back to previous versions
-   - more here: https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4    
+Stateful Sets are used to
+   a) controller will guarantee the pods are ordered and have a unique identifier 
+   b) pods will individually use their own PVCs instead of sharing
+   c) each unique identifier will fetch data from its corresponding PVC  
+   d) cannot roll back to previous versions
+   e) more here: https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4    
 ``` 
 
 ##### Ephemeral Volumes 
 ```
-Ephemeral Volumes: volumes with the same lifetime of a Pod but persists beyond containers  
+Ephemeral Volume : volumes with the same lifetime of a pod but persists beyond containers  
     
-emptyDir: 
-   - initially empty volume created when a Pod is assigned to a Node 
+emptyDir : initially empty volume created when a pod is assigned to a node 
 
-configMap: 
-   - mounts a configMap (configuration data) as a volume to inject into Pods  
+configMap : mounts a config map (configuration data) as a volume to inject into pods  
 ```
 
 ##### Persistent Volumes
 ```
-persistentVolumeClaim
-   - mechanism to claim persistent volumes without knowing details of the particular cloud environment 
+persistentVolumeClaim : mechanism to claim persistent volumes without knowing details of the particular cloud environment 
 
 hostPath
-   - mounts directory from host Node's filesystem into a Pod 
-   - the above means the directory and Pod must be in the same Node
-   - not recommended as a means for persistent storage, but suitable for development/testing purposes 
+   a) mounts directory from host node's filesystem into a pod 
+   b) the above means the directory and pod must be in the same node
+   c) not recommended as a means for persistent storage, but suitable for development/testing purposes 
 ```
