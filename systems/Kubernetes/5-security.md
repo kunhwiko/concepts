@@ -3,9 +3,11 @@
 ##### Secrets
 ```
 Secrets
-   a) stores credentials and tokens that by default are stored as plaintext in etcd
-   b) pods can mount secrets as files and the same secret can be mounted by multiple pods
-   c) secrets in a pod are mounted in-memory (ephemeral) for security purposes 
+   a) stores base64 encoded credentials and tokens as plaintext on etcd
+   b) secrets are namespace scoped
+   c) secrets can be mounted via volumes or be picked up as container environment variables
+   d) kubelet downloads secrets from API server via TLS
+   e) kubelet stores secret in node memory (never to disk) and is deleted when it is not needed
 
 ImagePullSecrets : keys to pull image from a private registry
 ```

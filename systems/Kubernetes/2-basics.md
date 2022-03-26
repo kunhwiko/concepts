@@ -69,7 +69,8 @@ kubelet
    a) agents on each node that registers nodes to the API server so they can talk with the control plane
    b) makes sure containers run in pods in a healthy state 
    c) receives pod specs, downloads secrets from API server, runs liveness probe, mounts volumes
-   d) interact with Container Runtime Interface (CRI)
+   d) communicates to API server usually via TLS
+   e) interact with Container Runtime Interface (CRI)
 
 kube-proxy
    a) implements networking rules that allow for network communication to pods
