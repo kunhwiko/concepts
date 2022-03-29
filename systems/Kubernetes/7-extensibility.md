@@ -50,13 +50,14 @@ Cron Jobs
 ##### Probes
 ```
 Liveness Probes
-   a) kubelets have basic restart policies if a container process crashes, but it might not be sufficient
-   b) allows you to define what it means for a container to be alive
+   a) defines what it means for a container to be alive
+   b) kubelets have basic restart policies if a container process crashes, but it might not be sufficient
 
 Readiness Probes
-   a) container may be up, but dependent services might still be unavailable (requests should not be received during this time)
-   b) when readiness probe fails for a container, the pod hosting the container is temporarily removed
-   c) ensures requests don't flood a pod with requests it cannot process
+   a) defines what it means for a container to be ready
+   b) container may be up, but necessary dependencies might still be unavailable (requests should not be received during this time)
+   c) when readiness probe fails for a container, the pod hosting the container is temporarily removed
+   d) ensures requests don't flood a pod with requests it cannot process
 ```
 
 ##### Probe Examples
@@ -79,4 +80,16 @@ spec:
         # give time for the pod to initialize
         # kubelet will not check liveness for this period
         initialDelaySeconds: 30
+```
+
+##### Init Containers
+```
+Problems
+   a) initialDelaySeconds is defined so that probes do not kill a container that is still initializing
+   b) a definitive time might not be good to define when a container should be done initializing
+   
+Init Containers
+   a) containers that run to completion before all other containers start
+   b) probes can then start after all these init containers are started
+   c) init containers can provide setup scripts
 ```
