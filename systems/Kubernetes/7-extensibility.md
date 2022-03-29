@@ -44,3 +44,39 @@ Cron Jobs
    b) each invocation launches a new job object along with corresponding pods
    c) deleting a cron job will delete existing jobs and pods
 ```
+
+### Probing
+---
+##### Probes
+```
+Liveness Probes
+   a) kubelets have basic restart policies if a container process crashes, but it might not be sufficient
+   b) allows you to define what it means for a container to be alive
+
+Readiness Probes
+   a) container may be up, but dependent services might still be unavailable (requests should not be received during this time)
+   b) when readiness probe fails for a container, the pod hosting the container is temporarily removed
+   c) ensures requests don't flood a pod with requests it cannot process
+```
+
+##### Probe Examples
+```yaml
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: app
+      image: test-app
+      args:
+      - /bin/sh
+      - -c
+      - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+      livenessProbe:
+        exec:
+          command: 
+          - cat 
+          - /tmp/healthy
+        # give time for the pod to initialize
+        # kubelet will not check liveness for this period
+        initialDelaySeconds: 30
+```
