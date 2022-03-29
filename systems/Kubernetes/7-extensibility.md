@@ -36,3 +36,11 @@ spec:
 # when a job is done, pods that completed the task will be status "completed"
 # run kubectl logs <pod-name> to view output of the job
 ```
+
+##### Cron Jobs
+```
+Cron Jobs
+   a) jobs that run periodically
+   b) each invocation launches a new job object along with corresponding pods
+   c) deleting a cron job will delete existing jobs and pods
+```
