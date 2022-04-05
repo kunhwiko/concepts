@@ -124,3 +124,10 @@ Taint
 
 Toleration : specify that a pod can tolerate a specific taint
 ```
+
+##### Daemon Sets
+```
+Daemon Set
+   a) ensures that a pod runs on all or a designated subset of nodes 
+   b) useful for monitoring or aggregating multiple small requests into a single network request
+```
