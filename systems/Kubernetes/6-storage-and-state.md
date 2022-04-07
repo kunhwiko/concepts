@@ -1,22 +1,22 @@
-### Storages  
+### Volumes  
 ---
 ##### emptyDir
 ```
-emptyDir : initially empty volume created when a pod is assigned to a node 
-```
+emptyDir
+   a) ephemeral volume mounted on a particular pod and starts with empty contents
+   b) contents are erased upon pod being deleted, but not erased when containers crash
+   c) contents are not erased upon node reboot, as contents are stored in disk
 
-##### Other Ephemeral Volumes 
-```
-configMap : mounts a config map (configuration data) as a volume to inject into pods
-secrets   : see 5-security.md
+RAM backed emptyDir
+   a) faster reads but more volatile
+   b) contents are lost upon node restart
 ```
 
 ##### hostPath
 ```
 hostPath
    a) mounts directory from host node's filesystem into a pod 
-   b) the above means the directory and pod must be in the same node
-   c) not recommended as a means for persistent storage, but suitable for development/testing purposes 
+   b) containers accessing host directories must be priviledged to do so 
 ```
 
 ##### persistentVolumeClaims
