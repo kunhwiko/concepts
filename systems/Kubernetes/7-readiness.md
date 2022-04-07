@@ -45,7 +45,7 @@ Cron Jobs
    c) deleting a cron job will delete existing jobs and pods
 ```
 
-### Probing
+### Probing & Readiness
 ---
 ##### Probes
 ```
@@ -92,4 +92,13 @@ Init Containers
    a) containers that run to completion before all other containers start
    b) probes can then start after all these init containers are started
    c) init containers can provide setup scripts
+```
+
+##### Readiness Gates
+```
+Problems
+   a) readiness probes help address pod level readiness, but not an infrastructure level readiness
+   b) services, network policies forwarding traffic might not be ready yet
+
+Readiness Gates : provide an extra podSpec to specify set of conditions for when things are ready
 ```
