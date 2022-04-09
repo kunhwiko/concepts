@@ -5,11 +5,13 @@
 emptyDir
    a) ephemeral volume mounted on a particular pod and starts with empty contents
    b) contents are erased upon pod being deleted, but not erased when containers crash
-   c) contents are not erased upon node reboot, as contents are stored in disk
+   c) each container can have different mount paths to the same emptyDir
+   c) contents are not erased upon node reboot as contents are stored in disk
 
 RAM backed emptyDir
    a) faster reads but more volatile
    b) contents are lost upon node restart
+   c) by default, size of memory is half of node's RAM  
 ```
 
 ##### hostPath
