@@ -28,6 +28,23 @@ storageClass : use a provisioner to allocate storage to pods
 Provisioning
    a) static  : creates storage ahead of time and can be claimed later by containers
    b) dynamic : provision storage on the fly if not available
+   
+Volume Configurations
+   a) capacity
+      * storage claims are satisfied by persistent volumes that have at least that amount of storage
+      * even if 10 pvs with 50G capacity are provisioned, a container claiming 100G will not be satisfied
+   b) volume mode
+      * file system vs raw storage (block)
+   c) access mode
+      * ROX (read only by many nodes) vs RWO (read-write by one node) vs RWX (read-write by many nodes)
+      * storages are mounted to nodes, so multiple containers in a node can still write to a RWO storage
+   d) reclaim policy
+      * retain (volume must be reclaimed manually) vs delete vs recycle (retain but contents are deleted)
+      * dynamically provisioned volumes always have delete policy
+   e) storage class
+      * only PVCs that specify the storage class name can claim the volume
+   f) volume type
+      * e.g. nfs
 
 PVC
    a) mechanism to claim persistent volumes without knowing details of the particular cloud environment 
