@@ -21,7 +21,7 @@ hostPath
    b) containers accessing host directories must be privileged to do so (e.g. root user)
 ```
 
-##### Persistent Volume Claims
+##### Persistent Volumes and Claims
 ```
 storageClass : use a provisioner to allocate storage to pods
 
@@ -37,18 +37,21 @@ Volume Configurations
       * file system vs raw storage (block)
    c) access mode
       * ROX (read only by many nodes) vs RWO (read-write by one node) vs RWX (read-write by many nodes)
-      * storages are mounted to nodes, so multiple containers in a node can still write to a RWO storage
+      * storages are mounted to nodes, so multiple containers/pods in a node can still write to a RWO storage
+      * for RWO storages, if one claim is satisfied no other claim with RWO can be satisfied
    d) reclaim policy
       * retain (volume must be reclaimed manually) vs delete vs recycle (retain but contents are deleted)
       * dynamically provisioned volumes always have delete policy
    e) storage class
       * only PVCs that specify the storage class name can claim the volume
+      * empty storage class name on PVC : match PV with no storage class name
+      * no storage class name on PVC    : use default storage class
    f) volume type
       * e.g. nfs
 
-PVC
+PVC 
    a) mechanism to claim persistent volumes without knowing details of the particular cloud environment 
-   b) can either be an external storage or disk physically attached to node
+   b) Kubernetes will attempt to try to match to the smallest capacity volume available
 ```
 
 ##### Local Persistent Volume
