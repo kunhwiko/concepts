@@ -18,12 +18,31 @@ RAM backed emptyDir
 ```
 hostPath
    a) mounts directory from host node's filesystem into a pod 
-   b) containers accessing host directories must be priviledged to do so 
+   b) containers accessing host directories must be privileged to do so (e.g. root user)
 ```
 
-##### persistentVolumeClaims
+##### Persistent Volume Claims
 ```
-persistentVolumeClaim : mechanism to claim persistent volumes without knowing details of the particular cloud environment 
+storageClass : use a provisioner to allocate storage to pods
+
+Provisioning
+   a) static  : creates storage ahead of time and can be claimed later by containers
+   b) dynamic : provision storage on the fly if not available
+
+PVC
+   a) mechanism to claim persistent volumes without knowing details of the particular cloud environment 
+   b) can either be an external storage or disk physically attached to node
+```
+
+##### Local Persistent Volume
+```
+Local Persistent Volume
+   a) local disk physically attached to nodes
+   b) can use node affinity to bind the volume to particular nodes
+
+Local Persistent Volume vs hostPath
+   a) Kubernetes scheduler understands which node a local persistent volume belongs to
+   b) ensures pod using a local persistent volume is always scheduled to the same node
 ```
 
 ### Stateful Applications
