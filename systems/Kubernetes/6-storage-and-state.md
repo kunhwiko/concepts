@@ -34,11 +34,12 @@ Volume Configurations
       * storage claims are satisfied by persistent volumes that have at least that amount of storage
       * even if 10 pvs with 50G capacity are provisioned, a container claiming 100G will not be satisfied
    b) volume mode
-      * file system vs raw storage (block)
+      * file system vs raw block storage
+      * block storage : direct access to block device without filesystem abstraction for efficient data transport
    c) access mode
       * ROX (read only by many nodes) vs RWO (read-write by one node) vs RWX (read-write by many nodes)
       * storages are mounted to nodes, so multiple containers/pods in a node can still write to a RWO storage
-      * for RWO storages, if one claim is satisfied no other claim with RWO can be satisfied
+      * for RWO storages, if one claim is satisfied no other claim with RWO can be satisfied but ROX can still be satisfied
    d) reclaim policy
       * retain (volume must be reclaimed manually) vs delete vs recycle (retain but contents are deleted)
       * dynamically provisioned volumes always have delete policy
