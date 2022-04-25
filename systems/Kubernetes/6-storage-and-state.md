@@ -66,6 +66,13 @@ Local Persistent Volume vs hostPath
    b) ensures pod using a local persistent volume is always scheduled to the same node
 ```
 
+##### Projections
+```
+Projections
+   a) project multiple volumes into a single volume on a single volume mount
+   b) supported for secrets, downward API, configmaps
+```
+
 ### Stateful Applications
 ---
 ##### Stateful Sets
