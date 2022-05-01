@@ -49,15 +49,29 @@ Cron Jobs
 ---
 ##### Probes
 ```
+Startup Probes
+   a) defines what it means for a container to have started
+   b) disables liveness and readiness checks until startup succeeds
+   c) provides time for the container application to initialize
+
 Liveness Probes
    a) defines what it means for a container to be alive
    b) kubelets have basic restart policies if a container process crashes, but it might not be sufficient
 
 Readiness Probes
-   a) defines what it means for a container to be ready
-   b) container may be up, but necessary dependencies might still be unavailable (requests should not be received during this time)
-   c) when readiness probe fails for a container, the pod hosting the container is temporarily removed
+   a) defines what it means for a container application to be able to serve requests
+   b) container may be initialized, but necessary dependencies might still be or have become unavailable 
+   c) when readiness probe fails, containers are not killed but requests will not be received
    d) ensures requests don't flood a pod with requests it cannot process
+```
+
+##### Readiness Gates
+```
+Problems
+   a) readiness probes help address pod level readiness, but not an infrastructure level readiness
+   b) services, network policies forwarding traffic might not be ready yet
+
+Readiness Gates : provide an extra podSpec to specify set of conditions for when things are ready
 ```
 
 ##### Probe Examples
@@ -84,21 +98,8 @@ spec:
 
 ##### Init Containers
 ```
-Problems
-   a) initialDelaySeconds is defined so that probes do not kill a container that is still initializing
-   b) a definitive time might not be good to define when a container should be done initializing
-   
 Init Containers
    a) containers that run to completion before all other containers start
-   b) probes can then start after all these init containers are started
+   b) can configure such that probes will start only after init containers are started
    c) init containers can provide setup scripts
-```
-
-##### Readiness Gates
-```
-Problems
-   a) readiness probes help address pod level readiness, but not an infrastructure level readiness
-   b) services, network policies forwarding traffic might not be ready yet
-
-Readiness Gates : provide an extra podSpec to specify set of conditions for when things are ready
 ```
