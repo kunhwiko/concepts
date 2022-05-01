@@ -23,13 +23,15 @@ hostPath
 
 ##### Persistent Volumes and Claims
 ```
-storageClass : use a provisioner to allocate storage to pods
+storageClass
+   a) describes the class of storage 
+   b) maps quality of service levels, backup policies
 
 Provisioning
    a) static  : creates storage ahead of time and can be claimed later by containers
    b) dynamic : provision storage on the fly if not available
    
-Volume Configurations
+Persistent Volume Configurations
    a) capacity
       * storage claims are satisfied by persistent volumes that have at least that amount of storage
       * even if 10 pvs with 50G capacity are provisioned, a container claiming 100G will not be satisfied
