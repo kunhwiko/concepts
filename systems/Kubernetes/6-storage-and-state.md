@@ -66,20 +66,35 @@ Local Persistent Volume vs hostPath
    b) ensures pod using a local persistent volume is always scheduled to the same node
 ```
 
-##### Projections
+##### Container Storage Interface
+```
+Problems
+   a) Storage vendors relied on Kubernetes in-tree (source code) volume plugins to support storage connectivity
+   b) Vendors would need to develop a volume plugin and add it to the Kubernetes source code to integrate their storage system
+   c) Source code changes could cause bugs and are difficult to test
+   d) Development of volume plugin depends on Kubernetes release version and requires the source code to be publicly available
+
+CSI
+   a) Kubernetes has a CSI-compliant plugin that acts as a standard adapter between containerized workloads and storages
+   b) Vendors need to develop a CSI-compliant driver in which the plugin will interact with through an API  
+   c) Vendors do not need to be worried about the Kubernetes source code
+   d) Plugin can be used for all container orchestrators that have a CSI-compliant plugin
+```
+
+##### Projections, Snapshots, Cloning
 ```
 Projections
    a) project multiple volumes into a single volume on a single volume mount
    b) supported for secrets, downward API, configmaps
-```
 
-##### Volume Snapshots and Cloning
-```
-Snapshots : Kubernetes allows for the snapshotting of a volume at a certain point of time
+Snapshots 
+  a) Kubernetes allows for the snapshotting of a volume at a certain point of time
+  b) Only available for CSI drivers
 
 Cloning
    a) New volumes populated with the content of the existing volume
    b) Works for dynamic provisioning and uses the storage class of the source volume
+   c) Only available for CSI drivers
 ```
 
 ### Stateful Applications
