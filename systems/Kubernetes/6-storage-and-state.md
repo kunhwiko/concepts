@@ -73,6 +73,15 @@ Projections
    b) supported for secrets, downward API, configmaps
 ```
 
+##### Volume Snapshots and Cloning
+```
+Snapshots : Kubernetes allows for the snapshotting of a volume at a certain point of time
+
+Cloning
+   a) New volumes populated with the content of the existing volume
+   b) Works for dynamic provisioning and uses the storage class of the source volume
+```
+
 ### Stateful Applications
 ---
 ##### Stateful Sets
