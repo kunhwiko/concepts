@@ -103,6 +103,13 @@ Cloning
 
 ### Stateful Applications
 ---
+##### Config Maps
+```
+Config Maps
+   a) means to keep configuration separate from container image
+   b) configurations can be consumed as environment variables, volumes, or secrets
+```
+
 ##### Stateful Sets
 ```
 Stateful Sets
