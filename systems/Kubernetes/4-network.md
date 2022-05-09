@@ -8,9 +8,9 @@ Service
    c) allows for load balancing between pods  
    d) services operates at layer 3 (UDP/TCP), ingress operates at HTTP layer
 
-Services normally get published as either
+Services normally get published and discoverable through
    a) environment variables that are picked up by pods (e.g. SOME_NAME_SERVICE_HOST, SOME_NAME_SERVICE_PORT)
-   b) pods discover service through a DNS name 
+   b) DNS name that pods can use 
    c) more here: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
 ```
 
