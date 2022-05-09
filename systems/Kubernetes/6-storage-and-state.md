@@ -46,15 +46,17 @@ Persistent Volume Configurations
       * retain (volume must be reclaimed manually) vs delete vs recycle (retain but contents are deleted)
       * dynamically provisioned volumes always have delete policy
    e) storage class
-      * only PVCs that specify the storage class name can claim the volume
+      * only PVCs that specify the same storage class name can claim the volume
       * empty storage class name on PVC : match PV with no storage class name
-      * no storage class name on PVC    : use default storage class
+      * no storage class line on PVC    : use default storage class
    f) volume type
       * e.g. nfs
 
 PVC 
    a) mechanism to claim persistent volumes without knowing details of the particular cloud environment 
-   b) Kubernetes will attempt to try to match to the smallest capacity volume available
+   b) finds a matching persistent volume based on specs (e.g. capacity, access mode, storage class, labels)
+   c) Kubernetes will attempt to try to match to the smallest capacity volume available
+   d) pods can choose which pvcs to mount by pvc name
 ```
 
 ##### Local Persistent Volume
