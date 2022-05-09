@@ -45,7 +45,7 @@ Replica Sets:
    a) ensures that a specified number of pod replicas are running at a given time 
    b) allows for rollback to previous deployments
 
-Stateful Sets : see 6-storage.md
+Stateful Sets : see 6-storage-and-state.md
 ```
 
 ##### Raft Protocol
@@ -74,7 +74,7 @@ kubelet
 
 kube-proxy
    a) implements networking rules that allow for network communication to pods
-   b) finds cluster IPs via environment variables or DNS
+   b) resources can be discovered either through DNS or environment variables
 ```
 
 ##### CRI
