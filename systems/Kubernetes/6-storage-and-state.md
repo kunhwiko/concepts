@@ -113,9 +113,11 @@ Config Maps
 ##### Stateful Sets
 ```
 Stateful Sets
-   a) controller will guarantee the pods are ordered and have a unique identifier 
-   b) pods will individually use their own PVCs instead of sharing
-   c) each unique identifier will fetch data from its corresponding PVC  
-   d) cannot roll back to previous versions
-   e) more here: https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4 
+   a) controller will guarantee pods are ordered and have unique identifiers 
+   b) pods are associated with their own dynamic PVCs instead of sharing
+   c) each unique identifier will fetch data from its corresponding PVC
+   d) headless service is used to manage network identity of pods
+   e) cannot roll back to previous versions
+
+More here: https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4 
 ```
