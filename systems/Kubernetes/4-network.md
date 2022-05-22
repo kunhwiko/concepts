@@ -73,6 +73,18 @@ Pros of Ingress
    b) supports multiple protocols and authentication rules  
 ```
 
+##### Headless Services
+```
+Limitations of Services
+   a) connections to services are load balanced and forwarded randomly to a backing pod
+   b) difficult to get A records of all backing pods through services
+
+Headless Services
+   a) DNS entry of headless service returns all A records of pods backed by headless service
+   b) all backing pods are able to connect with each other
+   c) headless service does not have a clusterIP
+```
+
 ### Network Policies
 ---
 ##### Network Policies
