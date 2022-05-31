@@ -88,6 +88,13 @@ Horizontal Pod Autoscaling
 Cluster Autoscaling : provisions a new node when there are not enough resources in cluster
 ```
 
+##### Scaling Metrics
+```
+Metrics
+   a) respects and evaluates all existing metrics and autoscales based on largest number of replicas required
+   b) for custom metrics, must enable API aggregation layer and then register resource / custom metrics API
+```
+
 ##### Vertical Pod Autoscaling
 ```
 Vorizontal Pod Autoscaling : Provide additional resources (e.g. CPU, memory) to pods
