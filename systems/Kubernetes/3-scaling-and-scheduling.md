@@ -80,7 +80,10 @@ Example
 ---
 ##### Horizontal Pod / Cluster Autoscaling
 ```
-Horizontal Pod Autoscaling : increases number of pods to handle more requests for a particular service
+Horizontal Pod Autoscaling
+   a) increases number of pods to handle more requests for a particular service
+   b) synchronizes effort and interaction with replica controller instead of with pods directly
+   c) scaling is not done immediately to reduce thrashing issues where average load is around scaling thresholds
 
 Cluster Autoscaling : provisions a new node when there are not enough resources in cluster
 ```
