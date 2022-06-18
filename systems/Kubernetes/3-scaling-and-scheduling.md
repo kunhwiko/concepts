@@ -76,6 +76,17 @@ Example
    Step 2) gradually increase number of canary pods to production
 ```
 
+### Resource Quotas
+---
+##### Quota Types
+```
+Resource Quota
+   a) at max, there can be one ResourceQuota object per namespace
+   b) can specify CPU, memory, GPU quotas
+   c) can specify total amount of storage and number of PVCs / ephemeral storage per cluster or per storage class
+   d) can specify a limit for the number of each Kubernetes resource
+```
+
 ### Scaling
 ---
 ##### Horizontal Pod / Cluster Autoscaling
