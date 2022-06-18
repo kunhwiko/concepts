@@ -101,7 +101,7 @@ Rolling Updates
 
 ##### Vertical Pod Autoscaling
 ```
-Vorizontal Pod Autoscaling : Provide additional resources (e.g. CPU, memory) to pods
+Vertical Pod Autoscaling : Provide additional resources (e.g. CPU, memory) to pods
 
 Components
    a) Recommender      : watches resource usage and recommends new values
