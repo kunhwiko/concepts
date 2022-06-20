@@ -81,13 +81,19 @@ Example
 ##### Quota Types
 ```
 Resource Quota
-   a) at max, there can be one ResourceQuota object per namespace
+   a) there cannot be conflicts for ResourceQuota object per namespace
+      * kubectl get quota
    b) can specify CPU, memory, GPU quotas
    c) can specify total amount of storage and number of PVCs / ephemeral storage per cluster or per storage class
    d) can specify a limit for the number of each Kubernetes resource
    e) can specify quota scopes
       * quota can be specified for only non-terminating pods
       * even if quota is exceeded, new pods can be scheduled if existing pods are terminating
+```
+
+##### Priority Classes
+```
+Priority Class : Prioritize scheduling of pods when resources are scarce
 ```
 
 ### Scaling
