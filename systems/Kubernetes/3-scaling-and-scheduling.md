@@ -85,6 +85,9 @@ Resource Quota
    b) can specify CPU, memory, GPU quotas
    c) can specify total amount of storage and number of PVCs / ephemeral storage per cluster or per storage class
    d) can specify a limit for the number of each Kubernetes resource
+   e) can specify quota scopes
+      * quota can be specified for only non-terminating pods
+      * even if quota is exceeded, new pods can be scheduled if existing pods are terminating
 ```
 
 ### Scaling

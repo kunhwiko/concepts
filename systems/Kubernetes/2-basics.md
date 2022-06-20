@@ -44,8 +44,7 @@ Deployments
 Replica Sets:
    a) ensures that a specified number of pod replicas are running at a given time 
    b) allows for rollback to previous deployments
-
-Stateful Sets : see 6-storage-and-state.md
+   c) even with 0 replicas, API server can still be overwhelmed by having to validate for 0 replicas
 ```
 
 ##### Raft Protocol
