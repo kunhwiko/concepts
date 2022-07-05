@@ -76,24 +76,41 @@ Example
    Step 2) gradually increase number of canary pods to production
 ```
 
-### Resource Quotas
+### Quotas
 ---
 ##### Quota Types
 ```
-Resource Quota
-   a) there cannot be conflicts for ResourceQuota object per namespace
-      * kubectl get quota
-   b) can specify CPU, memory, GPU quotas
-   c) can specify total amount of storage and number of PVCs / ephemeral storage per cluster or per storage class
-   d) can specify a limit for the number of each Kubernetes resource
-   e) can specify quota scopes
-      * quota can be specified for only non-terminating pods
-      * even if quota is exceeded, new pods can be scheduled if existing pods are terminating
+Quota: observable through `kubectl get quota`
+
+Compute Quotas: 
+   a) can specify CPU, GPU, memory quotas
+   b) if quota is specified, resource request and limit must be set at the container level as well
+
+Storage Quotas: 
+   a) can specify total amount of storage and number of PVCs / ephemeral storage per cluster
+   b) can also be specified per storage class
+
+Object Count Quotas: 
+   a) can specify a limit for the number of each Kubernetes resource
+   b) even replica sets with zero replicas can still overwhelm the API server because validation must still happen
+
+Quota Scopes
+   a) quota can be specified for only non-terminating pods
+   b) if quota is exceeded, new pods can still be scheduled if existing pods are terminating
+```
+
+##### Limit Ranges
+```
+Problems: if a compute quota is set, users must specify the resource request and limit for each container  
+
+Limit Ranges: 
+   a) provides a means to set default resource request and limit values for containers, if not specified
+   b) observable through `kubectl get limit`
 ```
 
 ##### Priority Classes
 ```
-Priority Class : Prioritize scheduling of pods when resources are scarce
+Priority Class : prioritize scheduling of pods when resources are scarce
 ```
 
 ### Scaling
