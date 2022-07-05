@@ -182,3 +182,13 @@ Daemon Set
    a) ensures that a pod runs on all or a designated subset of nodes 
    b) useful for monitoring or aggregating multiple small requests into a single network request
 ```
+
+### Testing
+---
+##### Kubemark
+```
+Kubemark
+   a) does not test actual real life behavior for the sake of cost
+   b) runs mock hollow nodes, hollow kubelets, hollow proxies that fake functionalities in a lightweight manner
+   c) still very good at testing improvements and regressions to the cluster
+```
