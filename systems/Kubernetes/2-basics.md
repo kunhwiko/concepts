@@ -75,11 +75,11 @@ kube-proxy
    b) resources can be discovered either through DNS or environment variables
 ```
 
-##### CRI
+##### Container Runtime Interface (CRI)
 ```
 CRI
-   a) enables Kubernetes to support not only Docker containers but other container runtimes as well
-   b) uses gRPC framework to enable kubelet to interact with the CRI
+   a) enables Kubernetes to support a general interface for not only Docker containers but other container runtimes as well
+   b) kubelet can interact with CRI via gRPC to determine what container runtime to use
 ```
 
 ### Labels and Selectors

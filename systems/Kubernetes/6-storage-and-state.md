@@ -70,7 +70,7 @@ Local Persistent Volume vs hostPath
    b) ensures pod using a local persistent volume is always scheduled to the same node
 ```
 
-##### Container Storage Interface
+##### Container Storage Interface (CSI)
 ```
 Problems
    a) Storage vendors relied on Kubernetes in-tree (source code) volume plugins to support storage connectivity
