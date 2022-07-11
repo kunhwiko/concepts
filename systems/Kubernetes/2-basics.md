@@ -51,6 +51,11 @@ API Server cache
    a) Kubernetes components operate on state snapshots rather than real-time updates
    b) snapshots are saved in etcd, and API Server has an in-memory read cache where the snapshot can be read from
    c) caching decreases read latency and reduces load on etcd  
+
+Protocol Buffers
+   a) REST APIs typically use JSON as serialization format, and typically requires marshaling / unmarshaling JSON
+   b) JSON parsing becomes expensive because so many REST APIs are called to the API Server
+   c) Internal components in Kubernetes instead communicate via a protocol buffer serialization format to reduce this expense
 ```
 
 ##### Controller Manager
@@ -101,6 +106,17 @@ kube-proxy
 CRI
    a) enables Kubernetes to support a general interface for not only Docker containers but other container runtimes as well
    b) kubelet can interact with CRI via gRPC to determine what container runtime to use
+```
+
+##### Pod Lifecycle Event Generator (PLEG)
+```
+Problems
+   a) kubelet used to poll container runtimes from each pod for info
+   b) consistently puts a lot of pressure on the container runtime and to each pod 
+
+PLEG
+   a) lists the state of pods and containers and compares with the previous state
+   b) kubelet knows which pods need to sync again and only polls those pods 
 ```
 
 ### Labels and Selectors
