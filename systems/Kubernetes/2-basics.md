@@ -15,11 +15,9 @@ Node    : a single host that could be a physical or virtual machine
 ---
 ##### Components
 ```
-etcd 
-   a) distributed key-value store to back cluster data (e.g. configuration, state, metadata)
-   b) a means to restore K8s cluster by recording past snapshots of the cluster 
+etcd : refer below
 
-API server
+API server : refer below
    a) exposes Kubernetes REST API
    b) means for control plane and worker nodes to communicate with one another 
 
@@ -30,6 +28,29 @@ CoreDNS
    b) every service has a DNS name and pods can receive DNS names too 
 
 Controller Manager : refer below 
+```
+
+##### etcd 
+```
+etcd
+   a) distributed key-value store to back cluster data (e.g. configuration, state, metadata)
+   b) a means to restore K8s cluster by recording past snapshots of the cluster 
+
+Improvements from etcd2 to etcd3
+   a) uses gRPC (HTTP/2 protocol) over REST which enables single TCP connections for multiple streams of requests and responses
+   b) uses leases over TTL to reduce keep-alive traffic
+```
+
+##### API Server
+```
+Kubernetes API Server
+   a) exposes Kubernetes REST API
+   b) means for control plane and worker nodes to communicate with one another
+
+API Server cache
+   a) Kubernetes components operate on state snapshots rather than real-time updates
+   b) snapshots are saved in etcd, and API Server has an in-memory read cache where the snapshot can be read from
+   c) caching decreases read latency and reduces load on etcd  
 ```
 
 ##### Controller Manager
