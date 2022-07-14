@@ -2,91 +2,93 @@
 ---
 ##### Service
 ```
-Service
-   a) provides a stable access point to pods
-   b) provides a DNS entry to pods that persists even if pods update their IP 
-   c) allows for load balancing between pods  
-   d) services operates at layer 3 (UDP/TCP), ingress operates at HTTP layer
+Problems
+   a) Pods have internal IP addresses that can be used to directly access that pod.
+      These IP address are instable as pod restarts will assign new IP addresses.
 
-Services are published/discovered via
-   a) environment variables that are picked up by pods (e.g. SOME_NAME_SERVICE_HOST, SOME_NAME_SERVICE_PORT)
-   b) DNS name that pods can use 
+Service
+   a) Provides a stable access point to pods via a DNS entry to pods that persists even if pods update their IP.
+   b) Allows for load balancing between pods.
+   c) Services operates at layer 3 (UDP/TCP), ingress operates at HTTP layer.
+
+Discoverability
+   a) Environment variables that are picked up by pods (e.g. SOME_NAME_SERVICE_HOST, SOME_NAME_SERVICE_PORT).
+   b) DNS name that pods can use. 
    c) more here: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
 
-Service Uses
-   a) services are pieces of data stored in etcd
-   b) kube-proxy will update iptables for each node based on info stored in etcd
+How Services Work
+   a) Services are pieces of data stored in etcd. 
+      Kube proxy will update iptables for each node based on info stored in etcd.
 ```
 
-##### Service Types
-```
-Types
-   a) ClusterIP
-      * exposes service on an internal IP in the cluster 
-      * reachable only from within the cluster 
-   b) NodePort 
-      * using NATs, exposes service on the same port of each selected node
-      * makes a service accessible outside the cluster using <node-ip>:<node-port>
-      * requests to nodeports get routed to clusterIP services  
-      * superset of clusterIP
-   c) LoadBalancer
-      * mostly used with cloud services 
-      * sets up clusterIPs / nodeports and a great means to get external traffic to come into service 
-      * creates an external load balancer and assigns a fixed, external IP to the service 
-      * superset of nodeport
-   d) ExternalName
-      * means to get traffic out to an external source
-      * adds CNAME DNS record to coreDNS 
-
-Also reference : https://www.ibm.com/cloud/blog/kubernetes-ingress
-```
-
-##### Ports 
+##### Ports
 ```
 NodePort vs Port vs TargetPort : https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
-##### NodePort vs Load Balancer
+##### ClusterIP
 ```
-Things to know
-   a) nodes have publicly accessible IPs
-   b) nodeports will open the same port number on all nodes
-   c) <node-ip>:<node-port> will convert requests to <clusterIP>:<port>  
-    
+ClusterIP
+   a) Exposes service on an internal IP in the cluster reachable only from within the cluster.
+```
+
+##### NodePort
+```
+NodePort
+   a) Nodes have publicly accessible IPs. Using NATS, node ports will expose the same port number on all nodes. 
+      Takes makes the service externally accessible via <node-ip>:<node-port>, which will convert requests to <clusterIP>:<port>.
+   b) Requests to node ports will get routed to clusterIPs (node ports are supersets of clusterIPs).
+```
+
+##### Load Balancer
+```
+LoadBalancer
+   a) Mostly used with managed cloud services
+   b) Sets up clusterIPs / node ports and are a great means to get external traffic inbound (load balancers are superset of node ports).
+   c) Creates an external load balancer and assigns a fixed external IP to the service
+   d) Additional references: https://www.ibm.com/cloud/blog/kubernetes-ingress
+
 Limitations of NodePorts  
-   a) only exposes a single service per port 
-   b) must maintain and know the IP of the node you're looking for, which is difficult when many nodes exist / crash
+   a) Only exposes a single service per port.
+   b) Must maintain and know the IP of the node you're looking for, which is difficult when many nodes exist / crash.
 
-Pros of Load Balancers 
-   a) only need to know the IP address of the load balancer 
-   b) transfers request of <loadbalancer-ip>:<port> to appropriate <node-ip>:<node-port>
-   c) ability to open multiple ports and protocols per service 
+Advantages over NodePorts
+   a) Only need to know the IP address of the load balancer.
+   b) Transfers request of <loadbalancer-ip>:<port> to appropriate <node-ip>:<node-port>.
+   c) Ability to open multiple ports and protocols per service. 
 ```
 
-##### Load Balancer vs Ingress 
+#### Ingress
 ```
-Limitations of Load Balancers 
-   a) one service is exposed per load balancer, and with multiple services, this costs a lot of overhead
-
 Ingress Components
-   a) Load Balancer      : performs the actual routing
-   b) Ingress Controller : enables controlled routing based on a set of predefined rules
+   a) Load Balancer      : Performs the actual routing.
+   b) Ingress Controller : Enables controlled routing based on a set of predefined rules.
 
-Pros of Ingress
-   a) enable routing to multiple services with a single load balancer 
-   b) supports multiple protocols and authentication rules  
+Limitations of Load Balancers 
+   a) One service is exposed per load balancer, and with multiple services, this costs a lot of overhead.
+
+Advantages over Load Balancers
+   a) Enable routing to multiple services with a single load balancer.
+   b) Supports multiple protocols and authentication rules.   
 ```
 
 ##### Headless Services
 ```
 Limitations of Services
-   a) connections to services are load balanced and forwarded randomly to a backing pod
-   b) difficult to get A records of all backing pods through services
+   a) Connections to services are load balanced and forwarded randomly to a backing pod.
+      It is difficult to get A records of all backing pods through services.
 
 Headless Services
-   a) DNS entry of headless service returns all A records of pods backed by headless service
-   b) all backing pods are able to connect with each other
-   c) headless service does not have a clusterIP
+   a) DNS entry of headless service returns all A records of pods backed by headless service.
+   b) All backing pods are able to connect with each other.
+   c) Headless service does not have a clusterIP.
+```
+
+##### External Name
+```
+ExternalName
+   a) Means to get traffic out to an external source
+   b) Adds CNAME DNS recourd to coreDNS
 ```
 
 ### Network Policies
@@ -94,16 +96,20 @@ Headless Services
 ##### Network Policies
 ```
 Network Policy
-   a) set of firewall rules
-   b) labels are used to define virtual network segments (more flexible than IP address range / subnet masking)
+   a) Set of firewall rules.
+   b) Labels are used to define virtual network segments (more flexible than IP address range / subnet masking).
 
 Purposes
-   a) network segmentation allows for multi-tenancy and minimizes security breaches
-   b) maximize parts of system that don't need to talk to each other
+   a) Network segmentation allows for multi-tenancy and minimizes security breaches.
+   b) Maximize parts of system that don't need to talk to each other.
 
 Scope
-  a) network policies are cluster-wide
-  b) rules are unified if multiple network policies exist
+  a) Network policies are cluster-wide.
+  b) Rules are unified if multiple network policies exist.
+
+Whitelist
+   a) By default, all access is forbidden to a certain pod if targeted by at least one network policy.
+   b) By default, all access is granted to a certain pod if targeted by no network policy.  
 ```
 
 ##### Examples
@@ -129,13 +135,6 @@ spec:
   ports:
     - protocol: tcp
       port: 8888
-```
-
-##### Whitelist
-```
-Whitelist
-   a) by default, all access is forbidden to a certain pod if targeted by at least one network policy
-   b) by default, all access is granted to a certain pod if targeted by no network policy
 ```
 
 ##### Egress
