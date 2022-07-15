@@ -36,16 +36,16 @@ ClusterIP
 ```
 NodePort
    a) Nodes have publicly accessible IPs. Using NATS, node ports will expose the same port number on all nodes. 
-      Takes makes the service externally accessible via <node-ip>:<node-port>, which will convert requests to <clusterIP>:<port>.
+      Makes the service externally accessible via <node-ip>:<node-port>, which will convert requests to <clusterIP>:<port>.
    b) Requests to node ports will get routed to clusterIPs (node ports are supersets of clusterIPs).
 ```
 
 ##### Load Balancer
 ```
 LoadBalancer
-   a) Mostly used with managed cloud services
+   a) Mostly used with managed cloud services and might spin up resources (e.g. Network Load Balancers) for a cost.
    b) Sets up clusterIPs / node ports and are a great means to get external traffic inbound (load balancers are superset of node ports).
-   c) Creates an external load balancer and assigns a fixed external IP to the service
+   c) Assigns a fixed external IP to the service
    d) Additional references: https://www.ibm.com/cloud/blog/kubernetes-ingress
 
 Limitations of NodePorts  
