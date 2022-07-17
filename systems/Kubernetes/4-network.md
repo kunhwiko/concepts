@@ -19,6 +19,7 @@ Discoverability
 How Services Work
    a) Services are pieces of data stored in etcd. 
       Kube proxy will update iptables for each node based on info stored in etcd.
+   b) Kube proxy on each node will take care of redirecting traffic to the correct pod.
 ```
 
 ##### Ports
@@ -91,6 +92,22 @@ ExternalName
    b) Adds CNAME DNS recourd to coreDNS
 ```
 
+### Connections
+---
+##### Container to Container Networking
+```
+Container to Container Networking
+   a) Containers in a pod share IP addresses.
+   b) Containers in the same pod can communicate via localhost, local filesystem, etc. 
+```
+
+##### Pod to Pod Networking
+```
+Pod to Pod Networking
+   a) The same pod IP address is used for within the node and across the entire cluster.  
+   b) Pod's IP addresses are exposed across the entire cluster.
+```
+
 ### Network Policies
 ---
 ##### Network Policies
@@ -139,5 +156,6 @@ spec:
 
 ##### Egress
 ```
-Egress : ability to control outbound traffic
+Egress
+   a) Ability to control outbound traffic.
 ```
