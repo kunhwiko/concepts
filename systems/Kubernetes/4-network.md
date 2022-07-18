@@ -106,6 +106,25 @@ Container to Container Networking
 Pod to Pod Networking
    a) The same pod IP address is used for within the node and across the entire cluster.  
    b) Pod's IP addresses are exposed across the entire cluster.
+   c) Containers can talk to other containers by connecting to a registration service (typically a Kubernetes service).
+
+Queues
+   a) Containers can listen or respond to messages, perform actions, post progress status via queues
+   b) Queues decouple the need to know about IP addresses.
+   c) Easy to keep track of progress by monitoring the queue.
+   d) Easy to add or remove listeners.
+   e) The queue must be highly available and may requires some time to set up.
+   f) Queues can be used alongside databases.
+      After a container stores job results or data into the database, the container can ping the container.
+      Other containers in the system can then pick up this data.
+```
+
+##### Cloud Provider Networking
+```
+Cloud Provider Networking
+   a) Cloud provider load balancers are not Kubernetes aware. 
+      Typically these load balancers will direct to any Kubernetes node.
+      Kube proxy will then redirect to the correct pod in the correct node. 
 ```
 
 ### Network Policies
