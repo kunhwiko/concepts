@@ -1,80 +1,107 @@
-### Networking
+### Getting Started with Networks
 ---
-##### Getting Started with Networks 
+##### Networks
 ```
-Networks: system of links that interconnect computers to move data 
+Networks
+   a) System of links that interconnect computers to move data.
+```
 
-Internet: networking infrastructure linking connected devices 
+##### Protocols
+```
+Protocol
+   a) St of rules and structures that define the syntax / semantics of how computers communicate.
 
-Protocol: set of rules and structures that define the syntax / semantics of how computers communicate 
-   - IP: address of where packets come from and where they should be sent 
-   - TCP: responsible for breaking data into packets, delivering / reassembling the packets, checks for corruption 
-   - HTTP: set of rules for how request-response works in the web 
+IP
+   a) Address of where packets come from and where they should be sent.
 
-Network Devices: specialized computers focusing on I/O that forward messages by connecting through network links 
-   - Switches: 
-      - connects L1 layers to form a network 
-      - decides on a port based on a 'forwarding table' to determine where to send messages in an L2 network 
-  	   - switches must become aware of different hosts in a given L2 network
-  	   - through broadcasting across the network, switches learn MAC addresses based on the source of the broadcast   
-   - Routers:
-  		- connects L2 networks to form L3 networks 
-  		- coordinate amongst themselves to decide on a 'forwarding table' and 'routing table' for each router 
+TCP
+   a) Responsible for breaking data into packets, delivering / reassembling the packets, checks for corruption.
 
-Ports: 
-   - docking point for where information is received or sent
-   - how multiple programs listen for new network connections on the same machine without collision  
-   - IP address is like a mailbox to an apartment complex, and ports are the specific apt number
+HTTP
+   a) Set of rules for how request-response works in the web.
+```
 
+##### Network Devices
+```
+Network Devices
+   a) Specialized computers focusing on I/O that forward messages by connecting through network links.
+
+Switches 
+   a) Connects L1 layers to form a network.
+   b) Decides on a port based on a 'forwarding table' to determine where to send messages in an L2 network.
+   c) Switches must become aware of different hosts in a given L2 network.
+   d) Through broadcasting across the network, switches learn MAC addresses based on the source of the broadcast.
+
+Routers
+   a) Connects L2 networks to form L3 networks.
+   b) Coordinate amongst themselves to decide on a 'forwarding table' and 'routing table' for each router.
+```
+
+##### Tables
+```
 Tables:
-   - Forwarding Table: maps a MAC address to a port to forward packets 
-   - Routing Table: maps longest prefix matches on IPs to send packets over next hops (other L2 networks) 
+   a) Forwarding Table : Maps a MAC address to a port to forward packets.
+   b) Routing Table    : Maps longest prefix matches on IPs to send packets over next hops (other L2 networks).
 ```
 
+##### Ports
+```
+Ports: 
+   a) Docking point for where information is received or sent.
+   b) How multiple programs listen for new network connections on the same machine without collision.
+   c) IP address is like a mailbox to an apartment complex, and ports are the specific apartment number.
+```
+
+### Internet
+---
 ##### Internet Architecture 
 ```
-Circuit Switching:
-   - the process of establishing circuits, transferring data, and then terminating upon finish 
-   - resource allocation is inefficient, but fast for large data transfers 
-   - guarantees data transfer while connected 
+Internet
+   a) Networking infrastructure linking connected devices.
 
-Packet Switching :
-   - packet headers contain addresses, routing protocols compute packet hops, no resources are pre-allocated 
-   - no connection is required, minimal network assumptions 
-   - easy to recover from errors 
+Circuit Switching:
+   a) The process of establishing circuits, transferring data, and then terminating upon finish.
+   b) Resource allocation is inefficient, but fast for large data transfers.
+   c) Guarantees data transfer while connected.
+
+Packet Switching
+   a) Packet headers contain addresses, routing protocols compute packet hops, no resources are pre-allocated.
+   b) No connection is required, minimal network assumptions.
+   c) Easy to recover from errors.
 
 Internet Characteristics
-   - uses packet switching 
-   - decentralized  
-   - Fate Sharing 
-   - provides heterogeneous services to different devices/networks
-      - latency for calls vs high quality for video streaming
-      - possible due to "layering", or mix and matching different protocols as needed  
-
-Fate Sharing vs Replication 
-   - Replication 
-      - networks hold replicas and are responsible for state 
-      - fault tolerant only as long as replicas are fine 
-      - concurrency / consistency issues might exist 
-      - hard to engineer 
-
-   - Fate Sharing
-      - end hosts responsible for state
-      - fault tolerant is perfect as long as host is up 
-      - hurts the end host performance, but ends up working fine 
-
-Curse of the Narrow Waist 
-   1) Internet provides heterogeneous services by mix-matching various protocols
-   2) those protocols eventually agree on IP/TCP/HTTP 
-   3) since various protocols rely on IP/TCP/HTTP, switching / changing IP/TCP/HTTP causes a chain of problems   
+   a) Uses packet switching.
+   b) Decentralized and fate sharing. 
+   c) Provides heterogeneous services to different devices/networks.
+      * Latency for calls vs high quality for video streaming.
+        This is possible due to "layering", or mix and matching different protocols as needed.
+   d) Curse of the Narrow Waist
+      * Internet typically provides heterogeneous services by mix-matching various protocols.
+        These protocols eventually agree on IP/TCP/HTTP. 
+        Switching IP/TCP/HTTP can then cause a chain of problems for all other relying protocols. 
 ```
 
-##### Layers 
+##### Fate Sharing vs Replication
 ```
-Layering: ability to mix and match different protocols 
+Replication
+   a) Networks hold replicas and are responsible for state.
+   b) Fault tolerant only as long as replicas are fine.
+   c) Concurrency / consistency issues might exist, and difficult to engineer.
 
-Protocol Stack: set of protocols that are currently in use, can mix and match for different situations
-ex) when using email, network can switch HTTP protocol layer for SMTP protocol layer 
+Fate Sharing
+   a) End hosts responsible for state.
+   b) Fault toleranance is perfect as long as host is up.
+   c) Hurts the end host performance, but ends up working fine in practice.
+```
+
+##### Layers
+```
+Layering
+   a) Ability to mix and match different protocols.
+
+Protocol Stack
+   a) Set of protocols that are currently in use, can mix and match for different situations.
+   b) Example: When using email, network can switch HTTP protocol layer for SMTP protocol layer.
 
 OSI (formal layer): 
    Layer 7) Application 
@@ -83,7 +110,7 @@ OSI (formal layer):
    Layer 4) Transport 
    Layer 3) Network
    Layer 2) Datalink
-   Layer 1) Physical --> physical links that transfer message bits 
+   Layer 1) Physical 
 
 Internet (informal):
    Layer 7) Application
@@ -92,69 +119,88 @@ Internet (informal):
    Layer 1 & 2) Net Access/Physical
 
 Encapsulation 
-   1) when sending over messages, start with the highest layer and move down to layer 1
-   2) for each layer, the lower layer "wraps" the current message from higher levels to create protocol stacks 
-   3) lower layers don't have to know what higher level layers actually do 
-   4) after sending over a message, switches and routers will decapsulate the message from lowest to highest layer 
-   5) the message is then recapsulated before resending and the steps are repeated  
+   Step 1) When sending over messages, start with the highest layer and move down to layer 1.
+   Step 2) For each layer, the lower layer "wraps" the current message from higher levels to create protocol stacks.
+   Step 3) Lower layers don't have to know what higher level layers actually do.
+   Step 4) After sending over a message, switches and routers will decapsulate the message from lowest to highest layer.
+   Step 5) The message is then recapsulated before resending and the steps are repeated.
 ```
 
-##### Lower Level Layers 
+### Layer 1 and Layer 2
+---
+##### Physical & Link Layer
 ```
-Layer 1: Physical Layer
-   - physical links that transfer message bits 
+Physical Layer
+   a) Physical links that transfer message bits.
 
-Layer 2: Link Layer 
-   - bundles physical layers into a LAN
-   - takes stream of bits into frames that hold MAC src/dest address
+Link Layer
+   a) Bundles physical layers into a LAN.
+   b) takes stream of bits into frames that hold MAC src/dest address.
 ```
 
+### Layer 3
+---
 ##### Network Layer 
 ```
-Layer 3: Network Layer 
-   - bundles link layers to Internet
-   - takes frames and transmits as packets
+Network Layer 
+   a) Bundles link layers to Internet.
+   b) Takes frames and transmits as packets.
+```
 
-Packets : small segments of data of a larger message 
-   - IP Packet Header  : holds the source and destination address
-   - TCP Packet Header : order of how packets should be reassembled
-   - IP Packet Data    : holds the data of the packet  
-
-IPv4: 
-   - 32 bits broken into two parts (network and host addresses)
-  -  network addresses are common to groups of host addresses (geography / company)
-
-Classless Interdomain Routing 
-  - 128.168.1.0/26 
-     - 26 bits for network addresses, 6 bits for host addresses
-     - great if you have 50 or less computers in a common network
-  - 192.168.1.0/24
-     - 8 bits for host addresses (192.168.1.0 ~ 192.168.1.255) 
-  - routers do a longest prefix match on these "prefixes" to route packets   
-
-Subnets
-   - networks inside network
-   - uses "subnet mask" to send packet through the most efficient route
-   - send mail --> delivered to office --> delivered to department --> delivered to team --> delivered to person 
-   - for more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/
+##### IPv4 vs IPv6
+```
+IPv4
+   a) Consists of 32 bits that can be broken into two parts (network and host addresses).
+   b) Network addresses are common addresses to groups of host addresses (geography / company).
 
 IPv6: 
-   - more addresses, better functionality
-   - delayed as the entire network must become IPv6 compatible 
-  
-Tunneling
-   - encapsulating IPv6 packets as IPv4 packets to carry over IPv4 networks
-   - not a popular strategy
+   a) More addresses, better functionality.
+   b) Delayed as the entire network must become IPv6 compatible.
+   c) Rely more on alternative solutions such as NATs for now.
+```
 
-NAT
-   Steps 
-      1) assign private IP addresses within common network
-      2) NAT devices maps private IP addresses to a single public IP address
-      3) send to destination address with mapped public IP address as the source 
-      4) when host at destination tries to send a packet to a host within the network, use demultiplexing IDs (L4 protocol) to find host 
-   Disadvantages 
-      - difficult to distinguish devices
-      - can't connect to hosts within the private network (address unknown) until they send a message first
+##### Packets
+```
+Packets
+   a) Small segments of data of a larger message.
+
+Components
+   a) IP Packet Header  : Holds the source and destination address.
+   b) TCP Packet Header : Order of how packets should be reassembled.
+   c) IP Packet Data    : Holds the data of the packet.
+```
+
+##### Classless Interdomain Routing (CIDR)
+```
+CIDR
+   a) Example 1: 128.168.1.0/26
+      * 26 bits for network addresses, 6 bits for host addresses.
+      * Great if you have 50 or less computers in a common network.
+   b) Example 2: 192.168.1.0/24
+      * 24 bits for network addresses, 8 bits for host addresses (192.168.1.0 ~ 192.168.1.255).
+   c) Routers do a longest prefix match on these "prefixes" to route packets.
+```
+
+##### Subnets
+```
+Subnets
+   a) Networks inside networks.
+   b) Uses "subnet mask" to send packet through the most efficient route.
+      Send mail --> delivered to office --> delivered to department --> delivered to team --> delivered to person.
+   c) For more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/
+```
+
+##### Network Address Translation (NAT)
+```
+NAT Steps
+   Step 1) Assign private IP addresses within common network.
+   Step 2) NAT devices maps private IP addresses to a single public IP address.
+   Step 3) Send to destination address with mapped public IP address as the source.
+   Step 4) When host at destination tries to send a packet to a host within the network, use demultiplexing IDs (L4 protocol) to find host.
+
+NAT Disadvantages
+   a) Difficult to distinguish devices.
+   b) Can't connect to hosts within the private network (address unknown) until they send a message first.
 ```
 
 ##### Discovery 
@@ -162,30 +208,32 @@ NAT
 host name (www.github.com) --(DNS)--> IP Address --(ARP)--> MAC address 
 
 Processes of Discovery 
-   1) Host begins only knowing its source MAC address 
-   2) Must discover its source IP address (DHCP)
-   3) Must discover the destination's IP address (DNS)
-   4) Longest prefix match on the IP to determine if the message should go to a router or a local machine 
-   5) Move to a router (another L2 network) or a local machine (current L2 network) (ARP) 
+   Step 1) Host begins only knowing its source MAC address.
+   Step 2) Must discover its source IP address via DHCP.
+   Step 3) Must discover the destination's IP address via DNS.
+   Step 4) Longest prefix match on the IP to determine if the message should go to a router or a local machine.
+   Step 5) Move to a router (another L2 network) or a local machine (current L2 network) via ARP. 
 
 IP address 
-   - determines "where" the machine is 
-   - IP addresses can vary based on location 
-   - IP addresses will efficiently narrow down from L3 to the correct L2 network, where computers can then be located through MAC addresses  
+   a) Determines "where" the machine is.
+   b) IP addresses can vary based on location.
+   c) IP addresses will efficiently narrow down from L3 to the correct L2 network, where computers can then be located through MAC addresses.
 
 MAC address
-   - physical unique address of a machine 
-   - useful for local communications 
-   - determines "who" the machine is 
-   - difficult for the entire Internet to keep track of where all MAC addresses are 
+   a) Physical unique address of a machine. 
+   b) Useful for local communications.
+   c) Determines "who" the machine is.
+   d) Difficult for the entire Internet to keep track of where all MAC addresses are.
 
-DNS Server: phonebook for finding the IP addresses of sites, DNS servers are replicated for availability, and caches popular addresses 
+DNS Server
+   a) Phonebook for finding the IP addresses of sites, DNS servers are replicated for availability, and caches popular addresses.
 
-DHCP Server: 
-   - host broadcasts a DHCP discovery network, DHCP servers respond with an offer response, host sends a request message specifying the DHCP it wants
-   - DHCP helps a machine learn its own IP address, IP addresses of local DNS servers, gateway routers, and prefix length 
+DHCP Server
+   a) Host broadcasts a DHCP discovery ping --> DHCP servers respond with an offer response --> host sends a request message specifying the DHCP server it will use.
+   b) DHCP helps a machine learn its own IP address, IP addresses of local DNS servers, gateway routers, and prefix length.
 
-ARP Table: table used to translate IP addresses into MAC addresses 
+ARP Table
+   a) Table used to translate IP addresses into MAC addresses.
 ```
 
 ##### Transport Layer 
