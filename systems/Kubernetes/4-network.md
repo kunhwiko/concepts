@@ -111,7 +111,7 @@ Pod to Pod Networking
 Queues
    a) Containers can listen or respond to messages, perform actions, post progress status via queues
    b) Queues decouple the need to know about IP addresses.
-   c) Easy to keep track of progress by monitoring the queue.
+   c) Easy to keep track of progress by monitoring the queue, and great for large scale systems.
    d) Easy to add or remove listeners.
    e) The queue must be highly available and may requires some time to set up.
    f) Queues can be used alongside databases.

@@ -3,9 +3,9 @@
 ##### Jobs
 ```
 Jobs
-   a) manages one or more pods to execute some operation until it is successful
-   b) if a pod fails, then a new pod runs to finish the operation 
-   c) jobs and their pods will not be cleared after completion (delete the job to clear all resources)
+   a) Manages one or more pods to execute some operation until it is successful.
+   b) If a pod fails, then a new pod runs to finish the operation.
+   c) Jobs and their pods will not be cleared after completion (delete the job to clear all resources).
 ``` 
 
 ##### Example
@@ -40,9 +40,9 @@ spec:
 ##### Cron Jobs
 ```
 Cron Jobs
-   a) jobs that run periodically
-   b) each invocation launches a new job object along with corresponding pods
-   c) deleting a cron job will delete existing jobs and pods
+   a) Jobs that run periodically.
+   b) Each invocation launches a new job object along with corresponding pods.
+   c) Deleting a cron job will delete existing jobs and pods.
 ```
 
 ### Probing & Readiness
@@ -50,28 +50,29 @@ Cron Jobs
 ##### Probes
 ```
 Startup Probes
-   a) defines what it means for a container to have started
-   b) disables liveness and readiness checks until startup succeeds
-   c) provides time for the container application to initialize
+   a) Defines what it means for a container to have started.
+   b) Disables liveness and readiness checks until startup succeeds.
+   c) Provides time for the container application to initialize.
 
 Liveness Probes
-   a) defines what it means for a container to be alive
-   b) kubelets have basic restart policies if a container process crashes, but it might not be sufficient
+   a) Defines what it means for a container to be alive.
+   b) Kubelets have basic restart policies if a container process crashes, but it might not be sufficient.
 
 Readiness Probes
-   a) defines what it means for a container application to be able to serve requests
-   b) container may be initialized, but necessary dependencies might still be or have become unavailable 
-   c) when readiness probe fails, containers are not killed but requests will not be received
-   d) ensures requests don't flood a pod with requests it cannot process
+   a) Defines what it means for a container application to be able to serve requests.
+   b) Container may be initialized, but necessary dependencies might still be or have become unavailable.
+   c) When readiness probe fails, containers are not killed but requests will not be received.
+   d) Ensures requests don't flood a pod with requests it cannot process.
 ```
 
 ##### Readiness Gates
 ```
 Problems
-   a) readiness probes help address pod level readiness, but not an infrastructure level readiness
-   b) services, network policies forwarding traffic might not be ready yet
+   a) Readiness probes help address pod level readiness, but not an infrastructure level readiness.
+   b) Services, network policies forwarding traffic might not be ready yet.
 
-Readiness Gates : provide an extra podSpec to specify set of conditions for when things are ready
+Readiness Gates
+   a) Provide an extra podSpec to specify set of conditions for when things are ready.
 ```
 
 ##### Probe Examples
@@ -99,7 +100,7 @@ spec:
 ##### Init Containers
 ```
 Init Containers
-   a) containers that run to completion before all other containers start
-   b) can configure such that probes will start only after init containers are started
-   c) init containers can provide setup scripts
+   a) Containers that run to completion before all other containers start.
+   b) Can configure such that probes will start only after init containers are started.
+   c) Init containers can provide setup scripts.
 ```
