@@ -236,63 +236,97 @@ ARP Table
    a) Table used to translate IP addresses into MAC addresses.
 ```
 
+### Layer 4
+---
 ##### Transport Layer 
 ```
-Layer 4: Transport Layer 
-   - provides the means for transferring variable length data in a reliable fashion 
-   - on the host and typically not on the layer 
-   - message: UDP / TCP  
+Transport Layer 
+   a) Provides the means for transferring variable length data in a reliable fashion.
+```
 
+##### UDP
+```
 UDP 
-   - a simply wrapper to IP that provides lightweight, fast delivery of data 
-   - connection-less protocol
-   - sends and receives chunks of data 
+   a) Wrapper around IP that provides lightweight, fast delivery of data.
+   b) Connection-less protocol.
+   c) Sends and receives chunks of data.
+```
 
+##### TCP
+```
 TCP 
-   - extensive error checking, provides recovery options, and reliable delivery of data 
-   - connection-oriented (must request a handshake with the destination host first)
-   - Handshake: TCP sends requests by sending packets to destination server asking for a connection
-   - sends and receives a stream of bytes in segments that must be reorganized upon delivery 
-   - controls flow of packets (sending/receiving) 
+   a) Extensive error checking, provides recovery options, and reliable delivery of data.
+   b) Connection-oriented (must request a handshake with the destination host first).
+   c) Sends and receives a stream of bytes in segments that must be reorganized upon delivery.
+   d) Controls flow of packets (sending/receiving).
+
+Handshake
+   a) TCP sends requests by sending packets to destination server asking for a connection.
 
 How does TCP ensure reliable delivery?
-   - checksum: checks for bit errors 
-   - ack/nack: acknowledges if receiver received the message 
-   - sequence number: checks which packets receiver already received 
-   - timeout: resends if there is no response 
-
-TCP Flow Control: end hosts control packet traffic 
-   Problem: What if Netflix sends a 4K video, can a computer handle all the packets at once?
-      - TCP allows us to control the flow rate of packets by advertising an available window in our buffer
-      - TCP sends more packets when receiving an acknowledgment and sends less when a packet loss occurs. 
-
-TCP Congestion Control: routers controlling packet traffic 
-   Problem: What if there are too many packets in the network? 
-      - routers tell hosts that the network is congested 
+   a) checksum        : Checks for bit errors.
+   b) ACK / NACK      : Acknowledges if receiver received the message.
+   c) Sequence Number : Checks which packets receiver already received. 
+   d) Timeout         : Resends if there is no response.
 ```
 
-##### HTTP (Application Layer)
+##### Flow Control
 ```
-Base Structure of HTTP
-   - synchronous request/reply protocol (before HTTP/2)
-   - on top of TCP/IP (before HTTP/3)
-   - stateless (server does not recognize same client) (before HTTP/1.1)
-   - ASCII format (before HTTP/2)
+TCP Flow Control 
+   a) End hosts control packet traffic.
 
-Stateless
-   Pros: improves scalability / resource availability on server side 
-   Cons: some applications need persistent state (shopping carts, usage tracking)
-   Cookies:
-      - sets a key-value pair that a website can store in the browser 
-      - the cookie is sent in subsequent requests so server can recognize clients 
+Problem
+   a) What if Netflix sends a 4K video, can a computer handle all the packets at once?
 
-HTTP 1.1
-   - persistent connection: maintain TCP connections across multiple requests 
-   - understands state (server recognizes client) 
+Solution
+   a) TCP allows us to control the flow rate of packets by advertising an available window in our buffer.
+   b) TCP sends more packets when receiving an acknowledgment and sends less when a packet loss occurs. 
+```
 
-Reducing page load times 
-   - CDNs 
+##### Congestion Control
+```
+TCP Congestion Control 
+   a) Routers control packet traffic.
 
+Problem
+   a) What if there are too many packets in the network?
+
+Solution
+   a) Routers tell hosts that the network is congested.
+```
+
+### Layer 7
+---
+##### HTTP 1
+```
+HTTP/1.0
+   a) Synchronous request/reply protocol (before HTTP/2).
+   b) Wrapper on top of TCP/IP (before HTTP/3).
+   c) Stateless (server does not recognize same client) (before HTTP/1.1).
+   d) ASCII format (before HTTP/2).
+
+HTTP/1.1
+   a) Host fields: Servers can distinguish different host addresses through the host field 
+   b) persistent connections: Maintains TCP connections across multiple requests.
+   c) chunked transfer encoding
+```
+
+##### Cookies
+```
+Pros of Stateless Application
+   a) Improves scalability.
+   b) Improves resource availability on server side.
+
+Cons of Stateless Application
+   a) Some applications need persistent state (e.g. shopping carts, usage tracking).
+
+Cookies
+   a) Sets a key-value pair that a website can store in the browser.
+      The cookie is sent from the browser in subsequent client requests so the server can recognize clients.
+```
+
+##### HTTP 2 and 3
+```
 HTTP 2
    - binary framing: 
       - instead of sending stream of ASCII characters, messages are formatted into stream of packets 
@@ -303,7 +337,6 @@ HTTP 2
 HTTP 3
    - moving to build a UDP based protocol: custom TLS handshake, custom congestion control 
 ```
-
 
 ### Getting Started with Security 
 ---
