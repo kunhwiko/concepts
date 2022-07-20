@@ -300,15 +300,19 @@ Solution
 ##### HTTP 1
 ```
 HTTP/1.0
-   a) Synchronous request/reply protocol (before HTTP/2).
-   b) Wrapper on top of TCP/IP (before HTTP/3).
-   c) Stateless (server does not recognize same client) (before HTTP/1.1).
-   d) ASCII format (before HTTP/2).
+   a) Wrapper on top of TCP/IP (before HTTP/3).
+   b) Synchronous request/reply protocol (before HTTP/2).
+   c) ASCII format (before HTTP/2).
+   d) Stateless (server does not recognize same client) (before HTTP/1.1).
+   e) Single request/reply per TCP connection (before HTTP/1.1).
 
 HTTP/1.1
-   a) Host fields: Servers can distinguish different host addresses through the host field 
-   b) persistent connections: Maintains TCP connections across multiple requests.
-   c) chunked transfer encoding
+   a) Host header fields: Servers can distinguish different host addresses that have the same IP address through the header. 
+                          This allows for multiple domains per web server. 
+   b) Persistent connections: Maintains the same TCP connections across multiple requests/responses.
+   c) Chunked transfer encoding: By transferring chunks, it is unnecessary to generate the full content and content size can be dynamic. 
+                                 For each chunk, a new header can be sent instead of having to buffer the whole data before sending the initial header.
+                                 This strategy makes use of the advantages of persistent connections.
 ```
 
 ##### Cookies
