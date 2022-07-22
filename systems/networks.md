@@ -9,7 +9,7 @@ Networks
 ##### Protocols
 ```
 Protocol
-   a) St of rules and structures that define the syntax / semantics of how computers communicate.
+   a) Set of rules and structures that define the syntax / semantics of how computers communicate.
 
 IP
    a) Address of where packets come from and where they should be sent.
@@ -329,60 +329,70 @@ Cookies
       The cookie is sent from the browser in subsequent client requests so the server can recognize clients.
 ```
 
-##### HTTP 2 and 3
+##### HTTP 2
 ```
-HTTP 2
-   - binary framing: 
-      - instead of sending stream of ASCII characters, messages are formatted into stream of packets 
-      - this allows interleaving different messages based on priority 
-   - compressed headers 
-   - promises: send files that the client did not explicitly request, but might need as deemed by the server  
+HTTP/2.0
+   a) Binary Framing: Instead of sending stream of ASCII characters, messages are formatted into stream of packets.
+                      This allows interleaving different messages based on priority.
+   b) Compressed headers
+   c) Promises: Send files that the client did not explicitly request, but might need as deemed by the server.
+```
 
-HTTP 3
-   - moving to build a UDP based protocol: custom TLS handshake, custom congestion control 
+##### HTTP 3
+```
+HTTP/3.0
+   a) UDP based protocol.
+   b) Custom TLS handshake protocol.
+   c) Custom congestion control.
 ```
 
 ### Getting Started with Security 
 ---
 ##### Encryptions
 ```
-Man-in-the-Middle(MITM) Attack: malicious activity to intercept or alter IP packets in an HTTP connection
+Man-in-the-Middle(MITM) Attack
+   a) Malicious activity to intercept or alter IP packets in an HTTP connection.
 
 Symmetric Encryption
-   - uses a single key to encrypt/decrypt data and is faster 
-   - makes use of Advanced Encryption Standard (AES) algorithm 
+   a) Uses a single key to encrypt/decrypt data and is faster.
+   b) <akes use of Advanced Encryption Standard (AES) algorithm.
 
 Asymmetric Encryption
-   - uses a public and private key and is slower  
-   - anyone can encrypt with public key, only private key can decrypt messages  
+   a) Uses a public and private key and is slower.
+   b) Anyone can encrypt with public key, only private key can decrypt messages.
 ```
 
 ##### TLS
 ```
-HTTPS: HTTP over TLS 
-Transport Layer Security (TLS): security protocol for secure communication 
+HTTPS
+   a) HTTP over TLS.
 
-TLS Handshake: process to establish a secure connection between clients and server 
-   Step 1) 
-      - Client sends "client hello"
-      - Server responds with "server hello" + SSL certificate containing the public key
+Transport Layer Security (TLS)
+   a) Security protocol for secure communication.
+
+TLS Handshake 
+   a) Process to establish a secure connection between clients and server.
+
+   Step 1)
+      a) Client sends "client hello".
+      b) Server responds with "server hello" + SSL certificate containing the public key.
    Step 2) 
-      - Client verifies SSL certificate and sends a "premaster secret" encrypted with the public key
-      - Server decrypts the premaster secret using the private key
+      a) Client verifies SSL certificate and sends a "premaster secret" encrypted with the public key.
+      b) Server decrypts the premaster secret using the private key.
    Step 3) 
-      - client hello, server hello, premaster secret are used to create temporary symmetric keys for the session
-      - Symmetric keys are used to figure out whether a connection was established or has failed 
+      a) Client hello, server hello, premaster secret are used to create temporary symmetric keys for the session.
+      b) Symmetric keys are used to figure out whether a connection was established or has failed.
 
 Purpose of SSL Certificates 
-   - MITM attacks can intercept server hellos and public keys, send their own public key, and establish a connection with client 
-   - SSL certificates guarantee where public keys come from
+   a) MITM attacks can intercept server hellos and public keys, send their own public key, and establish a connection with client.
+   b) SSL certificates guarantee where public keys come from.
 ```
 
 ##### Authentication & Authorization
 ```
-Authentication
-   - Act of validating that users are whom they claim to be 
+Authentication (AuthN)
+   a) Act of validating that users are whom they claim to be.
 
-Authorization
-   - Act of verifying if the user has the ability to perform a certain function
+Authorization (AuthZ)
+   a) Act of verifying if the user has the ability to perform a certain function.
 ```
