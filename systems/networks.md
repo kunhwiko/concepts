@@ -185,9 +185,13 @@ CIDR
 ```
 Subnets
    a) Networks inside networks.
-   b) Uses "subnet mask" to send packet through the most efficient route.
-      Send mail --> delivered to office --> delivered to department --> delivered to team --> delivered to person.
-   c) For more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/
+   b) Narrows down the range of IP addresses and the list of devices in that network.
+
+Subnet Masks
+   a) Means to send packets to a smaller subnet in a time efficient way.
+      Send mail --> route to office --> route to department --> route to team --> route to person.
+      The above does not waste time trying to get the mail to the individual person directly.
+   b) For more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/
 ```
 
 ##### Network Address Translation (NAT)
