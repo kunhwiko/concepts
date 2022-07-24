@@ -97,16 +97,22 @@ ExternalName
 ##### Container to Container Networking
 ```
 Container to Container Networking
-   a) Containers in a pod share IP addresses.
-   b) Containers in the same pod can communicate via localhost, local filesystem, etc. 
+   a) CRI is responsible for creating new Linux namespaces.
+      Each pod is assigned to a Linux namespace on a Kubernetes node and gets their own IP address.
+   b) Containers in a pod share IP addresses and network namespaces, and therefore can communicate via localhost. 
 ```
 
 ##### Pod to Pod Networking
 ```
 Pod to Pod Networking
-   a) The same pod IP address is used for within the node and across the entire cluster.  
-   b) Pod's IP addresses are exposed across the entire cluster.
-   c) Containers can talk to other containers by connecting to a registration service (typically a Kubernetes service).
+   a) CNI is responsible for setting up a virtual ethernet in the pod's namespace.
+      This veth connects to the veth of the node's root namespace via a network bridge.
+   b) For pod to pod communication from within the node, requests will be sent via hops from veths.
+   c) For pod to pod communication for different nodes, subnet masking determines if endpoint is on the same network.
+      If not, ARP will check for the MAC address of the Kubernetes default gateway and use it to correct to the right node.
+   d) The same pod IP address is used for within the node and across the entire cluster.  
+      This IP address is exposed across the entire cluster.
+   e) Containers can talk to other containers by connecting to a registration service (typically a Kubernetes service).
 
 Queues
    a) Containers can listen or respond to messages, perform actions, post progress status via queues
