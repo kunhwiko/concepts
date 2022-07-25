@@ -112,15 +112,9 @@ Pod to Pod Networking
 ##### Pod to Pod Networking via Services
 ```
 How Services Work
-   a) Services are pieces of data stored in etcd and are built on top of Linux netfilters and iptables.
+   a) Services are pieces of data stored in etcd and are built on top of Linux Netfilter and IP Tables.
       Kube proxy will update iptables for each node based on info stored in etcd.
    b) Kube proxy on each node will take care of redirecting traffic to the correct pod.
-
-Netfilter
-   a) Framework to configure packet filtering, create NAT or port translation rules, and manage traffic flow in the network.
-
-IPTables
-   a) User-space utility program that allows for configuring IP packet filter rules of the Linux kernel firewall.
 ```
 
 ##### Pod to Pod Networking via Queues
