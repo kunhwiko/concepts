@@ -138,6 +138,13 @@ Link Layer
    b) takes stream of bits into frames that hold MAC src/dest address.
 ```
 
+##### Virtual Ethernet (veth)
+```
+Virtual Ethernet
+   a) Virtual implementation of Ethernet that allow for communications across logical partitions or different virtual machines without the need of assigning physical hardware.
+   b) Devices are typically created in pairs and are connected via a bridge.
+```
+
 ### Layer 3
 ---
 ##### Network Layer 
