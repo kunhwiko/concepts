@@ -100,21 +100,30 @@ Container to Container Networking
 ##### Pod to Pod Networking
 ```
 Pod to Pod Networking
-   a) CNI is responsible for setting up a virtual ethernet in the pod's namespace.
-      This veth connects to the veth of the node's root namespace via a network bridge.
-   b) For pod to pod communication from within the node, requests will be sent via hops from veths.
-   c) For pod to pod communication for different nodes, subnet masking first determines if endpoint is on the same network.
-      If not, ARP will check for the MAC address of the Kubernetes default gateway and route to it to find the right node.
-   d) The same pod IP address is used for within the node and across the entire cluster.  
+   Step 1) CNI sets up a virtual ethernet in the pod's Linux namespace.
+           This veth is connected to the veth of the node's root namespace via a network bridge.
+   Step 2) When two pods communicate from within the node, requests are resolved via ARP.
+           The request will jump from the current namespace's veth to the root namespace's veth, and then to the target namespace's veth.
+   Step 3) For pod communications across different nodes, subnet masking first determines if endpoint is on the same network.
+           If not, ARP will check for the MAC address of the Kubernetes default gateway.
+           The request will jump from the current namespace's veth to the root namespace's veth, and then to the default gateway to be routed to the right node. 
+
+IP Address Uniformity
+   a) The same pod IP address is used for within the node and across the entire cluster.  
       This IP address is exposed across the entire cluster.
 ```
 
 ##### Pod to Pod Networking via Services
 ```
 How Services Work
-   a) Services are pieces of data stored in etcd and are built on top of Linux Netfilter and IP Tables.
-      Kube proxy will update iptables for each node based on info stored in etcd.
-   b) Kube proxy on each node will take care of redirecting traffic to the correct pod.
+   a) Services are pieces of data stored in etcd and built on top of Linux Netfilter and IP Tables.
+      Kube proxy will update IP Tables for each node based on info stored in etcd.
+
+Pod to Pod Networking via Services
+   Step 1) ARP will check for the MAC address of the Kubernetes default gateway.
+   Step 2) Netfilter hooks are triggered and IP Table chains are applied.
+           DNAT will rewrite the packet's destination address to the backend Pod of the service.
+   Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
 ```
 
 ##### Pod to Pod Networking via Queues
