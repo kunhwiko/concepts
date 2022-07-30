@@ -87,7 +87,7 @@ ExternalName
    b) Adds CNAME DNS recourd to coreDNS
 ```
 
-### Connections
+### Networking Methods
 ---
 ##### Container to Container Networking
 ```
@@ -145,6 +145,37 @@ Cloud Provider Networking
    a) Cloud provider load balancers are not Kubernetes aware. 
       Typically these load balancers will direct to any Kubernetes node.
       Kube proxy will then redirect to the correct pod in the correct node. 
+```
+
+### Container Network Interface (CNI)
+---
+##### CNI
+```
+CNI
+   a) Component that is concerned about the networking in the current node.
+   b) Set of rules that a networking plugin should follow (e.g. ADD, DEL container to network, CHECK container's network).
+   c) CNI abstracts away creating interfaces, veths, NAT rules and setting up linux namespaces, routes, bridges, IP addresses.
+```
+
+##### Inner Workings
+```
+Inner Workings of CNI
+   Step 1) When a pod gets assigned to a node, CNI initializes the networking components.
+   Step 2) Kubelet sends a configuration in JSON format to the CNI to explain what the CNI plugin looks like.
+```
+
+##### Flat Networking Approach
+```
+CNI with Flat Networking
+   a) All pods in the cluster are assigned IP addresses from the cluster's IP pool.
+   b) Easy to set up and monitor network traffic but could easily exhaust all of the available IP addresses.
+```
+
+##### Overlay Networking Approach
+```
+CNI with Overlay Networking
+   a) Encapsulates packets coming from the underlaying network at the secondary network level when going to another node.
+   b) Typically uses VXLAN (tunneling L2 domains over L3 networks).
 ```
 
 ### Network Policies
