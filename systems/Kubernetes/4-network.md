@@ -152,16 +152,31 @@ Cloud Provider Networking
 ##### CNI
 ```
 CNI
-   a) Component that is concerned about the networking in the current node.
-   b) Set of rules that a networking plugin should follow (e.g. ADD, DEL container to network, CHECK container's network).
-   c) CNI abstracts away creating interfaces, veths, NAT rules and setting up linux namespaces, routes, bridges, IP addresses.
+   a) Specification and a set of libraries for writing CNI plugins.
+   b) Initiative to make different networking solutions integratable with various container orchestration systems.
+   c) Users are able to adopt networking solutions and the container orchestration system of their choice according to different needs.
+```
+
+##### CNI Plugin
+```
+CNI Plugin
+   a) Plugin must do the following:
+      * Create veth pairs, attach veth to linux namespace, bridge veth.
+      * Assign unique IP addresses to CNI containers (in Kubernetes, these are pods) via an IP Address Management (IPAM) plugin.
+      * Take care of networking routes.
+   b) Plugin must support the following inputs:
+      * ADD / DEL container to network
+      * CHECK container's network status
+      * VERSION reporting
+   c) Container runtimes invoke CNI plugins as an executable (e.g. call ADD verb) and passes a JSON configuration payload to the CNI. 
 ```
 
 ##### Inner Workings
 ```
 Inner Workings of CNI
-   Step 1) When a pod gets assigned to a node, CNI initializes the networking components.
-   Step 2) Kubelet sends a configuration in JSON format to the CNI to explain what the CNI plugin looks like.
+   Step 1) Container runtime executes CNI plugin with the desired command along with related network configs.
+   Step 2) CNI plugin performs the required operations. 
+   Step 3) CNI plugin streams standard output as JSON.
 ```
 
 ##### Flat Networking Approach

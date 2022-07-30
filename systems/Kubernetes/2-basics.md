@@ -101,7 +101,7 @@ Kube Proxy
 ```
 CRI
    a) Enables Kubernetes to support a general interface for not only Docker containers but other container runtimes as well.
-   b) Kubelet interacts with CRI via gRPC to determine what container runtime to use.
+   b) Kubelet interacts with custom implementations of CRI via gRPC to determine what the container runtime should do.
 ```
 
 ##### Pod Lifecycle Event Generator (PLEG)
