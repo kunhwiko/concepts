@@ -161,9 +161,9 @@ CNI
 ```
 CNI Plugin
    a) Plugin must do the following:
-      * Create veth pairs, attach veth to linux namespace, bridge veth.
+      * Add network interface (e.g. bridge) to container network namespace, bridge the container to the host via veth pairs.
       * Assign unique IP addresses to CNI containers (in Kubernetes, these are pods) via an IP Address Management (IPAM) plugin.
-      * Take care of networking routes.
+      * Take care of routing logic.
    b) Plugin must support the following inputs:
       * ADD / DEL container to network
       * CHECK container's network status
@@ -173,21 +173,31 @@ CNI Plugin
 
 ##### Inner Workings
 ```
-Inner Workings of CNI
-   Step 1) Container runtime executes CNI plugin with the desired command along with related network configs.
-   Step 2) CNI plugin performs the required operations. 
-   Step 3) CNI plugin streams standard output as JSON.
+How CNI Works
+   Step 1) Container runtime specifies actions (e.g. add container) it wants to execute on CNI plugin.
+   Step 2) Input network configurations stored as JSON files are picked up and streamed to the plugin via STDIN.
+           Runtimes typically specify what path to look for when picking up JSON files. 
+           Examples of configurations:
+              * CNI version
+              * Name of network
+              * Type of plugin to use (e.g. bridge plugin)
+              * IPAM and DNS configurations 
+   Step 3) Container runtime can pass other additional environment variables.
+           Examples of environment variables:
+              * Desired operations (e.g. ADD)
+              * Path to network namespace file
+              * Name of the network interface that will be set up
+              * Path to CNI plugin executable
+   Step 4) CNI plugin performs operations based on the configurations.
+   Step 5) CNI plugin outputs generated network interfaces as STDOUT in JSON format.
 ```
 
-##### Flat Networking Approach
+##### Flat Networking vs Overlay Networking Model
 ```
 CNI with Flat Networking
    a) All pods in the cluster are assigned IP addresses from the cluster's IP pool.
    b) Easy to set up and monitor network traffic but could easily exhaust all of the available IP addresses.
-```
 
-##### Overlay Networking Approach
-```
 CNI with Overlay Networking
    a) Encapsulates packets coming from the underlaying network at the secondary network level when going to another node.
    b) Typically uses VXLAN (tunneling L2 domains over L3 networks).
