@@ -164,14 +164,14 @@ CNI Plugin
       * Add network interface (e.g. bridge) to container network namespace, bridge the container to the host via veth pairs.
       * Assign unique IP addresses to CNI containers (in Kubernetes, these are pods) via an IP Address Management (IPAM) plugin.
       * Take care of routing logic.
-   b) Plugin must support the following inputs:
+   b) Plugin must implement and support the following interface:
       * ADD / DEL container to network
       * CHECK container's network status
       * VERSION reporting
-   c) Container runtimes invoke CNI plugins as an executable (e.g. call ADD verb) and passes a JSON configuration payload to the CNI. 
+   c) Container runtimes invoke CNI plugins as an executable (e.g. invoke ADD verb) and passes a JSON configuration payload to the CNI. 
 ```
 
-##### Inner Workings
+##### CNI Workings
 ```
 How CNI Works
    Step 1) Container runtime specifies actions (e.g. add container) it wants to execute on CNI plugin.
@@ -179,7 +179,6 @@ How CNI Works
            Runtimes typically specify what path to look for when picking up JSON files. 
            Examples of configurations:
               * CNI version
-              * Name of network
               * Type of plugin to use (e.g. bridge plugin)
               * IPAM and DNS configurations 
    Step 3) Container runtime can pass other additional environment variables.
@@ -189,7 +188,7 @@ How CNI Works
               * Name of the network interface that will be set up
               * Path to CNI plugin executable
    Step 4) CNI plugin performs operations based on the configurations.
-   Step 5) CNI plugin outputs generated network interfaces as STDOUT in JSON format.
+   Step 5) CNI plugin outputs the result (generated network interfaces) as STDOUT in JSON format.
 ```
 
 ##### Flat Networking vs Overlay Networking Model
