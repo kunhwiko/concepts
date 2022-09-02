@@ -30,17 +30,6 @@ AppArmor : Linux kernel security module that allows you to create profiles to do
    d) Provide improved auditing through logs.
 ```
 
-### Monitoring Tools
----
-##### Prometheus / Grafana
-```
-Prometheus
-   a) Time series database that scrapes metrics such as CPU and memory usage via HTTP requests.
-
-Grafana 
-   a) Provides means to visualize metrics and provide alerts.
-```
-
 ### Testing Tools
 ---
 ##### Kubemark
