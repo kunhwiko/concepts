@@ -175,6 +175,17 @@ Components
    a) IP Packet Header  : Holds the source and destination address.
    b) TCP Packet Header : Order of how packets should be reassembled.
    c) IP Packet Data    : Holds the data of the packet.
+
+Maximum Transmission Unit (MTU)
+   a) Determines the largest data packet that can be accepted. Packets larger than the limit go through "fragmentation".
+      Fragmentation can lead to additional network latency.
+   b) Larger MTU size means more data can fit in. This results in a faster and more efficient transmission.
+   c) Larger packets are prone to corruption and delays, so packet arrival could be relatively slow.
+   d) If an error occurs, larger packets take longer to retransmit.
+
+Fragmentation
+   a) Routers check the size of each IP packet and the MTU of the next router to receive the packet.
+      If the packet is too big, packets are broken up with copies of the packet header.
 ```
 
 ##### Classless Interdomain Routing (CIDR)

@@ -91,10 +91,12 @@ Kubelet
    c) Receives pod specs, downloads secrets from API server, runs liveness probes, mounts volumes.
    d) Communicates to API server typically via TLS.
    e) Interacts with Container Runtime Interface (CRI).
+   f) Able to manually set network MTU, otherwise network plugins will attempt to deduce optimal MTU.
 
 Kube Proxy
    a) Implements networking rules that allow for network communication to pods.
-   b) Typically discovers resources (e.g. services) either through DNS or environment variables.
+   b) Updates IP Tables for each node.
+   c) Typically discovers resources (e.g. services) either through DNS or environment variables.
 ```
 
 ##### Container Runtime Interface (CRI)

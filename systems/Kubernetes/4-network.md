@@ -41,7 +41,7 @@ NodePort
 LoadBalancer
    a) Mostly used with managed cloud services and might spin up resources (e.g. Network Load Balancers) for a cost.
    b) Sets up clusterIPs / node ports and are a great means to get external traffic inbound (load balancers are superset of node ports).
-   c) Assigns a fixed external IP to the service
+   c) Assigns a fixed external IP to the service.
    d) Additional references: https://www.ibm.com/cloud/blog/kubernetes-ingress
 
 Limitations of NodePorts  
@@ -83,8 +83,8 @@ Headless Services
 ##### External Name
 ```
 ExternalName
-   a) Means to get traffic out to an external source
-   b) Adds CNAME DNS recourd to coreDNS
+   a) Means to get traffic out to an external source.
+   b) Adds CNAME DNS recourd to coreDNS.
 ```
 
 ### Networking Methods
@@ -129,7 +129,7 @@ Pod to Pod Networking via Services
 ##### Pod to Pod Networking via Queues
 ```
 Pod to Pod Networking via Queues
-   a) Containers can listen or respond to messages, perform actions, post progress status via queues
+   a) Containers can listen or respond to messages, perform actions, post progress status via queues.
    b) Queues decouple the need to know about IP addresses.
    c) Easy to keep track of progress by monitoring the queue, and great for large scale systems.
    d) Easy to add or remove listeners.
@@ -142,8 +142,7 @@ Pod to Pod Networking via Queues
 ##### Cloud Provider Networking
 ```
 Cloud Provider Networking
-   a) Cloud provider load balancers are not Kubernetes aware. 
-      Typically these load balancers will direct to any Kubernetes node.
+   a) Cloud provider load balancers are not Kubernetes aware and will typically direct to any Kubernetes node.
       Kube proxy will then redirect to the correct pod in the correct node. 
 ```
 
