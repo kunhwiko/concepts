@@ -206,20 +206,37 @@ CNI with Overlay Networking
 ##### Network Policies
 ```
 Network Policy
-   a) Set of firewall rules.
-   b) Labels are used to define virtual network segments (more flexible than IP address range / subnet masking).
-
-Purposes
-   a) Network segmentation allows for multi-tenancy and minimizes security breaches.
-   b) Maximize parts of system that don't need to talk to each other.
+   a) Manages network traffic to selected pods and namespaces and can act as a set of firewall rules.
+   b) Specfies how a selection of pods can communicate with each other and other endpoints.
+   c) Minimizes security breaches and maximizes parts of systems that don't need to talk to each other.
+   d) Uses labels to select pods, define whitelist rules, define what is allowed for a given namespace.
+      Usage of labels to define virtual network segments tends to be more flexible than CIDR / subnet masking.
 
 Scope
   a) Network policies are cluster-wide.
-  b) Rules are unified if multiple network policies exist.
+  b) Rules are unified if multiple network policies exist. 
 
 Whitelist
    a) By default, all access is forbidden to a certain pod if targeted by at least one network policy.
-   b) By default, all access is granted to a certain pod if targeted by no network policy.  
+   b) By default, all access is granted to a certain pod if targeted by no network policy.    
+```
+
+##### CNI Plugin Implementations
+```
+Relationship between CNI plugins and network policies
+   a) Implementation of network policy differs between CNI plugins.
+      Some CNI plugins both implement network connectivity and enable network policies, while others only do one or the other.
+   b) CNI plugins are able to collaborate with one another.
+      As an example, Calico can implement networking connectivity + Flannel can enable network policies.
+```
+
+##### Execution of Network Policies
+```
+Enforcement of Network Policies
+   Step 1) Policy is posted and sent to Kubernetes master nodes.
+   Step 2) Kubernetes master nodes forwards the policy to a policy controller.
+   Step 3) Policy controller pushes the policy to gatekeepers on each worker node.
+   Step 4) Each gatekeeper intercepts traffic, verifies against policies, and forward/rejects requests.
 ```
 
 ##### Examples
@@ -227,11 +244,11 @@ Whitelist
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 spec: 
-  # what pods are targeted by this policy?
+  # what pods this policy applies to
   podSelector:
     matchLabels:
       role: app-backend
-  # namespace and pods with these labels can access target pods 
+  # which namespace and pod can access above pods 
   # current namespace is exempt and does not need to match labels here
   ingress:
     - from:
