@@ -65,7 +65,7 @@ Limitations of Load Balancers
 
 Advantages over Load Balancers
    a) Enable routing to multiple services with a single load balancer.
-   b) Supports multiple protocols and authentication rules.   
+   b) Can support request limits, URL rewrites, TCP/UDP load balancing, SSL termination, access control, authentication.   
 ```
 
 ##### Headless Services
@@ -85,6 +85,30 @@ Headless Services
 ExternalName
    a) Means to get traffic out to an external source.
    b) Adds CNAME DNS recourd to coreDNS.
+```
+
+##### Client IP Preservation
+```
+service.spec.externalTrafficPolicy
+   a) Specifies whether to route external traffic to node-local endpoint or cluster-wide endpoint.
+
+Cluster Wide Endpoint
+   a) Default behavior.
+   b) Spreads load well.
+   c) Does not preserve client IP address.
+   d) Could make network hops.
+
+Node Local Endpoint
+   a) Does not spread load well.
+   b) Preserves client IP address.
+   c) does not perform network hops.
+```
+
+##### External Load Balancing
+```
+External Load Balancing
+   a) External load balancers operate at a node level rather than a pod level.
+      If 3 pods exist in node A and 1 pod exists in node B for the service, load will likely be distributed equally to both nodes.
 ```
 
 ### Networking Methods
