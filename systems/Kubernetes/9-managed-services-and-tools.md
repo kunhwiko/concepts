@@ -19,6 +19,32 @@ Examples with ACI
    b) Deploys containers only when necessary in a quick fashion.
 ```
 
+### Network Tools
+---
+##### Load Balancer Solutions
+```
+Load Balancer Solutions
+   a) Nginx
+   b) HAProxy
+   c) MetalLB
+   d) Traefic
+```
+
+##### Keepalived Virtual IP
+```
+Problem
+   a) Clients need a stable endpoint, but pods and sometimes load balancers move around in Kubernetes.
+   b) DNS resolution for load balancers and services are not good enough due to performance issues.
+
+Solution
+   a) Keepalived provides high performance virtual IP address that serves address of load balancers / ingress controllers.
+
+Linux functionalities
+   a) IPVS (IP virtual server).
+   b) High availability via Virtual Redundancy Router Protocol (VRRP).
+   c) Operates at networking layer 4 level.
+```
+
 ### Security Tools
 ---
 ##### AppArmor
