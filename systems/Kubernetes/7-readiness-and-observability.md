@@ -1,50 +1,3 @@
-### Jobs  
----
-##### Jobs
-```
-Jobs
-   a) Manages one or more pods to execute some operation until it is successful.
-   b) If a pod fails, then a new pod runs to finish the operation.
-   c) Jobs and their pods will not be cleared after completion (delete the job to clear all resources).
-``` 
-
-##### Example
-```yaml
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: factorial5
-spec:
-  # by default, this value is 1
-  # specifies how many successful completions are required 
-  completions: 3
-
-  # determines max number of pods to launch to run job in parallel
-  # job will not launch more pods than required
-  parallelism: 5
-
-  template:
-    spec:
-      containers:
-      - name: factorial5
-        image: some-python-image-1.32
-        command: ["python",  "-c", "from math import factorial; print(factorial(5))"]
-      # job should not restart after completing
-      restartPolicy: Never
-
-# here only 3 pods will run in parallel as not all 5 are required
-# when a job is done, pods that completed the task will be status "completed"
-# run kubectl logs <pod-name> to view output of the job
-```
-
-##### Cron Jobs
-```
-Cron Jobs
-   a) Jobs that run periodically.
-   b) Each invocation launches a new job object along with corresponding pods.
-   c) Deleting a cron job will delete existing jobs and pods.
-```
-
 ### Probing & Readiness
 ---
 ##### Probes
@@ -103,4 +56,31 @@ Init Containers
    a) Containers that run to completion before all other containers start.
    b) Can configure such that probes will start only after init containers are started.
    c) Init containers can provide setup scripts.
+```
+
+### Prometheus
+---
+##### Features
+```
+Features
+   a) Collects and stores metrics as time series data that are organized as key-value labels.
+   b) Pull model where Prometheus server periodically scrapes targets rather than applications needing to push data.
+   c) Time series collection and pulling is done via HTTP transport.
+   d) Supports PromQL query language that makes it easy to fetch metrics.
+   e) Designed for reliability and fault tolerance, but not for accuracy and completeness. 
+```
+
+##### Components
+```
+Prometheus Server
+   a) Scrapes from targets and stores time series data.
+   
+Push Gateway
+   a) Short lived jobs can push metrics to the Gateway where Prometheus can then pull data from.
+   
+Alertmanager
+   a) Prometheus servers can push metric alerts to Alertmanager, which can then send alert notifications.
+
+Grafana
+   a) Visualization tool that can query and pull data from the Prometheus server.
 ```
