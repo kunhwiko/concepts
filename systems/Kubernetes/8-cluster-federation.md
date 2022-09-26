@@ -10,9 +10,6 @@ History
 Cluster Federation
    a) Aggregate multiple Kubernetes clusters that are treated as a single logical cluster.
    b) Federation control plane presents a single unified view of the system.
-
-Federation Control Plane
-   a) Consists of federation API server and federation controller manager
 ```
 
 ##### Basic Terminology
@@ -26,6 +23,38 @@ Host Cluster
 Member Cluster
    a) Cluster that is registered with the KubeFed API.
    b) KubeFed controllers have authn credentials to contact this cluster.
+```
+
+##### Resource Federation
+```
+FederatedTemplate
+   a) Holds the base specifications of a resource.
+   b) FederatedReplicaSet holds the base specs for ReplicaSet.
+      This should be distributed to targeted clusters.
+
+FederatedPlacement
+   a) Holds the specifications of the clusters that resources should be distributed to.
+   b) FederatedReplicaSetPlacement holds specs about which clusters FederatedReplicaSets go to.
+   
+FederatedOverrides
+   a) Holds specifications of how Template resources should vary for certain clusters.
+   b) FederatedReplicaSetOverrides shows how FederatedReplicaSet should vary for some clusters.
+```
+
+##### Federation Control Plane
+```
+Federation Control Plane
+   a) Consists of federation API server and federation controller manager.
+
+Federation API Server
+   a) Keeps the state of clusters registered in the federation in etcd.
+   b) Interacts with federation controller manager.
+   c) Routes requests to member clusters.
+      Member clusters do not need to know they are part of the federation.
+
+Federation Controller Manager
+   a) Ensures the federation's desired state matches current state.
+   b) Binary contains multiple controllers for different federated resources.
 ```
 
 ##### Advantages
@@ -52,16 +81,4 @@ Availability
 Good examples of Cluster Federation:
    a) [CockroachDB Networking](https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-2-e8d403150d4f)
    b) [CockroachDB Resources](https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-3-182fe2eecc85)
-```
-
-##### Domain
-```
-Domain
-   a) Describes a domain that is to be set by external DNS provider.
-
-ServiceDNSRecord
-   a) Resource that specifies how a service will be registered to the federation.
-
-IngressDNSRecord
-   a) Resource that specifies how an ingress will be registered to the federation.
 ```
