@@ -71,7 +71,7 @@ Advantages over Load Balancers
 ##### Endpoint
 ```
 Endpoint
-   a) Object that shows a current/valid mapping of DNS name to corresponding IP addresses.
+   a) Object that shows a current/valid DNS record of host to IP addresses.
 ```
 
 ##### Headless Services
