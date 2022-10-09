@@ -1,4 +1,4 @@
-<to-deprecate-this-page>
+# Deprecated
 
 ### Cloud Providers
 ---
