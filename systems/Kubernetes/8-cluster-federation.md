@@ -105,31 +105,36 @@ Federated Scaling
 Reference: https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-2-e8d403150d4f
 ```
 
-##### Multi Cluster Services
+##### Domain / DNSRecord
 ```
 Problems
    a) If a service is created in multiple clusters, they are bound to have different IP addresses.
       These IP addresses need to turn into a single endpoint that users can use.
    b) DNS lets us map all IP addresses as an A record to a single domain, but IP addresses can change.
-```
 
-##### Domain / DNSRecord / DNSEndpoint
-```
 Domain
-   a) Associates a DNS zone to the KubeFed control plane and specifies the domain/subdomain to setup.
-   b) Specifies the <federation> record of DNSEndpoints.
+   a) Configuration of domain object is necessary for FederatedService LoadBalancer objects.
+   b) Specifies a domain/subdomain that can be used for all linked FederatedServices.
+   c) Name metadata for this object specifies the <federation> record of DNSEndpoints.
 
-ServiceDNSRecord / IngressDNSRecord
-   a) CRD that identifies the intended domain name of a multi cluster service (ingress) object.
-   b) For every service (ingress) to be registered with DNS, a DNSRecord CRD object must be created.
+ServiceDNSRecord
+   a) CRD that links service object to domain object.
+   b) For every service to be registered with DNS, a DNSRecord CRD object must be created. 
+```
 
+##### DNSEndpoint
+```
 DNSEndpoint
    a) Once a DNSRecord object is created, KubeFed controller will create a DNSEndpoint CRD object.
-   b) Will create three A records (region/zone determined from node labels, if not there must be done manually)
+   b) This object will be read by ExternalDNS to create DNS records.
+
+DNSEndpoint A Records
+   a) For services, will create three A records:
       * <service>.<namespace>.<federation>.svc.<domain>
       * <service>.<namespace>.<federation>.svc.<region>.<domain>
       * <service>.<namespace>.<federation>.svc.<availability-zone>.<region>.<domain>
-   c) This object will be read by ExternalDNS to create DNS records.
+   b) Region and zone are determined from node labels.
+      If they are not there, manual processes will need to be involved.
 ```
 
 ##### ExternalDNS
