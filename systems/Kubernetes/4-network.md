@@ -68,6 +68,12 @@ Advantages over Load Balancers
    b) Can support request limits, URL rewrites, TCP/UDP load balancing, SSL termination, access control, authentication.   
 ```
 
+##### Endpoint
+```
+Endpoint
+   a) Object that shows a current/valid mapping of DNS name to corresponding IP addresses.
+```
+
 ##### Headless Services
 ```
 Limitations of Services
@@ -85,6 +91,12 @@ Headless Services
 ExternalName
    a) Means to get traffic out to an external source.
    b) Adds CNAME DNS recourd to coreDNS.
+```
+
+##### Egress
+```
+Egress
+   a) Ability to control outbound traffic.
 ```
 
 ##### Client IP Preservation
@@ -286,10 +298,4 @@ spec:
   ports:
     - protocol: tcp
       port: 8888
-```
-
-##### Egress
-```
-Egress
-   a) Ability to control outbound traffic.
 ```
