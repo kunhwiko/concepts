@@ -29,8 +29,8 @@ Member Cluster
 ```
 FederatedTemplate
    a) Holds the base specifications of a resource.
-   b) FederatedReplicaSet holds the base specs for ReplicaSet.
-      This should be distributed to member clusters.
+   b) FederatedDeployment holds the base specs for Deployment.
+      This pushes Deployment object to all member clusters by default.
 
 FederatedPlacement
    a) Holds the specifications of the clusters that resources should be distributed to.
@@ -42,7 +42,7 @@ FederatedOverrides
    
 ReplicaSchedulingPreference
    a) Allows user to specify total number of replicas for a particular Template resource.
-   b) Allows user to specify weighted distribution to member clusters.
+   b) Allows user to specify weighted distribution and min/max replica to member clusters.
    c) Allows for an option to dynamically rebalance resources if a resource cannot be scheduled.
 ```
 
@@ -82,7 +82,7 @@ Availability
 ##### Challenges
 ```
 Pod Location Affinity
-   a) If two pods needs to be strictly coupled, this could be done by ensuring same number of replicas per cluster.
+   a) If two pods needs to be strictly coupled, this could be done by putting them in all member clusters.
    b) Best architecture is for pods to be loosely coupled.
    c) Difficult to make pods preferentially coupled or strictly decoupled.
 
@@ -100,9 +100,58 @@ Federated Scaling
 
 ### Networking
 ---
-##### Getting Started
+##### Resources
 ```
-Good examples of Cluster Federation:
-   a) [CockroachDB Networking](https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-2-e8d403150d4f)
-   b) [CockroachDB Resources](https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-3-182fe2eecc85)
+Reference: https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-2-e8d403150d4f
+```
+
+##### Multi Cluster Services
+```
+Problems
+   a) If a service is created in multiple clusters, they are bound to have different IP addresses.
+      These IP addresses need to turn into a single endpoint that users can use.
+   b) DNS lets us map all IP addresses as an A record to a single domain, but IP addresses can change.
+```
+
+##### Domain / DNSRecord / DNSEndpoint
+```
+Domain
+   a) Associates a DNS zone to the KubeFed control plane and specifies the domain/subdomain to setup.
+   b) Specifies the <federation> record of DNSEndpoints.
+
+ServiceDNSRecord / IngressDNSRecord
+   a) CRD that identifies the intended domain name of a multi cluster service (ingress) object.
+   b) For every service (ingress) to be registered with DNS, a DNSRecord CRD object must be created.
+
+DNSEndpoint
+   a) Once a DNSRecord object is created, KubeFed controller will create a DNSEndpoint CRD object.
+   b) Will create three A records (region/zone determined from node labels, if not there must be done manually)
+      * <service>.<namespace>.<federation>.svc.<domain>
+      * <service>.<namespace>.<federation>.svc.<region>.<domain>
+      * <service>.<namespace>.<federation>.svc.<availability-zone>.<region>.<domain>
+   c) This object will be read by ExternalDNS to create DNS records.
+```
+
+##### ExternalDNS
+```
+ExternalDNS
+   a) Synchronizes exposed services and ingresses with DNS providers.
+      Watches and lists LoadBalancer services, ExternalType services, and ingress hostnames.
+   b) For federations where services are replicated across clusters with varying endpoints, DNSEndpoint should be used.
+   c) For newly scanned resources, upserts DNS records in external DNS providers.
+```
+
+### Tools
+---
+##### Gardener
+```
+Garden Cluster
+   a) Responsible for managing seed clusters.
+
+Seed clusters
+   a) Responsible for managing shoot clusters.
+   b) Control planes of all shoot clusters run as pods and services in the seed cluster.
+
+Shoot clusters
+   a) Runs actual workloads and contains only worker nodes.
 ```
