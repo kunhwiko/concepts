@@ -30,7 +30,7 @@ Member Cluster
 FederatedTemplate
    a) Holds the base specifications of a resource.
    b) FederatedReplicaSet holds the base specs for ReplicaSet.
-      This should be distributed to targeted clusters.
+      This should be distributed to member clusters.
 
 FederatedPlacement
    a) Holds the specifications of the clusters that resources should be distributed to.
@@ -39,6 +39,11 @@ FederatedPlacement
 FederatedOverrides
    a) Holds specifications of how Template resources should vary for certain clusters.
    b) FederatedReplicaSetOverrides shows how FederatedReplicaSet should vary for some clusters.
+   
+ReplicaSchedulingPreference
+   a) Allows user to specify total number of replicas for a particular Template resource.
+   b) Allows user to specify weighted distribution to member clusters.
+   c) Allows for an option to dynamically rebalance resources if a resource cannot be scheduled.
 ```
 
 ##### Federation Control Plane
@@ -60,7 +65,7 @@ Federation Controller Manager
 ##### Advantages
 ```
 Cloud Bursting
-   a) Primarily runs on-premise infra but uses cloud computing when peak capacity is reached.
+   a) Primarily runs on-premise infra but uses managed clusters when peak capacity is reached.
 
 Private Data Protection
    a) Sensitive data and workloads are subject to external auditing and may need to run on-premise.
@@ -70,8 +75,27 @@ Private Data Protection
 
 Availability
    a) Provides availability and redundancy in case a cloud provider shuts down.
-   b) Denies vendor lock inds and allows for the ability to negotiate prices.
+   b) Denies vendor lock ins and allows for the ability to negotiate prices.
    c) Able to distribute across availability zones, regions, and cloud providers.
+```
+
+##### Challenges
+```
+Pod Location Affinity
+   a) If two pods needs to be strictly coupled, this could be done by ensuring same number of replicas per cluster.
+   b) Best architecture is for pods to be loosely coupled.
+   c) Difficult to make pods preferentially coupled or strictly decoupled.
+
+Data Access
+   a) Access data remotely if need be but risk high latency.
+   b) Replica data in each cluster but will be expensive to store and will require syncing mechanisms.
+   c) Use a hybrid solution by caching most used data but is complicated and could result in caching stale data.
+
+Federated Scaling
+   a) Difficult to dynamically pick just a few clusters to scale resources under load.
+      Normally will require scaling resources on all member clusters.
+   b) Difficult to start new member clusters due to public cloud quota issues.
+      Hybrid approach is to increase capacity of existing clusters and preparing new ones when need be.
 ```
 
 ### Networking
