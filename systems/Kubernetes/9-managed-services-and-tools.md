@@ -1,3 +1,5 @@
+<to-deprecate-this-page>
+
 ### Cloud Providers
 ---
 ##### Managed Kubernetes Services
