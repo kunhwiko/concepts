@@ -110,7 +110,7 @@ Reference: https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-
 Problems
    a) If a service is created in multiple clusters, they are bound to have different IP addresses.
       These IP addresses need to turn into a single endpoint that users can use.
-   b) DNS lets us map all IP addresses as an A record to a single domain, but IP addresses can change.
+   b) DNS lets us manually map all IP addresses as an A record to a single domain, but IP addresses can change.
 
 Domain
    a) Configuration of domain object is necessary for FederatedService LoadBalancer objects.
@@ -119,7 +119,14 @@ Domain
 
 ServiceDNSRecord
    a) CRD that links service object to domain object.
-   b) For every service to be registered with DNS, a DNSRecord CRD object must be created. 
+   b) For every service to be registered with DNS, a ServiceDNSRecord CRD object must be created. 
+```
+
+##### IngressDNSRecord
+```
+IngressDNSRecord
+   a) Cluster may need to send requests from the receiving cluster to a different cluster.
+      IngressDNSRecord CRD objects can be created for KubeFed to register a DNSEndpoint CRD object.
 ```
 
 ##### DNSEndpoint
@@ -128,8 +135,8 @@ DNSEndpoint
    a) Once a DNSRecord object is created, KubeFed controller will create a DNSEndpoint CRD object.
    b) This object will be read by ExternalDNS to create DNS records.
 
-DNSEndpoint A Records
-   a) For services, will create three A records:
+ServiceDNSEndpoint A Records
+   a) For services, three A records will be generated:
       * <service>.<namespace>.<federation>.svc.<domain>
       * <service>.<namespace>.<federation>.svc.<region>.<domain>
       * <service>.<namespace>.<federation>.svc.<availability-zone>.<region>.<domain>
@@ -142,8 +149,7 @@ DNSEndpoint A Records
 ExternalDNS
    a) Synchronizes exposed services and ingresses with DNS providers.
       Watches and lists LoadBalancer services, ExternalType services, and ingress hostnames.
-   b) For federations where services are replicated across clusters with varying endpoints, DNSEndpoint should be used.
-   c) For newly scanned resources, upserts DNS records in external DNS providers.
+   b) For newly scanned resources, upserts DNS records in external DNS providers.
 ```
 
 ### Tools
