@@ -156,13 +156,22 @@ ExternalDNS
 ---
 ##### Gardener
 ```
+Purpose
+   a) Open source project that abstracts Kubernetes infra to manage multiple Kubernetes clusters.
+
+Shoot Cluster
+   a) Runs actual workloads and contains only worker nodes.
+   b) Control plane of a Shoot is analogous to a Kubernetes deployment.
+
+Seed Cluster
+   a) Responsible for managing multiple shoot clusters. 
+   b) Seed takes all the control planes of its Shoots and manages them.
+   c) Seed cluster is analogous to a Kubernetes node.
+   d) Recommended to have a Seed per cloud provider.
+   e) Contains a Gardenlet controller analogous to a Kubelet.
+   f) Creates a Kubernetes namespace per Shoot cluster.
+
 Garden Cluster
    a) Responsible for managing seed clusters.
-
-Seed clusters
-   a) Responsible for managing shoot clusters.
-   b) Control planes of all shoot clusters run as pods and services in the seed cluster.
-
-Shoot clusters
-   a) Runs actual workloads and contains only worker nodes.
+   b) Analogous to a Kubernetes control plane managing worker nodes.
 ```
