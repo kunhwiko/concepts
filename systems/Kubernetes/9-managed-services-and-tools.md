@@ -1,37 +1,40 @@
-# Deprecated
-
-### Cloud Providers
+### Azure AKS
 ---
-##### Managed Kubernetes Services
+##### Azure Container Instance
 ```
-Kubernetes Flavors
-   a) AKS: K8s on Azure
-   b) EKS: K8s on AWS
-   c) GKE: K8s on GCP
-
-Container Management
-   a) Examples: Azure Container Instance (ACI), AWS Fargate, Google Cloud Run
-   b) Compatible and are used as part of AKS, EKS, GKE.
-   b) Offer means to deploy containers without having to provision instances or install container runtimes.
-   b) Offer means to automatically find a machine to run containers for you.
-
-Examples with ACI
-   a) Utilizes the concept of provisioning virtual nodes, which are not backed by actual VMs.
-   b) Virtual nodes do not rely on cluster autoscaler and so do not need to wait for number of VM nodes to scale up.
-   b) Deploys containers only when necessary in a quick fashion.
+ACI
+   a) Non-K8s specific solution that allows for on-demand containers on Azure.
+   b) Deploys containers onto a virtual node, removing need to provision instances or install container runtimes.
+      Kubernetes recognizes the virtual node as a node with infinite resources.
+   c) Behind the scenes, offers a means to automatically find a machine to run containers for you.
+   b) For known workloads, nodes should be provisioned in a traditional way.
+      Extra loads will then be bursted dynamically to ACI.
 ```
+
+### Amazon EKS
+---
+##### Fargate
+```
+Fargate
+   a) Non-K8s specific solution that allows for on-demand containers on AWS.
+   b) While a single infinite virtual node represents ACI, Fargate puts each pod onto its own virtual node.
+      This still removes the need to provision instances or install container runtimes.
+```
+
+### Google GKE
+---
+##### Google Cloud Run
+```
+Cloud Run
+   a) Non-K8s specific solution that allows for on-demand containers on GCP.
+   b) Cloud Run is based off of Knative.
+```
+
+
+# Below is Deprecated
 
 ### Network Tools
 ---
-##### Load Balancer Solutions
-```
-Load Balancer Solutions
-   a) Nginx
-   b) HAProxy
-   c) MetalLB
-   d) Traefic
-```
-
 ##### Keepalived Virtual IP
 ```
 Problem
