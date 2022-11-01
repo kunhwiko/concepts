@@ -30,6 +30,36 @@ Cloud Run
    b) Cloud Run is based off of Knative.
 ```
 
+### Serverless Computing Tools
+---
+##### Knative
+```
+Knative
+   a) Supports use cases for scaling to zero for non-frequent operations.
+   b) Project that aims to build serverless and event driven applications.
+   c) Supported by two components, Knative Serving and Knative Eventing.
+
+Knative Serving
+   a) Comprised of 4 CRDs: Service, Route, Configuration, Revision.
+   b) Service
+      * Manages the lifecycle of workloads. 
+      * Responsible for creating Route and Configuration and a new Revision whenever the service is updated.
+   c) Route
+      * Able to specify how to route service traffic to a particular Revision.
+   c) Configuration
+      * Contains records of multiple Revisions.
+```
+
+### Testing Tools
+---
+##### Kubemark
+```
+Kubemark
+   a) Does not test actual real life behavior for the sake of cost.
+   b) Runs mock hollow nodes, hollow kubelets, hollow proxies that fake functionalities in a lightweight manner.
+   c) Still very good at testing improvements and regressions to the cluster.
+```
+
 
 # Below is Deprecated
 
@@ -59,14 +89,4 @@ AppArmor : Linux kernel security module that allows you to create profiles to do
    b) Restrict Linux capabilities of container.
    c) Restrict file permissions of container.
    d) Provide improved auditing through logs.
-```
-
-### Testing Tools
----
-##### Kubemark
-```
-Kubemark
-   a) Does not test actual real life behavior for the sake of cost.
-   b) Runs mock hollow nodes, hollow kubelets, hollow proxies that fake functionalities in a lightweight manner.
-   c) Still very good at testing improvements and regressions to the cluster.
 ```
