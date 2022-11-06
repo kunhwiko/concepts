@@ -42,12 +42,18 @@ Knative
 Knative Serving
    a) Comprised of 4 CRDs: Service, Route, Configuration, Revision.
    b) Service
-      * Manages the lifecycle of workloads. 
-      * Responsible for creating Route and Configuration and a new Revision whenever the service is updated.
+      * Manages the lifecycle of workloads and acts as both a Kubernetes deployment and service. 
+      * Responsible for creating Routes and Configurations.
+      * Manages new Revisions whenever the Service is updated.
    c) Route
-      * Able to specify how to route service traffic to a particular Revision.
-   c) Configuration
-      * Contains records of multiple Revisions.
+      * Able to customize logic to specify how to route traffic to different Revisions.
+   d) Configuration
+      * Contains records of the latest Service, number of generations, and Revisions.
+      
+Knative Eventing
+   a) Instead of hitting API endpoints, Knative uses event publishing.
+      Events can be modelled as an an EventType CRD.
+      A broker will identify these events and match them to consumers (e.g. Knative Service) via triggers.
 ```
 
 ### Testing Tools
