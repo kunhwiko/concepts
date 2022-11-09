@@ -111,6 +111,17 @@ Step 3
       https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
 ```
 
+### Security Tools
+---
+##### AppArmor
+```
+AppArmor : Linux kernel security module that allows you to create profiles to do the following
+   a) Restrict network access of processes in container.
+   b) Restrict Linux capabilities of container.
+   c) Restrict file permissions of container.
+   d) Provide improved auditing through logs.
+```
+
 ### Malicious Attacks
 ---
 ##### Node Attacks

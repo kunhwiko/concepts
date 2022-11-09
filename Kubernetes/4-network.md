@@ -237,16 +237,6 @@ CNI with Overlay Networking
    b) Typically uses VXLAN (tunneling L2 domains over L3 networks).
 ```
 
-##### Networking Solutions
-```
-Networking Solution Tools
-   a) Flannel
-   b) Calico
-   c) Weave Net
-   d) Romana
-   e) Contiv
-```
-
 ### Network Policies
 ---
 ##### Network Policies
@@ -308,4 +298,31 @@ spec:
   ports:
     - protocol: tcp
       port: 8888
+```
+
+### Network Tools
+---
+##### Networking Solutions
+```
+Networking Solution Tools
+   a) Flannel
+   b) Calico
+   c) Weave Net
+   d) Romana
+   e) Contiv
+```
+
+##### Keepalived Virtual IP
+```
+Problem
+   a) Clients need a stable endpoint, but pods and sometimes load balancers move around in Kubernetes.
+   b) DNS resolution for load balancers and services are not good enough due to performance issues.
+
+Solution
+   a) Keepalived provides high performance virtual IP address that serves address of load balancers / ingress controllers.
+
+Linux functionalities
+   a) IPVS (IP virtual server).
+   b) High availability via Virtual Redundancy Router Protocol (VRRP).
+   c) Operates at networking layer 4 level.
 ```

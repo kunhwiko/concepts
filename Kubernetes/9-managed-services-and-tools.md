@@ -73,34 +73,3 @@ Kubemark
    b) Runs mock hollow nodes, hollow kubelets, hollow proxies that fake functionalities in a lightweight manner.
    c) Still very good at testing improvements and regressions to the cluster.
 ```
-
-
-# Below is Deprecated
-
-### Network Tools
----
-##### Keepalived Virtual IP
-```
-Problem
-   a) Clients need a stable endpoint, but pods and sometimes load balancers move around in Kubernetes.
-   b) DNS resolution for load balancers and services are not good enough due to performance issues.
-
-Solution
-   a) Keepalived provides high performance virtual IP address that serves address of load balancers / ingress controllers.
-
-Linux functionalities
-   a) IPVS (IP virtual server).
-   b) High availability via Virtual Redundancy Router Protocol (VRRP).
-   c) Operates at networking layer 4 level.
-```
-
-### Security Tools
----
-##### AppArmor
-```
-AppArmor : Linux kernel security module that allows you to create profiles to do the following
-   a) Restrict network access of processes in container.
-   b) Restrict Linux capabilities of container.
-   c) Restrict file permissions of container.
-   d) Provide improved auditing through logs.
-```
