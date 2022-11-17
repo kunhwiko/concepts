@@ -28,6 +28,11 @@ b) Enables users to scale number of replicas, control rollout of updates, rollba
 c) Enables users to check or update status of pods.  
 ```
 
+##### Daemon Sets
+```
+Ensures that a pod runs on all or a designated subset of nodes.
+```
+
 ##### StatefulSets
 ```
 a) Controller uniquely identifies pods with a stable hostname and ordering.
