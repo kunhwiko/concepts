@@ -15,25 +15,6 @@ Systems Availability
    e) Persist raw data in case processed data is corrupted (raw or old data can be kept in cheap storage).
 ```
 
-##### Distributed System Design Patterns
-```
-Sidecar Pattern
-   Step 1) In the same pod, create a separate container from the main application container.
-   Step 2) This separate container provides supplemental features such as logging.
-   Step 3) Places less burden on application container.
-
-Ambassador Pattern
-   Step 1) Like the Sidecar Pattern, create a separate container from the main app container.
-   Step 2) This container acts as a proxy to the main app container that filters requests.
-   Step 3) Often used with legacy apps that are risky to modify to extend networking/security configurations.
-   Step 4) Able to update configurations of ambassador while keeping legacy code.
-
-Adapter Pattern
-   Step 1) Assume main application has been updated but generates output in a different format.
-   Step 2) Consumers of the output have not been upgraded to read in the new format.
-   Step 3) Adapter standardizes output until all consumers have been upgraded.
-```
-
 ### Live Updating
 ---
 ##### Rolling Update

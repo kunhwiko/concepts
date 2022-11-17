@@ -1,16 +1,18 @@
-### Secrets
+### Definition of Secret
 ---
 ##### Secrets
 ```
-Secrets
-   a) Stores base64 encoded credentials and tokens as plaintext on etcd.
-   b) Secrets are namespace scoped.
-   c) Secrets can be mounted via volumes or be picked up as container environment variables.
-   d) Kubelet downloads secrets from API server via TLS.
-   e) Kubelet stores secret in node memory (never to disk) and is deleted when it is not needed.
+a) Secrets contain sensitive info such as credentials and tokens and are namespace-scoped.
+b) Secrets are stored by default as plaintext in etcd and are base64 encoded.
+c) Kubelet can download and access secrets from the API server via TLS.
+d) Secrets can be mounted as files via volumes or be picked up as container environment variables.
+   The same secret can be mounted in multiple pods.
+e) Kubelet stores secrets in node memory (never to disk) and are deleted when not needed.
+```
 
-ImagePullSecrets
-   a) Keys to pull image from a private registry.
+##### ImagePullSecrets
+```
+Keys used to pull images from a private registry.
 ```
 
 ### Roles & Security Context

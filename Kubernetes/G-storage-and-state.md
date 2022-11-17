@@ -103,21 +103,8 @@ Cloning
 
 ### Stateful Applications
 ---
-##### Config Maps
+##### ConfigMaps
 ```
-Config Maps
-   a) Means to keep configuration separate from container image.
-   b) Configurations can be consumed as environment variables, volumes, or secrets.
-```
-
-##### Stateful Sets
-```
-Stateful Sets
-   a) Controller will guarantee pods are ordered and have unique identifiers.
-   b) Pods are associated with their own dynamic PVCs instead of sharing.
-   c) Each unique identifier will fetch data from its corresponding PVC.
-   d) Headless service is used to manage network identity of pods.
-   e) Cannot roll back to previous versions.
-
-More here: https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4 
+a) Means to keep configuration separate from container image.
+b) Configurations can be consumed as environment variables, volumes, or secrets.
 ```

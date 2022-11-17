@@ -1,27 +1,34 @@
-### Service Types 
+### Definition of Service
 ---
+##### Problem Statement
+```
+Pods have internal IP addresses that can be used to directly route requests to pods.
+However, these IP address are generally instable as pod restarts will assign new IP addresses.
+```
+
 ##### Service
 ```
-Problems
-   a) Pods have internal IP addresses that can be used to directly access that pod.
-      These IP address are instable as pod restarts will assign new IP addresses.
+a) Provides a stable access point to load balance and send requests to pods.
+b) Services identify pods it needs to send requests to via labels. 
+c) Services operate at layer 3 (TCP/UDP) networking.
+```
 
-Service
-   a) Provides a stable access point to pods via a DNS entry to pods that persists even if pods update their IP.
-   b) Allows for load balancing between pods.
-   c) Services operates at layer 3 (UDP/TCP), ingress operates at HTTP layer.
-
-Discoverability
-   a) Environment variables that are picked up by pods (e.g. SOME_NAME_SERVICE_HOST, SOME_NAME_SERVICE_PORT).
-   b) DNS name that pods can use. 
-   c) more here: https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/
+###### Discoverability
+```
+a) Services can be discovered via environment variables. 
+   When a pod runs on a node, the kubelet will add env variables for the host and port of each active service.
+   However, env variables will not be updated for services created after the pod's creation. 
+b) Services can be discovered via DNS name.
+   Kubernetes CoreDNS will register the service name internally in the cluster.  
 ```
 
 ##### Ports
 ```
-NodePort vs Port vs TargetPort : https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
+Port vs TargetPort: https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
+### Service Types 
+---
 ##### ClusterIP
 ```
 ClusterIP
@@ -65,7 +72,8 @@ Limitations of Load Balancers
 
 Advantages over Load Balancers
    a) Enable routing to multiple services with a single load balancer.
-   b) Can support request limits, URL rewrites, TCP/UDP load balancing, SSL termination, access control, authentication.   
+   b) Can support request limits, URL rewrites, TCP/UDP load balancing, SSL termination, access control, authentication.
+   c) Ingress operates at HTTP layer.
 ```
 
 ##### Endpoint
