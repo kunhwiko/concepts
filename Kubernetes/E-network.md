@@ -18,7 +18,7 @@ c) Services operate at layer 3 (TCP/UDP) networking.
 a) Services can be discovered via environment variables. 
    When a pod runs on a node, the kubelet will add env variables for the host and port of each active service.
    However, env variables will not be updated for services created after the pod's creation. 
-b) Services can be discovered via DNS name.
+b) Services can be discovered via DNS name (i.e. <service-name>.<namespace>.svc.cluster.local).
    Kubernetes CoreDNS will register the service name internally in the cluster.  
 ```
 
@@ -27,38 +27,39 @@ b) Services can be discovered via DNS name.
 Port vs TargetPort: https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
-### Service Types 
+### Types of Services
 ---
 ##### ClusterIP
 ```
-ClusterIP
-   a) Exposes service on an internal IP in the cluster reachable only from within the cluster.
+Exposes service on an internal IP in the cluster reachable only from within the cluster.
 ```
 
 ##### NodePort
 ```
-NodePort
-   a) Nodes have publicly accessible IPs. Using NATS, node ports will expose the same port number on all nodes. 
-      Makes the service externally accessible via <node-ip>:<node-port>, which will convert requests to <clusterIP>:<port>.
-   b) Requests to node ports will get routed to clusterIPs (node ports are supersets of clusterIPs).
+a) Kubernetes nodes have publicly accessible IPs. Using NATS, nodeports can be exposed on the same port number on all nodes. 
+   This makes the service externally accessible via <node-ip>:<node-port>, which will convert requests to <clusterIP>:<port>.
+b) Requests to nodeports via <node-ip>:<node-port> will be routed to clusterIPs on <clusterIP>:<port>.
+   Nodeports are therefore a superset of clusterIPs.
 ```
 
 ##### Load Balancer
 ```
-LoadBalancer
-   a) Mostly used with managed cloud services and might spin up resources (e.g. Network Load Balancers) for a cost.
-   b) Sets up clusterIPs / node ports and are a great means to get external traffic inbound (load balancers are superset of node ports).
-   c) Assigns a fixed external IP to the service.
-   d) Additional references: https://www.ibm.com/cloud/blog/kubernetes-ingress
+a) Mostly used with managed cloud services and might spin up resources (e.g. Network Load Balancers) for a cost.
+b) Sets up clusterIPs / node ports and are a great means to get external traffic inbound (load balancers are superset of node ports).
+c) Assigns a fixed external IP to the service.
+d) Additional references: https://www.ibm.com/cloud/blog/kubernetes-ingress
+```
 
+##### Load Balancer vs NodePort
+```
 Limitations of NodePorts  
-   a) Only exposes a single service per port.
-   b) Must maintain and know the IP of the node you're looking for, which is difficult when many nodes exist / crash.
+  a) A nodeport exposes the port on all node to just a single service, so a user must be carefully to not run into port conflicts.
+  b) Users must know the IP of the node they are looking for, which can be difficult when many nodes exist or crash.
 
 Advantages over NodePorts
-   a) Only need to know the IP address of the load balancer.
-   b) Transfers request of <loadbalancer-ip>:<port> to appropriate <node-ip>:<node-port>.
-   c) Ability to open multiple ports and protocols per service. 
+  a) Users only need to know the IP address of the load balancer.
+  b) Transfers request to <loadbalancer-ip>:<port> to appropriate <node-ip>:<node-port>.
+  c) Ability to open multiple ports and protocols per service. 
 ```
 
 #### Ingress
@@ -78,8 +79,7 @@ Advantages over Load Balancers
 
 ##### Endpoint
 ```
-Endpoint
-   a) Object that shows a current/valid DNS record of host to IP addresses.
+Object that shows a current/valid DNS record of host to IP addresses.
 ```
 
 ##### Headless Services

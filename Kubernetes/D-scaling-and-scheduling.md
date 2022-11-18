@@ -90,6 +90,41 @@ Example
   Step 2) Gradually increase number of canary pods to production.
 ```
 
+### Scheduling
+---
+##### Node Selector
+```
+A pod spec that specifies which nodes it should be scheduled to.
+```
+
+##### Taints
+```
+a) Taint a Kubernetes node to prevent pods from being scheduled onto that node.
+b) A given node can have multiple taints.
+c) NoSchedule taints prevent pods from being scheduled.
+d) NoExecute taints prevent pods from being scheduled and also evict existing pods without proper tolerations.
+```
+
+##### Tolerations
+```
+Specify that a pod can tolerate a specific taint.
+```
+
+##### Node Affinity
+```
+a) Sophisticated selection criteria of assigning pods to particular nodes.
+b) Ability to specify "preferred" requirements rather than hard requirements.
+c) Ability to specify anti-affinity requirements.
+d) If both node selectors and node affinities exist, pods will be scheduled to nodes that match both requirements.
+```
+
+##### Pod Affinity
+```
+a) Able to assign pods based on labels of existing pods.
+b) Ability to assign a pod only if some other pod co-exists.
+c) Ability to not co-locate a pod with some other pod (i.e. anti-affinity).
+```
+
 ### Quotas
 ---
 ##### Quota Types
@@ -128,32 +163,4 @@ Limit Ranges
 ```
 Priority Class
    a) Prioritize scheduling of pods when resources are scarce.
-```
-
-### Scheduling
----
-##### Node Selector & Affinity
-```
-Node Selector
-   a) Pod spec that specifies which nodes to schedule to.
-
-Node Affinity
-   a) More sophisticated selection criteria to assign pods to particular nodes.
-   b) Ability to specify "preferred" requirements rather than hard requirements.
-   c) Assigned pods will not be evicted from nodes even if labels are changed and no longer satisfy node affinity.
-
-Pod Affinity
-   a) Able to assign pod based on labels of existing pods.
-   b) Can make sure to assign a pod only if some other pod co-exists.
-   c) Can make sure that a pod does not co-locate with some other pod (anti-affinity).
-```
-
-##### Taint and Tolerations
-```
-Taint
-   a) Taint a Kubernetes node to prevent pods from being scheduled onto that node.
-   b) Nodes can have multiple taints.
-
-Toleration
-   a) Specify that a pod can tolerate a specific taint.
 ```

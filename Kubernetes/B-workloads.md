@@ -98,12 +98,17 @@ b) Keys are comprised of a prefix and name and follow similar restrictions to la
 ##### Jobs
 ```
 a) Manages one or more pods to execute some operation until it is successful.
-b) If a pod fails, then a new pod runs to finish the operation.
-c) Jobs and their pods will not be cleared after completion (delete the job to clear all resources).
+b) If a pod fails, a new pod runs to finish the operation.
+c) Jobs and their pods will not be cleared after completion. 
+   Deleting the job will clear all related resources.
 ``` 
 
-##### Example
+##### Job Example
 ```yaml
+# here only 3 pods will run in parallel as not all 5 are required
+# when a job is done, pods that complete their task will update their status as "completed"
+# run kubectl logs <pod-name> to view output of the job
+
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -123,12 +128,8 @@ spec:
       - name: factorial5
         image: some-python-image-1.32
         command: ["python",  "-c", "from math import factorial; print(factorial(5))"]
-      # job should not restart after completing
+      # job should not restart after a successful completion
       restartPolicy: Never
-
-# here only 3 pods will run in parallel as not all 5 are required
-# when a job is done, pods that completed the task will be status "completed"
-# run kubectl logs <pod-name> to view output of the job
 ```
 
 ##### Cron Jobs
