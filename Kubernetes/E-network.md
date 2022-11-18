@@ -27,6 +27,23 @@ b) Services can be discovered via DNS name (i.e. <service-name>.<namespace>.svc.
 Port vs TargetPort: https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-ports-targetport-nodeport-service.html
 ```
 
+##### Endpoint
+```
+Object that shows a current/valid DNS record of host to IP addresses.
+```
+
+##### Headless Services
+```
+Problem Statement
+  a) Connections to services are load balanced and forwarded randomly to a backing pod.
+  b) It is difficult to get A records of all backing pods through services.
+
+Headless Services
+  a) DNS entry of headless service returns all A records of pods backed by headless service.
+  b) All backing pods are able to connect with each other.
+  c) Headless service does not have a clusterIP.
+```
+
 ### Types of Services
 ---
 ##### ClusterIP
@@ -36,69 +53,58 @@ Exposes service on an internal IP in the cluster reachable only from within the 
 
 ##### NodePort
 ```
-a) Kubernetes nodes have publicly accessible IPs. Using NATS, nodeports can be exposed on the same port number on all nodes. 
-   This makes the service externally accessible via <node-ip>:<node-port>, which will convert requests to <clusterIP>:<port>.
-b) Requests to nodeports via <node-ip>:<node-port> will be routed to clusterIPs on <clusterIP>:<port>.
+a) Kubernetes nodes have publicly accessible IPs. Utilizing NATS, nodeports can be exposed on the same port number on all nodes. 
+   This makes the service externally accessible via <node-ip>:<node-port>.
+b) Requests to nodeports via <node-ip>:<node-port> will be routed to clusterIPs on <clusterIP>:<port> by the kube-proxy.
    Nodeports are therefore a superset of clusterIPs.
 ```
 
 ##### Load Balancer
 ```
-a) Mostly used with managed cloud services and might spin up resources (e.g. Network Load Balancers) for a cost.
-b) Sets up clusterIPs / node ports and are a great means to get external traffic inbound (load balancers are superset of node ports).
-c) Assigns a fixed external IP to the service.
-d) Additional references: https://www.ibm.com/cloud/blog/kubernetes-ingress
+a) Load balancers are assigned a fixed external IP that is accessible from outside the cluster.
+b) Load balancers are a superset of nodeports, meaning both nodeports and clusterIPs will be created.
+   Requests are typically forwarded from load balancers to nodeports.
+c) Load balancers are mostly used with managed cloud services and might require spinning up resources (e.g. NLBs) for a cost.
+   Cloud providers also decide how requests will be be load balanced.
+d) Multiple ports and protocols can be defined on a single load balancer.
 ```
 
 ##### Load Balancer vs NodePort
 ```
 Limitations of NodePorts  
-  a) A nodeport exposes the port on all node to just a single service, so a user must be carefully to not run into port conflicts.
-  b) Users must know the IP of the node they are looking for, which can be difficult when many nodes exist or crash.
+  a) Users must know the IP of the node they are looking for, which can be difficult when many nodes exist or crash.
+  b) Nodeports expose at most a single service per port.
 
 Advantages over NodePorts
   a) Users only need to know the IP address of the load balancer.
-  b) Transfers request to <loadbalancer-ip>:<port> to appropriate <node-ip>:<node-port>.
-  c) Ability to open multiple ports and protocols per service. 
+     Requests to <loadbalancer-ip>:<port> are sent to appropriate <node-ip>:<node-port>.
+  b) While load balancers typically create and forward requests to nodeports, this can optionally be disabled.
+     This is only possible if the given cloud provider has implemented load balancers this way.
 ```
 
 #### Ingress
 ```
-Ingress Components
-   a) Load Balancer      : Performs the actual routing.
-   b) Ingress Controller : Enables controlled routing based on a set of predefined rules.
+a) Ingress is technically not a service.
+b) Ingress comes in two components, a load balancer and ingress controller.
+   Ingress controller enables controlled routing based on a set of predefined rules.
+   Ingress load balancer performs actual routing.
+```
 
+##### Ingress vs Load Balancer
+```
 Limitations of Load Balancers 
-   a) One service is exposed per load balancer, and with multiple services, this costs a lot of overhead.
+  a) One service is exposed per load balancer, and with multiple services, this can lead to a large overhead.
 
 Advantages over Load Balancers
-   a) Enable routing to multiple services with a single load balancer.
-   b) Can support request limits, URL rewrites, TCP/UDP load balancing, SSL termination, access control, authentication.
-   c) Ingress operates at HTTP layer.
-```
-
-##### Endpoint
-```
-Object that shows a current/valid DNS record of host to IP addresses.
-```
-
-##### Headless Services
-```
-Limitations of Services
-   a) Connections to services are load balanced and forwarded randomly to a backing pod.
-      It is difficult to get A records of all backing pods through services.
-
-Headless Services
-   a) DNS entry of headless service returns all A records of pods backed by headless service.
-   b) All backing pods are able to connect with each other.
-   c) Headless service does not have a clusterIP.
+  a) Enable routing to multiple services with a single load balancer.
+  b) Supports request limits, URL rewrites, TCP/UDP load balancing, SSL termination, authentication etc.
+  c) Ingress operates at HTTP layer.
 ```
 
 ##### External Name
 ```
-ExternalName
-   a) Means to get traffic out to an external source.
-   b) Adds CNAME DNS recourd to coreDNS.
+a) Maps a service to a user specified DNS name as a means to get traffic out to an external source.
+b) Adds a CNAME DNS record to coreDNS such that looking up the service will route to the user specified DNS.
 ```
 
 ##### Client IP Preservation
