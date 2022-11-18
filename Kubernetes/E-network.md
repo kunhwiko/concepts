@@ -101,12 +101,6 @@ ExternalName
    b) Adds CNAME DNS recourd to coreDNS.
 ```
 
-##### Egress
-```
-Egress
-   a) Ability to control outbound traffic.
-```
-
 ##### Client IP Preservation
 ```
 service.spec.externalTrafficPolicy
@@ -245,42 +239,21 @@ CNI with Overlay Networking
    b) Typically uses VXLAN (tunneling L2 domains over L3 networks).
 ```
 
-### Network Policies
+### Definition of Network Policies
 ---
 ##### Network Policies
 ```
-Network Policy
-   a) Manages network traffic to selected pods and namespaces and can act as a set of firewall rules.
-   b) Specfies how a selection of pods can communicate with each other and other endpoints.
-   c) Minimizes security breaches and maximizes parts of systems that don't need to talk to each other.
-   d) Uses labels to select pods, define whitelist rules, define what is allowed for a given namespace.
-      Usage of labels to define virtual network segments tends to be more flexible than CIDR / subnet masking.
-
-Scope
-  a) Network policies are cluster-wide.
-  b) Rules are unified if multiple network policies exist. 
-
-Whitelist
-   a) By default, all access is forbidden to a certain pod if targeted by at least one network policy.
-   b) By default, all access is granted to a certain pod if targeted by no network policy.    
+a) Network policies act as a set of firewall rules that manages network traffic for selected pods and namespaces.
+b) Network policies aim to minimize security breaches and maximize parts of systems that don't need to talk to each other.
+c) Network policies use labels to select applicable pods/namespaces and to define whitelist rules.
+   Usage of labels to define virtual network segments is much more flexible than defining CIDR / subnet masking.
+d) Network policies are cluster scoped and rules are unified if multiple network policies exist. 
 ```
 
-##### CNI Plugin Implementations
+##### Whitelisting
 ```
-Relationship between CNI plugins and network policies
-   a) Implementation of network policy differs between CNI plugins.
-      Some CNI plugins both implement network connectivity and enable network policies, while others only do one or the other.
-   b) CNI plugins are able to collaborate with one another.
-      As an example, Calico can implement networking connectivity + Flannel can enable network policies.
-```
-
-##### Execution of Network Policies
-```
-Enforcement of Network Policies
-   Step 1) Policy is posted and sent to Kubernetes master nodes.
-   Step 2) Kubernetes master nodes forwards the policy to a policy controller.
-   Step 3) Policy controller pushes the policy to gatekeepers on each worker node.
-   Step 4) Each gatekeeper intercepts traffic, verifies against policies, and forward/rejects requests.
+a) By default, all access is forbidden to a certain pod if targeted by at least one network policy.
+b) By default, all access is granted to a certain pod if targeted by no network policy.    
 ```
 
 ##### Examples
@@ -308,16 +281,39 @@ spec:
       port: 8888
 ```
 
+##### Egress
+```
+Policies used to control and deny outbound traffic.
+```
+
+##### CNI Plugin Implementations
+```
+Relationship between CNI plugins and network policies
+   a) Implementation of network policy differs between CNI plugins.
+      Some CNI plugins both implement network connectivity and enable network policies, while others only do one or the other.
+   b) CNI plugins are able to collaborate with one another.
+      As an example, Calico can implement networking connectivity + Flannel can enable network policies.
+```
+
+##### Execution of Network Policies
+```
+Enforcement of Network Policies
+   Step 1) Policy is posted and sent to Kubernetes master nodes.
+   Step 2) Kubernetes master nodes forwards the policy to a policy controller.
+   Step 3) Policy controller pushes the policy to gatekeepers on each worker node.
+   Step 4) Each gatekeeper intercepts traffic, verifies against policies, and forward/rejects requests.
+```
+
 ### Network Tools
 ---
 ##### Networking Solutions
 ```
 Networking Solution Tools
-   a) Flannel
-   b) Calico
-   c) Weave Net
-   d) Romana
-   e) Contiv
+  a) Flannel
+  b) Calico
+  c) Weave Net
+  d) Romana
+  e) Contiv
 ```
 
 ##### Keepalived Virtual IP
