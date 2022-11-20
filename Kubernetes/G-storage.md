@@ -1,24 +1,40 @@
-### Volumes  
+### Volumes on Nodes
 ---
 ##### emptyDir
 ```
-EmptyDir
-   a) Ephemeral volume mounted on a particular pod and starts with empty contents.
-   b) Contents are erased upon pod being deleted, but not erased when containers crash.
-   c) Each container can have different mount paths to the same emptyDir.
-   c) Contents are not erased upon node reboot as contents are stored in disk.
+a) Ephemeral volume mounted on a particular pod that starts with empty contents.
+   Containers in the pod can read the same content.
+b) Each container can have different mount paths to the same emptyDir.
+c) Contents are erased upon pod being deleted, but not erased when containers crash.
+   Contents are not erased upon node reboot as contents are stored in disk.
+```
 
-RAM backed EmptyDir
-   a) Faster reads but more volatile.
-   b) Contents are lost upon node restart.
-   c) By default, size of memory is half of node's RAM.
+##### RAM backed emptyDir
+```
+a) Faster read performance.
+b) Contents are lost upon node restart.
+c) By default, size of allocatable memory is half of node's RAM.
 ```
 
 ##### hostPath
 ```
-HostPath
-   a) Mounts directory from host node's filesystem into a pod.
-   b) Containers accessing host directories must be privileged to do so (e.g. root user).
+a) Mounts directory from host node's file system into a pod.
+   All pods on the same node that have this volume mounted can read the same content.
+b) Containers accessing host directories must be privileged to do so (e.g. root user) to allow writing.
+```
+
+### Persistent Volumes
+---
+##### Local Persistent Volume
+```
+a) Local disk physically attached to nodes.
+b) Can use node affinity to bind the volume to particular nodes.
+```
+
+##### Local Persistent Volume vs hostPath
+```
+a) Kubernetes scheduler understands which node a local persistent volume belongs to.
+b) Ensures pod using a local persistent volume is always scheduled to the same node.
 ```
 
 ##### Persistent Volumes and Claims
@@ -57,17 +73,6 @@ PVC
    b) Finds a matching persistent volume based on specs (e.g. capacity, access mode, storage class, labels).
    c) Kubernetes will attempt to try to match to the smallest capacity volume available.
    d) Pods can choose which pvcs to mount by pvc name.
-```
-
-##### Local Persistent Volume
-```
-Local Persistent Volume
-   a) Local disk physically attached to nodes.
-   b) Can use node affinity to bind the volume to particular nodes.
-
-Local Persistent Volume vs HostPath
-   a) Kubernetes scheduler understands which node a local persistent volume belongs to.
-   b) Ensures pod using a local persistent volume is always scheduled to the same node.
 ```
 
 ##### Container Storage Interface (CSI)
