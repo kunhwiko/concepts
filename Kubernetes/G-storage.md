@@ -28,20 +28,15 @@ b) Containers accessing host directories must be privileged to do so (e.g. root 
 ##### Local Persistent Volume
 ```
 a) Local persistent volume mounts a local disk directly to a node.
-b) Local persistent volumes can use node affinity annotations to bind pods to the storage they need to access.
-```
-
-##### Local Persistent Volume vs hostPath
-```
-a) Kubernetes scheduler understands which node a local persistent volume belongs to.
-b) Kubernetes scheduler ensures pods using local persistent volumes are always scheduled to the same node.
+b) Local persistent volumes can specify node affinities to define which nodes to be attached to.
+c) Unlike hostpath volumes, scheduler will ensure pods requiring persistent volumes will be scheduled on the same node.
 ```
 
 ##### Local vs Remote Persistent Volumes
 ```
 a) Local storages provides more consistent high performance as networking is not involved.
 b) Local storages do not support dynamic volume provisioning.
-c) Local storages are pre-provisioned to be tied to a specific node.
+c) Local storages must be pre-provisioned and be tied to a specific node.
    There must be sufficient space on the node for pods requiring the local storage to be scheduled.
 d) Most remote storages implement synchronous replication while most local storages do not.
    Loss of the disk or node could result in loss of all data in the local storage.
