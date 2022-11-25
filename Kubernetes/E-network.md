@@ -194,10 +194,9 @@ Cloud Provider Networking
 ---
 ##### CNI
 ```
-CNI
-   a) Specification and a set of libraries for writing CNI plugins.
-   b) Initiative to make different networking solutions integratable with various container orchestration systems.
-   c) Users are able to adopt networking solutions and the container orchestration system of their choice according to different needs.
+Initiative and specification to write various networking solutions via plugins that are integratable with various container orchestrators.
+Users are able to adopt networking solutions and the container orchestration system of their choice according to different needs.
+Vendors do not need to worry about Kubernetes source code or be locked down to Kubernetes this way.
 ```
 
 ##### CNI Plugin

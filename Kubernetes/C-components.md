@@ -84,10 +84,10 @@ b) Kubelet interacts with custom implementations of CRI via gRPC to determine wh
 ##### Pod Lifecycle Event Generator (PLEG)
 ```
 Problems
-   a) Kubelet used to poll container runtimes from each pod for info.
-      This consistently puts a lot of pressure on the container runtime and to each pod.
+  a) Kubelet used to poll container runtimes from each pod for info.
+     This consistently puts a lot of pressure on the container runtime and to each pod.
 
 PLEG
-   a) Lists the state of pods and containers and compares with the previous state.
-      Kubelet then knows which pods need to sync again and only polls those pods.
+  a) Lists the state of pods and containers and compares with the previous state.
+     Kubelet then knows which pods need to sync again and only polls those pods.
 ```
