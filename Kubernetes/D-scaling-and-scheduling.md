@@ -25,7 +25,13 @@ b) HPA interacts with replicasets or deployments instead of with pods directly a
    In general, it is recommended to bind HPA to deployments and not replicasets.
    This prevents HPA from being bound to an old replicaset during rolling updates.
 c) Scaling does not happen immediately to reduce thrashing issues where average load is around scaling thresholds.
-d) HPA respects and evaluates all existing metrics and autoscales based on largest number of replicas required.
+```
+
+##### HPA Scaling Metrics
+```
+a) HPA usually requires a metric server to measure CPU percentage. 
+b) Custom metrics can be configured and exposed for more complex scaling.
+c) HPA respects and evaluates all existing metrics and autoscales based on largest number of replicas required.
 ```
 
 ##### Cluster Autoscaler
@@ -125,7 +131,7 @@ b) Ability to assign a pod only if some other pod co-exists.
 c) Ability to not co-locate a pod with some other pod (i.e. anti-affinity).
 ```
 
-### Quotas
+### Definition of Quotas
 ---
 ##### Quota Types
 ```
