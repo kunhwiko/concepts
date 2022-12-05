@@ -84,7 +84,7 @@ Advantages over NodePorts
      This is only possible if the given cloud provider has implemented load balancers this way.
 ```
 
-#### Ingress
+##### Ingress
 ```
 a) Ingress is technically not a service.
 b) Ingress comes in two components, a load balancer and ingress controller.
