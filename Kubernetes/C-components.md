@@ -74,9 +74,9 @@ c) Downloads secrets from API server, runs liveness probes, and mounts volumes.
 d) Able to manually configure network MTU, otherwise network plugins will attempt to deduce optimal MTU.
 ```
 
-### CRI
+### Container Runtime Interface (CRI)
 ---
-##### Container Runtime Interface
+##### CRI
 ```
 a) Enables Kubernetes to support a general interface for various container runtimes.
 b) Kubelet interacts with custom implementations of CRI via gRPC to determine what the container runtime should do.
