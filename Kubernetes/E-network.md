@@ -2,15 +2,17 @@
 ---
 ##### Problem Statement
 ```
-Pods have internal IP addresses that can be used to directly route requests to pods.
+Pods are assigned internal IP addresses that are exxposed across the entire cluster.
+This IP address can be used to directly route requests to certain pods.
 However, these IP address are generally instable as pod restarts will assign new IP addresses.
 ```
 
 ##### Service
 ```
-a) Provides a stable access point to load balance and send requests to pods.
-b) Services identify pods it needs to send requests to via labels. 
-c) Services operate at layer 3 (TCP/UDP) networking.
+a) Provides a stable access point to send requests to pods.
+b) Services provide load balancing features done by kube-proxy. 
+c) Services identify pods it needs to send requests to via labels. 
+d) Services operate at layer 3 (TCP/UDP) networking.
 ```
 
 ###### Discoverability
@@ -107,6 +109,49 @@ a) Maps a service to a user specified DNS name as a means to get traffic out to 
 b) Adds a CNAME DNS record to coreDNS such that looking up the service will route to the user specified DNS.
 ```
 
+### Kubernetes Internal Networking
+---
+##### Container to Container Networking
+```
+a) Containers in the same pod share IP addresses and network namespaces.
+   This means containers in the same pod can communicate with one another via localhost. 
+b) CRI is responsible for creating new Linux namespaces on the Kubernetes node.
+   Each pod is assigned to a Linux namespace and gets its own IP address.
+```
+
+##### Pod to Pod Networking
+```
+Step 1) CNI sets up a virtual ethernet in the pod's Linux namespace.
+        This veth is connected to the veth of the node's root namespace via a network bridge.
+Step 2) When two pods communicate from within the node, requests are resolved via ARP.
+        The request will jump from the current namespace's veth to the root namespace's veth, and then to the target namespace's veth.
+Step 3) For pod communications across different nodes, subnet masking first determines if endpoint is on the same network.
+        If not, ARP will check for the MAC address of the Kubernetes default gateway.
+        The request will jump from the current namespace's veth to the root namespace's veth, and then to the default gateway to be routed to the right node. 
+```
+
+##### Pod to Pod Networking via Services
+```
+How Services Work
+   a) Services are pieces of data stored in etcd and built on top of Linux Netfilter and IP Tables.
+      Kube proxy will update IP Tables for each node based on info stored in etcd.
+
+Pod to Pod Networking via Services
+   Step 1) ARP will check for the MAC address of the Kubernetes default gateway.
+   Step 2) Netfilter hooks are triggered and IP Table chains are applied.
+           DNAT will rewrite the packet's destination address to the backend Pod of the service.
+   Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
+```
+
+### Kubernetes External Networking
+---
+##### Cloud Provider Networking
+```
+External access from the cluster usually involves a public load balancer that directs requests to any Kubernetes node.
+Kube proxy on the node will then redirect the request to the correct pod on the correct node.
+This is typically the process for cloud providers.
+```
+
 ##### Client IP Preservation
 ```
 service.spec.externalTrafficPolicy
@@ -133,43 +178,6 @@ External Load Balancing
 
 ### Networking Methods
 ---
-##### Container to Container Networking
-```
-Container to Container Networking
-   a) CRI is responsible for creating new Linux namespaces.
-      Each pod is assigned to a Linux namespace on a Kubernetes node and gets their own IP address.
-   b) Containers in a pod share IP addresses and network namespaces, and therefore can communicate via localhost. 
-```
-
-##### Pod to Pod Networking
-```
-Pod to Pod Networking
-   Step 1) CNI sets up a virtual ethernet in the pod's Linux namespace.
-           This veth is connected to the veth of the node's root namespace via a network bridge.
-   Step 2) When two pods communicate from within the node, requests are resolved via ARP.
-           The request will jump from the current namespace's veth to the root namespace's veth, and then to the target namespace's veth.
-   Step 3) For pod communications across different nodes, subnet masking first determines if endpoint is on the same network.
-           If not, ARP will check for the MAC address of the Kubernetes default gateway.
-           The request will jump from the current namespace's veth to the root namespace's veth, and then to the default gateway to be routed to the right node. 
-
-IP Address Uniformity
-   a) The same pod IP address is used for within the node and across the entire cluster.  
-      This IP address is exposed across the entire cluster.
-```
-
-##### Pod to Pod Networking via Services
-```
-How Services Work
-   a) Services are pieces of data stored in etcd and built on top of Linux Netfilter and IP Tables.
-      Kube proxy will update IP Tables for each node based on info stored in etcd.
-
-Pod to Pod Networking via Services
-   Step 1) ARP will check for the MAC address of the Kubernetes default gateway.
-   Step 2) Netfilter hooks are triggered and IP Table chains are applied.
-           DNAT will rewrite the packet's destination address to the backend Pod of the service.
-   Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
-```
-
 ##### Pod to Pod Networking via Queues
 ```
 Pod to Pod Networking via Queues
@@ -181,13 +189,6 @@ Pod to Pod Networking via Queues
    f) Queues can be used alongside databases.
       After a container stores job results or data into the database, the container can ping the container.
       Other containers in the system can then pick up this data.
-```
-
-##### Cloud Provider Networking
-```
-Cloud Provider Networking
-   a) Cloud provider load balancers are not Kubernetes aware and will typically direct to any Kubernetes node.
-      Kube proxy will then redirect to the correct pod in the correct node. 
 ```
 
 ### Container Network Interface (CNI)
