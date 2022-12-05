@@ -61,6 +61,7 @@ b) Every service, except for headless services, receive a DNS name and pods can 
 a) Kube-proxy discovers cluster IPs through DNS or environment variables.
 b) Kube-proxy maintains networking rules (e.g. IP tables) on each node.
 c) Kube-proxy is able to forward traffic via TCP and UDP forwarding.
+d) Kube-proxy is able to load balance requests if there are multiple pod backends.
 ```
 
 ##### Kubelet
