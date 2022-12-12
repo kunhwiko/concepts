@@ -1,4 +1,4 @@
-### Definition of Namespace, Secret, and Service Account
+### Definition of Namespace and Secret
 ---
 ##### Namespace
 ```
@@ -21,6 +21,8 @@ e) Kubelet stores secrets in node memory (never to disk) and are deleted when no
 Keys used to pull images from a private registry.
 ```
 
+### Definition of Service Account
+---
 ##### User Accounts
 ```
 a) When a human tries to access a Kubernetes cluster, they are typically authenticated via a user account.

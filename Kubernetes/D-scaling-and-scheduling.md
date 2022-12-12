@@ -30,7 +30,7 @@ c) Scaling does not happen immediately to reduce thrashing issues where average 
 ##### HPA Scaling Metrics
 ```
 a) HPA usually requires a metric server to measure CPU percentage. 
-b) Custom metrics can be configured and exposed for more complex scaling.
+b) Custom metrics can be configured and exposed for more complex scaling (e.g. memory based scaling).
 c) HPA respects and evaluates all existing metrics and autoscales based on largest number of replicas required.
 ```
 
@@ -78,7 +78,7 @@ Example
   Step 3) Introduce adapter that translates requests/responses between pod A and B.
 ```
 
-##### Blue-green Deployments
+##### Blue Green Deployments
 ```
 Example
   Step 1) Prepare a copy of a production environment green with the new version.
@@ -133,40 +133,44 @@ c) Ability to not co-locate a pod with some other pod (i.e. anti-affinity).
 
 ### Definition of Quotas
 ---
-##### Quota Types
+##### Resource Quota
 ```
-Quota
-   a) Observable through `kubectl get quota`.
+a) Provides constraints that limit aggregate resource consumption per namespace.
+b) Observable through `kubectl get quota`.
+```
 
+##### Resource Quota Types
+```
 Compute Quotas
-   a) Can specify CPU, GPU, memory quotas.
-      If quota is specified, resource request and limit must be set at the container level as well.
+  a) Can specify CPU, GPU, and memory quotas.
+  b) If quota is specified, resource request and limit must be set at the container level as well.
 
 Storage Quotas
-   a) Can specify total amount of storage and number of PVCs / ephemeral storage per cluster.
-      Can also be specified per storage class.
+  a) Can specify total amount of storage. This can also be done per storage class.
+  b) Can specify total number of PVCs and ephemeral storage. This can also be done per storage class.
 
 Object Count Quotas
-   a) Can specify a limit for the number of each Kubernetes resource.
-      Replica sets with zero replicas can still overwhelm the API server because validation must still happen.
+  a) Can specify a limit on the number of each Kubernetes resource.
+     Replica sets with zero replicas can still overwhelm the API server because validation must still happen.
+```
 
-Quota Scopes
-   a) Quota can be customized to target certain resources at a certain state (e.g. target only non-terminating pods).
-      If specified for non-terminating pods and quota is exceeded, new pods can still be scheduled if existing pods are terminating.
+##### Resource Quota Scope
+```
+Quota can be customized to target certain resources of a certain state (e.g. target only non-terminating pods).
+If quota targets only non-terminating pods and quota is exceeded, new pods can be scheduled if existing pods are terminating.
+```
+
+##### Priority Classes
+```
+Prioritize scheduling of pods when resources are scarce.
 ```
 
 ##### Limit Ranges
 ```
 Problems
-   a) If a compute quota is set, users must specify the resource request and limit for each container.
+  a) If a compute quota is set, users must specify the resource request and limit for each container.
 
 Limit Ranges
-   a) Provides a means to set default resource request and limit values for containers, if not specified.
-   b) Observable through `kubectl get limit`.
-```
-
-##### Priority Classes
-```
-Priority Class
-   a) Prioritize scheduling of pods when resources are scarce.
+  a) Provides a means to set a default resource request and limit values for containers if not already specified.
+  b) Observable through `kubectl get limit`.
 ```

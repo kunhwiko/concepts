@@ -2,7 +2,7 @@
 ---
 ##### Problem Statement
 ```
-Pods are assigned internal IP addresses that are exxposed across the entire cluster.
+Pods are assigned internal IP addresses that are exposed across the entire cluster.
 This IP address can be used to directly route requests to certain pods.
 However, these IP address are generally instable as pod restarts will assign new IP addresses.
 ```
@@ -130,7 +130,7 @@ Step 3) For pod communications across different nodes, subnet masking first dete
         The request will jump from the current namespace's veth to the root namespace's veth, and then to the default gateway to be routed to the right node. 
 ```
 
-##### Pod to Pod Networking via Services
+##### Service Networking
 ```
 How Services Work
    a) Services are pieces of data stored in etcd and built on top of Linux Netfilter and IP Tables.
@@ -141,6 +141,16 @@ Pod to Pod Networking via Services
    Step 2) Netfilter hooks are triggered and IP Table chains are applied.
            DNAT will rewrite the packet's destination address to the backend Pod of the service.
    Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
+```
+
+##### Asynchronous Networking
+```
+Queues
+  a) Queues are a great way to achieve asynchronous communication and decouple various Kubernetes components.
+     Queues abstract away the need to know about IP addresses, ports, and Kubernetes services.
+  b) Containers can listen or respond to messages, perform actions, and post progress to queues.
+     It is also easy to add or remove listeners and keep track of progress by monitoring the queue.
+  c) The queue can be used alongside databases and must be highly available.
 ```
 
 ### Kubernetes External Networking
@@ -174,21 +184,6 @@ Node Local Endpoint
 External Load Balancing
    a) External load balancers operate at a node level rather than a pod level.
       If 3 pods exist in node A and 1 pod exists in node B for the service, load will likely be distributed equally to both nodes.
-```
-
-### Networking Methods
----
-##### Pod to Pod Networking via Queues
-```
-Pod to Pod Networking via Queues
-   a) Containers can listen or respond to messages, perform actions, post progress status via queues.
-   b) Queues decouple the need to know about IP addresses.
-   c) Easy to keep track of progress by monitoring the queue, and great for large scale systems.
-   d) Easy to add or remove listeners.
-   e) The queue must be highly available and may requires some time to set up.
-   f) Queues can be used alongside databases.
-      After a container stores job results or data into the database, the container can ping the container.
-      Other containers in the system can then pick up this data.
 ```
 
 ### Container Network Interface (CNI)
