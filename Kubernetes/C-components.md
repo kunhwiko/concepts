@@ -7,30 +7,10 @@ b) API server is a means for the control plane and worker nodes to communicate w
 c) API server is designed to be stateless as data is meant to be stored in etcd. 
 ```
 
-##### API Server Optimizations
-```
-API Server cache
-  a) Kubernetes components operate on snapshots of the cluster state rather than on real-time updates.
-     Snapshots are saved in etcd, and API Server maintains an in-memory read cache where the snapshot can be read from.
-  b) Caching states in the API server decreases read latency and reduces load on etcd.  
-
-Protocol Buffers
-  a) REST APIs typically use JSON as a serialization format, which typically requires marshaling / unmarshaling JSON.
-     JSON parsing can become expensive because so many REST APIs are called to the API Server.
-     Instead, internal components in Kubernetes communicate via a protocol buffer serialization format to reduce this expense.
-```
-
 ##### etcd 
 ```
 a) etcd is a highly reliable distributed key-value store to back cluster level data (e.g. configuration, state, metadata).
 b) etcd can act as a means to restore the Kubernetes cluster by recording past snapshots of the cluster.
-```
-
-##### etcd Optimizations
-```
-Improvements from etcd2 to etcd3
-  a) Uses gRPC (HTTP/2 protocol) over REST which enables single TCP connections for multiple streams of requests and responses.
-  b) Uses leases over TTL to reduce keep-alive traffic.
 ```
 
 ##### Controller Managers
@@ -52,6 +32,41 @@ Assigns pods to nodes.
 ```
 a) CoreDNS is a pod that functions as a DNS server in the cluster.
 b) Every service, except for headless services, receive a DNS name and pods can receive DNS names as well. 
+```
+
+### Master Node Component Optimizations
+---
+##### API Server Cache
+```
+a) Various Kubernetes components operate on snapshots of the cluster state rather than on real-time updates.
+b) Current state of the cluster is maintained by the API server through an in-memory read cache.
+c) Snapshots are saved in etcd, and the in-memory read cache will be updated by etcd watches.  
+d) Caching states in the API server decreases read latency and reduces load on etcd.
+```
+
+##### Pod Lifecycle Event Generator (PLEG)
+```
+Problems
+  a) Kubelet used to poll container runtimes from each pod for info. 
+     This consistently puts pressure on CPU usage for the container runtimes.
+
+PLEG
+  a) Kubelet lists the state of pods and containers and compares with the previous state.
+     Kubelet then knows which pods need to sync again and only polls those pods.
+```
+
+### Protocol Buffers
+```
+REST APIs typically use JSON as a serialization format, which typically requires marshaling / unmarshaling JSON to native data structures.
+JSON parsing can become expensive because so many REST APIs are called to the API Server.
+Instead, internal components in Kubernetes communicate via a protocol buffers serialization format to reduce this expense.
+```
+
+##### etcd3
+```
+a) Uses gRPC over REST (etcd2), utilizing HTTP/2 to enable a single TCP connection for multiple streams of requests and responses.
+b) etcd2 uses Time to Live (TTL) per key to expire keys, while etcd3 uses leases with TTLs such that multiple keys can share the same key.
+c) Stores state as protocol buffers to reduce JSON serialization overhead.
 ```
 
 ### Worker Node Components
@@ -80,15 +95,4 @@ d) Able to manually configure network MTU, otherwise network plugins will attemp
 ```
 a) Enables Kubernetes to support a general interface for various container runtimes.
 b) Kubelet interacts with custom implementations of CRI via gRPC to determine what the container runtime should do.
-```
-
-##### Pod Lifecycle Event Generator (PLEG)
-```
-Problems
-  a) Kubelet used to poll container runtimes from each pod for info.
-     This consistently puts a lot of pressure on the container runtime and to each pod.
-
-PLEG
-  a) Lists the state of pods and containers and compares with the previous state.
-     Kubelet then knows which pods need to sync again and only polls those pods.
 ```
