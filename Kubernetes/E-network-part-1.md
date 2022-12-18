@@ -123,6 +123,14 @@ e) Network policies are part of the standard Kubernetes API but differs in imple
    However, enforcing the network policy is left to the networking solution.
 ```
 
+##### Execution of Network Policies
+```
+Step 1) Policy is posted and sent to Kubernetes master nodes.
+Step 2) Kubernetes master nodes forwards the policy to a policy controller.
+Step 3) Policy controller pushes the policy to agents on each worker node.
+Step 4) Each agent intercepts traffic, verifies against policies, and forward/rejects requests.
+```
+
 ##### Whitelisting
 ```
 a) By default, all access is forbidden to a certain pod if targeted by at least one network policy.
@@ -152,14 +160,6 @@ spec:
   ports:
     - protocol: tcp
       port: 8888
-```
-
-##### Execution of Network Policies
-```
-Step 1) Policy is posted and sent to Kubernetes master nodes.
-Step 2) Kubernetes master nodes forwards the policy to a policy controller.
-Step 3) Policy controller pushes the policy to gatekeepers on each worker node.
-Step 4) Each gatekeeper intercepts traffic, verifies against policies, and forward/rejects requests.
 ```
 
 

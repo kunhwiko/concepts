@@ -10,11 +10,34 @@ Queues
   c) The queue can be used alongside databases and must be highly available.
 ```
 
+### Load Balancing
+---
 ##### Cloud Provider Networking
 ```
 External access from the cluster usually involves a public load balancer that directs requests to any Kubernetes node.
 Kube proxy on the node will then redirect the request to the correct pod on the correct node.
 This is typically the process for cloud providers.
+```
+
+##### Cluster Wide Endpoint, Node Local Endpoint, and Client IP Preservation 
+```
+a) Kubernetes has the ability to preserve information about the originating client IP address. 
+b) Ability to preserve client IP address differs based on how service.spec.externalTrafficPolicy is set.
+   This field specifies whether to route external traffic to node-local endpoint or cluster-wide endpoint.
+
+Cluster Wide Endpoint
+  a) Default Kubernetes behavior that does not preserve client IP address.
+  b) Might make network hops to other nodes but spreads load efficiently.
+
+Node Local Endpoint
+  a) Does not preserve client IP address.
+  b) Does not make network hops but does not spread load well.
+```
+
+##### External Load Balancing
+```
+External load balancers operate at a node level rather than a pod level.
+If 3 pods exist in node A and 1 pod exists in node B, load will still be distributed equally to both nodes.
 ```
 
 ### Container Network Interface (CNI)
@@ -44,13 +67,14 @@ c) Container runtimes invoke CNI plugins as an executable (e.g. invoke ADD verb)
 Step 1) Container runtime specifies actions (e.g. add container) it wants to execute on CNI plugin.
 Step 2) Input network configurations stored as JSON files are picked up and streamed to the plugin via STDIN.
         Runtimes typically specify what path to look for when picking up JSON files. 
-        Examples of configurations:
+        Examples of input configurations:
           * CNI version
           * Type of plugin to use (e.g. bridge plugin)
           * IPAM and DNS configurations 
 Step 3) Supplementary information can be further provided via environment variables.
         Examples of environment variables:
           * Desired operations (e.g. ADD)
+          * Container ID
           * Path to network namespace file
           * Name of the network interface that will be set up
           * Path to CNI plugin executable
@@ -166,57 +190,4 @@ Pod to Pod Networking via Services
    Step 2) Netfilter hooks are triggered and IP Table chains are applied.
            DNAT will rewrite the packet's destination address to the backend Pod of the service.
    Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
-```
-
-
-
-##### Client IP Preservation
-```
-service.spec.externalTrafficPolicy
-   a) Specifies whether to route external traffic to node-local endpoint or cluster-wide endpoint.
-
-Cluster Wide Endpoint
-   a) Default behavior.
-   b) Spreads load well.
-   c) Does not preserve client IP address.
-   d) Could make network hops.
-
-Node Local Endpoint
-   a) Does not spread load well.
-   b) Preserves client IP address.
-   c) does not perform network hops.
-```
-
-##### External Load Balancing
-```
-External Load Balancing
-   a) External load balancers operate at a node level rather than a pod level.
-      If 3 pods exist in node A and 1 pod exists in node B for the service, load will likely be distributed equally to both nodes.
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-##### Keepalived Virtual IP
-```
-Problem
-   a) Clients need a stable endpoint, but pods and sometimes load balancers move around in Kubernetes.
-   b) DNS resolution for load balancers and services are not good enough due to performance issues.
-
-Solution
-   a) Keepalived provides high performance virtual IP address that serves address of load balancers / ingress controllers.
-
-Linux functionalities
-   a) IPVS (IP virtual server).
-   b) High availability via Virtual Redundancy Router Protocol (VRRP).
-   c) Operates at networking layer 4 level.
 ```
