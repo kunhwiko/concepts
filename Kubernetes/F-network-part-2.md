@@ -1,5 +1,37 @@
 ### Cross Component Networking
 ---
+##### Container to Container Networking
+```
+a) Containers in the same pod share IP addresses and network namespaces.
+   This means containers in the same pod can communicate with one another via localhost. 
+b) CRI is responsible for creating new Linux namespaces on the Kubernetes node.
+   Each pod is assigned to a Linux namespace and gets its own IP address.
+```
+
+##### Pod to Pod Networking
+```
+Step 1) CNI sets up a virtual ethernet in the pod's Linux namespace.
+        This veth is connected to the veth of the node's root namespace via a network bridge.
+Step 2) Subnet masking determines if endpoint is on the same network.
+Step 3) If two pods are communicating from within the same node, requests are resolved via ARP.
+        The request will jump from the current namespace's veth --> root namespace's veth --> target namespace's veth.
+Step 4) For pod communications across different nodes, ARP will check for the MAC address of the Kubernetes default gateway.
+        The request will jump from the current namespace's veth --> root namespace's veth --> default gateway --> route to correct node. 
+```
+
+##### Service Networking
+```
+How Services Work
+  a) Services are pieces of data stored in etcd and are configurations on Linux Netfilter and IP Tables.
+     Kube proxy will update IP Tables for each node based on info stored in etcd.
+
+Pod to Pod Networking via Services
+  Step 1) ARP will check for the MAC address of the Kubernetes default gateway.
+  Step 2) Netfilter hooks are triggered and IP Table chains are applied.
+          DNAT will rewrite the packet's destination address to the backend Pod of the service.
+  Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
+```
+
 ##### Asynchronous Networking
 ```
 Queues
@@ -104,90 +136,4 @@ Networking Solution Tools
   c) Weave Net
   d) Romana
   e) Contiv
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##### Container to Container Networking
-```
-a) Containers in the same pod share IP addresses and network namespaces.
-   This means containers in the same pod can communicate with one another via localhost. 
-b) CRI is responsible for creating new Linux namespaces on the Kubernetes node.
-   Each pod is assigned to a Linux namespace and gets its own IP address.
-```
-
-##### Pod to Pod Networking
-```
-Step 1) CNI sets up a virtual ethernet in the pod's Linux namespace.
-        This veth is connected to the veth of the node's root namespace via a network bridge.
-Step 2) When two pods communicate from within the node, requests are resolved via ARP.
-        The request will jump from the current namespace's veth to the root namespace's veth, and then to the target namespace's veth.
-Step 3) For pod communications across different nodes, subnet masking first determines if endpoint is on the same network.
-        If not, ARP will check for the MAC address of the Kubernetes default gateway.
-        The request will jump from the current namespace's veth to the root namespace's veth, and then to the default gateway to be routed to the right node. 
-```
-
-##### Service Networking
-```
-How Services Work
-   a) Services are pieces of data stored in etcd and built on top of Linux Netfilter and IP Tables.
-      Kube proxy will update IP Tables for each node based on info stored in etcd.
-
-Pod to Pod Networking via Services
-   Step 1) ARP will check for the MAC address of the Kubernetes default gateway.
-   Step 2) Netfilter hooks are triggered and IP Table chains are applied.
-           DNAT will rewrite the packet's destination address to the backend Pod of the service.
-   Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
 ```

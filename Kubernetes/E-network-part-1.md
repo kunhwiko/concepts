@@ -123,6 +123,11 @@ e) Network policies are part of the standard Kubernetes API but differs in imple
    However, enforcing the network policy is left to the networking solution.
 ```
 
+##### Egress
+```
+Policies used to control and deny outbound traffic.
+```
+
 ##### Execution of Network Policies
 ```
 Step 1) Policy is posted and sent to Kubernetes master nodes.
@@ -161,35 +166,3 @@ spec:
     - protocol: tcp
       port: 8888
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##### Egress
-```
-Policies used to control and deny outbound traffic.
-```
-
-
-
-
