@@ -3,47 +3,47 @@
 ##### Federation History
 ```
 History
-   Step 1) Original proposal was to reuse existing Kubernetes APIs to federate clusters.
-           However, there were many underlying problems to this approach.
-   Step 2) New proposal published dedicated APIs for federation.
+  Step 1) Original proposal was to reuse existing Kubernetes APIs to federate clusters.
+          However, there were many underlying problems to this approach.
+  Step 2) New proposal published dedicated APIs for federation.
 
 Cluster Federation
-   a) Aggregate multiple Kubernetes clusters that are treated as a single logical cluster.
-   b) Federation control plane presents a single unified view of the system.
+  a) Aggregate multiple Kubernetes clusters that are treated as a single logical cluster.
+  b) Federation control plane presents a single unified view of the system.
 ```
 
 ##### Basic Terminology
 ```
 KubeFed
-   a) Control plane of the federation.
+  a) Control plane of the federation.
    
 Host Cluster
-   a) Cluster that exposes KubeFed APIs and runs as the KubeFed control plane.
+  a) Cluster that exposes KubeFed APIs and runs as the KubeFed control plane.
 
 Member Cluster
-   a) Cluster that is registered with the KubeFed API.
-   b) KubeFed controllers have authn credentials to contact this cluster.
+  a) Cluster that is registered with the KubeFed API.
+  b) KubeFed controllers have AuthN credentials to contact this cluster.
 ```
 
 ##### Resource Federation
 ```
 FederatedTemplate
-   a) Holds the base specifications of a resource.
-   b) FederatedDeployment holds the base specs for Deployment.
-      This pushes Deployment object to all member clusters by default.
+  a) Holds the base specifications of a resource.
+  b) FederatedDeployment holds the base specs for Deployment.
+     This pushes Deployment object to all member clusters by default.
 
 FederatedPlacement
-   a) Holds the specifications of the clusters that resources should be distributed to.
-   b) FederatedReplicaSetPlacement holds specs about which clusters FederatedReplicaSets go to.
+  a) Holds the specifications of the clusters that resources should be distributed to.
+  b) FederatedReplicaSetPlacement holds specs about which clusters FederatedReplicaSets go to.
    
 FederatedOverrides
-   a) Holds specifications of how Template resources should vary for certain clusters.
-   b) FederatedReplicaSetOverrides shows how FederatedReplicaSet should vary for some clusters.
+  a) Holds specifications of how Template resources should vary for certain clusters.
+  b) FederatedReplicaSetOverrides shows how FederatedReplicaSet should vary for some clusters.
    
 ReplicaSchedulingPreference
-   a) Allows user to specify total number of replicas for a particular Template resource.
-   b) Allows user to specify weighted distribution and min/max replica to member clusters.
-   c) Allows for an option to dynamically rebalance resources if a resource cannot be scheduled.
+  a) Allows user to specify total number of replicas for a particular Template resource.
+  b) Allows user to specify weighted distribution and min/max replica to member clusters.
+  c) Allows for an option to dynamically rebalance resources if a resource cannot be scheduled.
 ```
 
 ##### Federation Control Plane
@@ -150,28 +150,4 @@ ExternalDNS
    a) Synchronizes exposed services and ingresses with DNS providers.
       Watches and lists LoadBalancer services, ExternalType services, and ingress hostnames.
    b) For newly scanned resources, upserts DNS records in external DNS providers.
-```
-
-### Tools
----
-##### Gardener
-```
-Purpose
-   a) Open source project that abstracts Kubernetes infra to manage multiple Kubernetes clusters.
-
-Shoot Cluster
-   a) Runs actual workloads and contains only worker nodes.
-   b) Control plane of a Shoot is analogous to a Kubernetes deployment.
-
-Seed Cluster
-   a) Responsible for managing multiple shoot clusters. 
-   b) Seed takes all the control planes of its Shoots and manages them.
-   c) Seed cluster is analogous to a Kubernetes node.
-   d) Recommended to have a Seed per cloud provider.
-   e) Contains a Gardenlet controller analogous to a Kubelet.
-   f) Creates a Kubernetes namespace per Shoot cluster.
-
-Garden Cluster
-   a) Responsible for managing seed clusters.
-   b) Analogous to a Kubernetes control plane managing worker nodes.
 ```

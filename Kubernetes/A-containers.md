@@ -51,6 +51,6 @@ d) Containers reduces management of multiple OS to a single OS.
 ##### Separation of Concerns
 ```
 a) All changes should be made to the source app, and containers should then be redeployed.
-b) Changes should not be made directly to a container directly as the results will not be reproducible.
+b) Changes should not be made to a container directly as the results will not be reproducible.
 c) Containers should not contain unique data as they might have to be redeployed.
 ```

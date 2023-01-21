@@ -15,7 +15,7 @@ c) Services identify pods it needs to send requests to via labels.
 d) Services operate at layer 3 (TCP/UDP) networking.
 ```
 
-###### Discoverability
+##### Discoverability
 ```
 a) Services can be discovered via environment variables. 
    When a pod runs on a node, the kubelet will add env variables for the host and port of each active service.

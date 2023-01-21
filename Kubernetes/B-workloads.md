@@ -28,7 +28,7 @@ b) Enables users to scale number of replicas, control rollout of updates, rollba
 c) Enables users to check or update status of pods.  
 ```
 
-##### Daemon Sets
+##### DaemonSets
 ```
 Ensures that a pod runs on all or a designated subset of nodes.
 ```
@@ -60,7 +60,7 @@ a) Key-value pairs to identify, select, and group pods or other objects together
 b) Keys are comprised of a prefix and name and must be unique on an object.
 c) Key prefixes are optional, must be a valid DNS subdomain, and can be at most 253 characters long.
 d) Key names are mandatory, only allow for certain characters, and must be at most 63 characters long.
-e) Labels should not used for attaching arbitrary metadata to objects.
+e) Labels should not be used for attaching arbitrary metadata to objects.
 ```
 
 ##### Label Selectors

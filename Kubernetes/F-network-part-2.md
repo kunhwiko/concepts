@@ -69,7 +69,7 @@ Node Local Endpoint
 ##### External Load Balancing
 ```
 External load balancers operate at a node level rather than a pod level.
-If 3 pods exist in node A and 1 pod exists in node B, load will still be distributed equally to both nodes.
+If 3 pods exist in node A and 1 pod exists in node B, load could still be distributed equally to both nodes.
 ```
 
 ### Container Network Interface (CNI)

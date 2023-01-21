@@ -94,7 +94,7 @@ ClusterRoleBindings
   b) ClusterRoleBindings are available for use in all namespaces.
 
 Roles
-  a) Represent a set of permissions to resources in a given namespaces.    
+  a) Represent a set of permissions to resources in a given namespace.    
 
 RoleBindings
   a) Grants permissions defined by a Role in a given namespace.
@@ -176,7 +176,7 @@ Considerations between ease of discovery vs security
   d) What data is considered sensitive enough that we should be encrypting it?
 ```
 
-#### Image Attacks
+##### Image Attacks
 ```
 Attacks
   a) Malicious images can be designed to hack into systems.
