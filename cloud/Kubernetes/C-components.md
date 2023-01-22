@@ -74,19 +74,22 @@ c) Stores state as protocol buffers to reduce JSON serialization overhead.
 ##### Kube Proxy
 ```
 a) Kube-proxy discovers cluster IPs through DNS or environment variables.
-b) Kube-proxy maintains networking rules (e.g. IP tables) on each node.
+b) Kube-proxy watches for new endpoints and helps maintain/update networking rules (e.g. IP tables) on each node.
 c) Kube-proxy is able to forward traffic via TCP and UDP forwarding.
-d) Kube-proxy is able to load balance requests if there are multiple pod backends.
+d) Kube-proxy is able to round robin requests if there are multiple pod backends.
 ```
 
 ##### Kubelet
 ```
-a) Agents on each node that registers nodes to the API server.
-   Communicates to API server typically via TLS.
-b) Makes sure containers run in pods via the configured runtime in a healthy state.
-   Also reports the status of the node and pods. 
-c) Downloads secrets from API server, runs liveness probes, and mounts volumes.
-d) Able to manually configure network MTU, otherwise network plugins will attempt to deduce optimal MTU.
+a) Kubelets are agents on each node that registers nodes to the API server.
+b) Kubelet makes sure containers run in pods via their configured container runtime. 
+c) Kubelet makes sure that containers run in a healthy state.
+   Kubelet reports the status of the node and pods to the control plane.
+   Communication to API server is typically done through TLS.
+d) Kubelet makes sure to inject necessary environment variables (e.g. service names) to pods before they start.
+   Kubelet also downloads secrets from API server, runs liveness probes, and mounts volumes.
+e) Kubelet allows you to manually configure network MTU.
+   Otherwise by default, network plugins will attempt to deduce optimal MTU.
 ```
 
 ### Container Runtime Interface (CRI)

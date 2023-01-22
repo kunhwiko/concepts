@@ -31,7 +31,7 @@ Port vs TargetPort: https://matthewpalmer.net/kubernetes-app-developer/articles/
 
 ##### Endpoint
 ```
-Object that shows a current/valid DNS record of host to IP addresses.
+Object that shows a current/valid DNS mapping of host to IP addresses.
 ```
 
 ##### Headless Services
@@ -86,16 +86,16 @@ Advantages over NodePorts
 
 ##### Ingress
 ```
-a) Ingress is technically not a service.
-b) Ingress comes in two components, a load balancer and ingress controller.
-   Ingress controller enables controlled routing based on a set of predefined rules.
-   Ingress load balancer performs actual routing.
+While technically not a service, ingress comes in two components, a load balancer and ingress controller.
+Ingress controller enables controlled routing based on a set of predefined rules.
+Ingress load balancer performs actual routing.
 ```
 
 ##### Ingress vs Load Balancer
 ```
 Limitations of Load Balancers 
-  a) One service is exposed per load balancer, and with multiple services, this can lead to a large overhead.
+  a) Like nodeports, a single service is exposed per load balancer.
+     With multiple services, this can lead to a large overhead.
 
 Advantages over Load Balancers
   a) Enable routing to multiple services with a single load balancer.
@@ -106,7 +106,7 @@ Advantages over Load Balancers
 ##### External Name
 ```
 a) Maps a service to a user specified DNS name as a means to get traffic out to an external source.
-b) Adds a CNAME DNS record to coreDNS such that looking up the service will route to the user specified DNS.
+b) Adds a CNAME DNS record to CoreDNS such that looking up the service will route to the user specified DNS.
 ```
 
 ### Definition of Network Policies
@@ -115,17 +115,12 @@ b) Adds a CNAME DNS record to coreDNS such that looking up the service will rout
 ```
 a) Network policies act as a set of firewall rules that manages network traffic for selected pods and namespaces.
 b) Network policies aim to minimize security breaches and maximize parts of systems that don't need to talk to each other.
-c) Network policies use labels to select applicable pods/namespaces and to define whitelist rules.
+c) Network policies use labels to whitelist applicable pods and namespaces.
    Usage of labels to define virtual network segments is much more flexible than defining CIDR / subnet masking.
 d) Network policies are cluster scoped and rules are unified if multiple network policies exist. 
-e) Network policies are part of the standard Kubernetes API but differs in implementation per networking solution / CNI plugin.
-   Kubernetes provides the ability to define and store network policies through APIs. 
-   However, enforcing the network policy is left to the networking solution.
-```
-
-##### Egress
-```
-Policies used to control and deny outbound traffic.
+e) Network policies are part of the standard Kubernetes API but differ in implementation per networking solution / CNI plugin.
+   In other words, Kubernetes provides the ability to define and store network policies through APIs. 
+   However, enforcing that network policy is left to the networking solution.
 ```
 
 ##### Execution of Network Policies
@@ -136,10 +131,15 @@ Step 3) Policy controller pushes the policy to agents on each worker node.
 Step 4) Each agent intercepts traffic, verifies against policies, and forward/rejects requests.
 ```
 
-##### Whitelisting
+##### Whitelisting of Network Policies
 ```
 a) By default, all access is forbidden to a certain pod if targeted by at least one network policy.
 b) By default, all access is granted to a certain pod if targeted by no network policy.    
+```
+
+##### Egress
+```
+Policies used to control and deny outbound traffic.
 ```
 
 ##### Examples

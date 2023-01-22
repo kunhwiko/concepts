@@ -55,7 +55,7 @@ This is typically the process for cloud providers.
 ```
 a) Kubernetes has the ability to preserve information about the originating client IP address. 
 b) Ability to preserve client IP address differs based on how service.spec.externalTrafficPolicy is set.
-   This field specifies whether to route external traffic to node-local endpoint or cluster-wide endpoint.
+   This field specifies whether to route external traffic to a node-local endpoint or cluster-wide endpoint.
 
 Cluster Wide Endpoint
   a) Default Kubernetes behavior that does not preserve client IP address.
@@ -68,7 +68,7 @@ Node Local Endpoint
 
 ##### External Load Balancing
 ```
-External load balancers operate at a node level rather than a pod level.
+External load balancers distributes load at a node level rather than a pod level.
 If 3 pods exist in node A and 1 pod exists in node B, load could still be distributed equally to both nodes.
 ```
 
