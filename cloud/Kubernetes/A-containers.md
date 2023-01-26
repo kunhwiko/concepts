@@ -19,8 +19,9 @@ Containers are an instance of an image and run as a process.
 
 ##### Container Layers
 ```
-a) Containers continue to build layers on top of base images.
-b) Container layers are just single read/write layers on top of base images. 
+Container runtime adds a new writable layer on top of base layers when a new container is launched.
+Changes made to the running container (e.g. modification of files) will be written to this layer.
+The contents of the container layer are lost when the container is deleted.
 ```
 
 ##### Tags
@@ -35,15 +36,19 @@ b) Multiple tags can refer to the same commit, so they have the same image ID.
 ```
 a) Hypervisors are necessary in allocating resources from host machine and emulating VMs.
 b) Provides environmental consistency.
-c) Provides ability to run different apps with different OS on the same host machine.
+c) Provides ability to run different apps with a different OS on the same host machine.
 ```
 
 ##### Containers vs Virtual Machines
 ```
-a) VMs are packaged with their own OS, containers share the host OS and run as a process.
-b) Containers do not require a hypervisor and therefore are more lightweight.
-c) Containers provide environmental consistency but are also portable and faster to deploy. 
-d) Containers reduces management of multiple OS to a single OS.
+a) VMs virtualize an entire machine down to the hardware layers, and are packaged with their own OS.
+   Containers virtualize software layers above the operating system level and share the host OS as isolated user spaces.
+b) VMs are relatively slow to start up as they need to boot up an OS.
+   Containers are lightweight as they run as OS processes while providing environmental consistency.
+c) VMs may incur the overhead of having to do kernel updates if thousands of VMs are active.
+   Containers reduce management of multiple OS to a single OS.
+d) Containers use Linux cgroups to control CPU, memory, I/O consumption.
+e) Containers use Linux namespaces to isolate applications.
 ```
 
 ### Best Practices in Containerization

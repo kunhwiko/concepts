@@ -169,13 +169,19 @@ File System Crash Recovery
 2) logging : use a log entry to ensure consistency (refer to systems-design.md)
 ```
 
-##### Miscellaneous 
+##### Distributed File Systems 
 ```
-Virtual Machines : "Hypervisor" allows the "host" computer to support "guests" by separating memory or processing resources
-
 Distributed File Systems 
 - client/server application where clients can access files from the server as if it were from the local machine 
 - server sends a copy of the file that gets cached into the client machine
 - typically has file/database replication across multiple servers to protect against failures 
 - must have a mechanism in place to organize updates across all replicas 
+```
+
+### Virtualization
+---
+##### Hypervisor
+```
+Software layer that breaks dependencies of an operating system on the host machine.
+It then allows virtual machines to share hardware of that host machine. 
 ```
