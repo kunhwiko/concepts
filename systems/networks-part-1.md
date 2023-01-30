@@ -18,7 +18,8 @@ Below are some examples of protocols.
 ```
 a) Determines "who" the machine is.
 b) Physical unique address of a machine represented in 48 bits.
-   It is difficult for the Internet to keep track of where all MAC addresses are.  
+   It is difficult for the Internet to keep track of where all MAC addresses are.
+c) For network broadcasts, the destination MAC address will typically look like ffff.ffff.ffff.
 ```
 
 ##### IP Address
@@ -162,10 +163,10 @@ c) Technologies include routers.
 ```
 Routers
   a) Routers connect L2 networks to form L3 networks and are assigned an IP address from each L2 network it is connected to.
-     This allows the router to serve as a network 'gateway', or a means for traffic to travel outside an L2 network.
-  b) Routers typically have multiple NICs and MAC addresses to help facilitate communication between networks.
-  c) Routers help form the IP address hierarchy in networks and subnets. 
-  d) Routers are knowledgable of the L2 networks connected to itself through a 'routing table'.
+     This allows routers to facilitate communication between networks and serve as a 'gateway', or a means for traffic to travel outside an L2 network.
+  b) Routers are knowledgable of the L2 networks connected to itself through a 'routing table'.
+  c) Routers typically have multiple NICs and MAC addresses as each network interface (e.g. ports) requires a MAC address.
+  d) Routers help form the IP address hierarchy in networks and subnets. 
   e) Routers provide a control point for network traffic where security, filtering, redirecting can be enforced.
 
 Routing Table
@@ -214,16 +215,16 @@ Step 4) Perform a longest prefix match on the IP to determine if the message sho
 Step 5) Move to a router (another L2 network) or a local machine (current L2 network) via ARP. 
 ```
 
-##### DNS Server
-```
-a) DNS servers act as a phonebook for finding the IP addresses of various sites.
-b) DNS servers are replicated for availability, and caches popular addresses.
-```
-
 ##### DHCP Server
 ```
 a) Host broadcasts a DHCP discovery ping --> DHCP servers respond with an offer response --> host sends a request message specifying the DHCP server it will use.
 b) DHCP helps a machine learn its own IP address, IP addresses of local DNS servers, gateway routers, and prefix length.
+```
+
+##### DNS Server
+```
+a) DNS servers act as a phonebook for finding the IP addresses of various sites.
+b) DNS servers are replicated for availability, and caches popular addresses.
 ```
 
 ##### A and CNAME Records
@@ -235,9 +236,19 @@ CNAME Records
   a) An alias from one domain to another.
 ``` 
 
-##### ARP Table
+##### Address Resolution Protocol (ARP)
 ```
-Table used to translate IP addresses into MAC addresses.
+Protocol used to translate IP addresses into MAC addresses. Hosts preserve these mappings on ARP tables.
+
+Step 1) When a client sends a request, it will know the destination IP but not the MAC address.
+        This means the request cannot be sent as the L2 header is incomplete.
+Step 2) Client fires an ARP request that sends a broadcast that holds the source's IP and MAC address.
+        This broadcast looks for a host with the destination IP address.
+        Layer 2 header for the broadcast will carry a destination MAC address of 'broadcast MAC address'.
+Step 3) Destination host receives the ARP broadcast and is able to update its ARP table with <src-ip>:<src-mac>.
+Step 4) Destination host fires an ARP response that sends a unicast that holds its IP and MAC address.
+Step 5) Client receives the ARP response and updates its ARP table.
+Step 6) Client is able to send its original request as it is now able to complete an L2 header.
 ```
 
 ### Subnets
@@ -257,12 +268,14 @@ c) Routers do a longest prefix match on these "prefixes" to route packets to the
 Subnets
   a) Networks inside networks that represents a segmented piece of the larger network.
   b) Narrows down and groups various network devices into the same IP address range.
-
-Subnet Masking
-  a) Means to send packets to a smaller subnet in a time efficient way.
+  c) Means to send packets in a time efficient way.
      Send mail --> route to office --> route to department --> route to team --> route to person.
      The above does not waste time trying to get the mail to the individual person directly.
-  b) For more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/
+  d) For more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/  
+
+Subnet Mask
+  a) A number (e.g 255.255.255.0) that helps distinguish the network address and host address for an IP address.
+  b) This number helps to determine whether a destination IP address lies in the same L2 network.
 ```
 
 ##### Network Address Translation (NAT)

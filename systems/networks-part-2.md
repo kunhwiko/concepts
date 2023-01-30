@@ -4,7 +4,7 @@
 ```
 a) Provides the means for transferring variable length data in a reliable fashion to the right place.
 b) Transport layer abstracts 'packets' into 'segments' and use ports as an address scheme.
-   The header for Layer 3 holds the src/dest port numbers.
+   The header for Layer 4 holds the src/dest port numbers.
 ```
 
 ##### Significance of Ports on Layer 4
