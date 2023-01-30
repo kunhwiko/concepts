@@ -86,7 +86,7 @@ Advantages over NodePorts
 
 ##### Ingress
 ```
-While technically not a service, ingress comes in two components, a load balancer and ingress controller.
+Technically not a service, ingress comes in two components, a load balancer and ingress controller.
 Ingress controller enables controlled routing based on a set of predefined rules.
 Ingress load balancer performs actual routing.
 ```

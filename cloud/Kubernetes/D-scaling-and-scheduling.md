@@ -144,6 +144,7 @@ b) Observable through `kubectl get quota`.
 Compute Quotas
   a) Can specify CPU, GPU, and memory quotas.
   b) If quota is specified, resource request and limit must be set at the container level as well.
+  c) Container level resource requests and limits are implemented using Linux cgroups.
 
 Storage Quotas
   a) Can specify total amount of storage. This can also be done per storage class.
