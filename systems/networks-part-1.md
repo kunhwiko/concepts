@@ -19,7 +19,7 @@ Below are some examples of protocols.
 a) Determines "who" the machine is.
 b) Physical unique address of a machine represented in 48 bits.
    It is difficult for the Internet to keep track of where all MAC addresses are.
-c) For network broadcasts, the destination MAC address will typically look like ffff.ffff.ffff.
+c) For broadcast frames, the destination MAC address will typically look like ffff.ffff.ffff.
 ```
 
 ##### IP Address
@@ -65,9 +65,10 @@ Step 1) When sending over messages, headers are 'encapsulated' starting from hig
 Step 2) For each layer, the lower layer "wraps" the message coming from higher levels to create protocol stacks.
         Lower layers do not have to actually care about what these higher level layers do.
 Step 3) After sending over a message, switches and routers will decapsulate the message from lowest to highest layer.
-        As an example, a switch at this time will identify from the layer 2 header that the message was intended for itself.
+        As an example, a router at this time will identify from the layer 2 header that the message was intended for itself.
+        It will then discard the L2 header and pass for Layer 3 header validation.
 Step 4) The message is then recapsulated before resending and the steps are repeated.
-        As an example, a switch at this time will write a new layer 2 header specifying a new src/dest MAC address.
+        As an example, a router at this time will write a new layer 2 header specifying a new src/dest MAC address.
 ```
 
 ### Layer 1
@@ -135,12 +136,18 @@ Problem Statement
 
 Solution
   a) Switches are a combination of hosts and bridges that help to connect L1 networks to form an L2 network.
-     All hosts in the same L2 network will share a common IP address space (prefix).  
-  b) Switches have multiple ports and know which hosts are on each port through a 'forwarding table'.
-  c) Hosts broadcast themselves to the network, and switches learn the existence of new MAC addresses through this broadcasting.
+     All hosts in the same L2 network will share a common IP address space (prefix). 
+  b) Switches have multiple ports and know which hosts are on each port through a 'forwarding table' that maps MAC addresses to ports.
+  c) Switches primarily perform 3 functions:
+       * Learn: Switches update their forwarding table with a <src-mac>:<port> mapping when a new frame passes the switch.
+       * Flood: When a destination MAC address is not found on the forwarding table, the switch duplicates the frame to all hosts except to the receiving port.
+                Irrelevant hosts will drop the request and only the relevant host will send a response back, which again causes an update on the forwarding table.
+       * Forward: Use mapping on forwarding table to send frame on the appropriate port.
+```
 
-Forwarding Table
-  a) Maps a MAC address to a port to forward packets.
+##### Virtual Local Area Network (VLAN)
+```
+Divides ports on a switch into isolated groups into "mini-switches".
 ```
 
 ##### Virtual Ethernet (veth)
@@ -246,10 +253,10 @@ Protocol used to translate IP addresses into MAC addresses. Hosts preserve these
 
 Step 1) When a client sends a request, it will know the destination IP but not the MAC address.
         This means the request cannot be sent as the L2 header is incomplete.
-Step 2) Client fires an ARP request that sends a broadcast that holds the source's IP and MAC address.
-        This broadcast looks for a host with the destination IP address.
-        Layer 2 header for the broadcast will carry a destination MAC address of 'broadcast MAC address'.
-Step 3) Destination host receives the ARP broadcast and is able to update its ARP table with <src-ip>:<src-mac>.
+Step 2) Client fires an ARP request that sends a broadcast frame that holds the source's IP and MAC address.
+        This broadcast is meant to discover the host with the destination IP address.
+        Layer 2 header for the broadcast will carry a destination MAC address of ffff.ffff.ffff.
+Step 3) Destination host receives the ARP broadcast and updates its ARP table with a <src-ip>:<src-mac> mapping.
 Step 4) Destination host fires an ARP response that sends a unicast that holds its IP and MAC address.
 Step 5) Client receives the ARP response and updates its ARP table.
 Step 6) Client is able to send its original request as it is now able to complete an L2 header.

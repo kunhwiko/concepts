@@ -168,7 +168,7 @@ Man-in-the-Middle(MITM) Attack
 
 Symmetric Encryption
   a) Uses a single key to encrypt/decrypt data and is faster.
-  b) <akes use of Advanced Encryption Standard (AES) algorithm.
+  b) Makes use of Advanced Encryption Standard (AES) algorithm.
 
 Asymmetric Encryption
   a) Uses a public and private key and is slower.
