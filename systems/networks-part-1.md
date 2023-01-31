@@ -65,9 +65,9 @@ Step 1) When sending over messages, headers are 'encapsulated' starting from hig
 Step 2) For each layer, the lower layer "wraps" the message coming from higher levels to create protocol stacks.
         Lower layers do not have to actually care about what these higher level layers do.
 Step 3) After sending over a message, switches and routers will decapsulate the message from lowest to highest layer.
-        As an example, a switch might identify from the layer 2 header that the message was intended for that switch.
+        As an example, a switch at this time will identify from the layer 2 header that the message was intended for itself.
 Step 4) The message is then recapsulated before resending and the steps are repeated.
-        As an example, a switch could write a new layer 2 header specifying a new src/dest MAC address.
+        As an example, a switch at this time will write a new layer 2 header specifying a new src/dest MAC address.
 ```
 
 ### Layer 1
@@ -209,16 +209,20 @@ IPv6:
 host name (www.github.com) --(DNS)--> IP Address --(ARP)--> MAC address 
 
 Step 1) Host begins only knowing its source MAC address.
-Step 2) Host discovers its source IP address and DNS servers via DHCP.
+Step 2) Host looks for a DHCP server to discover its source IP address, IP of DNS servers, default gateway, and subnet mask.
 Step 3) Host discover the destination's IP address via DNS.
-Step 4) Perform a longest prefix match on the IP to determine if the message should go to a router or a local machine.
-Step 5) Move to a router (another L2 network) or a local machine (current L2 network) via ARP. 
+Step 4) Subnet mask determines if the message should go through a gateway router or if the destination is in the same L2 network.
+Step 5) Host fires an ARP broadcast to discover the destination MAC address of the default gateway or destination.
+Step 6) If packet goes through default gateway, the L2 header is rewritten (i.e. L3 header is preserved) and the above process is repeated.
 ```
 
 ##### DHCP Server
 ```
-a) Host broadcasts a DHCP discovery ping --> DHCP servers respond with an offer response --> host sends a request message specifying the DHCP server it will use.
-b) DHCP helps a machine learn its own IP address, IP addresses of local DNS servers, gateway routers, and prefix length.
+DHCP helps a machine learn its own IP address, IP addresses of local DNS servers, gateway routers (i.e. default gateway), and subnet mask.
+
+Step 1) Host broadcasts a DHCP discovery ping.
+Step 2) DHCP servers respond with an offer response.
+Step 3) Host sends a request message specifying the DHCP server it will use.
 ```
 
 ##### DNS Server
