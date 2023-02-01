@@ -171,14 +171,18 @@ c) Technologies include routers.
 Routers
   a) Routers connect L2 networks to form L3 networks and are assigned an IP address from each L2 network it is connected to.
      This allows routers to facilitate communication between networks and serve as a 'gateway', or a means for traffic to travel outside an L2 network.
-  b) Routers are knowledgable of the L2 networks connected to itself through a 'routing table'.
+  b) Routers are knowledgable of connected L2 networks through a 'routing table' that maps IP prefixes to next hops. 
+     Routers update routes on the routing table through the following:
+       * Direct Connection: Routers are aware of the networks they are directly attached to.
+       * Static Routes: Routers are aware of routes that administrators manually seed in.
+       * Dynamic Routes: Routers learn routes from other routers.
+  c) Router will determine how to route packets in the following ways:
+       * If there is one match on the routing table, packets are sent to the corresponding next hop.
+       * If there are multiple matches on the routing table, packets are sent to next hop that has the longest subnet mask.
+       * If there are no matches on the routing table, packets are sent to a default entry or dropped.
   c) Routers typically have multiple NICs and MAC addresses as each network interface (e.g. ports) requires a MAC address.
   d) Routers help form the IP address hierarchy in networks and subnets. 
   e) Routers provide a control point for network traffic where security, filtering, redirecting can be enforced.
-
-Routing Table
-  a) Routing table holds information about all the networks a router is aware about.
-  b) Routing table maps longest prefix matches on IPs to send packets over to next hops (other L2 networks).
 
 More info here: https://www.youtube.com/watch?v=H7-NR3Q3BeI&list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi&index=2
 ```
