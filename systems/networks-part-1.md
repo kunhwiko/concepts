@@ -179,10 +179,10 @@ Routers
   c) Router will determine how to route packets in the following ways:
        * If there is one match on the routing table, packets are sent to the corresponding next hop.
        * If there are multiple matches on the routing table, packets are sent to next hop that has the longest subnet mask.
-       * If there are no matches on the routing table, packets are sent to a default entry or dropped.
-  c) Routers typically have multiple NICs and MAC addresses as each network interface (e.g. ports) requires a MAC address.
-  d) Routers help form the IP address hierarchy in networks and subnets. 
-  e) Routers provide a control point for network traffic where security, filtering, redirecting can be enforced.
+       * If there are no matches on the routing table, packets are sent to a default entry (i.e. match on 0.0.0.0/0) or dropped.
+  d) Routers typically have multiple NICs and MAC addresses as each network interface (e.g. ports) requires a MAC address.
+  e) Routers help form the IP address hierarchy in networks and subnets. 
+  f) Routers provide a control point for network traffic where security, filtering, redirecting can be enforced.
 
 More info here: https://www.youtube.com/watch?v=H7-NR3Q3BeI&list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi&index=2
 ```
@@ -281,12 +281,12 @@ c) Routers do a longest prefix match on these "prefixes" to route packets to the
 ##### Subnets
 ```
 Subnets
-  a) Networks inside networks that represents a segmented piece of the larger network.
-  b) Narrows down and groups various network devices into the same IP address range.
-  c) Means to send packets in a time efficient way.
+  a) Subnets are a representation of a network hierarchy that makes network infra (e.g. routing tables) scalable when new networks are added.
+  b) Subnets narrow down and groups various network devices into the same IP address range.
+  c) Subnets are a means to send packets in a time efficient way.
      Send mail --> route to office --> route to department --> route to team --> route to person.
      The above does not waste time trying to get the mail to the individual person directly.
-  d) For more: https://www.cloudflare.com/learning/network-layer/what-is-a-subnet/  
+  d) For more: https://www.youtube.com/watch?v=zmxLg4jV0ts&list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi&index=11
 
 Subnet Mask
   a) A number (e.g 255.255.255.0) that helps distinguish the network address and host address for an IP address.
