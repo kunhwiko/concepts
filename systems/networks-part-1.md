@@ -61,8 +61,8 @@ Protocol Stack
 
 ##### Encapsulation
 ```
-Step 1) When sending over messages, headers are 'encapsulated' starting from highest to lowest layer.
-Step 2) For each layer, the lower layer "wraps" the message coming from higher levels to create protocol stacks.
+Step 1) When sending over messages, headers are "encapsulated" starting from highest to lowest layer.
+Step 2) For each layer, the lower layer wraps the message coming from higher levels to create protocol stacks.
         Lower layers do not have to actually care about what these higher level layers do.
 Step 3) After sending over a message, switches and routers will decapsulate the message from lowest to highest layer.
         As an example, a router at this time will identify from the layer 2 header that the message was intended for itself.
@@ -227,18 +227,22 @@ Step 5) Host fires an ARP broadcast to discover the destination MAC address of t
 Step 6) If packet goes through default gateway, the L2 header is rewritten (i.e. L3 header is preserved) and the above process is repeated.
 ```
 
-##### DHCP Server
+##### Dynamic Host Configuration Protocol (DHCP)
 ```
-DHCP helps a machine learn its own IP address, IP addresses of local DNS servers, gateway routers (i.e. default gateway), and subnet mask.
+DHCP servers helps a machine learn important information that is crucial to get packets into the Internet:
+  * Host's IP address
+  * DNS server's IP address
+  * Default gateway's IP address
+  * Subnet mask
 
 Step 1) Host broadcasts a DHCP discovery ping.
 Step 2) DHCP servers respond with an offer response.
 Step 3) Host sends a request message specifying the DHCP server it will use.
 ```
 
-##### DNS Server
+##### Domain Name System (DNS)
 ```
-a) DNS servers act as a phonebook for finding the IP addresses of various sites.
+a) DNS servers act as a phonebook for translating domain names or email addresses to IP addresses.
 b) DNS servers are replicated for availability, and caches popular addresses.
 ```
 

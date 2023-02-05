@@ -7,7 +7,7 @@ b) Transport layer abstracts 'packets' into 'segments' and use ports as an addre
    The header for Layer 4 holds the src/dest port numbers.
 ```
 
-##### Significance of Ports on Layer 4
+##### Significance of Ports
 ```
 a) Ports determine where the server is listening on and where the client is awaiting for a response.
 b) Ports act as a unique identifier to distinguish data streams and ensures various applications will receive the right data.
@@ -64,6 +64,12 @@ Solution
 
 ### Layer 7
 ---
+##### Hyper Text Transfer Protocol (HTTP)
+```
+Step 1) Client sends a GET request for a particular index.html.
+Step 2) Server responds with a 200 OK status message along with the request web files .
+```
+
 ##### HTTP 1.0
 ```
 a) Wrapper on top of TCP/IP (before HTTP/3).
@@ -115,6 +121,19 @@ c) Promises
 a) UDP based protocol.
 b) Custom TLS handshake protocol.
 c) Custom congestion control.
+```
+
+##### File Transfer Protocol (FTP)
+```
+Step 1) Client sends a RETR (retrieve) request for a particular file to the server.
+Step 2) Server responds with the file.
+```
+
+##### Simple Mail Transfer Protocol (SMTP)
+```
+Step 1) Client sends a HELO message along with the client URL.
+Step 2) Server responds with a 250 status message along with the server URL.
+Step 3) Client and server can now exchange email.
 ```
 
 ### Internet Fundamentals
