@@ -135,19 +135,55 @@ Problem Statement
   b) All hosts on both sides of the bridge will receive data if the source and destination are on opposite sides of the bridge.
 
 Solution
-  a) Switches are a combination of hosts and bridges that help to connect L1 networks to form an L2 network.
+  a) Switches are a combination of hubs and bridges that help to connect L1 networks to form an L2 network.
      All hosts in the same L2 network will share a common IP address space (prefix). 
-  b) Switches have multiple ports and know which hosts are on each port through a 'forwarding table' that maps MAC addresses to ports.
-  c) Switches primarily perform 3 functions:
-       * Learn: Switches update their forwarding table with a <src-mac>:<port> mapping when a new frame passes the switch.
-       * Flood: When a destination MAC address is not found on the forwarding table, the switch duplicates the frame to all hosts except to the receiving port.
-                Irrelevant hosts will drop the request and only the relevant host will send a response back, which again causes an update on the forwarding table.
-       * Forward: Use mapping on forwarding table to send frame on the appropriate port.
+  b) Switches have multiple ports and know which hosts are on each port through a 'MAC address table'.
+
+MAC Address Table
+  a) A table that maps ports to MAC addresses of connected hosts.
+
+Switch Functionality
+  * Learn: Switches update their MAC address table with a <src-mac>:<port> mapping when a new frame passes the switch.
+  * Flood: When a destination MAC address is not found on the MAC address table, the switch duplicates the frame to all hosts except to the receiving port.
+           Irrelevant hosts will drop the request and only the relevant host will send a response back, which again causes an update on the MAC address table.
+  * Forward: Use mapping on MAC address table to send frame on the appropriate port.
 ```
 
+### Virtualization of Layer 2
+---
 ##### Virtual Local Area Network (VLAN)
 ```
-Divides ports on a switch into isolated groups into "mini-switches".
+Problem Statement
+  a) Before virtualization, isolated switches were required for each and every network that needed to be isolated.
+
+Solution
+  a) Switches can be logically separated through virtualization.
+     Ports on a switch can be grouped into isolated "mini-switches".
+  b) VLANs allow a single physical switch to be split into multiple virtual switches.
+     VLANs allow a single virtual switch to be extended across other physical switches.
+```
+
+##### Trunk Ports
+```
+Problem Statement
+  a) Assume that VLAN 1 and VLAN 2 are extended across the same 2 physical switches.
+     This would normally require 2 wire connections, one between ports for VLAN 1 and another between ports for VLAN 2.
+     With more VLANs across physical switches, this becomes difficult to scale.
+
+Solution
+  a) Trunk ports allow data to flow from multiple VLANs in a single physical wire.
+  b) When data flows into trunk ports, it becomes difficult to know which VLAN the data is intended for.
+     "VLAN tags" are added to packets in addition to L2 and L3 headers to distinguish which VLAN the packet is intended for.   
+
+Access Ports
+  a) Links that carry data just for a single VLAN.
+  b) When data flows into access ports, the network knows that the data is intended for a given VLAN.
+
+Native VLAN
+  a) If a packet goes through a trunk port but does not have a VLAN tag, it will be sent to the Native VLAN as a default.
+  b) When sending a packet through a trunk port, the packet does not need a VLAN tag if the packet is already intended for the Native VLAN. 
+
+More info here: https://www.youtube.com/watch?v=MmwF1oHOvmg
 ```
 
 ##### Virtual Ethernet (veth)
@@ -168,21 +204,24 @@ c) Technologies include routers.
 
 ##### Router
 ```
-Routers
-  a) Routers connect L2 networks to form L3 networks and are assigned an IP address from each L2 network it is connected to.
-     This allows routers to facilitate communication between networks and serve as a 'gateway', or a means for traffic to travel outside an L2 network.
-  b) Routers are knowledgable of connected L2 networks through a 'routing table' that maps IP prefixes to next hops. 
-     Routers update routes on the routing table through the following:
+a) Routers connect L2 networks to form L3 networks and are assigned an IP address from each L2 network it is connected to.
+   This allows routers to facilitate communication between networks and serve as a 'gateway', or a means for traffic to travel outside an L2 network.
+b) Routers are knowledgable of connected L2 networks through a 'routing table'.
+c) Routers typically have multiple NICs and MAC addresses as each network interface (e.g. ports) requires a MAC address.
+d) Routers help form the IP address hierarchy in networks and subnets. 
+e) Routers provide a control point for network traffic where security, filtering, redirecting can be enforced.
+
+Routing Table
+  a) A table that maps IP prefixes to next hops.
+  b) Routes on routing tables are updated through the following:
        * Direct Connection: Routers are aware of the networks they are directly attached to.
        * Static Routes: Routers are aware of routes that administrators manually seed in.
        * Dynamic Routes: Routers learn routes from other routers.
-  c) Router will determine how to route packets in the following ways:
-       * If there is one match on the routing table, packets are sent to the corresponding next hop.
-       * If there are multiple matches on the routing table, packets are sent to next hop that has the longest subnet mask.
-       * If there are no matches on the routing table, packets are sent to a default entry (i.e. match on 0.0.0.0/0) or dropped.
-  d) Routers typically have multiple NICs and MAC addresses as each network interface (e.g. ports) requires a MAC address.
-  e) Routers help form the IP address hierarchy in networks and subnets. 
-  f) Routers provide a control point for network traffic where security, filtering, redirecting can be enforced.
+
+Routing
+  * If there is one match on the routing table, packets are sent to the corresponding next hop.
+  * If there are multiple matches on the routing table, packets are sent to next hop that has the longest subnet mask.
+  * If there are no matches on the routing table, packets are sent to a default entry (i.e. match on 0.0.0.0/0) or dropped.
 
 More info here: https://www.youtube.com/watch?v=H7-NR3Q3BeI&list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi&index=2
 ```
@@ -257,17 +296,20 @@ CNAME Records
 
 ##### Address Resolution Protocol (ARP)
 ```
-Protocol used to translate IP addresses into MAC addresses. Hosts preserve these mappings on ARP tables.
+Protocol used to translate IP addresses into MAC addresses. Hosts and switches preserve these mappings on ARP tables.
 
 Step 1) When a client sends a request, it will know the destination IP but not the MAC address.
         This means the request cannot be sent as the L2 header is incomplete.
 Step 2) Client fires an ARP request that sends a broadcast frame that holds the source's IP and MAC address.
         This broadcast is meant to discover the host with the destination IP address.
         Layer 2 header for the broadcast will carry a destination MAC address of ffff.ffff.ffff.
-Step 3) Destination host receives the ARP broadcast and updates its ARP table with a <src-ip>:<src-mac> mapping.
-Step 4) Destination host fires an ARP response that sends a unicast that holds its IP and MAC address.
+Step 3) Destination host receives the ARP broadcast and updates its ARP table with a <src-ip>:<src-mac> entry.
+Step 4) Destination host fires an ARP response as a unicast that holds its IP and MAC address.
 Step 5) Client receives the ARP response and updates its ARP table.
 Step 6) Client is able to send its original request as it is now able to complete an L2 header.
+
+ARP Table
+  a) A table that maps IP addresses to MAC addresses.
 ```
 
 ### Subnets
