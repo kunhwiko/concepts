@@ -173,7 +173,8 @@ Problem Statement
 Solution
   a) Trunk ports allow data to flow from multiple VLANs in a single physical wire.
   b) When data flows into trunk ports, it becomes difficult to know which VLAN the data is intended for.
-     "VLAN tags" are added to packets in addition to L2 and L3 headers to distinguish which VLAN the packet is intended for.   
+     "VLAN tags" are added to packets in addition to L2 and L3 headers to distinguish which VLAN the packet is intended for.
+     VLAN tags follow IEEE 820.1Q standards.
 
 Access Ports
   a) Links that carry data just for a single VLAN.
@@ -186,9 +187,19 @@ Native VLAN
 More info here: https://www.youtube.com/watch?v=MmwF1oHOvmg
 ```
 
-##### Virtual Ethernet (veth)
+##### Virtual Extensible Local Area Network (VXLAN)
 ```
-a) Virtual implementation of Ethernet that allow for communications across logical partitions or different virtual machines without the need of assigning physical hardware.
+Problem Statement
+  a) VLAN tags are only supported up to a maximum of 4096 (12 bits) following 820.1Q standards.
+
+Solution
+  a) VXLANs encapsulate frames along with a VXLAN header into UDP packets to resolve VLAN's inability to be routed out of an L2 network.
+  b) VXLANs are identified by a 24 bit VXLAN network identifier (VNI), allowing up to 16,777,216 VLANs.
+```
+
+##### Virtual Ethernet (VETH)
+```
+a) Virtualization of ethernet that allow for communications across logical partitions without the need of assigning physical hardware.
 b) Devices are typically created in pairs and are connected via a bridge.
 ```
 
