@@ -362,3 +362,12 @@ NAT Disadvantages
   a) Difficult to distinguish devices within the subnet.
   b) Cannot connect to hosts within the private network (address unknown) from the outside until a packet has been trasmitted.
 ```
+
+##### SNAT vs DNAT
+```
+SNAT
+  a) Refers to source NAT, which translates the source IP address.
+
+DNAT
+  a) Refers to destination NAT, which translates the destination IP address.
+```

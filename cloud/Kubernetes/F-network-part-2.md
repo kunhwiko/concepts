@@ -5,7 +5,7 @@
 a) Containers in the same pod share IP addresses and network namespaces.
    This means containers in the same pod can communicate with one another via localhost. 
 b) CRI is responsible for creating new Linux namespaces on the Kubernetes node.
-   Each pod is assigned to a Linux namespace and gets its own IP address.
+   Each pod is assigned a Linux namespace and CNI is responsible for giving the pod a unique IP address.
 ```
 
 ##### Pod to Pod Networking
@@ -19,17 +19,23 @@ Step 4) For pod communications across different nodes, ARP will check for the MA
         The request will jump from the current namespace's veth --> root namespace's veth --> default gateway --> route to correct node. 
 ```
 
-##### Service Networking
+##### Pod to Service Networking
 ```
-How Services Work
-  a) Services are pieces of data stored in etcd and are configurations on Linux Netfilter and IP Tables.
-     Kube proxy will update IP Tables for each node based on info stored in etcd.
-
-Pod to Pod Networking via Services
-  Step 1) ARP will check for the MAC address of the Kubernetes default gateway.
-  Step 2) Netfilter hooks are triggered and IP Table chains are applied.
-          DNAT will rewrite the packet's destination address to the backend Pod of the service.
+Step 1) Services are pieces of data stored in etcd that use endpoint objects as a lookup table to fetch target pod IP addresses.
+        When new endpoints are added, all kube proxies will update IP tables on their node based on info stored in etcd.
+Step 2) Pod to service networking works the same way as pod to pod networking, but the destination IP address is the service's IP address.
+Step 3) When the packet reaches the correct node, IP table rules on the node will be applied.
+        The destination IP address is rewritten to a target pod's IP address through DNAT.
+        
   Step 3) Conntrack will keep track of the origin so the target pod can send back a response to the requesting pod.
+```
+
+##### Service to Pod Networking
+```
+Step 1) After a packet reaches a target pod, a response needs to be sent back.
+        However, the source expects a response back from the service's IP address and not the pod's IP address.
+Step 2) IP tables use a Linux feature known as 'Conntrack' to remember previous routing choices.
+Step 3) IP tables will rewrite the packet's source IP address to be the service's IP address through SNAT.
 ```
 
 ##### Asynchronous Networking

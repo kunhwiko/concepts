@@ -31,7 +31,8 @@ Port vs TargetPort: https://matthewpalmer.net/kubernetes-app-developer/articles/
 
 ##### Endpoint
 ```
-Object that shows a current/valid DNS mapping of host to IP addresses.
+a) Endpoint object shows a DNS mapping of hosts to IP addresses.
+b) Endpoint objects are used by services to keep track of all IP addresses of Pods corresponding to the service.
 ```
 
 ##### Headless Services

@@ -74,7 +74,7 @@ c) Stores state as protocol buffers to reduce JSON serialization overhead.
 ##### Kube Proxy
 ```
 a) Kube-proxy discovers cluster IPs through DNS or environment variables.
-b) Kube-proxy watches for new endpoints and helps maintain/update networking rules (e.g. IP tables) on each node.
+b) Kube-proxy watches for new services and endpoints and helps maintain networking rules (e.g. IP tables) on its node.
 c) Kube-proxy is able to forward traffic via TCP and UDP forwarding.
 d) Kube-proxy is able to round robin requests if there are multiple pod backends.
 ```
