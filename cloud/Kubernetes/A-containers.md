@@ -17,6 +17,12 @@ c) If two different changes are made on top of the same existing layer, two laye
 Containers are an instance of an image and run as a process. 
 ```
 
+##### Container Registry
+```
+a) A container registry is a service for storing container images.
+b) If a container registry is not specified, Kubernetes nodes will pull from docker.io. 
+```
+
 ##### Container Layers
 ```
 Container runtime adds a new writable layer on top of base layers when a new container is launched.
