@@ -224,6 +224,7 @@ e) Routers provide a control point for network traffic where security, filtering
 
 Routing Table
   a) A table that maps IP prefixes to next hops.
+     Both hosts and routers have a routing table.
   b) Routes on routing tables are updated through the following:
        * Direct Connection: Routers are aware of the networks they are directly attached to.
        * Static Routes: Routers are aware of routes that administrators manually seed in.
@@ -270,9 +271,10 @@ IPv6:
 host name (www.github.com) --(DNS)--> IP Address --(ARP)--> MAC address 
 
 Step 1) Host begins only knowing its source MAC address.
-Step 2) Host looks for a DHCP server to discover its source IP address, IP of DNS servers, default gateway, and subnet mask.
+Step 2) Host looks for a DHCP server to discover its own IP address, IP address of DNS servers, IP address of default gateway, and subnet mask.
 Step 3) Host discover the destination's IP address via DNS.
 Step 4) Subnet mask determines if the message should go through a gateway router or if the destination is in the same L2 network.
+        This is determined through entries in the host's routing table (i.e. 0.0.0.0/0 will map to IP address of default gateway).
 Step 5) Host fires an ARP broadcast to discover the destination MAC address of the default gateway or destination.
 Step 6) If packet goes through default gateway, the L2 header is rewritten (i.e. L3 header is preserved) and the above process is repeated.
 ```
@@ -318,9 +320,6 @@ Step 3) Destination host receives the ARP broadcast and updates its ARP table wi
 Step 4) Destination host fires an ARP response as a unicast that holds its IP and MAC address.
 Step 5) Client receives the ARP response and updates its ARP table.
 Step 6) Client is able to send its original request as it is now able to complete an L2 header.
-
-ARP Table
-  a) A table that maps IP addresses to MAC addresses.
 ```
 
 ### Subnets
