@@ -2,7 +2,7 @@
 ---
 ##### Driver
 ```
-Code that runs in the kernel to communicate with hardware device.
+Code that runs in the kernel to communicate with hardware devices.
 ```
 
 ##### Module
@@ -42,7 +42,7 @@ NF_IP_POST_ROUTING
 
 ##### IPTable
 ```
-a) IPTable is a firewall tool that interacts with kernel hooks from the Netfilter framework.  
+IPTable is a firewall tool that interacts with kernel hooks from the Netfilter framework.  
 ```
 
 ##### IPTable Tables
@@ -58,12 +58,16 @@ Mangle Table
   a) This table is used to alter the IP headers of packets (e.g. TTL values, number of network hops to sustain etc.).
 
 Raw Table
-  a) IPTables is a stateful firewall that inspects packets in relation to previous packets.
-     Connection tracking features from Netfilter enables IPTables to view packets as part of an ongoing session. 
+  a) IPTables is a stateful firewall that inspects packets in relation to previous packets through connection tracking.
      This table is used to exempt packets from connection tracking or allow users to work with packets before state is tracked.
 
 Security Table
   a) This table is used to set SELinux security context onto packets.
+```
+
+##### Connection Tracking (Conntrack)
+```
+Conntrack is a feature from Netfilter that enables IPTables to view packets as part of an ongoing session. 
 ```
 
 ### Resource Allocation

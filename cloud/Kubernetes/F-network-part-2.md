@@ -32,7 +32,7 @@ Step 3) When the packet reaches the correct node, IP table rules on the node wil
 ```
 Step 1) After a packet reaches a target pod, a response needs to be sent back.
         However, the source expects a response back from the service's IP address and not the pod's IP address.
-Step 2) IP tables use a Linux feature known as 'Conntrack' to remember previous routing choices.
+Step 2) IP tables use Linux connection tracking to remember previous routing choices.
 Step 3) IP tables will rewrite the packet's source IP address to be the service's IP address through SNAT.
 ```
 
