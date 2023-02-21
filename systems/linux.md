@@ -40,25 +40,31 @@ NF_IP_POST_ROUTING
   a) Triggered for outgoing traffic after routing but before being sent out on the wire.
 ```
 
-##### IPTable
+##### IP Table
 ```
-IPTable is a firewall tool that interacts with kernel hooks from the Netfilter framework.  
+a) IP table is a firewall tool that interacts with kernel hooks from the Netfilter framework.
+b) IP tables are organized in the following hierarchy:
+     * Tables : Files that join similar action and consist of multiple chains.
+     * Chains : Chains are a list of rules.
+     * Rules  : Statements that instruct the system what to do with a packet.  
 ```
 
-##### IPTable Tables
+##### IP Table Tables
 ```
 Filter Table
   a) This table is used to decide whether to accept or deny a packet to its intended destination.
+     Examples of chains in this table are input, output, and forward chains.
 
 NAT Table
   a) This table is used to implement NAT rules.
   b) This table is used to determine whether and how to modify the packet's source and destination addresses.
+     Examples of chains in this table are prerouting chains for DNAT and postrouting chains for SNAT.
 
 Mangle Table
   a) This table is used to alter the IP headers of packets (e.g. TTL values, number of network hops to sustain etc.).
 
 Raw Table
-  a) IPTables is a stateful firewall that inspects packets in relation to previous packets through connection tracking.
+  a) IP table is a stateful firewall that inspects packets in relation to previous packets through connection tracking.
      This table is used to exempt packets from connection tracking or allow users to work with packets before state is tracked.
 
 Security Table
@@ -67,7 +73,30 @@ Security Table
 
 ##### Connection Tracking (Conntrack)
 ```
-Conntrack is a feature from Netfilter that enables IPTables to view packets as part of an ongoing session. 
+Conntrack is a feature from Netfilter that enables IP tables to view packets as part of an ongoing session. 
+```
+
+##### IP Set
+```
+a) IP set is an extension of IP tables that allows for the creation of firewall rules that matches on entire sets of addresses at once.
+b) Lookup time for addresses saved in IP sets is O(1).  
+```
+
+##### IP Virtual Server (IPVS)
+```
+a) IPVS running on a host acts as a transport layer load balancer in the Linux kernel.
+   This load balancer can direct requests for TCP/UDP based services to a cluster of real servers.
+   The machine that is configured as the load balancer is known as a "Director".
+b) IPVS supports various load balancing algorithms (e.g. round robin, shortest expected delay, src/dest hashing).
+c) IPVS can make services of the real servers to appear as a virtual service on a single IP address.
+```
+
+##### IPVS Networking
+```
+Step 1) Client sends a packet with the destination IP address being the virtual IP address of the Director.
+Step 2) Director will forward the packet to a backend server with the source IP being rewritten as the Director's actual IP address.
+Step 3) Backend server will send a response back to the Director with the destination IP address being the actual IP address of the Director.
+Step 4) Director will send a response back to the client with the source IP address being the virtual IP address of the Director. 
 ```
 
 ### Resource Allocation

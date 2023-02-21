@@ -22,10 +22,15 @@ Step 4) For pod communications across different nodes, ARP will check for the MA
 ##### Pod to Service Networking
 ```
 Step 1) Services are pieces of data stored in etcd that use endpoint objects as a lookup table to fetch target pod IP addresses.
-        When new endpoints are added, all kube proxies will update IP tables on their node based on info stored in etcd.
-Step 2) Pod to service networking works the same way as pod to pod networking, but the destination IP address is the service's IP address.
-Step 3) When the packet reaches the correct node, IP table rules on the node will be applied.
-        The destination IP address is rewritten to a target pod's IP address through DNAT.
+        When new endpoints are added, all kube proxies will update IP tables on the root namespace of their node based on info stored in etcd.
+Step 2) Packets leaving a pod will trigger prerouting chains as part of IP table rules on the node.
+        Rules specific for the service will be searched in sequential order until a match is found.
+Step 3) Once a match is found, rules for what pod the packet should be sent to must be chosen.
+        If there are more than one pod that are backed by the service, there will be several applicable rules to choose from.
+        IP table uses a Linux module called "statistic" to choose between those rules through round robin. 
+Step 4) IP table rewrites the destination IP address via DNAT to a target pod's IP address chosen by round robin.
+
+More here: https://www.tkng.io/services/clusterip/dataplane/iptables/
 ```
 
 ##### Service to Pod Networking
@@ -33,7 +38,25 @@ Step 3) When the packet reaches the correct node, IP table rules on the node wil
 Step 1) After a packet reaches a target pod, a response needs to be sent back.
         However, the source expects a response back from the service's IP address and not the pod's IP address.
 Step 2) IP tables use Linux connection tracking to remember previous routing choices.
-Step 3) IP tables will rewrite the packet's source IP address to be the service's IP address through SNAT.
+Step 3) IP tables will masquerade the packet's source IP address to be the service's IP address through SNAT.
+```
+
+##### IP Table vs IPVS Networking
+```
+Problem Statement
+  a) IP table is not meant to provide load balancing functionality and is purely meant for firewall rules.
+  b) IP table only allows for round robin load balancing.
+  c) Sequential search is done across all IP table rules to find which rules are applicable to the packet.
+     This results in O(n) lookup time where n is the number of services and pods in the entire cluster.
+
+IPVS Networking
+  a) IPVS creates a dummy interface on each node and binds service IP addresses to the dummy interface.
+     IPVS virtual servers are created for each service IP address.
+  b) IPVS optimizes lookup through hash tables managed by the kernel to achieve a O(1) lookup time.
+  c) IPVS supports multiple load balancing algorithms.
+  d) When using IPVS mode, IP sets are used in cases IP tables are required (e.g. packet filtering, SNAT) for more efficient lookup.
+
+More here: https://www.tkng.io/services/clusterip/dataplane/ipvs/
 ```
 
 ##### Asynchronous Networking
