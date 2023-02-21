@@ -97,54 +97,51 @@ Federated Auto Scaling
 
 ### Networking
 ---
-##### Resources
+##### Domain / ServiceDNSRecord
 ```
-Reference: https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-2-e8d403150d4f
-```
-
-##### Domain / DNSRecord
-```
-Problems
-   a) If a service is created in multiple clusters, they are bound to have different IP addresses.
-      These IP addresses need to turn into a single endpoint that users can use.
-   b) DNS lets us manually map all IP addresses as an A record to a single domain, but IP addresses can change.
+Problem Statement
+  a) If a federated service creates load balancers in multiple clusters, there needs to be a single endpoint that users can access.
+  b) DNS allows for a manual mapping of all IP addresses as an A record to a single domain, but this can be a tedious process.
 
 Domain
-   a) Configuration of domain object is necessary for FederatedService LoadBalancer objects.
-   b) Specifies a domain/subdomain that can be used for all linked FederatedServices.
-   c) Name metadata for this object specifies the <federation> record of DNSEndpoints.
+  a) Object that specifies a domain/subdomain to be used for FederatedService LoadBalancer objects.
 
 ServiceDNSRecord
-   a) CRD that links service object to domain object.
-   b) For every service to be registered with DNS, a ServiceDNSRecord CRD object must be created. 
+  a) Kubernetes CRD that links a FederatedService object to a domain object.
+  b) For every service to be registered with DNS, both Domain and ServiceDNSRecord CRD object must be created. 
 ```
 
 ##### IngressDNSRecord
 ```
-IngressDNSRecord
-   a) Cluster may need to send requests from the receiving cluster to a different cluster.
-      IngressDNSRecord CRD objects can be created for KubeFed to register a DNSEndpoint CRD object.
+Kubernetes CRD that identifies FederatedIngress objects to understand and aggregate all ingress targets throughout the federation.
+Multi-cluster ingress controller helps to read all ingress objects of the federation.
 ```
 
 ##### DNSEndpoint
 ```
-DNSEndpoint
-   a) Once a DNSRecord object is created, KubeFed controller will create a DNSEndpoint CRD object.
-   b) This object will be read by ExternalDNS to create DNS records.
+Kubernetes CRD that represents endpoints for a FederatedService and are created when DNSRecord objects are created. 
 
 ServiceDNSEndpoint A Records
-   a) For services, three A records will be generated:
-      * <service>.<namespace>.<federation>.svc.<domain>
-      * <service>.<namespace>.<federation>.svc.<region>.<domain>
-      * <service>.<namespace>.<federation>.svc.<availability-zone>.<region>.<domain>
-   b) Region and zone are determined from node labels.
-      If they are not there, manual processes will need to be involved.
+  a) For services, the following endpoints will be generated per zone and region:
+       * <service>.<namespace>.<federation>.svc.<domain>
+       * <service>.<namespace>.<federation>.svc.<region>.<domain>
+       * <service>.<namespace>.<federation>.svc.<availability-zone>.<region>.<domain>
+  b) Region and zone are determined from node labels.
+     If these labels are not present, nodes must manually be labeled.
 ```
 
 ##### ExternalDNS
 ```
-ExternalDNS
-   a) Synchronizes exposed services and ingresses with DNS providers.
-      Watches and lists LoadBalancer services, ExternalType services, and ingress hostnames.
-   b) For newly scanned resources, upserts DNS records in external DNS providers.
+a) ExternalDNS synchronizes exposed services and ingresses with DNS providers.
+b) External DNS will watch for LoadBalancer services, ExternalType services, and ingress hostnames.
+   For newly scanned resources, ExternalDNS will upsert DNS records to external DNS providers.
+```
+
+##### Federated Networking
+```
+Step 1) User creates a Domain + ServiceDNSRecord or IngressDNSRecord for every service to be registered with a DNS provider.
+Step 2) KubeFed controller watches for new records and generates a DNSEndpoint which External DNS will read from.
+Step 3) External DNS upserts DNS records.
+
+More here: https://faun.pub/multi-cloud-multi-region-kubernetes-federation-part-2-e8d403150d4f
 ```
