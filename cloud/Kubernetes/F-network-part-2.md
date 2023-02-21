@@ -54,7 +54,7 @@ IPVS Networking
      IPVS virtual servers are created for each service IP address.
   b) IPVS optimizes lookup through hash tables managed by the kernel to achieve a O(1) lookup time.
   c) IPVS supports multiple load balancing algorithms.
-  d) When using IPVS mode, IP sets are used in cases IP tables are required (e.g. packet filtering, SNAT) for more efficient lookup.
+  d) When using IPVS, IP sets are used in cases IP tables are required (e.g. packet filtering, SNAT) for more efficient lookup.
 
 More here: https://www.tkng.io/services/clusterip/dataplane/ipvs/
 ```

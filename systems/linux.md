@@ -94,9 +94,12 @@ c) IPVS can make services of the real servers to appear as a virtual service on 
 ##### IPVS Networking
 ```
 Step 1) Client sends a packet with the destination IP address being the virtual IP address of the Director.
-Step 2) Director will forward the packet to a backend server with the source IP being rewritten as the Director's actual IP address.
-Step 3) Backend server will send a response back to the Director with the destination IP address being the actual IP address of the Director.
-Step 4) Director will send a response back to the client with the source IP address being the virtual IP address of the Director. 
+Step 2) Director will change the destination of the packet to one of the backend servers.
+        The packet's source IP here also needs to be rewritten to be the Director's actual IP address.
+        SNAT or masquerading has to be configured beforehand to accomplish this as IPVS only supports DNAT.
+Step 3) Backend server will send a response back with the destination IP address being the Director's actual IP address.
+Step 4) Director will send a response back to the client with the source IP address being the virtual IP address of the Director.
+        Again, SNAT or masquerading has to be configured beforehand.
 ```
 
 ### Resource Allocation
