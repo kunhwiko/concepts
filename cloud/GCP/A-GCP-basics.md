@@ -146,3 +146,27 @@ GCE is Google's infrastructure-as-a-service offering and gives full control over
 GKE is Google's version of Kubernetes and container-as-a-service offering.
 GKE leverages GCE for hosting cluster nodes and integrates GCP software defined networks.
 ```
+
+##### Anthos on VMWare
+```
+Anthos on VMWare (a.k.a GKE on-prem) is a GKE service that can be installed on on-premise data centers.
+```
+
+##### Google App Engine (GAE)
+```
+GAE is Google's platform-as-a-service offering that allows users to focus on writing code while abstracting infrastructure.
+GAE supports two types of environments:
+  * Standard: Supports a set of common languages. 
+  * Flexible: Supports more languages and custom runtimes but lose some out of the box integrations.
+```
+
+##### Cloud Function
+```
+Cloud Function is Google's function-as-a-service offering that allows users to focus on writing functions in one of the supported languages.
+Cloud Function is serverless and can be executed through an event trigger or HTTP endpoint.
+```
+
+##### Cloud Run
+```
+Cloud Run is Google's function-as-a-service offering that allows users to define on-demand containers that will listen for HTTP requests.
+```
