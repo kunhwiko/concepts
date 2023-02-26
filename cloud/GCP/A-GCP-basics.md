@@ -93,3 +93,56 @@ e) If a project is moved to a new folder, it will remove previously inherited po
 Google Workspace and Cloud Identity accounts come with super administrator roles that have high privileges.
 It is best to limit the direct use of this role on GCP and assign Organization Administrator IAM roles to designated users. 
 ```
+
+### Billing
+---
+##### Billing Accounts
+```
+Smallest entity that is billed is a project and a project can only be associated with one billing account.
+There can still be multiple billing accounts that a project can choose from.
+```
+
+##### Billing Exports
+```
+a) GCP allows for exporting billing information to a BigQuery dataset or a file on Cloud Storage.
+   After data is exported, users can perform queries to generate useful insights and reports.
+b) Budgets and alerts can be set for each billing account or project, where the default alert thresholds are 50%, 90%, 100%.
+   If an alert is attached to a billing account used by multiple projects, the alert counts towards the total cost of all projects. 
+```
+
+##### Billing Roles
+```
+Billing Account Creator
+  a) Role for initial billing setup and to allow creation of additional billing accounts.
+  b) This is an initial IAM role when an organization is created and the number of users with this role should be limited.
+
+Billing Account Administrator
+  a) Owner role of a billing account to manage payments, other user roles on the account, billing exports, and link or unlink projects to the account.
+  b) Role for managing a given billing account but cannot create new billing accounts.
+
+Billing Account Costs Manager
+  a) Role for creating, editing, and deleting budgets, viewing costs and transactions, and managing billing exports.
+  b) Role does not give right to export pricing data, view custom pricing, link projects, and manage properties of the billing account. 
+
+Billing Account Viewer
+  a) Role for allowing access to view billing information but nothing more.
+
+Billing Account User
+  a) Role that has very restricted permissions and can be granted broadly.
+  b) If user has "Project Creator" role, this role allows for the creation of new projects linked to the given billing account.
+  c) If user has "Project Billing Manager" role, this role allows for linking or unlinking those projects to the given billing account.
+     This does not give the rights to resources in the project.
+```
+
+### Computing and Hosting Services
+---
+##### Google Compute Engine (GCE)
+```
+GCE is Google's infrastructure-as-a-service offering and gives full control over instance hardware, operating system, region/zone, networking, and autoscaling.
+```
+
+##### Google Kubernetes Engine (GKE)
+```
+GKE is Google's version of Kubernetes and container-as-a-service offering.
+GKE leverages GCE for hosting cluster nodes and integrates GCP software defined networks.
+```
