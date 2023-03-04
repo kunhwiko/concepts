@@ -170,3 +170,56 @@ Cloud Function is serverless and can be executed through an event trigger or HTT
 ```
 Cloud Run is Google's function-as-a-service offering that allows users to define on-demand containers that will listen for HTTP requests.
 ```
+
+### Storage Services
+---
+##### Google Cloud Storage (GCS)
+```
+GCS is Google's version of blob storage that can store data in the form of "buckets" and can be infinitely scaled.
+```
+
+##### Filestore
+```
+Filestore is Google's managed file storage service (not block storage service).
+Filestore is a network attached storage that can be used alongside GCE or GKE.
+Filestore comes with two tiers, premium and standard, which differs for IOPS and throughput.
+```
+
+##### Cloud SQL
+```
+Cloud SQL is a managed relational database for MySQL or PostgreSQL and allows allows users to easily migrate an existing MySQL or PostgreSQL database.
+Cloud SQL offers data replication, backup, and monitoring out of the box.
+```
+
+##### Cloud Spanner
+```
+Cloud Spanner is a managed relational database that is globally available, supports strong consistency globally, and has 99.999% SLA.
+Compared to Cloud SQL, Cloud Spanner provides higher SLA, better concurrent request handling, more scalability, and more storage at the cost of higher prices.  
+```
+
+##### Cloud Firestore
+```
+Cloud Firestore is a managed NoSQL document database and is an upgraded version of Cloud Datastore.
+Firestore supports "Native" mode and "Datastore" mode without some of the previous limitations of Cloud Datastore. 
+Firestore supports multi-region replication, strong consistency, secondary indices, and is billed per operation. 
+```
+
+##### Bigtable
+```
+Bigtable is a managed NoSQL wide column database based on Apache HBase and is in use by Gmail and Google Maps.
+Bigtable indexes on row keys, is typically used as a mass scale database for IoT/time series, and is billed per provisioned node.
+Compared to Firestore, Bigtable supports faster reads, range scans, and higher write throughput through eventual consistency.
+```
+
+### Networking Services
+---
+##### Load Balancer
+```
+Load Balancer is Google's load balancing solution for GCE, GAE, and GKE.
+It allows to choose from HTTP, SSL proxy, TCP proxy, network, and internal TCP/UDP load balancer.
+```
+
+##### Cloud DNS
+```
+Cloud DNS is Google's managed DNS service with 100% SLA that can also host private zones accessible only to a user's GCP network.
+```
