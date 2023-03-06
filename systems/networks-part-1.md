@@ -300,11 +300,8 @@ b) DNS servers are replicated for availability, and caches popular addresses.
 
 ##### A and CNAME Records
 ```
-A Records
-  a) A mapping of a hostname to one or more IP addresses.
-
-CNAME Records
-  a) An alias from one domain to another.
+A Records     : A mapping of a hostname to one or more IP addresses.
+CNAME Records : An alias from one domain to another.
 ``` 
 
 ##### Address Resolution Protocol (ARP)
@@ -364,9 +361,6 @@ NAT Disadvantages
 
 ##### SNAT vs DNAT
 ```
-SNAT
-  a) Refers to source NAT, which translates the source IP address.
-
-DNAT
-  a) Refers to destination NAT, which translates the destination IP address.
+SNAT: Refers to source NAT, which translates the source IP address.
+DNAT: Refers to destination NAT, which translates the destination IP address.
 ```
