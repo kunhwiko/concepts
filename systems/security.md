@@ -29,6 +29,7 @@ This secret key is never trasmitted over the network.
 In asymmetric encryption, the client and the server uses public keys and private keys to encrypt or decrypt messages.
 Public keys are used by any individual to encrypt messages, but only the host with the private key can decrypt messages.
 Asymmetric encryption is used during the key exchange algorithm of symmetric encryption to help generate a shared secret key.
+Asymmetric encryption tends to be slower than symmetric encryption for data transfer purposes.
 ```
 
 ### Virtual Private Network (VPN)
@@ -51,9 +52,10 @@ SSH is a secure means to connect to a remote server without risking privacy from
 
 Step 1) Client initiates a TCP handshake with the remote server, which should be listening on port 22.
 Step 2) Server sends a public key to verify authenticity along with a list of supported encryption protocols.
-Step 3) Client agrees on an encryption protocol and the connection is started.
-Step 4) Client and server use a key exchange algorithm to create a symmetrical key to encrypt data.
-Step 5) Client authenticates to the server through a username and password, which is encrypted with the symmetric key.
+Step 3) Client agrees on an encryption protocol that it can support and the connection is started.
+Step 4) Client and server use a key exchange algorithm (i.e. Diffie–Hellman) to create a symmetric key to encrypt data.
+        Public keys and private keys of both the client and the server are involved to compute the symmetric key. 
+Step 5) Client sends credentials that are encrypted with the symmetric key to the server for authentication.
 ```
 
 ### TLS
