@@ -364,3 +364,9 @@ NAT Disadvantages
 SNAT: Refers to source NAT, which translates the source IP address.
 DNAT: Refers to destination NAT, which translates the destination IP address.
 ```
+
+##### Border Gateway Protocol (BGP)
+```
+BGP is a protocol responsible for picking the most efficient route to forward data to.
+This is done by autonomous systems constantly sharing routing information and next hops through TCP/IP peering sessions.
+```
