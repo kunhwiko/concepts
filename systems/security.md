@@ -82,7 +82,7 @@ IPsec Tunneling
 SSH Tunneling
   a) Establishes an SSH connection to forward insecure data through an encrypted tunnel.
   b) Can be used to forward ports that are blocked by firewalls to a different port that is not blocked.
-       More here: https://www.youtube.com/watch?v=AtuAdk4MwWw
+     More here: https://www.youtube.com/watch?v=AtuAdk4MwWw and https://goteleport.com/blog/ssh-tunneling-explained/
 ```
 
 ### TLS
