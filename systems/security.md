@@ -32,18 +32,12 @@ Asymmetric encryption is used during the key exchange algorithm of symmetric enc
 Asymmetric encryption tends to be slower than symmetric encryption for data transfer purposes.
 ```
 
-### Virtual Private Network (VPN)
+### Secure Shell Protocol (SSH)
 ---
-##### VPN
-```
-a) VPNs use client side proxying to hide the IP address of the client.
-b) VPN providers typically have zero log retention policies.
-```
-
 ##### Port Forwarding
 ```
-a) Port forwarding maps incoming requests with a certain port number to be sent to a certain IP address and port number in a private network. 
-b) Port forwarding allows hosts in the Internet to connect to a specific host within a private network.
+a) Port forwarding maps packets with a certain port number to be sent to a specified IP address and port number. 
+b) Port forwarding allows hosts in the Internet to connect to a specific host sitting within a private network.
 ```
 
 ##### Secure Shell Protocol (SSH)
@@ -55,7 +49,40 @@ Step 2) Server sends a public key to verify authenticity along with a list of su
 Step 3) Client agrees on an encryption protocol that it can support and the connection is started.
 Step 4) Client and server use a key exchange algorithm (i.e. Diffie–Hellman) to create a symmetric key to encrypt data.
         Public keys and private keys of both the client and the server are involved to compute the symmetric key. 
-Step 5) Client sends credentials that are encrypted with the symmetric key to the server for authentication.
+Step 5) Client sends login credentials that are encrypted with the symmetric key to the server for authentication.
+```
+
+### Virtual Private Network (VPN)
+---
+##### VPN
+```
+a) VPNs use client side proxying to hide the IP address of the client.
+b) VPNs use tunneling to encrypt data throughout the network session.
+c) VPN providers typically have zero log retention policies.
+```
+
+##### Tunneling
+```
+Tunneling is the process of moving private network communications across the public network through encapsulation.
+Encapsulation helps to encrypt data or to traverse a shorter network that normally cannot be crossed (e.g. IPv6 packets through IPv4 networks).
+Packets will be decrypted once they reach either end of the tunnel.
+```
+
+##### Tunneling Protocols
+```
+GRE Tunneling
+  a) Encapsulates packets with a GRE and IP header to traverse a previously unsupported network and potentially achieve less hops.
+     GRE headers are used to identify the packet is a GRE packet.
+     IP headers are used to identify the IP addresses for the beginning and end of the tunnel. 
+
+IPsec Tunneling
+  a) Encrypts IP packets and adds an authentication step through encapsulation. 
+  b) IPsec packets can also be used in conjunction with GRE tunneling.
+
+SSH Tunneling
+  a) Establishes an SSH connection to forward insecure data through an encrypted tunnel.
+  b) Can be used to forward ports that are blocked by firewalls to a different port that is not blocked.
+       More here: https://www.youtube.com/watch?v=AtuAdk4MwWw
 ```
 
 ### TLS
