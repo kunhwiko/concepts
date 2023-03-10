@@ -138,77 +138,126 @@ Billing Account User
 ---
 ##### Google Compute Engine (GCE)
 ```
-GCE is Google's infrastructure-as-a-service offering and gives full control over instance hardware, operating system, region/zone, networking, and autoscaling.
+GCE is an infrastructure-as-a-service offering and gives full control over instance hardware, operating system, region/zone, networking, and autoscaling.
 ```
 
 ##### Google Kubernetes Engine (GKE)
 ```
-GKE is Google's version of Kubernetes and container-as-a-service offering.
-GKE leverages GCE for hosting cluster nodes and integrates GCP software defined networks.
+a) GKE is Google's version of Kubernetes and container-as-a-service offering.
+b) GKE leverages GCE for hosting cluster nodes and integrates GCP software defined networks.
 ```
 
 ##### Anthos on VMWare
 ```
-Anthos on VMWare (a.k.a GKE on-prem) is a GKE service that can be installed on on-premise data centers.
+Anthos on VMWare (a.k.a. GKE on-prem) is a GKE service that can be installed on on-premise data centers.
 ```
 
 ##### Google App Engine (GAE)
 ```
-GAE is Google's platform-as-a-service offering that allows users to focus on writing code while abstracting infrastructure.
-GAE supports two types of environments:
-  * Standard: Supports a set of common languages. 
-  * Flexible: Supports more languages and custom runtimes but lose some out of the box integrations.
+a) GAE is a platform-as-a-service offering that allows users to focus on writing code while abstracting infrastructure.
+b) GAE supports two types of environments:
+     * Standard: Supports a set of common languages. 
+     * Flexible: Supports more languages and custom runtimes but lose some out of the box integrations.
 ```
 
 ##### Cloud Function
 ```
-Cloud Function is Google's function-as-a-service offering that allows users to focus on writing functions in one of the supported languages.
-Cloud Function is serverless and can be executed through an event trigger or HTTP endpoint.
+a) Cloud Function is a function-as-a-service offering that allows users to focus on writing functions in one of the supported languages.
+b) Cloud Function is serverless and can be executed through an event trigger or HTTP endpoint.
 ```
 
 ##### Cloud Run
 ```
-Cloud Run is Google's function-as-a-service offering that allows users to define on-demand containers that will listen for HTTP requests.
+Cloud Run is a function-as-a-service offering that allows users to define on-demand containers that will listen for HTTP requests.
 ```
 
 ### Storage Services
 ---
 ##### Google Cloud Storage (GCS)
 ```
-GCS is Google's version of blob storage that can store data in the form of "buckets" and can be infinitely scaled.
+GCS is a managed blob storage that can store data in the form of "buckets" and can be infinitely scaled.
 ```
 
 ##### Filestore
 ```
-Filestore is Google's managed file storage service (not block storage service).
-Filestore is a network attached storage that can be used alongside GCE or GKE.
-Filestore comes with two tiers, premium and standard, which differs for IOPS and throughput.
+a) Filestore is a managed file storage service (not block storage service).
+b) Filestore is a network attached storage that can be used alongside GCE or GKE.
+c) Filestore comes with two tiers, "premium" and "standard", which differs for IOPS and throughput.
 ```
 
 ##### Cloud SQL
 ```
-Cloud SQL is a managed relational database for MySQL or PostgreSQL and allows allows users to easily migrate an existing MySQL or PostgreSQL database.
-Cloud SQL offers data replication, backup, and monitoring out of the box.
+a) Cloud SQL is a managed relational database for MySQL or PostgreSQL and allows users to easily migrate existing MySQL or PostgreSQL databases.
+b) Cloud SQL offers data replication, backup, and monitoring out of the box.
 ```
 
 ##### Cloud Spanner
 ```
-Cloud Spanner is a managed relational database that is globally available, supports strong consistency globally, and has 99.999% SLA.
-Compared to Cloud SQL, Cloud Spanner provides higher SLA, better concurrent request handling, more scalability, and more storage at the cost of higher prices.  
+a) Cloud Spanner is a managed relational database that is globally available, supports strong consistency globally, and has 99.999% SLA.
+b) Compared to Cloud SQL, Spanner provides higher SLA, better concurrent request handling, more scalability, and more storage at the cost of higher prices.  
 ```
 
 ##### Cloud Firestore
 ```
-Cloud Firestore is a managed NoSQL document database and is an upgraded version of Cloud Datastore.
-Firestore supports "Native" mode and "Datastore" mode without some of the previous limitations of Cloud Datastore. 
-Firestore supports multi-region replication, strong consistency, secondary indices, and is billed per operation. 
+a) Cloud Firestore is a managed NoSQL document database and is an upgraded version of Cloud Datastore.
+b) Firestore supports "Native" mode as well as the legacy "Datastore" mode without some of the previous limitations of Datastore. 
+c) Firestore supports multi-region replication, strong consistency, secondary indices, and is billed per operation. 
 ```
 
 ##### Bigtable
 ```
-Bigtable is a managed NoSQL wide column database based on Apache HBase and is in use by Gmail and Google Maps.
-Bigtable indexes on row keys, is typically used as a mass scale database for IoT/time series, and is billed per provisioned node.
-Compared to Firestore, Bigtable supports faster reads, range scans, and higher write throughput through eventual consistency.
+a) Bigtable is a managed NoSQL wide column database based on Apache HBase and is in use by Gmail and Google Maps.
+b) Bigtable indexes on row keys, is typically used as a mass scale database for IoT/time series, and is billed per provisioned node.
+   Additional nodes can be provisioned to increase queries per second.
+c) Compared to Firestore, Bigtable supports faster reads, range scans, and higher write throughput through eventual consistency.
+```
+
+### Data Services
+---
+##### BigQuery
+```
+a) BigQuery is a managed serverless data warehouse that helps analyze mass scale data with built-in features like ML and geospatial analysis.
+   BigQuery abstracts away the computing and storage infrastructure so users can focus on data analysis.
+b) BigQuery allows for data to be ingested in batches or in streams which can then be queried through SQL.
+c) BigQuery provides the flexibility to analyze data not only from BigQuery storages but for other storage options where data might reside.
+d) BigQuery comes with two forms of payment models, one that involves paying for storage and queries, and another involves flat monthly rates.  
+```
+
+##### Cloud Pub/Sub
+```
+a) Cloud Pub/Sub is a managed asynchronous messaging service and is serverless with global availability.
+b) Cloud Pub/Sub allows messages to be pushed through webhooks.
+```
+
+##### Dataproc
+```
+Dataproc is a managed service based off of Apache Spark and Hadoop to bring up clusters for data processing.
+These clusters can be brought up on-demand and are billed per second.
+```
+
+##### Dataflow
+```
+Dataflow is a managed service based off of Apache Beam to process data in batches or streams and is completely serverless.
+```
+
+##### Datalab
+```
+Datalab is a service based off of Jupyter to explore, analyze, and transform data.
+```
+
+##### Dataprep
+```
+Dataprep is a managed service to perform data visualization and exploration without the need of prior coding experience.
+```
+
+##### Data Studio
+```
+Data Studio is a service to visualize data as reports and dashboards.
+```
+
+##### Cloud Composer
+```
+Cloud Composer is a managed service based off of Apache Airflow that helps to create and orchestrate big data pipelines.
 ```
 
 ### Networking Services
