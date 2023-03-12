@@ -262,15 +262,68 @@ Cloud Composer is a managed service based off of Apache Airflow that helps to cr
 
 ### Networking Services
 ---
+##### Virtual Private Cloud (VPC)
+```
+a) Google VPC is the foundation of GCP networking and each project by default comes with a default VPC network.
+b) Google VPC can contain one or more regional subnets and allows for VMs of the same VPC to communicate with one another.
+```
+
 ##### Load Balancer
 ```
 Google Load Balancer is Google's load balancing solution for GCE, GKE, and GAE.
 Google Load Balancer allows users to choose from HTTP, SSL proxy, TCP proxy, network, and internal TCP/UDP load balancer.
 ```
 
+##### Cloud Router
+```
+a) Cloud Router is a means to dynamically exchange route and next hop information between GCP VPC and on-prem network using BGP.
+b) Cloud Router is used with Cloud VPNs or Interconnect to achieve dynamic route propagation to GCP resources.
+
+More information here: https://www.youtube.com/watch?v=K_xb_j46YOk
+```
+
+##### Cloud VPN
+```
+a) Cloud VPN is a means for establishing a connection between GCP VPC and on-prem network through an IPsec tunnel.
+b) Cloud VPN entails traffic will traverse public networks, but the service is cheap, easy to setup, and packets are encrypted.
+```
+
+##### Cloud Interconnect
+```
+a) Cloud Interconnect is a means for establishing low latency connectivity to Google's network without traversing the Internet.
+   Cloud Interconnect achieves this by creating a cross connect between an on-prem router and Google network at a co-location facility.
+   Cloud Router can then be used to dynamically advertise efficient routes to resources in the GCP VPC network.
+b) Cloud Interconnect supports two different modes:
+     * Dedicated Interconnect :  Connects with Google directly for the highest guaranteed performance.
+     * Partner Interconnect   :  Connects with partners of Google if Dedicated Interconnect is not possible. 
+c) Cloud Interconnect gives the on-prem network direct access to internal IP spaces in the VPC without need for NATs or VPN tunneling.
+```
+
 ##### Cloud DNS
 ```
 Cloud DNS is Google's managed DNS service with 100% SLA that can also host private zones accessible only to a user's GCP network.
+```
+
+##### Cloud CDN
+```
+Cloud CDN is Google's managed CDN service that enables caching of HTTP load balanced content (e.g. GCS bucket objects) and mitigation of DDoS.
+```
+
+##### Cloud NAT
+```
+Cloud NAT is a regional service that allows VMs without external IPs to communicate to the outside network. 
+```
+
+##### GCP Firewall
+```
+Firewall rules are created per VPC and rules can be applied based on IP addresses, tags, and service accounts.
+```
+
+##### Identity Aware Proxy (IAP)
+```
+a) IAP inforces access control policies to control which users or groups have access to certain applications and GCP resources.
+b) IAP grants user permissions through IAM roles and performs authentication and authorization when a user tries to access an IAP secured resource.
+   This ensures access control even without the use of a VPN.
 ```
 
 ##### Cloud Armor
