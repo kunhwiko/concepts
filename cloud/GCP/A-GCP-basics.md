@@ -193,7 +193,7 @@ b) Cloud SQL offers data replication, backup, and monitoring out of the box.
 
 ##### Cloud Spanner
 ```
-a) Cloud Spanner is a managed relational database that is globally available, supports strong consistency globally, and has 99.999% SLA.
+a) Cloud Spanner is a managed relational database that is globally available, supports global strong consistency, and has 99.999% SLA.
 b) Compared to Cloud SQL, Spanner provides higher SLA, better concurrent request handling, more scalability, and more storage at the cost of higher prices.  
 ```
 
@@ -264,13 +264,18 @@ Cloud Composer is a managed service based off of Apache Airflow that helps to cr
 ---
 ##### Load Balancer
 ```
-Load Balancer is Google's load balancing solution for GCE, GAE, and GKE.
-It allows to choose from HTTP, SSL proxy, TCP proxy, network, and internal TCP/UDP load balancer.
+Google Load Balancer is Google's load balancing solution for GCE, GKE, and GAE.
+Google Load Balancer allows users to choose from HTTP, SSL proxy, TCP proxy, network, and internal TCP/UDP load balancer.
 ```
 
 ##### Cloud DNS
 ```
 Cloud DNS is Google's managed DNS service with 100% SLA that can also host private zones accessible only to a user's GCP network.
+```
+
+##### Cloud Armor
+```
+Cloud Armor is a service designed to protect against DDoS by integrating with HTTP load balancers and blocking traffic based on IP address ranges. 
 ```
 
 ### Machine Learning Services
@@ -299,4 +304,18 @@ These include text-to-speech, video intelligence, vision, natural language, and 
 ##### Dialogflow
 ```
 Dialogflow is a service to build conversational applications that can respond through text or speech by training from customer text and audio inputs.
+```
+
+### Identity Services
+---
+##### Identity and Access Management (IAM)
+```
+IAM allows GCP administrators to grant granular permissions for GCP resources to users or groups of users.
+```
+
+##### Cloud Identity
+```
+a) Cloud Identity is an identity-as-a-service offering that sits outside of GCP but can be easily integrated to GCP.
+b) Cloud Identity allows for a centralized way to create, assign IAM, and manage user and group accounts.
+c) Cloud Identity enables multi-factor authentication, SSO, and various login methods (e.g. SAML, OIDC) for applications. 
 ```
