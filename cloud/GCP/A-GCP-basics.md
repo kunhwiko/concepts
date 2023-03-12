@@ -272,3 +272,31 @@ It allows to choose from HTTP, SSL proxy, TCP proxy, network, and internal TCP/U
 ```
 Cloud DNS is Google's managed DNS service with 100% SLA that can also host private zones accessible only to a user's GCP network.
 ```
+
+### Machine Learning Services
+---
+##### Vertex AI
+```
+Vertex AI is a managed ML platform that provides a unified way to maintain all the steps in an ML workflow, including:
+  * Ingest, label, prepare, and transform data into trainable datasets.
+  * Start Jupyter instances with specified hardware for data exploration.
+  * Train models from datasets through AutoML or containers containing custom training logic.
+  * Assess and evaluate models through services like Explainable AI.
+  * Deploy trained models to an endpoint with the necessary infrastructure and hardware required.
+```
+
+##### AutoML
+```
+AutoML is a service to allow developers to train ML models without extensive knowledge about data science by simply passing in labeled data.
+```
+
+##### Pretrained APIs
+```
+GCP offers several different pretrained models for users to leverage.
+These include text-to-speech, video intelligence, vision, natural language, and translation.
+```
+
+##### Dialogflow
+```
+Dialogflow is a service to build conversational applications that can respond through text or speech by training from customer text and audio inputs.
+```
