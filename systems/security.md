@@ -72,7 +72,7 @@ Packets will be decrypted once they reach either end of the tunnel.
 ```
 GRE Tunneling
   a) Encapsulates packets with a GRE and IP header to traverse a previously unsupported network and potentially achieve less hops.
-     GRE headers are used to identify the packet is a GRE packet.
+     GRE headers are used to encapsulate packets as GRE packet.
      IP headers are used to identify the IP addresses for the beginning and end of the tunnel. 
 
 IPsec Tunneling
@@ -80,9 +80,9 @@ IPsec Tunneling
   b) IPsec packets can also be used in conjunction with GRE tunneling.
 
 SSH Tunneling
-  a) Establishes an SSH connection to forward insecure data through an encrypted tunnel.
-  b) Can be used to forward ports that are blocked by firewalls to a different port that is not blocked.
-     More here: https://www.youtube.com/watch?v=AtuAdk4MwWw and https://goteleport.com/blog/ssh-tunneling-explained/
+  a) SSH tunneling establishes an SSH connection to forward insecure data through an encrypted tunnel.
+  b) SSH tunneling be used to forward ports that are blocked by firewalls to a different port that is not blocked.
+  c) More information here: https://goteleport.com/blog/ssh-tunneling-explained/ and https://www.youtube.com/watch?v=AtuAdk4MwWw.
 ```
 
 ### TLS
