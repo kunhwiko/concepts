@@ -1,16 +1,33 @@
-### Base Configurations
+### Base Concepts
 ---
 ##### Deployment Modes
 ```
 GKE clusters can be "zonal" or "regional".
-Zonal clusters deploy a single master node.
-Regional clusters deploy three master nodes in different zones that can be upgraded individually to not risk downtime.
+  * Zonal clusters deploy a single master node.
+  * Regional clusters deploy three master nodes in different zones that can be upgraded individually to not risk downtime.
 ```
 
 ##### Node Pools
 ```
-Node pools are used to put worker nodes into groups with the same configuration.
-All nodes are put into the default node pool by default.
+a) Node pools are used to put worker nodes into groups with the same configuration.
+b) All nodes are put into the default node pool by default.
+```
+
+##### Container Registry
+```
+a) Google Container Registry can be used to store private images, control access to images, and perform vulnerability scans.
+b) GKE clusters are able to access registries in the same project by default.
+```
+
+##### Quotas
+```
+a) GKE has limitations per the documentation: https://cloud.google.com/kubernetes-engine/quotas.
+b) GKE forces resource quotas that cannot be removed to protect the stability of the Kubernetes cluster.
+```
+
+##### Pricing
+```
+Users are billed for Google Compute Engine VMs that run as worker nodes, but are not billed for master nodes.
 ```
 
 ### Control Plane
