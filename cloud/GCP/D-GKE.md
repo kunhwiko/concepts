@@ -1,3 +1,18 @@
+### Base Configurations
+---
+##### Deployment Modes
+```
+GKE clusters can be "zonal" or "regional".
+Zonal clusters deploy a single master node.
+Regional clusters deploy three master nodes in different zones that can be upgraded individually to not risk downtime.
+```
+
+##### Node Pools
+```
+Node pools are used to put worker nodes into groups with the same configuration.
+All nodes are put into the default node pool by default.
+```
+
 ### Control Plane
 ---
 ##### etcd
