@@ -1,15 +1,3 @@
-### Kernel
----
-##### Driver
-```
-Code that runs in the kernel to communicate with hardware devices.
-```
-
-##### Module
-```
-Code that can extend the behavior of the kernel and be removed on demand. 
-```
-
 ### Networking
 ---
 ##### Netfilter
