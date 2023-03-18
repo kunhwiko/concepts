@@ -37,7 +37,7 @@ b) IP tables are organized in the following hierarchy:
      * Rules  : Statements that instruct the system what to do with a packet.  
 ```
 
-##### IP Table Tables
+##### Tables of IP Table
 ```
 Filter Table
   a) This table is used to decide whether to accept or deny a packet to its intended destination.
@@ -92,7 +92,13 @@ Step 4) Director will send a response back to the client with the source IP addr
 
 ### Resource Allocation
 ---
-##### Control Groups (cgroups)
+##### Control Group (cgroup)
 ```
 Linux kernel feature that limits, isolates, and monitors resource usage (CPU, memory, I/O, network) of a collection of processes.
+```
+
+##### Namespace
+```
+Linux kernel feature that creates a virtual instance of a resource for a process or group of processes isolated from the host system.
+Namespaces allow for the isolation of process runtimes, network stack, file system, and UID/GID assignment.
 ```

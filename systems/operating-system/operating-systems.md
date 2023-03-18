@@ -31,3 +31,29 @@ Drivers represent code that runs in the kernel to communicate with hardware devi
 ```
 Modules represent code that can extend the behavior of the kernel and be removed on demand. 
 ```
+
+### Kernel and User Space
+---
+##### Kernel Space
+```
+Kernel space is system memory reserved for running kernel, kernel extensions, and drivers.
+```
+
+##### User Space
+```
+a) User space is memory area where user processes from user applications run.
+b) User space is isolated from kernel space through permission layers known as a "ring".
+```
+
+##### Protection Ring
+```
+Protection rings form layers of varying privileges that provides different levels of access to resources.
+These privileges are assigned based on the CPU architecture that the OS is running on.
+```
+
+##### System Call (syscall)
+```
+System calls provide a standardized interface for programs to interact with the OS and leverage its capabilities.
+These calls allow for user space applications to request for kernel level functionality.
+If user space application has proper permissions, a context switch to the kernel space is made and the user space application awaits a response. 
+```
