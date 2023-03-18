@@ -9,7 +9,13 @@ GKE clusters can be "zonal" or "regional".
     If this option is selected, it is possible to manually select zones to deploy to.
 ```
 
-##### Container Registry
+##### Container Optimized OS
+```
+GCE nodes in GKE by default use Google's Container-Optimized OS, which is based on Chromium OS.
+This OS is optimized for running containerized applications and is stripped of unnecessary features to reduce attack surface.
+```
+
+##### Google Container Registry
 ```
 a) Google Container Registry can be used to store private images, control access to images, and perform vulnerability scans.
 b) GKE clusters are able to access registries in the same project by default.
