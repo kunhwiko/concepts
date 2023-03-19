@@ -10,13 +10,14 @@ b) CRI is responsible for creating new Linux namespaces on the Kubernetes node.
 
 ##### Pod to Pod Networking
 ```
-Step 1) CNI sets up a virtual ethernet in the pod's Linux namespace.
-        This VETH is paired with the VETH of the node's root namespace via a network bridge.
+Step 1) CNI sets up a virtual ethernet pair, one end in the pod's Linux namespace and the other end in the host's namespace.
+        This veth device acts as a way to connect the pod and the host.
+        All veth interfaces on the node are connected using an L2 network bridge (L3 router for some CNI projects like Calico).
 Step 2) Subnet masking determines if endpoint is on the same network.
 Step 3) If two pods are communicating from within the same node, requests are resolved via ARP.
-        The request will jump from the current namespace's VETH --> root namespace's VETH --> target namespace's VETH.
+        The request will jump from the current namespace's VETH --> root namespace's VETH --> network bridge --> target namespace's VETH.
 Step 4) For pod communications across different nodes, ARP will check for the MAC address of the Kubernetes default gateway.
-        The request will jump from the current namespace's VETH --> root namespace's VETH --> default gateway --> route to correct node. 
+        The request will jump from the current namespace's VETH --> root namespace's VETH --> network bridge --> default gateway --> route to correct node. 
 ```
 
 ##### Pod to Service Networking

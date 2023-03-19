@@ -87,3 +87,46 @@ b) GKE will look for under utilized nodes, reallocate existing resources, and sh
 a) The maximum size of the etcd database is 6GB.
 b) etcd usage can be monitored from Google Cloud Console.
 ```
+
+### Networking
+---
+##### Control Plane Networking
+```
+a) Master nodes and worker nodes in GKE run in different VPCs and are connected through VPC peering.
+b) Master node IP addresses are static and do not change, but it is possible to initiate an IP rotation.
+```
+
+##### Public and Private Clusters
+```
+GKE supports both public and private clusters.
+  * Public clusters expose the control plane and nodes with external IP addresses.
+  * Private clusters do not expose nodes with external IP addresses.
+    In this mode, public endpoints to the control plane are still exposed by default but can be disabled.
+    In this mode, user must specify a /28 CIDR range for the private endpoint to the control plane.
+```
+
+##### Routes Based Networking
+```
+Routes-based networking use Google Cloud Routes for routing, but this method is no longer recommended.
+In this mode, pod IP addresses are not assigned to the VPC and are not natively routed.
+Rather, nodes reserve a unique /24 CIDR range for pods that are allocated to itself.
+GKE automatically creates routes using this CIDR range as a destination IP range and the node as the next hop.
+```
+
+##### VPC Native Networking
+```
+VPC-native clusters use alias IP addresses and is the recommended network mode.
+In this mode, primary CIDR ranges are reserved for nodes, but secondary CIDR ranges can be reserved for pods and services.
+The NIC for nodes will continue to be assigned an IP address from the primary CIDR range.
+Using alias IP features, the NIC is additionally assigned a /24 IP address range from the secondary CIDR range.
+
+This feature creates the following advantages over routes-based networking:
+  a) Pod IP address ranges do not depend on static routes and pod IP addresses are natively routable.
+  b) Firewall rules can be applied to pod IP address ranges.
+  c) Pod IP address ranges are accessible from on-prem networks connected with Cloud VPN or Interconnect.
+```
+
+##### IP Masquerade Agent
+```
+IP Masquerade Agent is a feature that can SNAT the source IP of packets sent from a pod to be the node's IP address.
+```
