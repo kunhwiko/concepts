@@ -76,16 +76,27 @@ b) Projects are identified through either a project ID or project number.
      * Project ID     : human readable identifiers that are frequently used alongside GCP APIs.
      * Project number : used for Google Cloud internal use (e.g. error logging, cloud support).  
 c) Quotas limit the number of projects per account.
-d) Initial IAM role for a newly created project grants Owner to the creator of the project.
+d) Initial IAM role for a newly created project grants "Owner" to the creator of the project.
 ```
 
 ##### IAM Inheritance
 ```
-a) IAM policies can be set at an organization, folder, project, or resource level and are inherited throughout the hierarchy.
-b) If a policy is set on a folder that grants Project Editor role to Alice, then Alice will have editor role on all projects under the folder.
-c) If a policy is set on a folder that grants Project Editor role to Alice but the role is removed at a project level, Alice will still inherit and have editor role for the project.
-d) If a policy is set on a folder that grants Owner to Alice but Viewer at a project level, Alice will still be granted Owner to the project.
-e) If a project is moved to a new folder, it will remove previously inherited policies and inherit from its new parent resource. 
+IAM policies can be set at an organization, folder, project, or resource level and are inherited throughout the hierarchy.
+  * If a policy is set on a folder that grants Project Editor to Alice, then Alice will have editor role on all projects under the folder.
+  * If a policy is set on a folder that grants Project Editor to Alice but the role is removed at a project level, Alice will still inherit editor role for the project.
+  * If a policy is set on a folder that grants Owner to Alice but Viewer at a project level, Alice will still be granted Owner to the project.
+  * If a project is moved to a new folder, it will remove previously inherited policies and inherit from its new parent resource. 
+```
+
+##### Google Service Accounts
+```
+a) Service accounts are typically attached to compute workloads to be used for authentication on certain API calls.
+   These accounts are identified by an email address and can have IAM roles attached.
+b) The following service accounts exist:
+     * Google managed service accounts are managed by Google for GCP services to run internal Google processes.
+     * User managed service accounts are explicitly created by users are often used as identities for workloads.
+     * Default service accounts are user managed service accounts that are automatically created for certain GCP services.
+       These defaults are meant to help users get started and typically have editor level access (not recommended for production).
 ```
 
 ##### Best Practices
@@ -268,7 +279,7 @@ a) Google VPC is the foundation of GCP networking and each project by default co
 b) Google VPC can contain one or more regional subnets and allows for VMs of the same VPC to communicate with one another.
 ```
 
-##### Load Balancer
+##### Google Load Balancer
 ```
 Google Load Balancer is Google's load balancing solution for GCE, GKE, and GAE.
 Google Load Balancer allows users to choose from HTTP, SSL proxy, TCP proxy, network, and internal TCP/UDP load balancer.

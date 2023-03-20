@@ -21,7 +21,14 @@ a) Google Container Registry can be used to store private images, control access
 b) GKE clusters are able to access registries in the same project by default.
 ```
 
-##### IAM
+##### Workload Identities
+```
+Workload identities allow Kubernetes service accounts to act as IAM service accounts.
+This is done by adding an IAM policy binding to the Google service account.
+Afterwards an annotation is placed on the Kubernetes service account.
+```
+
+##### GKE IAM Roles
 ```
 Kubernetes Engine Admin                   : Provides full access to management of clusters and to Kubernetes resources inside clusters.
 Kubernetes Engine Cluster Admin           : Provides full access to management of GKE clusters.
