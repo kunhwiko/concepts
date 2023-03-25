@@ -2,26 +2,19 @@
 ---
 ##### Abstraction 
 ```
-hide all but important features to reduce complexity and think about things at a higher level
-
-ex) think about instance variables and methods of a TV at a higher level, rather than the specific/internals of a TV 
+Concept of hiding all but important features and giving ability to conceptualize things at a higher level to reduce complexity.
 ``` 
 
 ##### Encapsulation 
 ```
-bundling data fields as private to prevent open access and changes  
+Bundling data fields as private to prevent open access and changes.
 ```
 
 ##### Inheritance
 ```
-parent class : Dog 
-child class : Retriever 
-
-child class can inherit all instance variables and methods of parent class, while defining its own fields or methods 
-
-Advantages: 
-  1) Reusability : Do not have to write already existing lines of code 
-  2) Define common protocol for group of classes
+Concept of passing down instance variables and methods of a parent class to a child class.
+As an example, a parent class could be "Dog" and a child class could be "Retriever".
+This allows code to be reusable and define a common protocol for groups of classes.
 ```
 
 ##### Polymorphism
@@ -83,8 +76,6 @@ Ability to write relational database queries through OOP languages by making the
 
 ex) SELECT * FROM users WHERE type = "test"; --> var user = orm("users").where({type: "test"});
 ```
-
-<br />
 
 ### Terms in Software Engineering 
 ---
@@ -229,16 +220,17 @@ api.com/groups/200/users/56 --> find user of id 56 in 200th group
 a user might also be in different groups    
 ```
 
+##### OpenAPI
+```
+OpenAPI is a specification for building and documenting REST APIs typically in the form of YAML or JSON. 
+It is a standard that allows developers to describe the functionality of their APIs in both human and machine readable format.
+```
+
 ##### Status Codes
 ```
 1xx : Request received and understood 
 2xx : Request by client was received, understood, and accepted 
-  1) 201 Resource Created (for POST methods)
-  2) 202 Accepted 
-  3) 204 No content (for DELETE methods)
 3xx : Client must take additional actions 
 4xx : Client screwed up (for wrong GET,DELETE requests)
 5xx : Server screwed up
-  1) 500 Internal Server Error
-  2) 504 Gateway Timeout
 ```

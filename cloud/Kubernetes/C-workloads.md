@@ -1,53 +1,36 @@
-### Definition of Cluster and Node
----
-##### Cluster
-```
-Collection of hosts that provide compute, memory, storage, and networking resources.
-```
-
-##### Nodes
-```
-a) A single host that could be a physical or virtual machine.
-b) Master nodes act as a control plane for Kubernetes and manage worker nodes.
-   Master nodes follow raft protocol, meaning an odd number of master nodes must exist for consensus to be possible. 
-c) Worker nodes carry out actual work.
-```
-
 ### Workload Resources
 ---
-##### ReplicaSets
-```
-a) Ensures that a specified number of pod replicas are running at a given time.
-b) Makes it easy for rollbacks and rolling updates.
-```
-
 ##### Deployments
 ```
-a) Defines a desired state for pods and replicasets.
-b) Enables users to scale number of replicas, control rollout of updates, rollback to previous deployments.
+a) Controller that defines a desired state for pods and replicasets.
+b) Enables users to scale number of replicas, control rollout of updates, and allow rollbacks to a previous state.
 c) Enables users to check or update status of pods.  
 ```
 
-##### DaemonSets
+##### ReplicaSets
 ```
-Ensures that a pod runs on all or a designated subset of nodes.
+a) Controller that ensures that a specified number of pod replicas are running at a given time.
+b) Makes it easy for rollbacks and rolling updates.
 ```
 
 ##### StatefulSets
 ```
-a) Controller uniquely identifies pods with a stable hostname and ordering.
+a) Controller that uniquely identifies pods with a stable hostname and ordering.
 b) Pods become associated with their own stable storage (i.e. dynamic PVC) that are linked based on hostname and order.
 c) Headless services are used to manage network identity of pods.
-d) Cannot roll back to previous versions.
+d) Does not support rollbacks to previous versions.
+```
 
-More info: https://medium.com/stakater/k8s-deployments-vs-statefulsets-vs-daemonsets-60582f0c62d4 
+##### DaemonSets
+```
+Controller that ensures that pods run on all or a designated subset of nodes.
 ```
 
 ##### Pods 
 ```
-a) Encapsulates one or more containers and are assigned to nodes. 
-   Containers in a pod are always scheduled together to the same machine.
-b) All containers in a pod share the same IP address and port, meaning they can communicate via localhost.
+a) Pods encapsulate one or more containers and are assigned to nodes. 
+b) Containers in a pod are always scheduled together to the same machine and Linux namespace.
+   This means containers share the same IP address and port and can communicate via localhost.
 c) Pods can specify storage and network configs to be used by containers.
 d) Pods are ephemeral by nature, but can be distinguished by unique IDs.
 ```
