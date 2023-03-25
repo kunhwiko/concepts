@@ -137,3 +137,19 @@ This feature creates the following advantages over routes-based networking:
 ```
 IP Masquerade Agent is a feature that can SNAT the source IP of packets sent from a pod to be the node's IP address.
 ```
+
+### Tools
+---
+##### Config Sync
+```
+Google Config Sync synchronizes various Kubernetes clusters automatically using cluster configuration files from Git repos as a source of truth.
+It is a declarative way to manage Kubernetes clusters from a single management point.
+```
+
+##### Config Connector
+```
+a) Google Config Connector allows for declaratively managing GCP resources using Kubernetes manifests.
+   This works by translating Kubernetes manifests to GCP resources through K8s custom resources that define the schema for GCP resources.
+b) Google Config Connector allows GCP resources to be managed by tools like kustomize and be easily included in GitOps pipelines.
+c) This also allows for managing GCP resources through Kubernetes labels, annotations, controllers, and RBAC policies.
+```

@@ -54,7 +54,8 @@ a) Controllers act as non-terminating control loops that continues to poll from 
    This information is used to trigger events to move from the current state to a desired state if necessary (e.g. ReplicaSet).
 b) Cloud controller managers provide the ability for cloud providers to replace certain controller manager functionality.
    This allows cloud providers to integrate their own platform logic for managing routes, services, volumes, nodes.
-c) Customer controller managers can be written to manage custom resources through KRM, including resources outside the cluster (e.g. Cloud SQL, IAM).
+c) Customer controller managers can be written to manage custom resources through KRM.
+   This could include resources outside the cluster (e.g. Cloud SQL, IAM) using tools like Google Config Connector which follow Kubernetes style YAML.
 ```
 
 ##### Scheduler
