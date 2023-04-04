@@ -1,3 +1,39 @@
+### Programming Terminology 
+---
+##### Compiled vs Interpreted Language
+```
+Compiled Language
+  a) Compiler translates program to machine code before execution.
+  b) Time is required to compile code, but execution is fast during runtime.
+
+Interpreted Language
+  a) Interpreter reads and executes program without prior compilation.
+  b) Execution is slow during runtime.
+```
+
+##### Weak vs Strong Typing
+```
+Weak Typing   : Interpreter allows for operations with incompatible types ("1" + 1 = 2).
+Strong Typing : Interpreter does not allow operations with incompatible types ("1" + 1).
+```
+
+##### Statically vs Dynamically Typed Language
+```
+Statically Typed Language
+  a) Type errors are checked during compile time. and the type of a variable cannot change.
+  b) Type of a variable cannot change during runtime.
+
+Dynamically Typed Language
+  a) Type errors are checked during runtime.
+  b) Type of a variable may change during runtime.
+```
+
+##### Declarative vs Imperative Programming
+```
+Declarative Programming : Practice of telling the program what you want it to do without explaining implementation details.
+Imperative Programming  : Practice of telling the program how you want it to achieve something through implementation details.
+```
+
 ### Object Oriented Programming
 ---
 ##### Abstraction 
@@ -75,69 +111,6 @@ Advantages :
 Ability to write relational database queries through OOP languages by making them compatible with each other. 
 
 ex) SELECT * FROM users WHERE type = "test"; --> var user = orm("users").where({type: "test"});
-```
-
-### Terms in Software Engineering 
----
-##### Languages 
-```
-compiled language : compiler translates program to machine code before execution, time needed to compile every time changes are made, fast during runtime 
-interpreted language : interpreter reads and executes program without compilation, dynamic typing, smaller memory size, slow during runtime   
-
-strong typing : interpreter does not allow operations with incompatible types ("1" + 1)
-weak typing : interpreter does allow operations with incompatible types ("1" + 1 = 2)
-
-static typing : type is checked during compile time 
-dynamic typing : type is checked during runtime
-```
-
-##### Programming Paradigms 
-```
-declarative programming : tell program specifically what you want it to do (may sometimes omit the specific implementation details)
-imperative programming : specify to program how you would like it to do something (implementation details are given)
-
-functional programming :
-  1) paradigm where programs are composed of functions that are independent of outside states 
-    ex) x = 5 
-        func double():  
-          x *= 2        // changes the state of an outside variable 
-          return x  
-
-        instead, 
-        func double(num):
-          return num * 2  // does not change outside variables 
-  2) does not share states 
-  3) paradigm where functions are treated as "first-class citizens" (can save as variable, pass as argument, be returned)
-    ex) func double(func2):
-          return func3   
-```
-
-##### Terms 
-```
-Web Server : return content of file following HTTP protocols (Apache HTTP)
-Application Server : dynamically changes and displays content of files following various protocols (Oracle WebLogic, Apache Tomcat)
-
-Regression Testing : testing to confirm that recent program changes do not impact existing functionality 
-Automated Testing : reduce time, cost, and errors by automating certain test cases that are repetitive, tedious, or difficult to test manually
-  ex) QTP, Rational Robot, Selenium
-```
-
-##### Methodology
-```
-Agile
-  1) approach to break development into stages and constantly collaborate with end users
-  2) advocates adaptive planning, evolutionary development, early delivery, and continual improvement 
- 
-DevOps 
-  1) set of practices to reduce the time between committing a change, and the change being placed into production 
-  2) integrate development and operations teams to improve collaboration by automating testing, infrastructure, workflows 
- 
-CI/CD
-  1) continous integration, continous delivery 
-  2) bridges gap between development and operations through automation to allow DevOps procedures
-  
-ETL 
-  1) extract, transform, and load one database to another
 ```
 
 ### API Design
