@@ -1,11 +1,9 @@
 ### Modules
 ---
-### Modules
----
 ##### Packages
 ```
 Packages organize Go source files into a unit that is modular, reusable, and maintainable.
-As a convention, the directory name is generally used as the package name. 
+As a convention, a package is represented in its own directory and the directory name is used as the package name. 
 ```
 
 ##### Modules
@@ -21,7 +19,7 @@ Packages that are downloaded are saved and cached in $GOPATH/pkg/cache.
 When a Go program requires a package, it will read from the cache instead of having to go through the Internet.   
 ```
 
-##### Modules Commands
+##### Module Commands
 ```go
 // check Go environment variables (e.g. $GOPATH)
 go env
@@ -29,14 +27,17 @@ go env
 // initializes a new module
 go mod init
 
+// list all modules and whether they need to be upgraded
+go list -m -u all
+
+// displays a graph of dependencies
+go mod graph
+
 // add missing and remove unused modules
 go mod tidy
 
 // checks go.sum to verify 
 go mod verify
-
-// list all module dependencies
-go list -m all
 ```
 
 ##### Exportability
