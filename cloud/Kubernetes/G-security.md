@@ -124,21 +124,11 @@ d) kubectl auth can-i ... verifies whether user can perform certain actions.
 
 ##### Step 3: Admission Control Plugins
 ```
-a) Address global cluster concerns after all authorization steps pass.
-   All admission control steps must succeed for request to succeed.
-b) Cluster admins can choose what admission control plugins to use.
-c) Admission controllers can validate requests (e.g. denies requests if exceeding resource limits) or mutate requests (e.g. create namespace if it does not exist).
-d) Alongside compiled admission plugins, it is possible to define custom dynamic admission controls.
-```
-
-##### Dynamic Admission Control
-```
-a) Admission plugins that run as webhooks during runtime and do not need to compiled in Kubernetes.
-b) Validating admission webhooks deny requests if the validation criteria is not met.
-c) Mutating admission webhooks are invoked first over validating admission webhooks.
-   These webhooks can modify requests and objects sent to the API server.
-
-More info: https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/
+a) Admission controller is code that intercepts requests to the API server after authorization but prior to storing objects into etcd.
+   All admission control steps must pass for the request to succeed.
+b) Admission controllers can validate (e.g. denies requests if exceeding resource limits) or mutate (e.g. create namespace if it does not exist) requests.
+   Mutating admission controllers are invoked before validating admission controllers and can modify requests and objects sent to the API server.
+c) Admission plugins can be compiled or dynamic (i.e. run as webhooks and do not require restart of API server).
 ```
 
 ### Security Tools
