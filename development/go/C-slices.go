@@ -18,7 +18,7 @@ func initSlice() {
     y := []int{4, 5, 6, 7, 8}
     z := [][]int{{1,2,3,4}, {5,6,7,8}}
     
-    // range slices
+    // slice ranges will create a new copy of the slice
     fmt.Println(y[1:4])
     fmt.Println(y[:2])
     fmt.Println(y[1:])
