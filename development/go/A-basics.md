@@ -3,7 +3,8 @@
 ##### Overview
 ```
 a) Go is a statically typed, strongly typed, compiled language.
-b) Go uses the concepts of struct types instead of classes.
+b) Go uses the concepts of types and structs instead of classes.
+   Go also heavily uses composition for OOP and does not use inheritance.
 c) Go is pass by value, refer to https://neilalexander.dev/2021/08/29/go-pass-by-value.
 d) Go supports automated garbage collection.
 ```
