@@ -2,6 +2,7 @@ package go
 
 import (
     "fmt"
+    "strings"
 )
 
 // arrays have a fixed length
@@ -72,4 +73,16 @@ func runEnhancedLoop() {
 func appendSlice() {
     x := []int{1, 2, 3}
     x = append(x, 4, 5, 6)
+}
+
+func joinSlice() {
+    // join strings
+    x := []string{"hello", "there", "world"}
+    str := strings.Join(x, ", ")
+
+    // split strings
+    x = strings.Split(str, ", ")
+
+    // repeat strings
+    str = strings.Repeat(str, 4)
 }
