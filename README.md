@@ -4,18 +4,19 @@ This repository is structured in the following way:
 ```
 concepts
  L cloud
-    L GCP
-    L Kubernetes
-    L CI/CD
+    L ci-cd
+    L gcp
+    L infra-tools
+    L kubernetes
  L development
     L go
     L java
     L python
+    L software-engineering
     L sql
-    L software engineering
  L systems
-    L network and security
-    L operating system
     L database
-    L system design
+    L network-and-security
+    L operating-system
+    L system-design
 ```
