@@ -20,7 +20,7 @@ type address struct {
 }
 
 // structs can be embedded
-// "address" will be translated as a field name address of type address
+// "address" will be translated as a field name "address" of type address
 type person struct {
     firstName string
     lastName  string
@@ -51,10 +51,11 @@ func declareType() {
         },
     }
     
+    // embedded structs for alice should have been initialized with defaults
     if alice.firstName == "" || alice.lastName == "" {
         alice.firstName = "alice"
         alice.lastName = "wonderland"
-        alice.contact = contactInfo{"aliceinwonderland@gmail.com", 123456789}
+        alice.contact.email = "aliceinwonderland@gmail.com"
         alice.address = address{"Wonderland", "Wonderland"}
     }
 }
@@ -63,4 +64,20 @@ func declareType() {
 // by convention, the instance of the type is represented as a single letter
 func (n names) modifyFirst() {
     n[0] = "Alice"
+}
+
+// structs are "pass by value" (i.e. copy is created) and the original reference is not modified
+func modifyStruct() {
+    var ellie person
+    ellie.wrongModifyFirstName("alice")
+    elliePtr := &ellie
+    elliePtr.modifyFirstName("alice")
+}
+
+func (p person) wrongModifyFirstName(newName string) {
+    p.firstName = newName
+}
+
+func (p *person) modifyFirstName(newName string) {
+    (*p).firstName = newName
 }
