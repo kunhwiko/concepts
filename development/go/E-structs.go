@@ -66,12 +66,18 @@ func (n names) modifyFirst() {
     n[0] = "Alice"
 }
 
-// structs are "pass by value" (i.e. copy is created) and the original reference is not modified
+// structs are "pass by value" (i.e. copy of value is created) and the original value is not modified
+// note that slices, maps, channels, pointers, functions are reference types
+// for reference types, the reference to the value is copied instead of the actual value 
 func modifyStruct() {
     var ellie person
     ellie.wrongModifyFirstName("alice")
+    
     elliePtr := &ellie
     elliePtr.modifyFirstName("alice")
+
+    // Go gives us a shortcut that auto inferences the "ellie" struct into a pointer
+    ellie.modifyFirstName("ellie")
 }
 
 func (p person) wrongModifyFirstName(newName string) {
