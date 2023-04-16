@@ -10,6 +10,14 @@ c) Go is pass by value, refer to https://neilalexander.dev/2021/08/29/go-pass-by
 d) Go supports automated garbage collection.
 ```
 
+##### Numeric Types
+```
+unsigned integers : uint8 (byte), uint16, uint32, uint64
+signed integers   : int8, int16, int32 (rune), int64
+float numbers     : float32, float64
+complex numbers   : complex64, complex128
+```
+
 ### Modules
 ---
 ##### Packages

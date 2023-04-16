@@ -9,6 +9,17 @@ import (
 // we can assign as int8 to conserve memory
 var x int8 = 1
 
+// multiple type assignments can be done
+const (
+    // untyped
+    a = 48
+    b = "hello"
+
+    // typed
+    c int8 = 48
+    d string = "hello"
+) 
+
 func declareVariables() {
     // multiple declarations
     var i, j int = 1, 2
@@ -39,7 +50,7 @@ func convertType() {
     bytes := []byte(str)
     fmt.Println(string(bytes))
     
-    // example converts a type back to []string
+    // example converts a custom type back to []string
     type names []string
     friends := names{"Alice", "Cassandra", "Ellie"}
     fmt.Println([]string(friends))

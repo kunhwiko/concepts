@@ -25,7 +25,7 @@ func initSlice() {
     fmt.Println(y[1:])
 }
 
-func runLoop() {
+func runLoopForSlice() {
     sum := 0
 
     // basic for loop
@@ -45,20 +45,11 @@ func runLoop() {
         }
         sum++
     }
-
-
-    x := []string{"hello", "there", "world"}
-
-    // enhanced for loop comes as (index, value) 
-    // idx and val are scoped to this loop and declaration will be thrown away
-    for idx, val := range x {
-        fmt.Println(idx, val)
-    }
 }
 
 // enhanced for loop comes as (index, value) 
 // idx and val are scoped to this loop and declaration will be thrown away
-func runEnhancedLoop() {
+func runEnhancedLoopForSlice() {
     x := []string{"hello", "there", "world"}
 
     for idx, val := range x {
@@ -85,4 +76,47 @@ func joinSlice() {
 
     // repeat strings
     str = strings.Repeat(str, 4)
+}
+
+func initMap() {
+    // empty is a type map that points to nil
+    // assigning an entry will throw a nil exception
+    var empty map[string]int
+    empty["I"] = 1
+
+    // initializes an empty map and we can now assign an entry
+    empty = make(map[string]int)
+    empty["I"] = 1
+
+    // maps in Go are unsorted default maps
+    numbers := map[string]int{
+        "I": 1,
+        "V": 5,
+        "X": 10,
+    }
+    
+    numbers["I"]  // returns 1
+    numbers["VX"] // returns 0 and does not return key error
+    
+    // put and delete items
+    empty["C"] = 1000
+    delete(empty, "C")
+}
+
+func runEnhancedLoopForMap() {
+    numbers := map[string]int{
+        "I": 1,
+        "V": 5,
+        "X": 10,
+    }
+
+    for key, val := range numbers {
+        fmt.Println(key, val)
+    }
+
+    // comma ok idiom
+    // ok is a boolean telling us whether or not the key is in the map
+    if v, ok := numbers["C"]; ok {
+        fmt.Println(v, "This should not print")
+    } 
 }
