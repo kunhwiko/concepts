@@ -57,8 +57,8 @@ func convertType() {
 
     // example converts int to string
     // note that Aoti returns (int, error)
-	num := 2000
-	str = strconv.Itoa(num)
-	num, _ = strconv.Atoi(str)
-	fmt.Println(str, num)
+    num := 2000
+    str = strconv.Itoa(num)
+    num, _ = strconv.Atoi(str)
+    fmt.Println(str, num)
 }
