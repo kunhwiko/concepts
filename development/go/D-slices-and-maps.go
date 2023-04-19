@@ -18,6 +18,12 @@ func initSlice() {
     var x []int 
     y := []int{4, 5, 6, 7, 8}
     z := [][]int{{1,2,3,4}, {5,6,7,8}}
+
+    // if a slice is full, append operations copy existing elements over to a larger slice
+    // this takes O(n) time, so we can optionally specify the initial length and capacity beforehand
+    m := make([]int, 10, 100)
+    fmt.Println(len(m))  // prints 10
+    fmt.Println(cap(m))  // prints 100
     
     // slice ranges will create a new copy of the slice
     fmt.Println(y[1:4])
@@ -64,6 +70,8 @@ func runEnhancedLoopForSlice() {
 func appendSlice() {
     x := []int{1, 2, 3}
     x = append(x, 4, 5, 6)
+    y := []int{7, 8, 9}
+    x = append(x, y...)
 }
 
 func joinSlice() {
