@@ -14,13 +14,6 @@ func declareType() {
     var friends names = []string{"Alice", "Bob"}
     friends = names{"Cassandra", "Ellie"}
     friends.modifyFirst()
-
-    x, y := ReturnMultiple(1, "hello")
-
-    // anonymous function
-    z := func(x int) int {
-        return x + 2
-    }(2)
 }
 
 // "methods" belong to a particular type where this one has a receiver of type 'names' called 'n'
@@ -29,8 +22,26 @@ func (n names) modifyFirst() {
     n[0] = "Alice"
 }
 
+func declareFunction() {
+    x, y := ReturnMultiple(1, "hello")
+    
+    // Go is pass by value, so a copy of "x" is created when passing to function
+    // x will stay as 1
+    add(x)
+
+    // function literal - anonymous function
+    // x is the original reference and not a copy
+    func(z int) {
+        x += z
+    }(2)
+}
+
 // functions can have multiple returns
 // capital case functions are exported to external packages
 func ReturnMultiple(x int, y string) (int, string) {
-    return x+1, y
+    return x, y
+}
+
+func add(x int) {
+    x += 10
 }

@@ -1,9 +1,9 @@
- 
-package go
+ package go
 
 import (
     "fmt"
-    "http"
+    "net/http"
+    "time"
 )
 
 // main goroutine executes the program line by line
@@ -47,9 +47,6 @@ func loopRoutine() {
     links := []string{
         "http://www.google.com",
         "http://www.amazon.com",
-        "http://www.facebook.com",
-        "http://www.workday.com",
-        "http://www.netflix.com",
     }
 
     c := make(chan string)
@@ -60,7 +57,10 @@ func loopRoutine() {
 
     // eternal loop that continues to listen on channel
     for l := range c {
-        go checkLink(l, c)
+        go func() {
+            time.Sleep(5 * time.Second)
+            checkLink(l, c)
+        }()
     }
 }
 

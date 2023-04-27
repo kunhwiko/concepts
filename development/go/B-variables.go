@@ -24,7 +24,7 @@ func declareVariables() {
     // multiple declarations
     var i, j int = 1, 2
 
-    // short variable declaration - not possible outside functions
+    // short variable declaration - not possible as global variables
     k := 3 
 
     // multiple short variable declaration

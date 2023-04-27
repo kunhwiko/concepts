@@ -25,7 +25,6 @@ type person struct {
 }
 
 func declareType() {
-    
     // declare person type 
     var alice person
     ellie := person{"Ellie", "Williams", contactInfo{"ellie@gmail.com", 123456}, address{"United States", "Boston"}}
@@ -47,7 +46,7 @@ func declareType() {
         alice.firstName = "alice"
         alice.lastName = "wonderland"
         alice.contact.email = "aliceinwonderland@gmail.com"
-        alice.address = address{"Wonderland", "Wonderland"}
+        alice.address = address{"Wonderland", "Tea Garden"}
     }
 }
 
@@ -71,4 +70,15 @@ func (p person) wrongModifyFirstName(newName string) {
 
 func (p *person) modifyFirstName(newName string) {
     (*p).firstName = newName
+}
+
+// anonymous structs
+func initAnonymousStruct() {
+    p1 := struct{
+        first string 
+        last string 
+    }{
+        first: "Ellie",
+        last: "Williams",
+    }
 }
