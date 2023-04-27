@@ -65,3 +65,31 @@ go mod verify
 Variables and functions are available in other packages if they start with a capital letter.
 Otherwise, variables and functions are considered private to the current package.
 ```
+
+### Goroutines
+---
+##### Goroutines vs Threads
+```
+a) Goroutines are managed by the Go runtime (i.e. scheduler) rather than by the OS. 
+b) Goroutines consume a smaller stack size (~2KB) than threads (1MB+), making context switching faster.
+   The stack is used to save local variables of function calls and has the capability to grow dynamically by allocating heap storage.
+c) Goroutines can communicate and share information efficiently with other goroutines through channels.
+```
+
+##### Main Goroutines
+```
+The main goroutine is created when a program is launched.
+Any subsequently created goroutines are child routines.
+```
+
+##### Concurrency and Parallelism
+```
+Golang can achieve concurrency through goroutines (i.e. if a goroutine is blocked, another can be scheduled to execute work).
+Golang can achieve parallelism through multiple CPU cores by configuring GOMAXPROCS.
+```
+
+##### Go Scheduler
+```
+Responsible for scheduling and monitoring code running in goroutines.
+Although a CPU core can only execute a single goroutine at a time, multiple goroutines can still run concurrently.
+```
