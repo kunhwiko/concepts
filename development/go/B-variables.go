@@ -5,32 +5,36 @@ import (
     "strconv"
 )
 
-// variable can be declared globally
-// we can assign as int8 to conserve memory
+/*
+ * Variables can be declared globally. In this case we can assign the variable as int8
+ * to conserve memory.
+ */
 var x int8 = 1
 
-// multiple type assignments can be done
+/*
+ * Multiple type assignments can be done at once.
+ */
 const (
-    // untyped
+    // untyped variables
     a = 48
     b = "hello"
 
-    // typed
+    // typed variables
     c int8 = 48
     d string = "hello"
 ) 
 
 func declareVariables() {
-    // multiple declarations
+    // multiple variable declaration
     var i, j int = 1, 2
 
-    // short variable declaration - not possible as global variables
+    // short variable declaration - not possible for global variables
     k := 3 
 
     // multiple short variable declaration
     a, b, c := true, 1, "hello"
 
-    // untyped variable 
+    // untyped variable declaration
     var y = 1
 
     fmt.Println(x, i, j, k, a, b, c, y)
@@ -55,8 +59,7 @@ func convertType() {
     friends := names{"Alice", "Cassandra", "Ellie"}
     fmt.Println([]string(friends))
 
-    // example converts int to string
-    // note that Aoti returns (int, error)
+    // example converts int to string - Aoti returns (int, error)
     num := 2000
     str = strconv.Itoa(num)
     num, _ = strconv.Atoi(str)

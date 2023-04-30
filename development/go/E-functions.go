@@ -4,28 +4,35 @@ import (
     "fmt"
 )
 
-// Go does not support inheritance and focuses more on composition
-// Go allows for the creation of new types
+/*
+ * Go does not support inheritance and focuses more on composition. Go also focuses on
+ * the creation of new "types".
+ */
 type names []string
 
-// "functions" do not belong to a particular type
+/*
+ * This is a "function" that declares a variable of type "names"
+ */
 func declareType() {
-    // declare names type
     var friends names = []string{"Alice", "Bob"}
     friends = names{"Cassandra", "Ellie"}
     friends.modifyFirst()
 }
 
-// "methods" belong to a particular type where this one has a receiver of type 'names' called 'n'
-// by convention, the instance of the type is represented as a single letter
+/*
+ * This is a "method" for type "names" with a receiver "n". By convention, the instance
+ * of the type is represented as a single letter.
+ */
 func (n names) modifyFirst() {
     n[0] = "Alice"
 }
 
+/*
+ * Go is pass by value, so a copy of "x" is created when passing to the function.
+ */
 func declareFunction() {
     x, y := ReturnMultiple(1, "hello")
     
-    // Go is pass by value, so a copy of "x" is created when passing to function
     // x will stay as 1
     add(x)
 
@@ -36,8 +43,10 @@ func declareFunction() {
     }(2)
 }
 
-// functions can have multiple returns
-// capital case functions are exported to external packages
+/*
+ * Functions can have multiple returns and capital case functions represent
+ * that the function can be exported to external packages.
+ */
 func ReturnMultiple(x int, y string) (int, string) {
     return x, y
 }

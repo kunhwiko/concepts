@@ -15,7 +15,7 @@ var runIfStatement() {
         fmt.Println(x)
     }
 
-    // returns 43
+    // continues to returns 43 instead of 42
     fmt.Println(x)
 }
 

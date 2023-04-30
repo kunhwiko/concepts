@@ -5,22 +5,25 @@ import (
     "strings"
 )
 
-// arrays have a fixed length
+/*
+ * Arrays have a fixed length and are initialized with default values (e.g. 0) by default.
+ */
 func initArray() {
-    // initializes with 0s by default
     var x [5]int   
     y := [5]int{4, 5, 6, 7, 8}
     z := [5][5]int{}
 }
 
-// slices have dynamic length
+/*
+ * Slices have dynamic length and when full, existing elements need to be copied over to a
+ * larger slice (i.e. O(n) complexity). 
+ */
 func initSlice() {
     var x []int 
     y := []int{4, 5, 6, 7, 8}
     z := [][]int{{1,2,3,4}, {5,6,7,8}}
 
-    // if a slice is full, append operations copy existing elements over to a larger slice
-    // this takes O(n) time, so we can optionally specify the initial length and capacity beforehand
+    // can optionally specify the initial length and capacity beforehand
     m := make([]int, 10, 100)
     fmt.Println(len(m))  // prints 10
     fmt.Println(cap(m))  // prints 100
@@ -53,8 +56,9 @@ func runLoopForSlice() {
     }
 }
 
-// enhanced for loop comes as (index, value) 
-// idx and val are scoped to this loop and declaration will be thrown away
+/*
+ * Enhanced for loops come as (index, value) and are scoped only to that loop.
+ */
 func runEnhancedLoopForSlice() {
     x := []string{"hello", "there", "world"}
 
@@ -65,8 +69,10 @@ func runEnhancedLoopForSlice() {
     // idx and val are unknown at this point!
 }
 
-// adds an element to the slice
-// this does not modify the existing slice but copies a new instance (i.e. O(n) operation)
+/*
+ * Adding an element to the slice does not modify the existing slice but creates a 
+ * new instance (i.e. O(n) operation).
+ */
 func appendSlice() {
     x := []int{1, 2, 3}
     x = append(x, 4, 5, 6)
@@ -86,6 +92,9 @@ func joinSlice() {
     str = strings.Repeat(str, 4)
 }
 
+/*
+ * Maps in Go are unsorted default maps.
+ */
 func initMap() {
     // empty is a type map that points to nil
     // assigning an entry will throw a nil exception
@@ -96,7 +105,6 @@ func initMap() {
     empty = make(map[string]int)
     empty["I"] = 1
 
-    // maps in Go are unsorted default maps
     numbers := map[string]int{
         "I": 1,
         "V": 5,

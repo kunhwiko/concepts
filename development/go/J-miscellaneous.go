@@ -10,6 +10,9 @@ type Element struct {
     Cost int 
 }
 
+/*
+ * Go comparator.
+ */
 func sortComparator() {
     e1 := Element{"Ruby", 32000}
     e2 := Element{"Sapphire", 29000}
@@ -24,4 +27,18 @@ func sortComparator() {
         return elements[i].Cost < elements[j].Cost
     })
     fmt.Println(elements)
+}
+
+/*
+ * Defer functions delay execution until the end of the function. If multiple
+ * defers exist, they will be executed in LIFO order.
+ */
+func defer() {
+    defer func() {
+        fmt.Println("Printing 1")
+    }()
+
+    defer func() {
+        fmt.Println("Printing 2")
+    }()
 }
