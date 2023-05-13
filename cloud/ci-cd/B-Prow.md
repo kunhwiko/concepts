@@ -12,12 +12,12 @@ Prowjobs are the basic unit of work in Prow that performs certain actions based 
 If specified, Prow can also run Tekton pipelines instead of Prowjobs.
 ```
 
-### Prow Architecture
+### Prow Components
 ---
 ##### Prow Architecture
 ```
 The overall Prow architecture is described here: https://docs.prow.k8s.io/docs/overview/architecture/.
-Core components in Prow are better described here: https://docs.prow.k8s.io/docs/components/core/
+Core components in Prow are better described here: https://docs.prow.k8s.io/docs/components/core/.
 ```
 
 ##### Crier
@@ -62,6 +62,6 @@ Pod Utilities help to ensure the following:
 
 ##### Tide
 ```
-a) Tide has logic to automatically tests PRs based on a given criteria (i.e. tide-in).
-b) Tide logic to merge PRs based on a given criteria (i.e. tide-out). 
+a) Tide holds logic to automatically tests PRs based on a given criteria (i.e. tide-in).
+b) Tide holds logic to merge PRs based on a given criteria (i.e. tide-out). 
 ```
