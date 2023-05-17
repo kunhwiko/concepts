@@ -16,12 +16,11 @@ type address struct {
 }
 
 // structs can be embedded
-// "address" will be translated as a field name "address" of type address
 type person struct {
     firstName string
     lastName  string
     contact   contactInfo
-    address
+    address                 // "address" will be translated as a field name "address" of type address
 }
 
 func declareType() {
@@ -50,9 +49,11 @@ func declareType() {
     }
 }
 
-// structs are "pass by value" (i.e. copy of value is created) and the original value is not modified
-// note that slices, maps, channels, pointers, functions are reference types
-// for reference types, the reference to the value is copied instead of the actual value 
+/*
+ * Structs are "pass by value" (i.e. copy of value is created) and the original value is not modified
+ * Note that slices, maps, channels, pointers, functions are reference types
+ * For reference types, the reference to the value is copied instead of the actual value 
+ */
 func modifyStruct() {
     var ellie person
     ellie.wrongModifyFirstName("alice")
