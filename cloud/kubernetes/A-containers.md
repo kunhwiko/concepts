@@ -50,9 +50,36 @@ c) Containers should not contain unique data as they might have to be redeployed
 
 ### Daemons
 ---
-##### Docker Daemon
+##### Open Container Initiative (OCI)
 ```
-Docker daemon (dockerd) listens for Docker API requests and manages Docker objects (e.g. images, containers, networks, volumes).
-Dockerd may send responses and stream output back to the Docker client (e.g. output to terminal after running a docker command).
-The Docker infrastructure is better explained here: https://docs.docker.com/get-started/overview/#docker-architecture
+Set of vendor-neutral standards for container runtime that defines how images should be structured (e.g. 
+file system, metadata) and how containers should be launched, managed, and interact with host system
+(e.g. process isolation, resource constraints, lifecycle management). 
+```
+
+##### runc
+```
+Lightweight container runtime that is universal per OCI standards and manages the following via system calls:
+  * Sets up container namespaces.
+  * Sets up cgroups and capabilities.
+  * Sets up file system.
+  * Typically invoked via higher level container runtimes (e.g. containerd) and not by end users.
+```
+
+##### containerd
+```
+containerd is a container runtime that serves as a foundation for containers and provides the following:
+  * Supports pulling and pushing container images.
+  * Handles the creation, execution, and management of containers.
+  * Manages the creation and handling of container filesystem snapshots.
+  * Integratable with networking and storage plugins to enable container networking and persistence.
+```
+
+##### Docker Daemon (dockerd)
+```
+a) dockerd listens for Docker API requests and manages Docker objects (e.g. images, containers, networks, volumes).
+b) dockerd can invoke containerd via a gRPC request to start a container.
+c) dockerd may send responses and stream output back to the client (e.g. output to terminal after running docker run).
+
+The Docker infrastructure is better explained here: https://docs.docker.com/get-started/overview/#docker-architecture.
 ```
