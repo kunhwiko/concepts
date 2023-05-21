@@ -9,8 +9,8 @@ at a given point in time. The snapshot holds all necessary info to instantiate a
 ##### Image Layers
 ```
 Images are built as a series of layers, or intermediate images that each represent changes from previous layers
-(e.g. ENV, COPY, RUN commands in Dockerfiles each represent a layer). If changes are made, only the new layers
-need to be pulled or pushed on top of existing layers residing in an image cache. 
+(e.g. ENV, COPY, RUN commands in Dockerfiles each represent a layer). These layers are read only and if changes 
+are made, only the new layers need to be pulled or pushed on top of existing layers residing in an image cache. 
 ```
 
 ##### Containers
@@ -22,7 +22,7 @@ Containers can have a different OS from the host and will share the host's kerne
 
 ##### Container Layers
 ```
-Container runtime adds a new writable layer on top of base layers when a new container is launched.
+Container runtime adds a new read-write layer on top of base layers when a new container is launched.
 Changes made to the running container (e.g. modification of files) will be written to this layer.
 The contents of the container layer are lost when the container is deleted.
 ```
@@ -46,6 +46,42 @@ b) Multiple tags can refer to the same commit, so they have the same image ID.
 a) All changes should be made to the source app, and containers should then be redeployed.
 b) Changes should not be made to a container directly as the results will not be reproducible.
 c) Containers should not contain unique data as they might have to be redeployed.
+```
+
+### Dockerfile
+---
+##### Dockerfile
+```
+Dockerfiles list instructions (e.g. FROM, ADD, COPY, LABEL, WORKDIR, RUN, CMD) to build out an image.
+Each instruction typically represents a single layer and will be its own intermediary image up to that instruction.
+It is recommended to use .dockerignore and avoid copying unnecessary files or packages to keep image size small.
+```
+
+##### CMD vs ENTRYPOINT
+```
+a) If multiple CMD commands exist, all except the last one are ignored (i.e. there is an expectation that it 
+   can be overriden). It could be further overrriden through arguments to the `docker run` command. 
+b) ENTRYPOINT instructions on the other hand will always be executed and are useful in multi-stage builds
+   when a command always needs to be executed.
+c) CMD can be used alongside ENTRYPOINT to specify parameters or arguments to the ENTRYPOINT executable.
+```
+
+##### ADD vs COPY
+```
+a) COPY supports copying of local files into a container and has a much more clear purpose of what to port over.
+b) ADD has additional functionalities such as automatic tar extraction and fetching of packages from remote URLs.
+   While decompression of compressed files is a valid feature, COPY and curl for remote URLs is generally recommended.  
+```
+
+##### Multiple Staging
+```
+Multiple staging allows users to keep image sizes small by using multiple images from a single Dockerfile to build a 
+final image. Below is an example:
+
+Step 1) First stage of a Dockerfile will download a repository holding Golang code and necessary dependencies.
+Step 2) This stage will compile the Golang code into a binary using necessary dependencies.
+Step 3) The second stage specifies a new base image and can copy just the binary. The repository, other 
+        dependencies, and the previous base image are discarded and only the final stage is kept.
 ```
 
 ### Daemons
@@ -82,4 +118,10 @@ b) dockerd can invoke containerd via a gRPC request to start a container.
 c) dockerd may send responses and stream output back to the client (e.g. output to terminal after running docker run).
 
 The Docker infrastructure is better explained here: https://docs.docker.com/get-started/overview/#docker-architecture.
+```
+
+##### Kaniko
+```
+Open source tool that enables a container to build other container images without requiring privileged access or the
+need for dockerd. It also supports authentication to push images to private registries. 
 ```
