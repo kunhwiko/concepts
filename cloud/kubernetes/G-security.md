@@ -103,6 +103,14 @@ RoleBindings
 
 ### Authentication and Authorization to API Server
 ---
+##### kubeconfig
+```
+a) Kubernetes uses a YAML file called kubeconfig to store cluster auth information for kubectl.
+b) kubeconfig contains a list of contexts to which kubectl will refer to.
+c) kubeconfig contains API server endpoints that kubectl will contact on port 443.
+d) Path to the kubeconfig file can be specified via the environment variable KUBECONFIG.
+```
+
 ##### Step 1: Authentication
 ```
 a) Users use keys and certificates to authenticate against the API server over TLS.
