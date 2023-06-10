@@ -1,4 +1,4 @@
-### Definition of Namespace and Secret
+### Namespace and Secret
 ---
 ##### Namespace
 ```
@@ -7,13 +7,13 @@ Provides a partition among users, and each namespace can be sealed with credenti
 
 ##### Secrets
 ```
-a) Secrets contain sensitive info such as credentials and tokens and are namespace scoped.
-   To limit access to secrets, they should be put in namespaces accessible to a limited set of users or services.
-b) Secrets are stored by default as plaintext in etcd and are base64 encoded.
-c) Kubelet can download and access secrets from the API server via TLS.
-d) Secrets can be mounted as files via volumes, specified in service accounts, or be picked up as container environment variables.
-   The same secret can be mounted in multiple pods.
-e) Kubelet stores secrets in node memory (never to disk) and are deleted when not needed.
+a) Secrets contain sensitive info such as credentials and tokens that are namespace scoped. To limit access to secrets, 
+   they should be put in namespaces accessible only to a limited set of users or services.
+b) Secrets are stored by default as plaintext in etcd and are base64 encoded. Kubelets can download and access these
+   secrets by invoking the API server via TLS. Kubelets will then store secrets in node memory (i.e. never to disk)
+   and are deleted when not needed.
+c) Secrets can be mounted as files via volumes, specified in service accounts, or be picked up as container environment 
+   variables. The same secret can be mounted to multiple pods.
 ```
 
 ##### ImagePullSecrets
@@ -21,38 +21,38 @@ e) Kubelet stores secrets in node memory (never to disk) and are deleted when no
 Keys used to pull images from a private registry.
 ```
 
-### Definition of Service Account
+### Service Account
 ---
 ##### User Accounts
 ```
-a) When a human tries to access a Kubernetes cluster, they are typically authenticated via a user account.
-b) Typically gives "admin" access, giving global access to all namespaces.
-c) Best practices are to give users privileges to a limited set of namespaces.
+When a human tries to access a Kubernetes cluster, they are typically authenticated via a user account. These accounts 
+typically give "admin" access, giving global access to all namespaces. Best practice is to give users privilege to a 
+limited set of namespaces.
 ```
 
 ##### Service Accounts
 ```
-a) When pods are instantiated, they are assigned a service account.
-b) Pod processes that need to contact the API server are authenticated via a service account.
-c) Default service account is used if one is not assigned, which limits access to resources in the current namespace.
-d) Service accounts carry credentials (e.g. token to communicate with API server) that are mounted in a secret volume.
+a) When pods are instantiated, they are assigned a service account. A default service account is used if one is not
+   assigned, which limits access to resources in the current namespace.
+b) Service accounts come with tokens (i.e. credentials to talk to the API server) that are mounted as secrets. Pod 
+   processes that need to contact the API server are authenticated with this token.
 ```
 
 ##### Service Account Admission Controller
 ```
-a) Assigns at pod creation time a custom or default service account.
-b) If specified, ensures pod has ImagePullSecrets if images need to be pulled from a remote registry.
+a) Assigns at pod creation time a custom or default service account. Also ensures a default service account exists in 
+   every namespace.
+b) Adds a volume to the pod with a token that is used to authenticate to the API server.   
+c) If specified, ensures pod has ImagePullSecrets if images need to be pulled from a remote registry.
    If not specified in the pod spec, uses the service account's ImagePullSecrets instead.
-c) Adds a volume to the pod with a token that is used to authenticate to the API server.
-d) Ensures default service account exists in every namespace.
 ```
 
 ##### Token Controller
 ```
-Whenever a service account is created, creates and adds a token that is used to authenticate to the API server to the secret volume.
+Whenever a service account is created, creates and adds a token as a secret that is used to authenticate to the API server.
 ```
 
-### Definition of Security Context
+### Security Context and RBAC
 ---
 ##### Container Security Context
 ```
@@ -81,24 +81,22 @@ c) Could harm other processes that were accessing the volumes with a different G
 d) Could cause slow startup for large volumes as permissions need to be modified. 
 ```
 
-### Definition of RBAC
----
 ##### RBAC Authorization
 ```
 ClusterRoles
-  a) Represent a set of permissions to resources in all namespaces.
-  b) ClusterRoles are available for use in all namespaces.
+  * Represent a set of permissions to resources in all namespaces.
+  * ClusterRoles are available for use in all namespaces.
 
 ClusterRoleBindings
-  a) Grants permissions defined by ClusterRoles.
-  b) ClusterRoleBindings are available for use in all namespaces.
+  * Grants permissions defined by ClusterRoles.
+  * ClusterRoleBindings are available for use in all namespaces.
 
 Roles
-  a) Represent a set of permissions to resources in a given namespace.    
+  * Represent a set of permissions to resources in a given namespace.    
 
 RoleBindings
-  a) Grants permissions defined by a Role in a given namespace.
-  b) RoleBindings can also reference a ClusterRole and bind it to the given namespace.
+  * Grants permissions defined by a Role in a given namespace.
+  * RoleBindings can also reference a ClusterRole and bind it to the given namespace.
 ```
 
 ### Authentication and Authorization to API Server
@@ -118,8 +116,8 @@ b) Cluster admins can choose what authentication strategy to use.
 c) If at least one authentication step succeeds, authentication is granted.
 
 Impersonation
-  a) Possible for users to impersonate different users (e.g. troubleshoot some issue for a different user).
-  b) Requires passing impersonation headers to API request (e.g. kubectl --as / --as-group parameters).
+  * Possible for users to impersonate different users (e.g. troubleshoot some issue for a different user).
+  * Requires passing impersonation headers to API request (e.g. kubectl --as / --as-group parameters).
 ```
 
 ##### Step 2: Authorization
@@ -144,10 +142,10 @@ c) Admission plugins can be compiled or dynamic (i.e. run as webhooks and do not
 ##### AppArmor
 ```
 Linux kernel security module that allows you to create profiles to do the following:
-  a) Restrict network access of processes in container.
-  b) Restrict Linux capabilities of container.
-  c) Restrict file permissions of container.
-  d) Provide improved auditing through logs.
+  * Restrict network access of processes in container.
+  * Restrict Linux capabilities of container.
+  * Restrict file permissions of container.
+  * Provide improved auditing through logs.
 ```
 
 ### Malicious Attacks
@@ -155,33 +153,33 @@ Linux kernel security module that allows you to create profiles to do the follow
 ##### Node Attacks
 ```
 Attacks
-  a) External user can replace kubelet to communicate normally with API server by sending false data.
-     Meanwhile, they can use the node to run their own workloads.
-  b) External user can gain access to shared resources and secrets.
-  c) External user can send malicious messages and disrupt the cluster or cause resource drain.
+  * External user can replace kubelet to communicate normally with API server by sending false data.
+    Meanwhile, they can use the node to run their own workloads.
+  * External user can gain access to shared resources and secrets.
+  * External user can send malicious messages and disrupt the cluster or cause resource drain.
 
 Mitigation
-  a) Place a limit on resource capacities.
-  b) Carefully consider interaction between containers and limit privileges as much as possible.
+  * Place a limit on resource capacities.
+  * Carefully consider interaction between containers and limit privileges as much as possible.
 ```
 
 ##### Network Attacks
 ```
 Considerations between ease of discovery vs security
-  a) Which endpoints should be publicly accessible, and if public, how do we authenticate users?
-  b) What privileges can we take away? What containers do not need to talk with each other?
-  c) How can we control access among internal services in case someone obtains internal access?
-  d) What data is considered sensitive enough that we should be encrypting it?
+  * Which endpoints should be publicly accessible, and if public, how do we authenticate users?
+  * What privileges can we take away? What containers do not need to talk with each other?
+  * How can we control access among internal services in case someone obtains internal access?
+  * What data is considered sensitive enough that we should be encrypting it?
 ```
 
 ##### Image Attacks
 ```
 Attacks
-  a) Malicious images can be designed to hack into systems.
-  b) Vulnerable images are good targets for malicious attacks.
+  * Malicious images can be designed to hack into systems.
+  * Vulnerable images are good targets for malicious attacks.
 
 Mitigation
-  a) Integrate static image analyzers.
-  b) Limit resource access of containers.
-  c) Patch known vulnerabilities as soon as possible.
+  * Integrate static image analyzers.
+  * Limit resource access of containers.
+  * Patch known vulnerabilities as soon as possible.
 ```

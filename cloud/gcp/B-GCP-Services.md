@@ -2,13 +2,14 @@
 ---
 ##### Google Compute Engine (GCE)
 ```
-GCE is an infrastructure-as-a-service offering and gives full control over instance hardware, operating system, region/zone, networking, and autoscaling.
+GCE is an infrastructure-as-a-service offering and gives full control over instance hardware, operating system, 
+region/zone, networking, and autoscaling.
 ```
 
 ##### Google Kubernetes Engine (GKE)
 ```
-a) GKE is Google's version of Kubernetes and container-as-a-service offering.
-b) GKE leverages GCE for hosting cluster nodes and integrates GCP software defined networks.
+GKE is a managed Kubernetes service and Google's container-as-a-service offering. GKE leverages GCE for hosting cluster 
+nodes and integrates GCP software defined networks.
 ```
 
 ##### Anthos on VMWare
