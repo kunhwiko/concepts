@@ -1,3 +1,10 @@
+### EC2
+---
+##### EC2 Properties
+```
+All EC2 properties are listed here: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html
+```
+
 ### Security
 ---
 ##### Security Group
