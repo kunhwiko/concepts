@@ -134,6 +134,13 @@ f) Kubelet allows you to manually configure network MTU.
 ---
 ##### Container Runtime Interface (CRI)
 ```
-CRI enables Kubernetes to support a general interface for various container runtimes. Kubelets will interact with 
-custom implementations of CRI via gRPC to determine what the container runtime should do.
+CRI is a standardized interface for various container runtimes to implement. The interface to implement is as follows: 
+https://github.com/kubernetes/kubernetes/blob/release-1.5/pkg/kubelet/api/v1alpha1/runtime/api.proto. CRI allows 
+Kubernetes to support various container runtimes based on user needs without the need to recompile.
+```
+
+##### CRI Architecture
+```
+Kubelets will interact with CRI compatible container runtimes or CRI shims (i.e. a bridge that implements CRI and 
+translates to something container runtimes can understand) over Unix sockets using the gRPC framework. 
 ```
