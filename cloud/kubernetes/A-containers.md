@@ -2,37 +2,39 @@
 ---
 ##### Images
 ```
-Images are a read-only template that represent snapshots of an application with necessary dependencies
-at a given point in time. The snapshot holds all necessary info to instantiate and run a container.
+Images are a read-only template that represent snapshots of an application with necessary dependencies at a given point 
+in time. The snapshot holds all necessary info to instantiate and run a container.
 ```
 
 ##### Image Layers
 ```
-Images are built as a series of layers, or intermediate images that each represent changes from previous layers
-(e.g. ENV, COPY, RUN commands in Dockerfiles each represent a layer). These layers are read only and if changes 
-are made, only the new layers need to be pulled or pushed on top of existing layers residing in an image cache. 
+Images are built as a series of layers, or intermediate images that each represent changes from previous layers (e.g. 
+ENV, COPY, RUN commands in Dockerfiles each represent a layer). These layers are read only and if changes  are made, 
+only the new layers need to be pulled or pushed on top of existing layers residing in an image cache. 
 ```
 
 ##### Containers
 ```
-Containers represent instances of images that run as processes in isolated user spaces on the host OS.
-Container processes use Linux features such as namespace and cgroups to provide this isolation.
-Containers can have a different OS from the host and will share the host's kernel through syscall requests.
+a) Containers represent instances of images that run as processes in isolated user spaces on the host OS. Container 
+   processes use Linux features such as namespaces (e.g. network namespace for network isolation, mount namespace for 
+   file system isolation) and cgroups to provide this isolation. 
+b) Containers can have a different OS from the host and will share the host's kernel through syscall requests.
+c) Containers are typically created and managed by container runtimes (e.g. Docker, containerd) that run on the host OS. 
 ```
 
 ##### Container Layers
 ```
-Container runtime adds a new read-write layer on top of base layers when a new container is launched.
-Changes made to the running container (e.g. modification of files) will be written to this layer.
-The contents of the container layer are lost when the container is deleted.
+Container runtime adds a new read-write layer on top of base layers when a new container is launched. Changes made to 
+the running container (e.g. modification of files) will be written to this layer. The contents of the container layer 
+are lost when the container is deleted.
 ```
 
 ##### Containers vs Virtual Machines
 ```
-a) VMs are packed with their own OS and virtualize an entire machine down to the hardware layers.
-   Containers share the kernel of the host OS and run as processes in isolated user spaces.
-b) VMs are relatively slow to start up as they need to boot up an OS. Containers are lightweight as 
-   there is no need to bootstrap a kernel but still provide environmental consistency.
+a) VMs are packed with their own OS and virtualize an entire machine down to the hardware layers. Containers share the 
+   kernel of the host OS and run as processes in isolated user spaces.
+b) VMs are relatively slow to start up as they need to boot up an OS. Containers are lightweight as there is no need to 
+   bootstrap a kernel but still provide environmental consistency.
 ```
 
 ##### Tags
@@ -88,36 +90,35 @@ Step 3) The second stage specifies a new base image and can copy just the binary
 ---
 ##### Open Container Initiative (OCI)
 ```
-Set of vendor-neutral standards for container runtime that defines how images should be structured (e.g. 
-file system, metadata) and how containers should be launched, managed, and interact with host system
-(e.g. process isolation, resource constraints, lifecycle management). 
+Set of vendor-neutral standards for container runtime that defines how images should be structured (e.g. file system, 
+metadata) and how containers should be launched, managed, and interact with host system (e.g. process isolation, 
+resource constraints, lifecycle management). 
 ```
 
-##### runc
+##### runC
 ```
-Lightweight container runtime that is universal per OCI standards and manages the following via system calls:
-  * Sets up container namespaces.
-  * Sets up cgroups and capabilities.
-  * Sets up file system.
-  * Typically invoked via higher level container runtimes (e.g. containerd) and not by end users.
+Lightweight container runtime that acts as a model for OCI standards and provides the following:
+  * Interacts with the kernel to setup Linux namespaces, cgroups, capabilities, security features, and file system mounts.
+    The full spec for runC can be found here: https://github.com/opencontainers/runc/blob/main/libcontainer/SPEC.md.
+  * runC is typically invoked by higher level runtimes (e.g. containerd) and not by the end user.
 ```
 
 ##### containerd
 ```
-containerd is a container runtime that serves as a foundation for containers and provides the following:
-  * Supports pulling and pushing container images.
-  * Handles the creation, execution, and management of containers.
-  * Manages the creation and handling of container filesystem snapshots.
-  * Integratable with networking and storage plugins to enable container networking and persistence.
+containerd is a lightweight container runtime that provides the following:
+  * Supports pulling and pushing container images from registries.
+  * Container lifecycle APIs to create, execute, and manage containers and their tasks by invoking lower level runtimes.
+  * Management of network namespaces such that containers can join existing namespaces.
+  * APIs for filesystem snapshots.
 ```
 
 ##### Docker Daemon (dockerd)
 ```
-a) dockerd listens for Docker API requests and manages Docker objects (e.g. images, containers, networks, volumes).
-b) dockerd can invoke containerd via a gRPC request to start a container.
-c) dockerd may send responses and stream output back to the client (e.g. output to terminal after running docker run).
-
 The Docker infrastructure is better explained here: https://docs.docker.com/get-started/overview/#docker-architecture.
+  * dockerd can invoke containerd via gRPC requests to start a container.
+  * dockerd provides end users with well known Docker APIs to help manage containers. The daemon may send responses to 
+    API requests by streaming output back to the client (e.g. output to terminal after running docker run).
+  * dockerd allows for the building of images through Dockerfiles.
 ```
 
 ##### Kaniko

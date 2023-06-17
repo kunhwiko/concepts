@@ -1,4 +1,4 @@
-### Definition of Cluster and Node
+### Cluster and Node
 ---
 ##### Cluster
 ```
@@ -130,10 +130,10 @@ f) Kubelet allows you to manually configure network MTU.
    Otherwise by default, network plugins will attempt to deduce optimal MTU.
 ```
 
-### Container Runtime Interface (CRI)
+### CRI
 ---
-##### CRI
+##### Container Runtime Interface (CRI)
 ```
-a) Enables Kubernetes to support a general interface for various container runtimes.
-b) Kubelet interacts with custom implementations of CRI via gRPC to determine what the container runtime should do.
+CRI enables Kubernetes to support a general interface for various container runtimes. Kubelets will interact with 
+custom implementations of CRI via gRPC to determine what the container runtime should do.
 ```
