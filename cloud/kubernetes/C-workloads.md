@@ -4,13 +4,13 @@
 ```
 a) Controller that defines a desired state for pods and replicasets.
 b) Enables users to scale number of replicas, control rollout of updates, and allow rollbacks to a previous state.
-c) Enables users to check or update status of pods.  
+c) Enables users to check or update status of pods in a centralized way.  
 ```
 
 ##### ReplicaSets
 ```
-a) Controller that ensures that a specified number of pod replicas are running at a given time.
-b) Makes it easy for rollbacks and rolling updates.
+Controller that is typically created by deployments and ensures that a specified number of pod replicas are running at 
+a given time. Replicasets make rollbacks and rolling updates an easier process.
 ```
 
 ##### StatefulSets
@@ -28,14 +28,15 @@ Controller that ensures that pods run on all or a designated subset of nodes.
 
 ##### Pods 
 ```
-a) Pods encapsulate one or more containers and are assigned to nodes. 
-b) Containers in a pod are always scheduled together to the same machine and Linux namespace.
-   This means containers share the same IP address and port and can communicate via localhost.
-c) Pods can specify storage and network configs to be used by containers.
-d) Pods are ephemeral by nature, but can be distinguished by unique IDs.
+a) Pods encapsulate one or more containers and are assigned to nodes. While containers could be separate user/PID 
+   Linux namespaces, containers in a pod are always scheduled together on the same node and share the same network and 
+   mount namespace. This means containers share the same IP address and port and can communicate via localhost.
+b) Pods specify network/storage configs for containers, specifications for how to run containers, and can help setup
+   necessary environments via init containers.   
+c) Pods are ephemeral by nature but can be distinguished by unique IDs.
 ```
 
-### Definition of Label, Annotation, and Selector
+### Label, Annotation, and Selector
 ---
 ##### Labels
 ```
@@ -76,7 +77,7 @@ a) Key-value pairs to attach arbitrary metadata that Kubernetes does not care ab
 b) Keys are comprised of a prefix and name and follow similar restrictions to labels.
 ```
 
-### Definition of Job
+### Jobs
 ---
 ##### Jobs
 ```

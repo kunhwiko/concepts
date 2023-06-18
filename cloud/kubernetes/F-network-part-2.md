@@ -99,9 +99,9 @@ External load balancers distributes load at a node level rather than a pod level
 If 3 pods exist in node A and 1 pod exists in node B, load will be distributed equally to both nodes.
 ```
 
-### Container Network Interface (CNI)
+### CNI
 ---
-##### CNI
+##### Container Network Interface (CNI)
 ```
 Initiative and specification to write various networking solutions via plugins to configure network interfaces for Linux containers.
 Users are then able to adopt networking solutions and the container orchestration system of their choice according to different needs.

@@ -115,9 +115,9 @@ containerd is a lightweight container runtime that provides the following:
 ##### Docker Daemon (dockerd)
 ```
 The Docker infrastructure is better explained here: https://docs.docker.com/get-started/overview/#docker-architecture.
-  * dockerd can invoke containerd via gRPC requests to start a container.
   * dockerd provides end users with well known Docker APIs to help manage containers. The daemon may send responses to 
     API requests by streaming output back to the client (e.g. output to terminal after running docker run).
+  * dockerd can invoke containerd via gRPC requests to start a container.
   * dockerd allows for the building of images through Dockerfiles.
 ```
 

@@ -131,7 +131,7 @@ b) Ability to assign a pod only if some other pod co-exists.
 c) Ability to not co-locate a pod with some other pod (i.e. anti-affinity).
 ```
 
-### Definition of Quotas
+### Quotas
 ---
 ##### Resource Quota
 ```

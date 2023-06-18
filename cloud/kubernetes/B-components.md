@@ -1,4 +1,4 @@
-### Cluster and Node
+### Clusters and Nodes
 ---
 ##### Cluster
 ```
@@ -8,8 +8,8 @@ Collection of node instances that provide compute, memory, storage, and networki
 ##### Nodes
 ```
 Nodes are physical or virtual machines.
-  * Master nodes act as a control plane for Kubernetes and manage worker nodes.
-    These nodes follow raft protocol, meaning an odd number of master nodes must exist for consensus to be possible. 
+  * Master nodes act as a control plane for Kubernetes and manage worker nodes. These nodes follow raft protocol, 
+    meaning an odd number of master nodes must exist for consensus to be possible. 
   * Worker nodes are instances that carry out actual computation work.
 ```
 
@@ -17,25 +17,19 @@ Nodes are physical or virtual machines.
 ---
 ##### KRM
 ```
-a) KRM is a declarative format used to talk to the Kubernetes API to express the desired state of the cluster.
-   The declarative format makes it particularly helpful for GitOps.
-b) KRM is typically expressed in YAML format and follows OpenAPI standards.
-   This allows developers to extend KRM with tools that consume OpenAPIs (e.g. SDK generator, API doc generator). 
+a) KRM is a declarative format used to talk to the Kubernetes API to express the desired state of the cluster. The 
+   declarative format makes it particularly helpful for GitOps.
+b) KRM is typically expressed in YAML format and follows OpenAPI standards. This allows developers to extend KRM with 
+   tools that consume OpenAPIs (e.g. SDK generator, API doc generator). 
 c) KRM allows environments to be configured and deployed in a repeatable and reliable way.
-```
-
-##### GitOps
-```
-GitOps is a means to automate deployment of infrastructure changes much like how software development lifecycle is automated through CI/CD.
-Once declarative configuration files (i.e. infrastructure as code) are committed, reproducible infrastructure updates are made through pipelines.
 ```
 
 ### Master Node Components
 ---
 ##### etcd 
 ```
-a) etcd is a highly reliable distributed key-value store to back cluster level configuration data.
-   This includes the state of the cluster, various configuration data (network, authorization), and API metadata.
+a) etcd is a highly reliable distributed key-value store to back cluster level configuration data. This includes the 
+   state of the cluster, various configuration data (network, authorization), and API metadata.
 b) etcd provides watch functionality, allowing API server to be notified of any key-value changes.
 c) Periodically taking snapshots of etcd is useful in the event of a cluster failure.
 ```
@@ -61,7 +55,8 @@ c) Customer controller managers can be written to manage custom resources throug
 ##### Scheduler
 ```
 Scheduler acts as a non-terminating loop that continues to poll from the API server to oversee the state of the cluster.
-This information is used to trigger events to assign pods to nodes based on availability (e.g. node availability, affinities, constraints). 
+This information is used to trigger events to assign pods to nodes based on availability (e.g. node availability, 
+affinities, constraints). 
 ```
 
 ##### CoreDNS
@@ -82,13 +77,9 @@ d) Caching states in the API server decreases read latency and reduces load on e
 
 ##### Pod Lifecycle Event Generator (PLEG)
 ```
-Problems
-  a) Kubelet used to poll container runtimes from each pod for info. 
-     This consistently puts pressure on CPU usage for the container runtimes.
-
-PLEG
-  a) Kubelet lists the state of pods and containers and compares with the previous state.
-     Kubelet then knows which pods need to sync again and only polls those pods.
+Kubelets used to poll container runtimes from each pod for info, which consistently puts pressure on the container 
+runtimes' CPU usage. To overcome this, PLEG was implemented such that the Kubelet lists the state of pods and containers 
+and compares with the previous state. The Kubelet then knows which pods need to sync again and only polls those pods.
 ```
 
 ### Protocol Buffers

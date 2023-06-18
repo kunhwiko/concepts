@@ -1,4 +1,4 @@
-### Definition of Service
+### Services
 ---
 ##### Problem Statement
 ```
@@ -110,7 +110,7 @@ a) Maps a service to a user specified DNS name as a means to get traffic out to 
 b) Adds a CNAME DNS record to CoreDNS such that looking up the service will route to the user specified DNS.
 ```
 
-### Definition of Network Policies
+### Network Policies
 ---
 ##### Network Policies
 ```

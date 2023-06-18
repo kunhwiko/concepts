@@ -1,4 +1,4 @@
-### Volumes on Nodes
+### Volumes
 ---
 ##### emptyDir
 ```
@@ -23,7 +23,7 @@ a) Mounts directory from host node's file system into a pod.
 b) Containers accessing host directories must be privileged to do so (e.g. root user) to allow writing.
 ```
 
-### Definition of Persistent Volumes
+### Persistent Volume Claims
 ---
 ##### Local Persistent Volume
 ```
@@ -149,7 +149,7 @@ parameters:
   fsType: ext4
 ```
 
-### Container Storage Interface (CSI)
+### CSI
 ---
 ##### Problem Statement
 ```
@@ -159,14 +159,14 @@ c) Source code changes could cause bugs that are difficult to test.
 d) Development of volume plugin depends on Kubernetes release version and requires the source code to be publicly available.
 ```
 
-##### CSI
+##### Container Storage Interface (CSI)
 ```
 Initiative and specification to write various storage solutions via plugins that are integratable with various container orchestrators.
 Users are able to adopt storage solutions and the container orchestration system of their choice according to different needs.
 Vendors do not need to worry about Kubernetes source code or be locked down to Kubernetes this way.
 ```
 
-### Definition of Projections, Snapshots, and Cloning
+### Projections, Snapshots, and Cloning
 ---
 ##### Projections
 ```
@@ -190,7 +190,7 @@ c) Uses the storage class of the source volume.
 d) Only available for CSI drivers.
 ```
 
-### Definition of ConfigMaps
+### ConfigMaps
 ---
 ##### ConfigMaps
 ```
