@@ -28,9 +28,9 @@ Controller that ensures that pods run on all or a designated subset of nodes.
 
 ##### Pods 
 ```
-a) Pods encapsulate one or more containers and are assigned to nodes. While containers could be separate user/PID 
-   Linux namespaces, containers in a pod are always scheduled together on the same node and share the same network and 
-   mount namespace. This means containers share the same IP address and port and can communicate via localhost.
+a) Pods encapsulate one or more containers and are assigned to nodes. While containers could be separate PID Linux 
+   namespaces, containers in a pod are always scheduled together on the same node and share the same network and IPC
+   namespace. This means containers share the same IP address and port and can communicate via localhost.
 b) Pods specify network/storage configs for containers, specifications for how to run containers, and can help setup
    necessary environments via init containers.   
 c) Pods are ephemeral by nature but can be distinguished by unique IDs.

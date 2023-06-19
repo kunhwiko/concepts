@@ -112,13 +112,13 @@ d) Kube-proxy is able to load balance requests if there are multiple pod backend
 ```
 a) Kubelets are agents on each node that registers nodes and reports the status of nodes/pods to the API server.
    Communication to the API server is typically done via TLS.
-b) Kubelets receive information about pods that need to be newly created from the API server.
-   Kubelets will then interact with CRIs to start pods and containers via their configured container runtime.
+b) Kubelets receive information about pods that need to be newly created from the API server. Kubelets will then 
+   interact with CRIs to start pods and containers via their configured container runtime.
 c) Kubelets ensure to inject necessary environment variables (e.g. service names) to pods before they start.
 d) Kubelets monitor and ensure that containers run in a healthy state.
 e) Kubelets help download secrets from API server, run liveness probes, and mount volumes.
-f) Kubelet allows you to manually configure network MTU.
-   Otherwise by default, network plugins will attempt to deduce optimal MTU.
+f) Kubelet allows you to manually configure network MTU. Otherwise by default, network plugins will attempt to deduce 
+   optimal MTU.
 ```
 
 ### CRI

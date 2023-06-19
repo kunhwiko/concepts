@@ -2,26 +2,25 @@
 ---
 ##### Problem Statement
 ```
-Pods are assigned internal IP addresses that are exposed across the entire cluster.
-This IP address can be used to directly route requests to certain pods.
-However, these IP address are generally instable as pod restarts will assign new IP addresses.
+Pods are assigned internal IP addresses that are exposed across the entire cluster. This IP address can be used to 
+directly route requests to certain pods. However, these IP addresses are generally instable as pod restarts will assign 
+new IP addresses.
 ```
 
 ##### Service
 ```
-a) Provides a stable access point to send requests to pods.
-b) Services provide load balancing features done by kube-proxy. 
-c) Services identify pods it needs to send requests to via labels. 
-d) Services operate at layer 3 (TCP/UDP) networking.
+a) Services provide a stable access point to send requests to pods and identifies the pods it needs to send requests to
+   via labels.
+b) Services provide load balancing features done by kube-proxy and operate at layer 3 (TCP/UDP) networking.
 ```
 
 ##### Discoverability
 ```
-a) Services can be discovered via environment variables. 
-   When a pod runs on a node, the kubelet will add env variables for the host and port of each active service.
-   However, env variables will not be updated for services created after the pod's creation. 
-b) Services can be discovered via DNS name (i.e. <service-name>.<namespace>.svc.cluster.local).
-   Kubernetes CoreDNS will register the service name internally in the cluster.  
+a) Services can be discovered via environment variables. When a pod runs on a node, the kubelet will inject env variables 
+   representing the host and port of each active service. However, env variables will not be updated for services created 
+   after the pod's creation. 
+b) Services can be discovered via DNS (i.e. <service-name>.<namespace>.svc.cluster.local). CoreDNS will register the 
+   service name internally in the cluster.  
 ```
 
 ##### Ports
@@ -31,77 +30,74 @@ Port vs TargetPort: https://matthewpalmer.net/kubernetes-app-developer/articles/
 
 ##### Endpoint
 ```
-a) Endpoint object shows a DNS mapping of hosts to IP addresses.
-b) Endpoint objects are used by services to keep track of all IP addresses of Pods corresponding to the service.
+Endpoint objects are used by services to keep track of all pod endpoints that the service routes to. These objects are 
+represented as a DNS mapping of hosts to IP addresses/ports.
 ```
 
 ##### Headless Services
 ```
 Problem Statement
-  a) Connections to services are load balanced and forwarded randomly to a backing pod.
-  b) It is difficult to get A records of all backing pods through services.
+  * Connections to services are load balanced and forwarded randomly to a backing pod.
+  * It is difficult to get A records of all backing pods through services.
 
 Headless Services
-  a) DNS entry of headless service returns all A records of pods backed by headless service.
-  b) All backing pods are able to connect with each other.
-  c) Headless service does not have a clusterIP.
+  * DNS entry of headless service returns all A records of pods backed by headless service.
+  * All backing pods are able to connect with each other.
+  * Headless service does not have a clusterIP.
 ```
 
 ### Types of Services
 ---
 ##### ClusterIP
 ```
-Exposes service on an internal IP in the cluster reachable only from within the cluster.
+Service that exposes an internal IP that is recognizable only from within the cluster.
 ```
 
 ##### NodePort
 ```
-a) Kubernetes nodes have publicly accessible IPs. Utilizing NATS, nodeports can be exposed on the same port number on all nodes. 
-   This makes the service externally accessible via <node-ip>:<node-port>.
+a) Kubernetes nodes have publicly accessible IPs. Utilizing NATs, nodeports can be exposed on the same port number on 
+   all nodes. This makes the service externally accessible via <node-ip>:<node-port>.
 b) Requests to nodeports via <node-ip>:<node-port> will be routed to clusterIPs on <clusterIP>:<port> by the kube-proxy.
    Nodeports are therefore a superset of clusterIPs.
 ```
 
 ##### Load Balancer
 ```
-a) Load balancers are assigned a fixed external IP that is accessible from outside the cluster.
-b) Load balancers are a superset of nodeports, meaning both nodeports and clusterIPs will be created.
-   Requests are typically forwarded from load balancers to nodeports.
-c) Load balancers are mostly used with managed cloud services and might require spinning up resources (e.g. NLBs) for a cost.
-   Cloud providers also decide how requests will be be load balanced.
-d) Multiple ports and protocols can be defined on a single load balancer.
+a) Load balancers are assigned a fixed external IP that is accessible from outside the cluster. Note that Multiple ports 
+   and protocols can be defined on a single load balancer.
+b) Load balancers are a superset of nodeports, meaning both nodeports and clusterIPs will be created. Requests are 
+   typically forwarded from load balancers to nodeports.
+c) Load balancers are mostly used with managed cloud services and might require spinning up resources (e.g. NLBs) for a 
+   cost. Cloud providers can also decide how requests will be load balanced.
 ```
 
 ##### Load Balancer vs NodePort
 ```
 Limitations of NodePorts  
-  a) Users must know the IP of the node they are looking for, which can be difficult when many nodes exist or crash.
-  b) Nodeports expose at most a single service per port.
+  * Users must know the IP of the node they are looking for, which can be difficult when many nodes exist or crash.
+  * Nodeports expose at most a single service per port.
 
 Advantages over NodePorts
-  a) Users only need to know the IP address of the load balancer.
-     Requests to <loadbalancer-ip>:<port> are sent to appropriate <node-ip>:<node-port>.
-  b) While load balancers typically create and forward requests to nodeports, this can optionally be disabled.
-     This is only possible if the given cloud provider has implemented load balancers this way.
+  * Users only need to know the IP address of the load balancer. Requests to <loadbalancer-ip>:<port> are sent to the
+    appropriate <node-ip>:<node-port>.
+  * While load balancers typically create and forward requests to nodeports, this can optionally be disabled. This is 
+    only possible if the given cloud provider has implemented load balancers this way.
 ```
 
 ##### Ingress
 ```
-Technically not a service, ingress comes in two components, a load balancer and ingress controller.
-Ingress controller enables controlled routing based on a set of predefined rules.
-Ingress load balancer performs actual routing.
+An ingress is technically not a service, and comes in two components, a load balancer and an ingress controller. Ingress 
+controllers enable controlled routing based on a set of predefined rules. Ingress load balancers performs routing.
 ```
 
 ##### Ingress vs Load Balancer
 ```
 Limitations of Load Balancers 
-  a) Like nodeports, a single service is exposed per load balancer.
-     With multiple services, this can lead to a large overhead.
+  * A single service is exposed per load balancer. With multiple services, this can lead to a large overhead.
 
 Advantages over Load Balancers
-  a) Enable routing to multiple services with a single load balancer.
-  b) Supports request limits, URL rewrites, TCP/UDP load balancing, SSL termination, authentication etc.
-  c) Ingress operates at HTTP layer.
+  * Enable rule based routing to various services with a single load balancer and operates at the HTTP layer.
+  * Supports request limits, URL rewrites, TCP/UDP load balancing, SSL termination, authentication etc.
 ```
 
 ##### External Name
@@ -114,14 +110,14 @@ b) Adds a CNAME DNS record to CoreDNS such that looking up the service will rout
 ---
 ##### Network Policies
 ```
-a) Network policies act as a set of firewall rules that manages network traffic for selected pods and namespaces.
-b) Network policies aim to minimize security breaches and maximize parts of systems that don't need to talk to each other.
-c) Network policies use labels to whitelist applicable pods and namespaces.
-   Usage of labels to define virtual network segments is much more flexible than defining CIDR / subnet masking.
-d) Network policies are cluster scoped and rules are unified if multiple network policies exist. 
-e) Network policies are part of the standard Kubernetes API but differ in implementation per networking solution / CNI plugin.
-   In other words, Kubernetes provides the ability to define and store network policies through APIs. 
-   However, enforcing that network policy is left to the networking solution.
+a) Network policies act as a set of firewall rules that manage network traffic for selected pods and namespaces. These
+   policies aim to implement the least privilege principle.
+b) Network policies use labels to whitelist applicable pods and namespaces. Usage of labels to define virtual network 
+   segments is much more flexible than defining CIDR / subnet masking.
+c) Network policies are part of the standard Kubernetes API but differ in implementation per networking solution / CNI 
+   plugin. Kubernetes provides the ability to define network policies through APIs, but it is up to the networking 
+   solution to enforce those policies.
+d) Network policies are cluster scoped and rules are unified if multiple network policies exist.
 ```
 
 ##### Execution of Network Policies
@@ -140,7 +136,7 @@ b) By default, all access is granted to a certain pod if targeted by no network 
 
 ##### Egress
 ```
-Policies used to control and deny outbound traffic.
+Kubernetes resources that represent policies used to control and deny outbound traffic.
 ```
 
 ##### Examples

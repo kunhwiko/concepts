@@ -52,11 +52,11 @@ Layer 1) Physical
 ##### Layering
 ```
 Layering
-  a) Ability to mix and match different protocols.
+  * Ability to mix and match different protocols.
 
 Protocol Stack
-  a) Set of protocols that are currently in use, but can be mixed and matched for different situations.
-     For example, in the case of emails, network can switch HTTP protocol layer for SMTP protocol layer.
+  * Set of protocols that are currently in use, but can be mixed and matched for different situations. For example, in 
+    the case of emails, network can switch HTTP protocol layer for SMTP protocol layer.
 ```
 
 ##### Encapsulation
@@ -82,22 +82,22 @@ b) Technologies include coaxial cables, fiber cables, ethernet, wifi, repeaters,
 ##### Repeater
 ```
 Problem Statement
-  a) As data is transmitted over network wires, it decays as it travels.
+  * As data is transmitted over network wires, it decays as it travels.
 
 Solution
-  a) Repeaters regenerate signals in between network traffic.
-     This allows for network communication across greater distances.
+  * Repeaters regenerate signals in between network traffic. This allows for network communication across greater 
+    distances.
 ```
 
 ##### Hub
 ```
 Problem Statement
-  a) If a new host joins the network, it needs to be connected with all the existing hosts in that network.
-     Directly connecting the new host to existing hosts through wires works, but is not a scalable solution.
+  * If a new host joins the network, it needs to be connected with all the existing hosts in that network. Directly 
+    connecting the new host to existing hosts through wires works, but is not a scalable solution.
 
 Solution
-  a) Hubs act as a multi-port repeater that all existing and new hosts in the network can connect to.
-  b) Data sent from one host is broadcasted to all hosts connected to the hub.
+  * Hubs act as a multi-port repeater that all existing and new hosts in the network can connect to.
+  * Data sent from one host is broadcasted to all hosts connected to the hub.
 ```
 
 ### Layer 2
@@ -106,47 +106,51 @@ Solution
 ```
 a) Data link layer bundles physical layers into a Local Area Network (LAN).
 b) Data link layer is responsible for correct network hops and putting/receiving bits into the physical layer.
-c) Data link layer abstracts stream of 'bits' into 'frames' and use MAC addresses as an address scheme.
-   The header for Layer 2 holds the src/dest MAC addresses.
+c) Data link layer abstracts stream of 'bits' into 'frames' and use MAC addresses as an address scheme. The header for 
+   Layer 2 holds the src/dest MAC addresses.
 d) Technologies include network interface cards (NICs), wifi access cards, bridges, and switches.
 ```
 
 ##### Network Interface Card (NIC)
 ```
-a) NICs are a hardware component that allows for network connectivity.
-b) NICs hold a unique MAC address for the host machine.  
+NICs are a hardware component that allows for network connectivity. Each NIC hold a unique MAC address for the host 
+machine.
 ```
 
 ##### Bridge
 ```
 Problem Statement
-  a) Hubs cause all hosts connected to the hub to know about data that they do not need to be involved in.
+  * Hubs cause all hosts connected to the hub to know about data that they do not need to be involved in.
 
 Solution
-  a) Bridges sit between two hubs and have two ports each for one of the hubs.
-  b) Bridges know which hosts are on what side of either port.
-  c) When a host sends data and the destination is connected on the same hub, the bridge will prevent transmitting data to the other hub. 
+  * Bridges sit between two hubs and have two ports each for one of the hubs.
+  * Bridges know which hosts are on what side of either port.
+  * When a host sends data and the destination is connected on the same hub, the bridge will prevent transmitting data 
+    to the other hub. 
 ```
 
 ##### Switch
 ```
 Problem Statement
-  a) All hosts on one side of a bridge still receive data that they might not be involved in.
-  b) All hosts on both sides of the bridge will receive data if the source and destination are on opposite sides of the bridge.
+  * All hosts on one side of a bridge still receive data that they might not be involved in.
+  * All hosts on both sides of the bridge will receive data if the source and destination are on opposite sides of the 
+    bridge.
 
 Solution
-  a) Switches are a combination of hubs and bridges that help to connect L1 networks to form an L2 network.
-     All hosts in the same L2 network will share a common IP address space (prefix). 
-  b) Switches have multiple ports and know which hosts are on each port through a 'MAC address table'.
+  * Switches are a combination of hubs and bridges that help to connect L1 networks to form an L2 network. All hosts in 
+    the same L2 network will share a common IP address space (i.e. prefix). 
+  * Switches have multiple ports and know which hosts are on each port through a 'MAC address table'. Switches will use
+    this table to determine which host to forward requests to.
 
 MAC Address Table
-  a) A table that maps ports to MAC addresses of connected hosts.
+  * A table that maps ports to MAC addresses of connected hosts.
 
 Switch Functionality
   * Learn: Switches update their MAC address table with a <src-mac>:<port> mapping when a new frame passes the switch.
-  * Flood: When a destination MAC address is not found on the MAC address table, the switch duplicates the frame to all hosts except to the receiving port.
-           Irrelevant hosts will drop the request and only the relevant host will send a response back, which again causes an update on the MAC address table.
   * Forward: Use mapping on MAC address table to send frame on the appropriate port.
+  * Flood: When a destination MAC address is not found on the MAC address table, the switch duplicates the frame to all 
+           hosts except to the receiving port. Irrelevant hosts will drop the request and only the relevant host will 
+           send a response back, which again causes an update on the MAC address table.
 ```
 
 ### Virtualization of Layer 2
@@ -154,35 +158,35 @@ Switch Functionality
 ##### Virtual Local Area Network (VLAN)
 ```
 Problem Statement
-  a) Before virtualization, isolated switches were required for each and every network that needed to be isolated.
+  * Before virtualization, isolated switches were required for each and every network that needed to be isolated.
 
 Solution
-  a) Switches can be logically separated through virtualization.
-     Ports on a switch can be grouped into isolated "mini-switches".
-  b) VLANs allow a single physical switch to be split into multiple virtual switches.
-     VLANs allow a single virtual switch to be extended across other physical switches.
+  * Switches can be logically separated through virtualization. Ports on a switch can be grouped into isolated 
+    "mini-switches".
+  * VLANs allow a single physical switch to be split into multiple virtual switches. VLANs allow a single virtual switch 
+    to be extended across other physical switches.
 ```
 
 ##### Trunk Ports
 ```
 Problem Statement
-  a) Assume that VLAN 1 and VLAN 2 are extended across the same 2 physical switches.
-     This would normally require 2 wire connections, one between ports for VLAN 1 and another between ports for VLAN 2.
-     With more VLANs across physical switches, this becomes difficult to scale.
+  * Assume that VLAN 1 and VLAN 2 are extended across the same 2 physical switches. This would normally require 2 wire 
+    connections, one between ports for VLAN 1 and another between ports for VLAN 2. With more VLANs across physical 
+    switches, this becomes difficult to scale.
 
 Solution
-  a) Trunk ports allow data to flow from multiple VLANs in a single physical wire.
-  b) When data flows into a single wire, it becomes difficult to know which VLAN the data is intended for.
-     "VLAN tags" are added on top of existing L2 and L3 headers to distinguish which VLAN the packet is intended for.
-     VLAN tags follow IEEE 820.1Q standards.
+  * Trunk ports allow data to flow from multiple VLANs in a single physical wire.
+  * When data flows into a single wire, it becomes difficult to know which VLAN the data is intended for. "VLAN tags" 
+    are added on top of existing L2 and L3 headers to distinguish which VLAN the packet is intended for.
 
 Access Ports
-  a) Links that carry data just for a single VLAN.
-  b) When data flows into access ports, the network knows that the data is intended for a single VLAN.
+  * Links that carry data just for a single VLAN.
+  * When data flows into access ports, the network knows that the data is intended for a single VLAN.
 
 Native VLAN
-  a) If a packet goes through a trunk port but does not have a VLAN tag, it will be sent to the Native VLAN as a default.
-  b) When sending a packet through a trunk port, the packet does not need a VLAN tag if the packet is already intended for the Native VLAN. 
+  * If a packet goes through a trunk port but does not have a VLAN tag, it will be sent to the Native VLAN as a default.
+    This means that when sending a packet through a trunk port, the packet does not need a VLAN tag if the packet is 
+    already intended for the Native VLAN. 
 
 More info here: https://www.youtube.com/watch?v=MmwF1oHOvmg
 ```
@@ -190,17 +194,18 @@ More info here: https://www.youtube.com/watch?v=MmwF1oHOvmg
 ##### Virtual Extensible Local Area Network (VXLAN)
 ```
 Problem Statement
-  a) VLAN tags only support up to a maximum of 4096 (12 bits) following 820.1Q standards.
+  * VLAN tags only support up to a maximum of 4096 (12 bits) following 820.1Q standards.
 
 Solution
-  a) VXLANs encapsulate frames with a VXLAN header into UDP packets to resolve the inability for VLANs to be routed out of L2 networks.
-  b) VXLANs are identified by a 24 bit VXLAN network identifier (VNI), allowing up to 16,777,216 VLANs.
+  * VXLANs encapsulate frames with a VXLAN header into UDP packets to resolve the inability for VLANs to be routed out 
+    of L2 networks.
+  * VXLANs are identified by a 24 bit VXLAN network identifier (VNI), allowing up to 16,777,216 VLANs.
 ```
 
 ##### Virtual Ethernet (VETH)
 ```
-a) Virtualization of ethernet that allow for communications across logical partitions without the need of assigning physical hardware.
-b) Devices are typically created in pairs and are connected via a bridge.
+Virtualization of ethernet that act as tunnels between network namespaces without the need of assigning physical 
+hardware. Virtual ethernet devices are typically created in pairs and are connected via a bridge.
 ```
 
 ### Layer 3
@@ -241,27 +246,27 @@ More info here: https://www.youtube.com/watch?v=H7-NR3Q3BeI&list=PLIFyRwBY_4bRLm
 ##### Maximum Transmission Unit (MTU)
 ```
 MTU
-  a) Determines the largest data packet that can be accepted. 
-     Packets larger than the limit go through "fragmentation", which can lead to additional network latency.
-  b) Larger MTU size means more data can fit in, resulting in a faster and more efficient transmission.
-  c) Larger packets are prone to corruption and delays, so packet arrival could end up being relatively slow.
-     If an error occurs, larger packets also take longer to retransmit.
+  * Determines the largest data packet that can be accepted. Packets larger than the limit go through "fragmentation", 
+    which can lead to additional network latency.
+  * Larger MTU size means more data can fit in, resulting in a faster and more efficient transmission.
+  * Larger packets are prone to corruption and delays, so packet arrival could end up being relatively slow. If an error 
+    occurs, larger packets also take longer to retransmit.
 
 Fragmentation
-  a) Routers check the size of each IP packet and the MTU of the next router to receive the packet.
-     If the packet is too big, packets are broken up with copies of the packet header.
+  * Routers check the size of each IP packet and the MTU of the next router to receive the packet. If the packet is too 
+    big, packets are broken up with copies of the packet header.
 ```
 
 ##### IPv4 vs IPv6
 ```
 IPv4
-  a) Consists of 32 bits that can be broken into two parts (network and host addresses).
-  b) Network addresses are common addresses to groups of host addresses (geography / company).
+  * Consists of 32 bits that can be broken into two parts (network and host addresses).
+  * Network addresses are common addresses to groups of host addresses (geography / company).
 
-IPv6: 
-  a) More addresses and better functionality compared to IPv4.
-  b) Release for IPv6 is delayed as the entire network must become IPv6 compatible.
-  c) Rely more on alternative solutions such as NATs for now.
+IPv6
+  * More addresses and better functionality compared to IPv4.
+  * Release for IPv6 is delayed as the entire network must become IPv6 compatible.
+  * Rely more on alternative solutions such as NATs for now.
 ```
 
 ### Discovery
@@ -367,6 +372,6 @@ DNAT: Refers to destination NAT, which translates the destination IP address.
 
 ##### Border Gateway Protocol (BGP)
 ```
-BGP is a protocol responsible for picking the most efficient route to forward data to.
-This is done by autonomous systems constantly sharing routing information and next hops through TCP/IP peering sessions.
+BGP is a protocol responsible for picking the most efficient route to forward data to. This is done by autonomous 
+systems constantly sharing routing information and next hops through TCP/IP peering sessions.
 ```
