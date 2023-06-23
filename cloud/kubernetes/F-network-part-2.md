@@ -48,19 +48,17 @@ necessary as the source expects a response back from the target service's IP add
 ##### IPTable vs IPVS Networking
 ```
 Problem Statement
-  a) IP table is not meant to provide load balancing functionality and is purely meant for firewall rules.
-  b) IP table only allows for round robin load balancing.
-  c) Sequential search is done across all IP table rules to find which rules are applicable to the packet.
-     This results in O(n) lookup time where n is the number of services and pods in the entire cluster.
+  * IPtable is not meant to provide load balancing functionality and is purely meant for firewall rules.
+  * IPtable only allows for simple round robin load balancing.
+  * Sequential search is done across all iptable rules to find which rules are applicable to the packet. This results in 
+    O(n) lookup time where n is the number of services and pods in the entire cluster.
 
 IPVS Networking
-  a) IPVS creates a dummy interface on each node and binds service IP addresses to the dummy interface.
-     IPVS virtual servers are created for each service IP address.
-  b) IPVS optimizes lookup through hash tables managed by the kernel to achieve a O(1) lookup time.
-  c) IPVS supports multiple load balancing algorithms.
-  d) When using IPVS, IP sets are used in cases IP tables are required (e.g. packet filtering, SNAT) for more efficient lookup.
-
-More here: https://www.tkng.io/services/clusterip/dataplane/ipvs/
+  * IPVS creates a dummy interface on each node and binds service IP addresses to the dummy interface. IPVS virtual 
+    servers are created for each service IP address.
+  * IPVS supports multiple load balancing algorithms.
+  * When using IPVS, ipsets are used in cases where iptables are required for an efficient O(1) lookup.
+  * More information here: https://www.tkng.io/services/clusterip/dataplane/ipvs/
 ```
 
 ##### Asynchronous Networking

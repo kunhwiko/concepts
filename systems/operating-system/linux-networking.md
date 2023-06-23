@@ -73,20 +73,20 @@ at once. Lookup time for addresses saved in ipsets is O(1).
 
 ##### IP Virtual Server (IPVS)
 ```
-a) IPVS running on a host acts as a transport layer load balancer in the Linux kernel.
-   This load balancer can direct requests for TCP/UDP based services to a cluster of real servers.
-   The machine that is configured as the load balancer is known as a "Director".
+a) IPVS running on a host acts as a transport layer load balancer in the Linux kernel. This load balancer can direct 
+   requests for TCP/UDP based services to a cluster of real servers. The machine that is configured as the load balancer 
+   is known as a "Director".
 b) IPVS supports various load balancing algorithms (e.g. round robin, shortest expected delay, src/dest hashing).
 c) IPVS can make services of the real servers to appear as a virtual service on a single IP address.
 ```
 
 ##### IPVS Networking
 ```
-Step 1) Client sends a packet with the destination IP address being the virtual IP address of the Director.
-Step 2) Director will change the destination of the packet to one of the backend servers.
-        The packet's source IP here also needs to be rewritten to be the Director's actual IP address.
-        SNAT or masquerading has to be configured beforehand to accomplish this as IPVS only supports DNAT.
-Step 3) Backend server will send a response back with the destination IP address being the Director's actual IP address.
-Step 4) Director will send a response back to the client with the source IP address being the virtual IP address of the Director.
-        Again, SNAT or masquerading has to be configured beforehand.
+Step 1) A virtual IP address can be assigned at random to the Director (i.e. the load balancer).
+Step 2) Client sends a packet with the destination IP address being the virtual IP address of the Director.
+Step 3) Director will DNAT the packet to one of the backend servers. The packet's source IP will be rewritten to be the 
+        Director's actual IP address (this could vary based on implementation). 
+Step 4) Backend server will send a response back with the destination IP being the Director's actual IP address. Based 
+        on implementation, the response could also be forwarded directly to the client (e.g. IPVS via direct routing).
+Step 5) Director will send a response back to the client with the source IP being the virtual IP address of the Director. 
 ```
