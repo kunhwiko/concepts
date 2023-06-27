@@ -121,6 +121,20 @@ The Docker infrastructure is better explained here: https://docs.docker.com/get-
   * dockerd allows for the building of images through Dockerfiles.
 ```
 
+##### CLI
+```
+ctr
+  * Created to interact with containerd but is difficult to use and supports a limited subset of operations.
+
+nerdctl
+  * Created to interact with containerd and uses docker API like syntax.
+  * Supports a wide variety of features.
+  
+crictl
+  * Created by the Kubernetes community to interact with all CRI compatible runtimes.
+  * Has a limited subset of supported features but is good for debugging purposes.
+```
+
 ##### Kaniko
 ```
 Open source tool that enables a container to build other container images without requiring privileged access or the

@@ -13,9 +13,9 @@ Nodes are physical or virtual machines.
   * Worker nodes are instances that carry out actual computation work.
 ```
 
-### Kubernetes Resource Model (KRM)
+### KRM
 ---
-##### KRM
+##### KRM (Kubernetes Resource Model)
 ```
 a) KRM is a declarative format used to talk to the Kubernetes API to express the desired state of the cluster. The 
    declarative format makes it particularly helpful for GitOps.
@@ -36,27 +36,31 @@ c) Periodically taking snapshots of etcd is useful in the event of a cluster fai
 
 ##### API Server
 ```
-a) API server exposes Kubernetes REST API and is a means for components in the control plane and worker nodes to communicate with one another.
-b) API server is the only component connected to etcd, meaning all other components must pass through the API server to work with cluster state.
+a) API server exposes Kubernetes REST API and is a means for components in the control plane and worker nodes to 
+   communicate with one another.
+b) API server is the only component connected to etcd, meaning all other components must pass through the API server to 
+   work with cluster state.
 c) API server is responsible for all authentication and authorization (e.g. kubectl) mechanisms.
 d) API server provide watch functionality, allowing watchers (e.g. scheduler, controllers) to be notified of changes.
 ```
 
 ##### Controller Managers
 ```
-a) Controllers act as non-terminating control loops that continues to poll from the API server to oversee the state of the cluster.
-   This information is used to trigger events to move from the current state to a desired state if necessary (e.g. ReplicaSet).
-b) Cloud controller managers provide the ability for cloud providers to replace certain controller manager functionality.
-   This allows cloud providers to integrate their own platform logic for managing routes, services, volumes, nodes.
-c) Customer controller managers can be written to manage custom resources through KRM.
-   This could include resources outside the cluster (e.g. Cloud SQL, IAM) using tools like Google Config Connector which follow Kubernetes style YAML.
+a) Controllers act as non-terminating control loops that continue to poll from the API server to oversee the state of 
+   various components. Controllers communicates with the API server to trigger events that move from the current state 
+   to a desired state when necessary. Basic controllers such as node, replication, service account, job controllers are 
+   compiled into a single binary and run as a single process known as the "kube controller manager".
+b) Cloud controller managers allow the cluster to interact with the cloud provider's API. These controllers allow cloud 
+   providers to implement platform logic for managing nodes, routes, volumes, load balancer services etc. 
+c) Customer controller managers can be written to manage user defined custom resources following the KRM approach.
 ```
 
 ##### Scheduler
 ```
-Scheduler acts as a non-terminating loop that continues to poll from the API server to oversee the state of the cluster.
-This information is used to trigger events to assign pods to nodes based on availability (e.g. node availability, 
-affinities, constraints). 
+Scheduler acts as a non-terminating loop that continues to poll from the API server to oversee the state of scheduling.
+If the scheduler identifies that a pod is not assigned to a node, it will determine the best node to schedule the pod to 
+considering node availability, affinities, constraints etc. It sends this information back to the API server, which will
+persist the info in etcd and communicate with the kubelet of the node for where the pod will be allocated.  
 ```
 
 ##### CoreDNS
@@ -100,12 +104,12 @@ c) Stores state as protocol buffers to reduce JSON serialization overhead.
 ---
 ##### Kube Proxy
 ```
-a) Kube-proxy discovers cluster IPs through DNS or environment variables.
+a) Kube-proxy discovers clusterIPs through DNS or environment variables.
 b) Kube-proxy is able to forward traffic via TCP and UDP forwarding.
-c) Kube-proxy watches the API server for new services and endpoints.
-   It will then help maintain networking rules (e.g. IP tables) on its node.
-d) Kube-proxy is able to load balance requests if there are multiple pod backends.
-   If IP tables are in use, load balancing is typically done through round robin.
+c) Kube-proxy watches the API server for new services and endpoints. It will then help maintain networking rules 
+   (e.g. iptables) on its node.
+d) Kube-proxy is able to load balance requests if there are multiple pod backends. If iptables are in use, load 
+   balancing is typically done through round robin.
 ```
 
 ##### Kubelet
@@ -132,6 +136,9 @@ Kubernetes to support various container runtimes based on user needs without the
 
 ##### CRI Architecture
 ```
-Kubelets will interact with CRI compatible container runtimes or CRI shims (i.e. a bridge that implements CRI and 
-translates to something container runtimes can understand) over Unix sockets using the gRPC framework. 
+Step 1) Kubelets will interact with CRI compatible container runtimes or CRI shims (i.e. a bridge that implements CRI and 
+        translates to something container runtimes can understand) over Unix sockets using the gRPC framework. 
+Step 2) The CRI will start containers based on its logic. This could include invoking other plugins such as CNI as well.
+Step 3) Once the containers are created and the pod is up, kubelets will reach out to the API server to persist this 
+        information into etcd. 
 ```
