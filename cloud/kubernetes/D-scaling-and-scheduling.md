@@ -20,11 +20,19 @@ d) Persist raw data in case processed data is corrupted (raw or old data can be 
 ---
 ##### Horizontal Pod Autoscaler (HPA)
 ```
-a) HPA is able to specify the min and max pod count that a user needs.
-b) HPA interacts with replicasets or deployments instead of with pods directly as a source of truth.
-   In general, it is recommended to bind HPA to deployments and not replicasets.
-   This prevents HPA from being bound to an old replicaset during rolling updates.
+a) HPA is able to specify the min and max pod count that a user requires.
+b) HPA interacts with replicasets or deployments instead of with pods directly as a source of truth. In general, it is 
+   recommended to bind HPA to deployments and not replicasets. This prevents HPA from being bound to an old replicaset 
+   during rolling updates.
 c) Scaling does not happen immediately to reduce thrashing issues where average load is around scaling thresholds.
+```
+
+##### Metrics Server
+```
+a) HPA requires a metrics server to scrape resource utiliziation (e.g. CPU, memory usage) to be able to know when it needs
+   to scale resources. 
+b) The Metrics API can be accessed via "kubectl top".
+c) The metrics server is not meant for non-autoscaling purposes (i.e. monitoring purposes). 
 ```
 
 ##### HPA Scaling Metrics
@@ -36,15 +44,14 @@ c) HPA respects and evaluates all existing metrics and autoscales based on large
 
 ##### Cluster Autoscaler
 ```
-a) Provisions a new node when not enough nodes necessary are provisioned.
-b) Downscaling times usually have longer delays to prevent thrashing.
+Cluster autoscaler provisions a new node when not enough nodes necessary are provisioned. Downscaling times usually 
+will have longer delays to prevent thrashing.
 ```
 
-##### Vertical Pod Autoscaler
+##### Vertical Pod Autoscaler (VPA)
 ```
-a) Provides additional resources (e.g. CPU, memory) to pods.
-b) Cannot update running pods (i.e. must bring down existing pods).
-c) Cannot be executed together with HPA.
+VPA provides additional resources (e.g. CPU, memory) to pods, but it cannot update running pods (i.e. must bring down 
+existing pods). It also cannot be executed together with HPA.
 ```
 
 ##### Vertical Pod Autoscaler Components
@@ -129,6 +136,12 @@ d) If both node selectors and node affinities exist, pods will be scheduled to n
 a) Able to assign pods based on labels of existing pods.
 b) Ability to assign a pod only if some other pod co-exists.
 c) Ability to not co-locate a pod with some other pod (i.e. anti-affinity).
+```
+
+##### Topology Spread Constraints
+```
+Controls how pods are spread across a Kubernetes cluster (e.g. regions, zones, nodes, and other user-defined topology 
+domains).
 ```
 
 ### Quotas
