@@ -48,8 +48,8 @@ d) API server provide watch functionality, allowing watchers (e.g. scheduler, co
 ```
 a) Controllers act as non-terminating control loops that continue to poll from the API server to oversee the state of 
    various components. Controllers communicates with the API server to trigger events that move from the current state 
-   to a desired state when necessary. Basic controllers such as node, replication, service account, job controllers are 
-   compiled into a single binary and run as a single process known as the "kube controller manager".
+   to a desired state when necessary. Basic controllers such as node, service account, job controllers are compiled into
+   a single binary and run as a single process known as the "kube controller manager".
 b) Cloud controller managers allow the cluster to interact with the cloud provider's API. These controllers allow cloud 
    providers to implement platform logic for managing nodes, routes, volumes, load balancer services etc. 
 c) Customer controller managers can be written to manage user defined custom resources following the KRM approach.
@@ -104,24 +104,20 @@ c) Stores state as protocol buffers to reduce JSON serialization overhead.
 ---
 ##### Kube Proxy
 ```
-a) Kube-proxy discovers clusterIPs through DNS or environment variables.
-b) Kube-proxy is able to forward traffic via TCP and UDP forwarding.
-c) Kube-proxy watches the API server for new services and endpoints. It will then help maintain networking rules 
-   (e.g. iptables) on its node.
-d) Kube-proxy is able to load balance requests if there are multiple pod backends. If iptables are in use, load 
-   balancing is typically done through round robin.
+Kube-proxies are agents on each node that watches the API server for new services and endpoints. It will then take this 
+information and create forwarding rules (e.g. iptables) on its respective node.
 ```
 
 ##### Kubelet
 ```
 a) Kubelets are agents on each node that registers nodes and reports the status of nodes/pods to the API server.
    Communication to the API server is typically done via TLS.
-b) Kubelets receive information about pods that need to be newly created from the API server. Kubelets will then 
-   interact with CRIs to start pods and containers via their configured container runtime.
+b) Kubelets receive information about pods that need to be newly created from the API server. Kubelets will interact 
+   with CRIs to start pods and containers via their configured container runtime. Kubelets will then monitor and ensure
+   containers run in a healthy state.
 c) Kubelets ensure to inject necessary environment variables (e.g. service names) to pods before they start.
-d) Kubelets monitor and ensure that containers run in a healthy state.
-e) Kubelets help download secrets from API server, run liveness probes, and mount volumes.
-f) Kubelet allows you to manually configure network MTU. Otherwise by default, network plugins will attempt to deduce 
+d) Kubelets help download secrets from API server, run liveness probes, and mount volumes.
+e) Kubelet allows you to manually configure network MTU. Otherwise by default, network plugins will attempt to deduce 
    optimal MTU.
 ```
 

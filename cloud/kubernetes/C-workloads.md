@@ -36,6 +36,13 @@ b) Pods specify network/storage configs for containers, specifications for how t
 c) Pods are ephemeral by nature but can be distinguished by unique IDs.
 ```
 
+##### Static Pods
+```
+Aside from pods notified by the API server, kubelets have the option to read pod definitions from its local node and 
+ensure those pods are up and running. The path to those definitions are configurable. Kubeadm uses this functionality 
+to bootstrap control plane components, thus allowing kubelets to manage these components on the master nodes.  
+```
+
 ### Label, Annotation, and Selector
 ---
 ##### Labels
