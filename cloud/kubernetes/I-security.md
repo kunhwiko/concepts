@@ -7,13 +7,19 @@ Provides a partition among users, and each namespace can be sealed with credenti
 
 ##### Secrets
 ```
-a) Secrets contain sensitive info such as credentials and tokens that are namespace scoped. To limit access to secrets, 
-   they should be put in namespaces accessible only to a limited set of users or services.
-b) Secrets are stored by default as plaintext in etcd and are base64 encoded. Kubelets can download and access these
-   secrets by invoking the API server via TLS. Kubelets will then store secrets in node memory (i.e. never to disk)
-   and are deleted when not needed.
+a) Secrets are namespaced resources that can contain sensitive info such as credentials and tokens. To limit access to
+   secrets, they should be put in namespaces accessible only to a limited set of users or services.
+b) Secrets are stored as unencrypted plain text in etcd and are typically base64 encoded when kubelets download them to
+   local nodes. Kubelets will typically download these secrets through the API server via TLS and store them in node
+   memory (i.e. never to disk) are deleted when not needed.
 c) Secrets can be mounted as files via volumes, specified in service accounts, or be picked up as container environment 
    variables. The same secret can be mounted to multiple pods.
+```
+
+##### EncryptionConfiguration
+```
+Configuration on the API server to control how API data is encrypted in etcd (e.g. encryption algorithms, what resources
+to encrypt). As an example, this can be used to encrypt secret objects before they are persisted in etcd.
 ```
 
 ##### ImagePullSecrets

@@ -62,9 +62,11 @@ It is recommended to use .dockerignore and avoid copying unnecessary files or pa
 ##### CMD vs ENTRYPOINT
 ```
 a) If multiple CMD commands exist, all except the last one are ignored (i.e. there is an expectation that it 
-   can be overriden). It could be further overrriden through arguments to the `docker run` command. 
+   can be overriden). It could be further overrriden through arguments to `docker run` or as `args` in a pod manifest
+   file.
 b) ENTRYPOINT instructions on the other hand will always be executed and are useful in multi-stage builds
-   when a command always needs to be executed.
+   when a command always needs to be executed. There can only be one ENTRYPOINT instruction in a Dockerfile. It could
+   be overriden through `command` in a pod manifest file.
 c) CMD can be used alongside ENTRYPOINT to specify parameters or arguments to the ENTRYPOINT executable.
 ```
 
