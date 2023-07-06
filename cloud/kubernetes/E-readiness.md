@@ -41,9 +41,11 @@ c) When readiness probe fails, container's pod are removed from registered servi
 
 ##### Init Containers
 ```
-a) Containers that run to completion before all other containers start.
-b) Init containers can provide setup scripts and take care of non-deterministic initializations.
-c) Init containers can be configured such that probes will start only after init containers are started.
+a) Containers that run to completion before all other containers start. These containers can provide setup scripts and 
+   take care of non-deterministic initializations. 
+b) Init containers can be configured such that probes will start only after init containers are started.
+c) If multiple init containers exist, they will run one at a time in sequential order. If any fail, the pod will restart 
+   until the containers succeed.
 ```
 
 ##### Readiness Gates

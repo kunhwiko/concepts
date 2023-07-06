@@ -61,48 +61,6 @@ b) Updater          : Kills managed pods where resource requests don't match rec
 c) Admission Plugin : Sets CPU/memory requests for new pods based on recommended values.
 ```
 
-### Live Updating
----
-##### Rolling Update
-```
-Gradually updates components from the current version to the next.
-
-Example
-  Step 1) Deployment v1 --> Pod v1, Pod v1
-  Step 2) Update to Deployment v2 
-  Step 3) Deployment v2 --> Pod v1, Pod v1, Pod v2
-  Step 4) Deployment v2 --> Pod v1, Pod v2, Pod v2
-  Step 5) Deployment v2 --> Pod v2, Pod v2
-```
-
-##### Adapter Service
-```
-Translates requests/responses during an update.
-
-Example
-  Step 1) Pod A v1 depends on pod B v1.
-  Step 2) Pod B v2 is introduced and is now incompatible with pod A v1.
-  Step 3) Introduce adapter that translates requests/responses between pod A and B.
-```
-
-##### Blue Green Deployments
-```
-Example
-  Step 1) Prepare a copy of a production environment green with the new version.
-  Step 2) Use green to test active requests on existing environment blue.
-  Step 3) Assuming stateless components only, switch active environment to green.
-  Step 4) Roll back to blue if there are problems.
-```
-
-##### Canary Deployments
-```
-More subtle process of blue-green deployments that changes gradually over time.
-
-Example
-  Step 1) Replace 10% of production pods to canary pods (pods hosting new feature).
-  Step 2) Gradually increase number of canary pods to production.
-```
-
 ### Scheduling
 ---
 ##### Scheduling Algorithm
