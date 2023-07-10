@@ -114,10 +114,12 @@ a) Network policies act as a set of firewall rules that manage network traffic f
    policies aim to implement the least privilege principle.
 b) Network policies use labels to whitelist applicable pods and namespaces. Usage of labels to define virtual network 
    segments is much more flexible than defining CIDR / subnet masking.
-c) Network policies are part of the standard Kubernetes API but differ in implementation per networking solution / CNI 
+c) If a network policy is created for ingress requests, then a response is allowed back regardless of egress network 
+   policies. From a Kubernetes perspective, we just need to be worried about the originating request.  
+d) Network policies are part of the standard Kubernetes API but differ in implementation per networking solution / CNI 
    plugin. Kubernetes provides the ability to define network policies through APIs, but it is up to the networking 
-   solution to enforce those policies.
-d) Network policies are cluster scoped and rules are unified if multiple network policies exist.
+   solution whether to enforce those policies.
+e) Network policies are cluster scoped and rules are unified if multiple network policies exist.
 ```
 
 ##### Execution of Network Policies
@@ -148,18 +150,37 @@ spec:
   podSelector:
     matchLabels:
       role: app-backend
-  # which namespace and pod can access above pods 
-  # current namespace is exempt and does not need to match labels here
+  # what policies we are allowing
+  policyTypes:
+  - Ingress
+  - Egress
+  # specifies what requests can come into the above pods
   ingress:
-    - from:
-      - namespaceSelector:
-          matchLabels:
-            project: test
-      - podSelector:
-          matchLabels:
-            role: app-frontend
-  # network protocol and ports that are allowed
-  ports:
-    - protocol: tcp
+  - from:
+    # rules inside the same element work as an AND condition
+    # separate rules work as an OR condition
+    - ipBlock:
+        cidr: 172.17.0.0/16
+        except:
+        - 172.17.1.0/24
+    # refer to https://kubernetes.io/docs/concepts/services-networking/network-policies/#behavior-of-to-and-from-selectors
+    - namespaceSelector:
+        matchLabels:
+          project: test
+      podSelector:
+        matchLabels:
+          role: app-frontend
+    # network protocol and ports that are allowed
+    ports:
+    - protocol: TCP
       port: 8888
+  # specifies what request can leave the above pods
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 192.168.5.10/32
+    ports:
+    - protocol: TCP
+      port: 80
+        
 ```

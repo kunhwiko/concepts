@@ -31,7 +31,7 @@ c) KRM allows environments to be configured and deployed in a repeatable and rel
 a) etcd is a highly reliable distributed key-value store to back cluster level configuration data. This includes the 
    state of the cluster, various configuration data (network, authorization), and API metadata.
 b) etcd provides watch functionality, allowing API server to be notified of any key-value changes.
-c) Periodically taking snapshots of etcd is useful in the event of a cluster failure.
+c) Users can take snapshots of data stored in etcd and restore the cluster in the event of a cluster failure.
 ```
 
 ##### API Server

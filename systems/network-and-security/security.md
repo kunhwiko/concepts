@@ -14,22 +14,73 @@ Act of verifying if the user has the ability to perform a certain function.
 ---
 ##### Man In the Middle (MITM) Attack
 ```
-Malicious activity to intercept or alter IP packets in an HTTP connection.
+Malicious activity to intercept or alter packets in a network before they reach the intended receiver.
 ```
 
 ##### Symmetric Encryption
 ```
-In symmetric encryption, the client and server uses a secret key to encrypt or decrypt messages.
-The secret key is derived by both the client and server through a key exchange algorithm (e.g. AES algorithm).
-This secret key is never trasmitted over the network.
+In symmetric encryption, the client and server uses the same secret key to encrypt or decrypt messages. The secret key 
+is derived by both the client and server through a key exchange algorithm (e.g. AES algorithm). This secret key should 
+never be trasmitted over the network.
 ```
 
 ##### Asymmetric Encryption
 ```
-In asymmetric encryption, the client and the server uses public keys and private keys to encrypt or decrypt messages.
-Public keys are used by any individual to encrypt messages, but only the host with the private key can decrypt messages.
-Asymmetric encryption is used during the key exchange algorithm of symmetric encryption to help generate a shared secret key.
-Asymmetric encryption tends to be slower than symmetric encryption for data transfer purposes.
+a) In asymmetric encryption, the client and the server uses public and private keys to encrypt or decrypt messages. 
+   Public keys are used by anyone to encrypt messages, but only the host with the private key can decrypt messages.
+b) Asymmetric encryption is used during the key exchange algorithm of symmetric encryption to help generate a shared 
+   secret key. 
+c) Asymmetric encryption tends to be slower than symmetric encryption for data transfer purposes.
+```
+
+### TLS
+---
+##### TLS
+```
+Security protocol for secure communication.
+```
+
+##### TLS Handshake - RSA Key Exchange Algorithm
+```
+Process to establish a secure connection between a client and server. The RSA key exchange algorithm was used for TLS
+before version 1.3 and the steps are as follows:
+
+Step 1) Client initiates a "client hello" to the server. This message includes the TLS version that the client supports,
+        list of cipher suites, and a string of random bytes called the "client random".
+Step 2) Server responds with a "server hello" containing the server's SSL certificate, server's public key, a selected 
+        cipher suite, and a string of random bytes called the "server random". 
+Step 3) Client verifies the server's SSL certificate with the certificate authority that signed it. This verifies that
+        the server can be entrusted.
+Step 4) Client sends an additional string of random bytes called the "premaster secret". This secret is encrypted with
+        the server's public key that the client had previously received.
+Step 5) Server decrypts the premaster secret using the private key.
+Step 6) Both client and server will generate sessions keys using the client random, server random, and premaster secret.
+        These session keys are temporary symmetric keys and should be identical.
+Step 7) The client and server share a "finished" message encrypted with the session key and the handshake is complete. 
+```
+
+##### TLS Handshake 1.3
+```
+Step 1) Client initiates a "client hello" to the server with the TLS version, client random, list of cipher suites, and
+        parameters to be used for calculating the premaster secret. The number of cipher suites supported in TLS 1.3 
+        have vastly been reduced to the point that the client assumes that it already knows the server's preferred key 
+        exchange method.
+Step 2) Server uses the client random, server random, and premaster secret parameters to generate a master secret.
+Step 3) Server sends back a "server hello" with the SSL certificate, public key, server random, and selected cipher 
+        suite. Since the server already has a master secret, it also sends a "finished" message.
+Step 4) Client verifies the SSL ceritificate and CA that signed it. Once verified, it will generate the master secret
+        using the client random, server random, and premaster secret parameters. 
+Step 5) Client sends a "finished" message and a session for symmetric encryption should have been established. 
+```
+
+##### SSL Certificates
+```
+a) Hackers can impersonate the identity of servers and reroute traffic to their servers. SSL certificates are used to 
+   guarantee that the server is who they claim to be. Self-signed ceritificates are insecure and cannot be trusted, but
+   ceritificates signed by trusted certificate authorities (a.k.a. CAs) can be trusted.
+b) Similar to server certificates, servers may verify the identity of clients through client certificates. 
+c) Similar to server certificates, CAs have root certificates to validate that their public key is legitimiate. These
+   CA public keys are pre-built into web browsers.  
 ```
 
 ### Secure Shell Protocol (SSH)
@@ -83,34 +134,4 @@ SSH Tunneling
   a) SSH tunneling establishes an SSH connection to forward insecure data through an encrypted tunnel.
   b) SSH tunneling be used to forward ports that are blocked by firewalls to a different port that is not blocked.
   c) More information here: https://goteleport.com/blog/ssh-tunneling-explained/ and https://www.youtube.com/watch?v=AtuAdk4MwWw.
-```
-
-### TLS
----
-##### HTTPS
-```
-HTTP over TLS.
-```
-
-##### TLS
-```
-Security protocol for secure communication.
-```
-
-##### TLS Handshake
-```
-Process to establish a secure connection between clients and server.
-
-Step 1) Client sends "client hello".
-        Server responds with "server hello" + SSL certificate containing the public key.
-Step 2) Client verifies SSL certificate and sends a "premaster secret" encrypted with the public key.
-        Server decrypts the premaster secret using the private key.
-Step 3) Client hello, server hello, premaster secret are used to create temporary symmetric keys for the session.
-        Symmetric keys are used to figure out whether a connection was established or has failed.
-```
-
-##### SSL Certificates
-```
-a) MITM attacks can intercept server hellos and public keys, send their own public key, and establish a connection with client.
-b) SSL certificates guarantee where public keys come from.
 ```

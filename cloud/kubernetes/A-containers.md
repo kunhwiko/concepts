@@ -17,7 +17,8 @@ only the new layers need to be pulled or pushed on top of existing layers residi
 ```
 a) Containers represent instances of images that run as processes in isolated user spaces on the host OS. Container 
    processes use Linux features such as namespaces (e.g. network namespace for network isolation, mount namespace for 
-   file system isolation) and cgroups to provide this isolation. 
+   file system isolation, PID namespace for process isolation), capabilities to limit the root user privileges in the 
+   new namespace, and cgroups for resource constraints to provide isolation from the host machine. 
 b) Containers can have a different OS from the host and will share the host's kernel through syscall requests.
 c) Containers are typically created and managed by container runtimes (e.g. Docker, containerd) that run on the host OS. 
 ```

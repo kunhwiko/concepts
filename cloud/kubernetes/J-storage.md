@@ -170,8 +170,8 @@ Vendors do not need to worry about Kubernetes source code or be locked down to K
 ---
 ##### Projections
 ```
-a) Projection projects multiple volumes as a single volume on a single volume mount.
-b) Supported for secrets, downward API, configmaps.
+Projection projects multiple volumes as a single volume on a single volume mount. This is supported for secrets, 
+downward API, and configmaps.
 ```
 
 ##### Snapshots

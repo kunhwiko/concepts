@@ -60,18 +60,18 @@ Whenever a service account is created, creates and adds a token as a secret that
 
 ### Security Context and RBAC
 ---
+##### Pod Security Context
+```
+a) OS level security settings such as UID that are applied at the pod level. The security settings are applied to all 
+   containers in the pod.
+b) Applied to volumes.
+```
+
 ##### Container Security Context
 ```
 a) OS level security settings such as UID that are applied at the container level.
 b) Container security contexts override pod security contexts.
 c) Cannot be applied to volumes.
-```
-
-##### Pod Security Context
-```
-a) OS level security settings such as UID that are applied at the pod level.
-   The security settings are applied to all containers in the pod.
-b) Applied to volumes.
 ```
 
 ##### SupplementalGroup
@@ -115,6 +115,13 @@ c) kubeconfig contains API server endpoints that kubectl will contact on port 44
 d) Path to the kubeconfig file can be specified via the environment variable KUBECONFIG.
 ```
 
+##### TLS
+```
+Various components (e.g. etcd, controllers, scheduler, kubelets) in Kubernetes will communicate with one another via TLS.
+Root ceritifcates (e.g. ca.key, ca.crt) need to first be created for the cluster. Certificates for the API server, etcd, 
+kubelet, admin users etc. will then need to be signed with the CA key pair.
+```
+
 ##### Step 1: Authentication
 ```
 a) Users use keys and certificates to authenticate against the API server over TLS.
@@ -136,10 +143,10 @@ d) kubectl auth can-i ... verifies whether user can perform certain actions.
 
 ##### Step 3: Admission Control Plugins
 ```
-a) Admission controller is code that intercepts requests to the API server after authorization but prior to storing objects into etcd.
-   All admission control steps must pass for the request to succeed.
-b) Admission controllers can validate (e.g. denies requests if exceeding resource limits) or mutate (e.g. create namespace if it does not exist) requests.
-   Mutating admission controllers are invoked before validating admission controllers and can modify requests and objects sent to the API server.
+a) Admission controller is code that intercepts requests to the API server after authorization but prior to storing 
+   objects into etcd. All admission control steps must pass for the request to succeed.
+b) Admission controllers can validate (e.g. deny requests that exceed resource limits) or mutate (e.g. create namespace 
+   if it does not exist) requests. Mutating admission controllers are invoked before validating admission controllers.
 c) Admission plugins can be compiled or dynamic (i.e. run as webhooks and do not require restart of API server).
 ```
 
@@ -159,8 +166,8 @@ Linux kernel security module that allows you to create profiles to do the follow
 ##### Node Attacks
 ```
 Attacks
-  * External user can replace kubelet to communicate normally with API server by sending false data.
-    Meanwhile, they can use the node to run their own workloads.
+  * External user can replace kubelet to communicate normally with API server by sending false data. Meanwhile, they can 
+    use the node to run their own workloads.
   * External user can gain access to shared resources and secrets.
   * External user can send malicious messages and disrupt the cluster or cause resource drain.
 

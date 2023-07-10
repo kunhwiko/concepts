@@ -1,4 +1,4 @@
-### Namespace & Cgroup
+### Namespace
 ---
 ##### Namespace
 ```
@@ -15,7 +15,9 @@ can have root privilege within its user namespace without having it in other use
 
 ##### PID Namespace
 ```
-PID namespace assigns a set of PIDs to processes that are independent from the set of PIDs in other namespaces.
+PID namespace assigns a set of PIDs to processes that are independent from the set of PIDs in other namespaces. A given
+process can run as a random PID in an isolated namespace but could be shown to be running as a different PID on the host 
+namespace. Refer to: https://www.nginx.com/blog/what-are-namespaces-cgroups-how-do-they-work/.
 ```
 
 ##### Network Namespace
@@ -36,8 +38,16 @@ mounting file systems without affecting the file system of other namespaces.
 IPC namespace has its own IPC resources (e.g. POSIX message queue).
 ```
 
-##### Control Group (cgroup)
+### Restrictions
+---
+##### Control Groups (cgroups)
 ```
 Linux kernel feature that limits, isolates, and monitors resource usage (CPU, memory, disk I/O, network) of a collection 
 of processes. It also allows for the prioritization of resource allocation under resource limits.  
+```
+
+##### Capabilities
+```
+Capabilities are a way to assign specific privileges to a running process (e.g. process kill, system reboot, port
+modifications privileges). 
 ```

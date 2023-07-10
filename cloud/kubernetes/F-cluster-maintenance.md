@@ -60,3 +60,14 @@ the node must be uncordoned to be considered ready.
 A node can be cordoned to mark it as unschedulable. This does not migrate existing workloads away from the node. Once
 cordoned, the node must be uncordoned to be considered ready.
 ```
+
+##### Node Upgrades
+```
+For non-managed clusters using kubeadm, refer to: https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
+```
+
+##### etcdctl
+```
+For non-managed clusters, refer to: https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/ for 
+ETCD related commands.
+```
