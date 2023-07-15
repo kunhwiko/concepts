@@ -39,23 +39,26 @@ limited set of namespaces.
 ##### Service Accounts
 ```
 a) When pods are instantiated, they are assigned a service account. A default service account is used if one is not
-   assigned, which limits access to resources in the current namespace.
-b) Service accounts come with tokens (i.e. credentials to talk to the API server) that are mounted as secrets. Pod 
-   processes that need to contact the API server are authenticated with this token.
+   assigned, which by default limits access to resources in the current namespace.
+b) Before Kubernetes 1.22, service accounts used to be attached with non-expiring token secrets that applications can 
+   use to authenticate against the Kubernetes API. Nowadays, API credentials with bounded lifetimes are obtained via the 
+   TokenRequest API and are mounted into a projected volume.
 ```
 
 ##### Service Account Admission Controller
 ```
 a) Assigns at pod creation time a custom or default service account. Also ensures a default service account exists in 
    every namespace.
-b) Adds a volume to the pod with a token that is used to authenticate to the API server.   
-c) If specified, ensures pod has ImagePullSecrets if images need to be pulled from a remote registry.
-   If not specified in the pod spec, uses the service account's ImagePullSecrets instead.
+b) Mutates the pod during pod creation time to add a projected volume to the pod containing a token to authenticate
+   against the API server. If a token does not exist, the kubelet will refresh the token via the TokenRequest API.   
+c) If specified, ensures pod has ImagePullSecrets if images need to be pulled from a remote registry. If not specified 
+   in the pod spec, uses the service account's ImagePullSecrets instead.
 ```
 
 ##### Token Controller
 ```
-Whenever a service account is created, creates and adds a token as a secret that is used to authenticate to the API server.
+Whenever a service account is created, creates and adds a token as a secret that is used to authenticate to the API 
+server. Note that TokenRequest based tokens are now in favor of secret based tokens as of Kubernetes 1.22.
 ```
 
 ### Security Context and RBAC

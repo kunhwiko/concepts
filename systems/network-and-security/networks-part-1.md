@@ -328,40 +328,50 @@ Step 6) Client is able to send its original request as it is now able to complet
 ---
 ##### Classless Interdomain Routing (CIDR)
 ```
-a) Example 1: 128.168.1.0/26
-     * 26 bits for network addresses, 6 bits for host addresses.
-     * Great if you have 50 or less computers in a common network.
-b) Example 2: 192.168.1.0/24
-     * 24 bits for network addresses, 8 bits for host addresses (192.168.1.0 ~ 192.168.1.255).
-c) Routers do a longest prefix match on these "prefixes" to route packets to the next hop.
+a) Example 1: 192.168.1.0/24
+     * 24 bits for network address (i.e. network's unique identifer). 
+     * 8 bits for host address (i.e. device identifier in the network).
+     * IP addresses in this CIDR range from 192.168.1.0 ~ 192.168.1.255
+b) Routers perform a longest prefix match on these "prefixes" to route packets to the next hop.
 ```
 
 ##### Subnets
 ```
-Subnets
-  a) Subnets are a representation of a network hierarchy that makes network infra (e.g. routing tables) scalable when new networks are added.
-  b) Subnets narrow down and groups various network devices into the same IP address range.
-  c) Subnets are a means to send packets in a time efficient way.
-     Send mail --> route to office --> route to department --> route to team --> route to person.
-     The above does not waste time trying to get the mail to the individual person directly.
-  d) For more: https://www.youtube.com/watch?v=zmxLg4jV0ts&list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi&index=11
+a) Subnets are a logical subdivision from the larger network that helps to build a scalable network infrastructure. This
+   logical division helps to group and manage similar applications separately. A use case for this is better
+   demonstrated here: https://www.youtube.com/watch?v=zmxLg4jV0ts&list=PLIFyRwBY_4bRLmKfP1KnZA6rZbRHtxmXi&index=11.
+b) Subnets allow for better security management. For instance, subnets can be configured such that only backend 
+   applications might access a database subnet while only frontend applications can access the backend subnet but not 
+   the database subnet.
+```
 
-Subnet Mask
-  a) A number (e.g 255.255.255.0) that helps distinguish the network address and host address for an IP address.
-  b) This number helps to determine whether a destination IP address lies in the same L2 network.
+##### Network and Braodcast Address
+```
+a) The xxx.xxx.xxx.0 in a subnet is reserved as the network address used to identify the subnet as a whole rather than
+   an individual device on the network.
+b) The last IP address in a subnet is reserved as the broadcast address.
+```
+
+##### Subnet Mask
+```
+32-bit number created by setting network bits to 1s and host bits to 0s (e.g 255.255.255.0). This helps to separate
+the IP address into the network and host addresses. This number helps to determine whether a destination IP address lies 
+in the same L2 network.
 ```
 
 ##### Network Address Translation (NAT)
 ```
 NAT Steps
   Step 1) Assign private IP addresses within a common network.
-  Step 2) NAT devices maps private IP addresses to a single public IP address.
-  Step 3) Send to destination address with mapped public IP address as the source.
-  Step 4) When host at destination tries to send a packet to the source within the subnet, use demultiplexing IDs (L4 protocol) to find the source.
+  Step 2) NAT devices map private IP addresses to a single public IP address.
+  Step 3) The mapped public IP address is used as the source IP when sending to the destination.
+  Step 4) When host at destination tries to send a packet to the source within the subnet, demultiplexing IDs (L4 
+          protocol) are used to find the original source.
 
 NAT Disadvantages
-  a) Difficult to distinguish devices within the subnet.
-  b) Cannot connect to hosts within the private network (address unknown) from the outside until a packet has been trasmitted.
+  * Difficult to distinguish devices within the subnet.
+  * Cannot connect to hosts within the private network (i.e. IP address is unknown) from the outside until a packet has 
+    been trasmitted.
 ```
 
 ##### SNAT vs DNAT

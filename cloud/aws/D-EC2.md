@@ -22,13 +22,3 @@ If a request is sent from an instance, the response for that request is allowed 
 inbound security group rules. Similarly, responses to allowed inbound traffic are allowed to leave the instance
 regardless of outbound rules.
 ```
-
-##### Network Access Control List (ACL)
-```
-a) Allows or denies inbound or outbound traffic at the subnet level based on rules similar to security group rules. The
-   network ACL will be triggered as traffic enters and leaves the subnet, not as it is routed within the subnet.
-b) An ACL can be associated with multiple subnets but a subnet cannot be associated with more than one ACL at a time. If 
-   not specified, a default network ACL for the VPC will be associated with the subnet. 
-c) Network ACLs do not follow security rule exceptions, which means responses to allowed inbound traffic are subject
-   to rules for outbound traffic.
-```
