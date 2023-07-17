@@ -110,19 +110,34 @@ RoleBindings
 
 ### Authentication and Authorization to API Server
 ---
-##### kubeconfig
-```
-a) Kubernetes uses a YAML file called kubeconfig to store cluster auth information for kubectl.
-b) kubeconfig contains a list of contexts to which kubectl will refer to.
-c) kubeconfig contains API server endpoints that kubectl will contact on port 443.
-d) Path to the kubeconfig file can be specified via the environment variable KUBECONFIG.
-```
-
 ##### TLS
 ```
-Various components (e.g. etcd, controllers, scheduler, kubelets) in Kubernetes will communicate with one another via TLS.
-Root ceritifcates (e.g. ca.key, ca.crt) need to first be created for the cluster. Certificates for the API server, etcd, 
-kubelet, admin users etc. will then need to be signed with the CA key pair.
+Various components (e.g. etcd, API server, scheduler, kubelets) in Kubernetes will communicate with one another via TLS.
+Note the following:
+  * Root ceritifcates (e.g. ca.key, ca.crt) need to first be generated for the cluster. These certificates should be 
+    stored in a safe environment.
+  * Certificates for individual components need to be signed with the CA key pair. While a single certificate can be 
+    used as both the client and server certificate, best practice is to separate them in case the certificate becomes 
+    compromised. For example, the API server can have a server certificate, a client certificate for kubelets, and a 
+    client certificate for etcd.
+  * Client certificates can specify a group that they belong to (e.g. system:masters) depending on the permissions that
+    are needed. Refer to: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings.
+```
+
+##### Certificate Signing Requests
+```
+A CertificateSigningRequest (CSR) object is used to request that a certificate be signed by a specified signer, after 
+which the request may be approved or denied by administrators before finally being signed. Refer to the following for
+signers: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers.
+```
+
+##### Kubeconfig
+```
+Kubernetes uses a YAML file called kubeconfig to store cluster auth information (e.g. certs, keys). The path to this file 
+can be specified via the environment variable KUBECONFIG. This file consists of the following:
+  * Clusters: HTTP endpoint to the Kubernetes API server along with the certificate of the root CA.
+  * Contexts: Links a user to a cluster.
+  * Users: Contains the client certificate and the client private key.
 ```
 
 ##### Step 1: Authentication
