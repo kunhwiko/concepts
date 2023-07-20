@@ -92,8 +92,9 @@ d) Could cause slow startup for large volumes as permissions need to be modified
 
 ##### RBAC Authorization
 ```
-ClusterRoles
-  * Represent a set of permissions to resources in all namespaces.
+ClusterRoles: 
+  * Represents a set of permissions to resources in all namespaces. ClusterRoles need to be used to grant permissions to 
+    cluster-scoped resources (e.g. namespace, node, pv, csr). 
   * ClusterRoles are available for use in all namespaces.
 
 ClusterRoleBindings
@@ -101,7 +102,7 @@ ClusterRoleBindings
   * ClusterRoleBindings are available for use in all namespaces.
 
 Roles
-  * Represent a set of permissions to resources in a given namespace.    
+  * Represents a set of permissions to resources in a given namespace.    
 
 RoleBindings
   * Grants permissions defined by a Role in a given namespace.
@@ -124,11 +125,11 @@ Note the following:
     are needed. Refer to: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings.
 ```
 
-##### Certificate Signing Requests
+##### Certificate Signing Requests (CSR)
 ```
-A CertificateSigningRequest (CSR) object is used to request that a certificate be signed by a specified signer, after 
-which the request may be approved or denied by administrators before finally being signed. Refer to the following for
-signers: https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers.
+A CertificateSigningRequest object is used to request that a certificate be signed by a specified signer, after which 
+the request may be approved or denied by administrators before finally being signed. Refer to the following for signers: 
+https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers.
 ```
 
 ##### Kubeconfig
@@ -143,20 +144,26 @@ can be specified via the environment variable KUBECONFIG. This file consists of 
 ##### Step 1: Authentication
 ```
 a) Users use keys and certificates to authenticate against the API server over TLS.
-b) Cluster admins can choose what authentication strategy to use.
-c) If at least one authentication step succeeds, authentication is granted.
-
-Impersonation
-  * Possible for users to impersonate different users (e.g. troubleshoot some issue for a different user).
-  * Requires passing impersonation headers to API request (e.g. kubectl --as / --as-group parameters).
+b) Cluster admins can choose what authentication strategy to use. If at least one authentication step succeeds, 
+   authentication is granted.
+c) Administrators can impersonate different users (e.g. troubleshoot some issue for a different user) through the --as 
+   and --as-group parameters.
 ```
 
 ##### Step 2: Authorization
 ```
 a) Authorization requests include info such as authenticated username and request verb.
-b) Cluster admins can choose what authorization strategy to use.
-c) All authorization steps must succeed for authorization to be granted.
-d) kubectl auth can-i ... verifies whether user can perform certain actions.
+b) Cluster admins can choose what authorization strategy to use. When multiple authorization modules are configured, each 
+   is checked in sequence. If any authorizer approves or denies a request, that decision is immediately returned and no 
+   other authorizer is consulted.
+c) kubectl auth can-i ... verifies whether user can perform certain actions.
+```
+
+##### Node Authorization
+```
+The node authorizer is a special purpose authorization mode that authorizes API requests made by kubelets. It recognizes
+requests from kubelets as their certificates should be configured with a "system:nodes" group with a username of 
+"system:node:<node-name>".
 ```
 
 ##### Step 3: Admission Control Plugins
