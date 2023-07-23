@@ -1,4 +1,4 @@
-### EC2
+### EC2 Basics
 ---
 ##### EC2 Properties
 ```

@@ -2,9 +2,9 @@
 ---
 ##### OPA Definition
 ```
-OPA is a CNCF project that provides a policy as code framework to help decouple policy decision making 
-away from applications. These policies are structured based on hierarchical structured data (e.g. YAML and JSON).
-OPA can be used to make admission control decisions in Kubernetes after authentication and authorization.
+OPA is a CNCF project that provides a policy as code framework to help decouple policy decision making away from 
+applications. These policies are structured based on hierarchical structured data (e.g. YAML and JSON). OPA can be used 
+to make admission control decisions in Kubernetes after authentication and authorization.
 ```
 
 ##### Deployment Strategies
@@ -21,17 +21,17 @@ The architecture is explained in details here: https://www.openpolicyagent.org/d
 ---
 ##### Init Containers
 ```
-Validating or mutating webhooks should first be configured to call the OPA service running in some namespace.
-Init containers can then be used to ensure OPA instances have the proper configurations necessary, such as 
-ensuring that TLS certificates to talk to the API server have been mounted properly.
+Validating or mutating webhooks should first be configured to call the OPA service running in some namespace. Init 
+containers can then be used to ensure OPA instances have the proper configurations necessary, such as ensuring that TLS 
+certificates to talk to the API server have been mounted properly.
 ```
 
 ##### OPA Instances
 ```
 a) 3 OPA instances are typically deployed and backed by the OPA service for load balancing purposes. The instances
    cache policies and data in memory (i.e. do not persist) to make performant policy decisions.
-b) OPA instances need to be configured to securely receive and respond to policy queries from Kubernetes 
-   admission controllers through TLS.
+b) OPA instances need to be configured to securely receive and respond to policy queries from Kubernetes admission 
+   controllers through TLS.
 c) API server sends a webhook request to OPA containing an AdmissionReview object. Refer to the following link for more:
    https://www.openpolicyagent.org/docs/latest/kubernetes-primer/#detailed-admission-control-flow. This object becomes
    bound to the `input` global variable in Rego code and is processed by OPA during decision making.
@@ -40,8 +40,8 @@ c) API server sends a webhook request to OPA containing an AdmissionReview objec
 ##### Kube Mgmt
 ```
 a) Kube-mgmt runs as a sidecar container that discovers policies stored in ConfigMaps and loads them into memory on OPA. 
-   It also has the capability to load ConfigMap JSON data into OPA under the `data` global variable in Rego.
-   Kube-mgmt can determine which ConfigMaps to load based on annotations:
+   It also has the capability to load ConfigMap JSON data into OPA under the `data` global variable in Rego. Kube-mgmt 
+   can determine which ConfigMaps to load based on annotations:
      * `openpolicyagent.org/policy=rego` to load Rego policies
      * `openpolicyagent.org/data=opa` to load JSON data
 b) Kube-mgmt is able to cache replications of Kubernetes resources through the `--replicate` flag and load them as 
@@ -54,9 +54,10 @@ b) Kube-mgmt is able to cache replications of Kubernetes resources through the `
 ```
 Compared to OPA with kube-mgmt, Gatekeeper provides the following functionality:
   * Extensive policy library for validation and mutation logic that are usable outside the box.
-  * Native Kubernetes CRD for defining policies (i.e. ConstraintTemplates instead of ConfigMaps) with control over parameter schema.
-  * Native Kubernetes CRD (i.e. Constraints) to provide fine-grained control over policies. This includes controlling target 
-    namespaces, resources, enforcement level) through YAML rather than Rego code.
+  * Native Kubernetes CRD for defining policies (i.e. ConstraintTemplates instead of ConfigMaps) with control over 
+    parameter schema.
+  * Native Kubernetes CRD (i.e. Constraints) to provide fine-grained control over policies. This includes controlling 
+    target namespaces, resources, enforcement level) through YAML rather than Rego code.
   * Cluster audit functionality.
 ```
 
@@ -69,21 +70,22 @@ b) Gatekeeper policy library: https://open-policy-agent.github.io/gatekeeper-lib
 ##### OPA Gatekeeper Instances
 ```
 a) Gatekeeper instances (a.k.a. controller managers) are typically deployed as 3 instances for load balancing purposes. 
-b) Gatekeeper instances respond to webhook requests from Kubernetes admission controllers and need to be mounted with TLS certs. 
-c) Gatekeeper instances internally uses OPA to make decisions. These instances can be configured to sync cluster state into 
-   OPA before making decisions.
+b) Gatekeeper instances respond to webhook requests from Kubernetes admission controllers and need to be mounted with 
+   TLS certs. 
+c) Gatekeeper instances internally use OPA to make decisions. These instances can be configured to sync cluster state 
+   into OPA before making decisions.
 ```
 
 ##### Audit Controller
 ```
-Audit controller is responsible for periodically monitoring the state of the cluster for any violations. The audit controller 
-itself does not require TLS certificates to communicate with the API server.
+Audit controller is responsible for periodically monitoring the state of the cluster for any violations. The audit 
+controller itself does not require TLS certificates to communicate with the API server.
 ```
 
 ##### ConstraintTemplate
 ```
 a) ConstraintTemplate is a resource that has Rego code to define the criteria for policy violations. 
-b) ConstraintTemplate acts as a template to instantiate Constraint custom resources. 
+b) OPA Gatekeeper dynamically creates a CRD for Constraint custom resources based on the ConstraintTemplate created. 
 ```
 
 ##### ConstraintTemplate Example
@@ -120,9 +122,10 @@ spec:
 
 ##### Constraint
 ```
-a) Constraint is an instantiation of the ConstraintTemplate resource that describe the enforcement level of policies (e.g. warn, 
-   deny), the target resource, target namespace, and parameters. 
-b) Constraint holds a violations field that describes violations for the constraint in the cluster as reported by the audit controller.
+a) Constraint is an instantiation of the ConstraintTemplate resource that describe the enforcement level of policies 
+   (e.g. warn, deny), the target resource, target namespace, and parameters.
+b) Constraint holds a violations field that describes violations for the constraint in the cluster as reported by the 
+   audit controller.
 ```
 
 ##### Constraint Example
@@ -170,7 +173,7 @@ Rego documentation: https://www.openpolicyagent.org/docs/latest/policy-language/
 
 ##### Rego Rule Basics
 ```
-# Variable code  will be assigned to 200 if all the statements in the {} bracket are true.
+# Variable code will be assigned to 200 if all the statements in the {} bracket are true.
 # Statements in the {}  brackets represent conditions that need be evaluated.
 # If input.request.method == "GET"  is true, code will be assigned to 200. If false, it will be assigned to undefined.
 code = 200 {
@@ -209,11 +212,11 @@ port = res {
 ##### Input Global Variable
 ```yaml
 apiVersion: admission.k8s.io/v1
-kind: AdmissionReview             # whenever a validating webhook request is sent to OPA, it will receive information here as `input`
+kind: AdmissionReview  # whenever a validating webhook request is sent to OPA, it will receive information here as `input`
 request:
   kind:
     group:
-    kind: Pod                     # as an example, this value can be queried in Rego via `input.request.kind.group.kind`
+    kind: Pod          # as an example, this value can be queried in Rego via `input.request.kind.group.kind`
     version: v1
   object:
     metadata:
@@ -234,9 +237,9 @@ metadata:
   name: policytestdata
   namespace: opa
   labels:
-    openpolicyagent.org/data: opa           # this tells kube-mgmt to import as external data
+    openpolicyagent.org/data: opa    # this tells kube-mgmt to import as external data
 data:
-  policytestdata: |-                        # this value can be queried via `data.<opa-namespace>.<configmap-name>.<configmap-key>`
+  policytestdata: |-                 # this value can be queried via `data.<opa-namespace>.<configmap-name>.<configmap-key>`
     {
       "opa-test-pod": {"testpolicy" : ["shouldBeAllowed"]}  
     }
@@ -249,15 +252,13 @@ data:
 
 # Policies can be retrieved via /v1/policies/<opa-namespace>/<configmap-name>/<configmap-key> endpoint
 # Data can be retrieved via /v1/data/<opa-namespace>/<configmap-name>/<configmap-key> endpoint
-
 kind: ConfigMap
 apiVersion: v1
 metadata:
   name: opa-policy-cm
   namespace: opa
   labels:
-    # this tells kube-mgmt to import as OPA policy, which is essentially a package of rules
-    openpolicyagent.org/policy: rego
+    openpolicyagent.org/policy: rego  # this tells kube-mgmt to import as OPA policy, which is essentially a package of rules
 data:
   opa-policy: |
     # specifies package for rules below
@@ -281,10 +282,8 @@ data:
     }
     
 ---
-
 # There should be a system.main policy that acts a main decision point for when OPA receives webhook requests.
 # The assigned deny value is used in the system.main policy.
-
 kind: ConfigMap
 apiVersion: v1
 metadata:

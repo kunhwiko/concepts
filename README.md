@@ -5,10 +5,9 @@ This repository is structured in the following way:
 concepts
  L cloud
     L aws
-    L ci-cd
     L gcp
-    L infra-tools
     L kubernetes
+    L projects
  L development
     L go
     L java

@@ -2,24 +2,23 @@
 ---
 ##### emptyDir
 ```
-a) Ephemeral volume mounted on a particular pod that starts with empty contents.
-   Containers in the pod can read the same content.
-b) Each container can have different mount paths to the same emptyDir.
-c) Contents are erased upon pod being deleted, but not erased when containers crash.
-   Contents are not erased upon node reboot as contents are stored in disk.
+a) Ephemeral volume mounted to a pod that starts with empty contents. Containers in the same pod can access the same 
+   content. Note that containers can have different mount paths even to the same emptyDir.
+b) Contents are erased upon pod being deleted, but not erased when containers crash. Contents are not erased upon node 
+   reboot as contents are still stored in disk.
 ```
 
 ##### RAM backed emptyDir
 ```
 a) Faster read performance.
-b) Contents are lost upon node restart.
+b) Contents are lost upon node restart as memory is reset.
 c) By default, size of allocatable memory is half of node's RAM.
 ```
 
 ##### hostPath
 ```
-a) Mounts directory from host node's file system into a pod.
-   All pods on the same node that have this volume mounted can read the same content.
+a) Mounts directory from host node's file system into a pod. All pods on the same node that have this volume mounted can 
+   read the same content.
 b) Containers accessing host directories must be privileged to do so (e.g. root user) to allow writing.
 ```
 
@@ -34,12 +33,11 @@ c) Unlike hostpath volumes, scheduler will ensure pods requiring persistent volu
 
 ##### Local vs Remote Persistent Volumes
 ```
-a) Local storages provides more consistent high performance as networking is not involved.
-b) Local storages do not support dynamic volume provisioning.
-c) Local storages must be pre-provisioned and be tied to a specific node.
-   There must be sufficient space on the node for pods requiring the local storage to be scheduled.
-d) Most remote storages implement synchronous replication while most local storages do not.
-   Loss of the disk or node could result in loss of all data in the local storage.
+a) Local storages provide better IOPS and lower latency as networking is not involved.
+b) Local storages do not support dynamic volume provisioning and must be statically pre-provisioned and be tied to a
+   specific node.
+c) Most remote storages implement synchronous replication while most local storages do not. Loss of the disk or node 
+   could result in loss of data on the persistent storage.
 ```
 
 ##### Provisioning
@@ -51,30 +49,31 @@ b) Dynamic Provisioning : Provision storage on the fly if not available.
 ##### Persistent Volume Configurations
 ```
 Capacity
-  a) Storage claims are satisfied by persistent volumes that have at least that amount of storage.
-  b) Even if 10 pvs with 50G capacity are provisioned, a container claiming 100G will not be satisfied.
+  * Storage claims are satisfied by persistent volumes that have at least that amount of storage. Even if 10 pvs with 
+    50G capacity are provisioned, a container claiming 100G will not be satisfied. In the same example, a PVC claiming
+    10G will be bound to a volume with 50G capacity.
 
 Volume Mode
-  a) Specifies whether the volume should use a file system or be raw block storage for efficient data transport.
+  * Specifies whether the volume should use a file system or be raw block storage for efficient data transport.
 
 Access Mode
-  a) ReadOnlyMany (ROX)  : Can be mounted as read only by many nodes.
-  b) ReadWriteOnce (RWO) : Can be mounted as read write by a single node.
-  c) ReadWriteMany(RWX)  : Can be mounted as read write by mane nodes.
-  d) Storages are mounted to nodes, so multiple pods on the same node can still read write to RWO volumes.
-     If this causes an issue, it can be solved with a mode called ReadWriteOncePod.
+  * ReadOnlyMany  (ROX) : Can be mounted as read only by many nodes.
+  * ReadWriteOnce (RWO) : Can be mounted as read/write by a single node.
+  * ReadWriteMany (RWX) : Can be mounted as read/write by several nodes.
+  * Storages are mounted to nodes, so multiple pods on the same node can still read/write to RWO volumes. If this causes 
+    an issue, it can be solved with a mode called ReadWriteOncePod.
 
 Reclaim Policy
-  a) Reclaim policies determine what happens when a volume claim is deleted.
-  b) Retain : Volume must be reclaimed manually.
-  c) Delete : Volume is deleted.
+  * Reclaim policies determine what happens when a claim to the volume is deleted.
+  * Retain : Volume is not deleted, it is not available for reuse by other claims, and must be reclaimed manually.
+  * Delete : Volume is deleted.
+  * Recycle: Data in the volume is deleted before making reuse.
 
 Storage Class
-  a) Only volume claims that specify the same storage class name can claim the volume.
-  c) Not specifying a storage class means claims that do not specify a storage class can bind to the volume.
+  * Only volume claims that specify the same storage class name can claim the volume.
 
 Volume Types
-  a) e.g. NFS
+  * e.g. NFS, AWS EBS
 ```
 
 ##### Persistent Volume Examples
@@ -92,6 +91,8 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
+  # can only be bound via PVCs specifying this storage class
+  # PVs with no storageClassName can only be bound to PVCs that request no particular class
   storageClassName: example-class
   nfs:
     path: /tmp
@@ -100,9 +101,9 @@ spec:
 
 ##### Persistent Volume Claim
 ```
-a) Mechanism to claim a persistent volume based on matching specs (e.g. capacity, access mode, storage class, labels).
-b) Kubernetes will attempt to try to match to the smallest capacity volume available.
-c) Pods mount claims and not volumes, meaning volumes will only be available once the claim is satisfied.  
+a) PVCs are a mechanism to claim a persistent volume based on matching specs (e.g. capacity, label selector access mode, 
+   storage class, labels). Once a persistent volume is claimed by a PVC, it cannot be claimed by other PVCs.  
+b) Kubernetes will attempt to try to bind PVCs to the smallest capacity volume available.
 ```
 
 ##### Persistent Volume Claim Example
@@ -118,7 +119,7 @@ spec:
     requests:
       storage: 80Gi
   # must match storage class name of persistent volume claim
-  # if storageClassName is empty (""), matches volumes with no storage class name
+  # if storageClassName: "", matches any volume with no storage class name
   # if storageClassName is not specified, default storage class will be used
   storageClassName: example-class
   selector:
@@ -132,8 +133,8 @@ spec:
 
 ##### Storage Class
 ```
-Describes the classes of storages that are offered.
-These classes might map to different quality of service levels or to backup policies. 
+Describes the classes of storages that are offered. These classes might map to different quality of service levels or 
+varying backup policies.  
 ```
 
 ##### Storage Class Examples
@@ -147,23 +148,33 @@ parameters:
   type: io1
   iopsPerGB: "10"
   fsType: ext4
+# WaitForFirstCustomer indicates the PV is dynamically created only after a pod consumes a PVC
+# Immediate indicates the PV is dynamically created after the PVC is created
+volumeBindingMode: WaitForFirstCustomer
 ```
 
 ### CSI
 ---
 ##### Problem Statement
 ```
-a) Storage vendors relied on Kubernetes in-tree (source code) volume plugins to support storage connectivity.
-b) Storage vendors would need to develop a volume plugin and add it to the source code to integrate their storage system.
-c) Source code changes could cause bugs that are difficult to test.
-d) Development of volume plugin depends on Kubernetes release version and requires the source code to be publicly available.
+In the past, storage vendors would need to develop a volume plugin and add it to the source code to integrate their 
+storage system. Development of volume plugins would heavily depend on Kubernetes release version and would also require 
+the source code to be publicly available. Source code changes could also cause bugs that are difficult to test.
 ```
 
 ##### Container Storage Interface (CSI)
 ```
-Initiative and specification to write various storage solutions via plugins that are integratable with various container orchestrators.
-Users are able to adopt storage solutions and the container orchestration system of their choice according to different needs.
-Vendors do not need to worry about Kubernetes source code or be locked down to Kubernetes this way.
+Specification for writing custom storage drivers via plugins that are integratable with various container orchestrators. 
+With CSI, users are able to select storage solutions and the container orchestration system of their choice according to 
+user needs. Vendors do not need to worry about Kubernetes source code or be locked down to Kubernetes.
+```
+
+### ConfigMaps
+---
+##### ConfigMaps
+```
+a) ConfigMaps are a means to keep configuration separate away from container images.
+b) ConfigMap configurations can be consumed as environment variables, volumes, or secrets.
 ```
 
 ### Projections, Snapshots, and Cloning
@@ -188,12 +199,4 @@ a) Volumes clones are new volumes populated with the content of an existing volu
 b) Only available for dynamic provisioning. 
 c) Uses the storage class of the source volume.
 d) Only available for CSI drivers.
-```
-
-### ConfigMaps
----
-##### ConfigMaps
-```
-a) ConfigMaps are a means to keep configuration separate away from container images.
-b) ConfigMap configurations can be consumed as environment variables, volumes, or secrets.
 ```
