@@ -4,12 +4,23 @@
 ```
 IRSA is an EKS native way to allow pods to assume IAM roles through service account annotations. It moves away from 
 having to define IAM roles at the node level (i.e. EC2 instance).
+```
 
-Step 1) IAM role must be created with a trust relationship to the EKS OIDC provider. Each EKS cluster can be configured 
-        to have an OIDC provider with a public endpoint to authenticate users to the cluster.
-Step 2) Pods should be annotated with the ARN of the IAM role to assume. A mutating webhook called the Pod Identity Webhook
+##### IRSA Workflow
+```
+Step 1) An OIDC provider for the cluster must be created with a public endpoint. This OIDC provider authenticates and 
+        issues new JWT tokens that are projected into pods via service accounts.
+Step 2) An IAM role must be created with a trust relationship to the OIDC provider:
+          * The following is used to indicate that any service authenticated by the OIDC provider can be trusted:
+            "Principal": {
+              "Federated": "arn:aws:iam::$account_id:oidc-provider/$oidc_provider"
+            }
+          * The following is used to indicate that the caller must pass a web identity token that indicates it has been
+            authenticated by the OIDC provider:
+            "Action": "sts:AssumeRoleWithWebIdentity"
+Step 3) Pods should be annotated with the ARN of the IAM role to assume. A mutating webhook from the Pod Identity Webhook 
         will inject environment variables representing the IAM Role ARN and path to the pod's service account token.
-Step 3) When a pod makes an AWS API call, STS evaluates the trust policy of the IAM role. STS checks with the trusted 
-        OIDC endpoint to verify that the JWT token is issued by the cluster's OIDC provider.
-Step 4) STS issues temporary credentials which effectively assigns the IAM role to the pod.
+Step 4) When a pod makes an AWS API call, the request is sent to STS to evaluate the trust policy of the IAM role. STS 
+        verifies with the public OIDC endpoint to verify that the pod's JWT token is issued by the same OIDC provider.
+Step 5) If verified, STS issues temporary credentials which effectively assigns the IAM role to the pod.
 ```

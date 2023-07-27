@@ -9,15 +9,15 @@ up new Linux namespaces for containers and CNI is responsible for assigning an I
 
 ##### Pod to Pod Networking
 ```
-Step 1) CNI sets up a veth pair, one to the pod's network namespace and the other end to the host. Depending on the CNI
-        implementation, veths on the root namespace are then connected (e.g. L2 network bridges, tunnels, L3 routers).
-        The next steps assume this networking model: https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/
+Step 1) CNI sets up a veth pair, one to the pod's network namespace and the other end to the root namespace's network 
+        bridge (this depends on CNI implementation - Linux bridges, tunnels, L3 routers). The next steps assume this 
+        networking model: https://sookocheff.com/post/kubernetes/understanding-kubernetes-networking-model/.
 Step 2) A pod will send a packet to the veth device on its network namespace, which will route to the other end of the 
         veth pair on the root namespace. 
-Step 3) The request will then be forwarded to the network bridge. This bridge has a MAC address table which it populates
-        via the ARP protocol.
-Step 4) If the packet needs to be forwarded to a pod in the same node, it will forward to the veth pair that leads to the
-        target pod's network namespace. 
+Step 3) Once the request is forwarded to the network bridge, a MAC address table is used to forward requests. This table
+        is populated via the ARP protocol.
+Step 4) If the packet needs to be forwarded to a pod in the same node, it will forward to the veth pair of the target 
+        pod's network namespace. 
 Step 5) If the packet needs to be forwarded to a different node, the bridge will send the request to the default gateway. 
         The default gateway will route the packet to the gateway of the node where the target pod resides (logic to know 
         which node to forward to based on the pod's IP will be cloud provider specific). From here, the request will be 
@@ -33,7 +33,7 @@ Step 2) Before packets leave the source node, prerouting chains as part of iptab
         specific to the service will be searched in sequential order until a match is found.
 Step 3) Once a match is found, rules for what pod the packet should be sent to must be chosen. If there is more than one 
         pod that is backed by the service, iptables use a Linux module called "statistic" to choose which pod's IP to
-        DNAT (i.e. rewrite packet's destination IP) into via round robin.
+        DNAT (i.e. rewrite packet's destination IP) into via round robin. DNAT can also be used to change port numbers.
 Step 4) The packet will leave the source node to the correct target node with a modified destination IP address. 
 ```
 

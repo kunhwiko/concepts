@@ -37,7 +37,7 @@ b) IPtables are organized in the following hierarchy:
      * Rules  : Statements that instruct the system what to do with a packet.  
 ```
 
-##### Tables of IP Table
+##### Tables of IPTable
 ```
 Filter Table
   * This table is used to decide whether to accept or deny a packet to its intended destination. Examples of chains in 
