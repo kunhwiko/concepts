@@ -1,21 +1,3 @@
-### Availability Designs
-----
-##### High Availability
-```
-a) Master components should be redundant.
-b) etcd across nodes should be able to communicate with one another and update cluster data.
-c) API server is stateless so there is no need for one to communicate with another.
-d) Multiple schedulers and controller managers means chaos, so these should implement leader election.
-```
-
-##### Systems Availability
-```
-a) Provide redundancy for all systems.
-b) Automate hot swapping for when components fail.
-c) Ensure to have robust logging, monitoring, alerting, testing.
-d) Persist raw data in case processed data is corrupted (raw or old data can be kept in cheap storage).
-```
-
 ### Autoscaling
 ---
 ##### Horizontal Pod Autoscaler (HPA)

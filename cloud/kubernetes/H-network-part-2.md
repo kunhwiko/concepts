@@ -2,9 +2,9 @@
 ---
 ##### Container to Container Networking
 ```
-Containers in the same pod share network/IPC namespaces and have a common IP address. This means containers in the 
-same pod can communicate with one another via localhost or IPC mechanisms. Container runtimes are responsible for setting 
-up new Linux namespaces for containers and CNI is responsible for assigning an IP address to the pod.
+Containers in the same pod share network/IPC namespaces and have a common IP address, indicating containers in the same 
+pod can communicate via localhost or IPC mechanisms. Container runtimes are responsible for setting up new Linux 
+namespaces for containers and CNI is responsible for assigning an IP address to the pod and various network interfaces.
 ```
 
 ##### Pod to Pod Networking
@@ -15,13 +15,12 @@ Step 1) CNI sets up a veth pair, one to the pod's network namespace and the othe
 Step 2) A pod will send a packet to the veth device on its network namespace, which will route to the other end of the 
         veth pair on the root namespace. 
 Step 3) Once the request is forwarded to the network bridge, a MAC address table is used to forward requests. This table
-        is populated via the ARP protocol.
+        is populated via ARP.
 Step 4) If the packet needs to be forwarded to a pod in the same node, it will forward to the veth pair of the target 
         pod's network namespace. 
 Step 5) If the packet needs to be forwarded to a different node, the bridge will send the request to the default gateway. 
-        The default gateway will route the packet to the gateway of the node where the target pod resides (logic to know 
-        which node to forward to based on the pod's IP will be cloud provider specific). From here, the request will be 
-        sent to the node's network bridge and the CNI specific networking solution will apply.
+        The default gateway will route the packet to the gateway of the correct node. The logic to know which node to 
+        forward to based on the pod's IP will be different per cloud provider.
 ```
 
 ##### Pod to Service Networking
@@ -112,7 +111,7 @@ according to networking needs. Vendors do not need to worry about Kubernetes sou
 ##### CNI Plugin
 ```
 CNI plugin is responsible for:
-  * Add network interface to network namespaces and bridge the container to the host via a VETH pair.
+  * Add network interface to network namespaces created by CRIs and bridge the container to the host via a VETH pair.
   * Assign unique IP addresses to CNI containers (e.g. pods for Kubernetes) via an IP Address Management (IPAM) plugin.
   * Set up routes and take care of routing logic.
 

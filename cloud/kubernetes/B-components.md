@@ -65,12 +65,21 @@ persist the info in etcd and communicate with the kubelet of the node for where 
 
 ##### CoreDNS
 ```
-a) CoreDNS is a pod that functions as a DNS server in the cluster.
-b) Every service, except for headless services, receive a DNS name and pods can receive DNS names as well. 
+CoreDNS is a pod that functions as a DNS server in the cluster. It has become the default over KubeDNS.
+  * Every service receives an A record: <service-name>.<namespace>.svc.cluster.local
+  * Every pod receives an A record: <pod-ip-address>.<namespace>.pod.cluster.local
 ```
 
 ### Master Node Component Optimizations
 ---
+##### High Availability
+```
+a) Master nodes and their components should be redundant in case of an outage. Leader election is used so that only one
+   master node is active at a time. This prevents schedulers or controller managers from taking duplicate actions at the 
+   same time. 
+b) Users can choose to run etcd on an isolated server in the event the master node goes down. 
+```
+
 ##### API Server Cache
 ```
 a) Various Kubernetes components operate on snapshots of the cluster state rather than on real-time updates.
@@ -134,7 +143,8 @@ Kubernetes to support various container runtimes based on user needs without the
 ```
 Step 1) Kubelets will interact with CRI compatible container runtimes or CRI shims (i.e. a bridge that implements CRI and 
         translates to something container runtimes can understand) over Unix sockets using the gRPC framework. 
-Step 2) The CRI will start containers based on its logic. This could include invoking other plugins such as CNI as well.
+Step 2) The CRI will start containers based on its logic. This includes setting up process and network namespaces. This 
+        could also include invoking other plugins such as CNI as well.
 Step 3) Once the containers are created and the pod is up, kubelets will reach out to the API server to persist this 
         information into etcd. 
 ```
