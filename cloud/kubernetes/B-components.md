@@ -74,10 +74,14 @@ CoreDNS is a pod that functions as a DNS server in the cluster. It has become th
 ---
 ##### High Availability
 ```
-a) Master nodes and their components should be redundant in case of an outage. Leader election is used so that only one
-   master node is active at a time. This prevents schedulers or controller managers from taking duplicate actions at the 
-   same time. 
-b) Users can choose to run etcd on an isolated server in the event the master node goes down. 
+a) Master nodes and their components should be redundant in case of an outage.
+b) API server is stateless, so multiple API servers can be active at a time. A load balancer can be placed in front of
+   master nodes to split traffic between API servers.
+c) Schedulers and controller managers perform leader election by periodically attempting to obtain a lock. This prevents
+   schedulers or controller managers from taking duplicate actions at the same time.
+d) etcd can either run on the master node or run on an isolated server. Leader election for etcd is done through raft 
+   protocol. All write requests are forwarded to the leader, and the leader will ensure a copy of the data is then sent 
+   to all etcd instances. When a new etcd instance comes up, data is copied to it.
 ```
 
 ##### API Server Cache
