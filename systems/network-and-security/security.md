@@ -83,6 +83,12 @@ c) Similar to server certificates, CAs have root certificates to validate that t
    CA public keys are pre-built into web browsers.  
 ```
 
+##### Certificate Signing Request (CSR)
+```
+A CSR can be created to get a certificate signed by a root CA. After the root CA reviews the legitimacy of the cert, it
+will be signed. 
+```
+
 ### Secure Shell Protocol (SSH)
 ---
 ##### Port Forwarding

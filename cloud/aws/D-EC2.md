@@ -2,7 +2,12 @@
 ---
 ##### EC2 Properties
 ```
-All EC2 properties are listed here: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html
+All EC2 properties are listed here: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html.
+```
+
+##### EC2 APIs
+```
+All EC2 APIs are listed here: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html.
 ```
 
 ### Security

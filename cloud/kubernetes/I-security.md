@@ -10,8 +10,8 @@ Provides a partition among users, and each namespace can be sealed with credenti
 a) Secrets are namespaced resources that can contain sensitive info such as credentials and tokens. To limit access to
    secrets, they should be put in namespaces accessible only to a limited set of users or services.
 b) Secrets are stored as unencrypted plain text in etcd and are typically base64 encoded when kubelets download them to
-   local nodes. Kubelets will typically download these secrets through the API server via TLS and store them in node
-   memory (i.e. never to disk) are deleted when not needed.
+   worker nodes. Kubelets will typically download these secrets through the API server via TLS and store them in node
+   memory (i.e. never to disk), and are deleted when not needed.
 c) Secrets can be mounted as files via volumes, specified in service accounts, or be picked up as container environment 
    variables. The same secret can be mounted to multiple pods.
 ```
@@ -36,13 +36,16 @@ typically give "admin" access, giving global access to all namespaces. Best prac
 limited set of namespaces.
 ```
 
+
+Authenticate Pods to the Kubernetes API server, allowing the Pods to read and manipulate Kubernetes API objects
 ##### Service Accounts
 ```
-a) When pods are instantiated, they are assigned a service account. A default service account is used if one is not
-   assigned, which by default limits access to resources in the current namespace.
+a) Service accounts represent an identity for a pod that allows for authenticating to the API server or represent what
+   privileges the pod has. When pods are instantiated, they are assigned a service account. A default service account is 
+   used if one is not assigned.
 b) Before Kubernetes 1.22, service accounts used to be attached with non-expiring token secrets that applications can 
-   use to authenticate against the Kubernetes API. Nowadays, API credentials with bounded lifetimes are obtained via the 
-   TokenRequest API and are mounted into a projected volume.
+   use to authenticate against the Kubernetes API. Nowadays, tokens with bounded lifetimes are obtained via the 
+   TokenRequest API and are mounted inside a projected volume.
 ```
 
 ##### Service Account Admission Controller

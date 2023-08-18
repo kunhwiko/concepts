@@ -27,6 +27,11 @@ CloudFront is a CDN service that can cache contents, limit access to the origin 
 what resources can be fetched (e.g. specific files in S3).
 ```
 
+##### Route53
+```
+Route53 is AWS's highly available and scalable DNS service.
+```
+
 ### Miscellaneous
 ---
 ##### CloudFormation
