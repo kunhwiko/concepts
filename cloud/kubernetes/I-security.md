@@ -36,8 +36,6 @@ typically give "admin" access, giving global access to all namespaces. Best prac
 limited set of namespaces.
 ```
 
-
-Authenticate Pods to the Kubernetes API server, allowing the Pods to read and manipulate Kubernetes API objects
 ##### Service Accounts
 ```
 a) Service accounts represent an identity for a pod that allows for authenticating to the API server or represent what
@@ -110,9 +108,12 @@ Roles
 RoleBindings
   * Grants permissions defined by a Role in a given namespace.
   * RoleBindings can also reference a ClusterRole and bind it to the given namespace.
+  
+Refer to the following for system component RBAC: 
+  * https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings
 ```
 
-### Authentication and Authorization to API Server
+### Component Authentication and Authorization
 ---
 ##### TLS
 ```
@@ -125,7 +126,7 @@ Note the following:
     compromised. For example, the API server can have a server certificate, a client certificate for kubelets, and a 
     client certificate for etcd.
   * Client certificates can specify a group that they belong to (e.g. system:masters) depending on the permissions that
-    are needed. Refer to: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings.
+    are needed. Refer to: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#referring-to-subjects.
 ```
 
 ##### Certificate Signing Requests (CSR)
@@ -137,8 +138,8 @@ https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requ
 
 ##### Kubeconfig
 ```
-Kubernetes uses a YAML file called kubeconfig to store cluster auth information (e.g. certs, keys). The path to this file 
-can be specified via the environment variable KUBECONFIG. This file consists of the following:
+Kubernetes uses a YAML file called kubeconfig to store cluster auth information (e.g. certs, keys). The path to this 
+file can be specified via the environment variable KUBECONFIG. This file consists of the following:
   * Clusters: HTTP endpoint to the Kubernetes API server along with the certificate of the root CA.
   * Contexts: Links a user to a cluster.
   * Users: Contains the client certificate and the client private key.
@@ -166,7 +167,7 @@ c) kubectl auth can-i ... verifies whether user can perform certain actions.
 ```
 The node authorizer is a special purpose authorization mode that authorizes API requests made by kubelets. It recognizes
 requests from kubelets as their certificates should be configured with a "system:nodes" group with a username of 
-"system:node:<node-name>".
+"system:node:<node-name>". Refer to: https://kubernetes.io/docs/reference/access-authn-authz/node/.
 ```
 
 ##### Step 3: Admission Control Plugins
