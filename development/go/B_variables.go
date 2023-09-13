@@ -37,6 +37,7 @@ func declareVariables() {
     // untyped variable declaration
     var y = 1
 
+    // print multiple variables
     fmt.Println(x, i, j, k, a, b, c, y)
 }
 

@@ -4,7 +4,7 @@ import (
     "fmt"
 )
 
-var runIfStatement() {
+func runIfStatement() {
     x := 43
     if x == 43 {
         fmt.Println(x)
@@ -15,11 +15,11 @@ var runIfStatement() {
         fmt.Println(x)
     }
 
-    // continues to returns 43 instead of 42
+    // continues to return 43 instead of 42
     fmt.Println(x)
 }
 
-var runSwitchStatement() {
+func runSwitchStatement() {
     switch {                   // find the first true expression
     case true:
         fmt.Println("First")   // prints and breaks here   

@@ -11,7 +11,7 @@ import (
 type names []string
 
 /*
- * This is a "function" that declares a variable of type "names"
+ * This is a "function" that declares a variable of type "names".
  */
 func declareType() {
     var friends names = []string{"Alice", "Bob"}
@@ -20,8 +20,7 @@ func declareType() {
 }
 
 /*
- * This is a "method" for type "names" with a receiver "n". By convention, the instance
- * of the type is represented as a single letter.
+ * This is a "method" for type "names" with a receiver "n".
  */
 func (n names) modifyFirst() {
     n[0] = "Alice"
@@ -44,11 +43,15 @@ func declareFunction() {
 }
 
 /*
- * Functions can have multiple returns and capital case functions represent
- * that the function can be exported to external packages.
+ * Capital case functions represent that the function can be exported. Functions can also
+ *  have multiple returns. Function return types can have "named return values" that initialize
+ * variables at the top of the function. These names are intended to document the meaning of
+ * the return values.
  */
-func ReturnMultiple(x int, y string) (int, string) {
-    return x, y
+func ReturnMultiple() (x int, y string) {
+	x = 5
+	y = "hello"
+	return x, y
 }
 
 func add(x int) {

@@ -96,12 +96,12 @@ func joinSlice() {
  * Maps in Go are unsorted default maps.
  */
 func initMap() {
-    // empty is a type map that points to nil
+    // empty is a map type that points to nil
     // assigning an entry will throw a nil exception
     var empty map[string]int
     empty["I"] = 1
 
-    // initializes an empty map and we can now assign an entry
+    // initializes an empty map that we can now assign an entry
     empty = make(map[string]int)
     empty["I"] = 1
 
