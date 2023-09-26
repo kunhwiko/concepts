@@ -131,8 +131,8 @@ Note the following:
 
 ##### Certificate Signing Requests (CSR)
 ```
-A CertificateSigningRequest object is used to request that a certificate be signed by a specified signer, after which 
-the request may be approved or denied by administrators before finally being signed. Refer to the following for signers: 
+A CertificateSigningRequest object is used to request that a certificate be signed by the root CA, after which the 
+request may be approved or denied by administrators before finally being signed. Refer to the following for signers: 
 https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#kubernetes-signers.
 ```
 

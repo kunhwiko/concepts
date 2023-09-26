@@ -13,7 +13,15 @@ ARNs uniquely identify AWS resources. These identifiers are typically in the fol
 ##### Identity and Access Management (IAM)
 ```
 IAM is a web service that allows for secure access to AWS resources. It is used to centrally manage who is authenticated 
-and authorized to use resources. 
+and authorized to use resources.
+```
+
+##### IAM Properties & APIs
+```
+All IAM properties are listed here:
+  * https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_IAM.html
+All IAM APIs are listed here: 
+  * https://docs.aws.amazon.com/IAM/latest/APIReference/welcome.html
 ```
 
 ##### IAM Users

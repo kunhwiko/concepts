@@ -1,13 +1,11 @@
 ### Route53 Basics
 ---
-##### Route53 Properties
+##### Route53 Properties & APIs
 ```
-All EC2 properties are listed here: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_Route53.html.
-```
-
-##### Route53 APIs
-```
-All EC2 APIs are listed here: https://docs.aws.amazon.com/Route53/latest/APIReference/Welcome.html.
+All Route53 properties are listed here: 
+  * https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_Route53.html
+All Route53 APIs are listed here: 
+  * https://docs.aws.amazon.com/Route53/latest/APIReference/Welcome.html
 ```
 
 ### Hosted Zones

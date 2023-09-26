@@ -1,13 +1,17 @@
 ### EC2 Basics
 ---
-##### EC2 Properties
+##### EC2 Properties & APIs
 ```
-All EC2 properties are listed here: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html.
+All EC2 properties are listed here:
+  * https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html
+All EC2 APIs are listed here: 
+  * https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html
 ```
 
-##### EC2 APIs
+##### Instance Profiles
 ```
-All EC2 APIs are listed here: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html.
+Instance profiles are similar to IAM users but are intended for EC2 instances. They define "who" the EC2 instances are
+and can assume at most 1 IAM role that defines what privileges the profile has. 
 ```
 
 ### Security
