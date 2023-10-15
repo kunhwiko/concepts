@@ -61,8 +61,16 @@ custom scheduling algorithms can also be deployed, and pods can then choose whic
 
 ##### Manual Scheduling
 ```
-If a pod needs to be forcefully scheduled to a particular node, it is possible to manually specify the nodeName field on 
+If a pod needs to be forcefully scheduled to a particular node, it is possible to manually specify the "nodeName" field on 
 the pod's spec. Otherwise, the scheduler will decide what the value of this field will be.
+```
+
+##### Multiple Schedulers
+```
+Users can create custom scheduler profiles that specifies what scheduling plugins to enable or disable. A scheduler
+deployment can use a single KubeSchedulerConfiguration that has multiple scheduling profiles, which will prevent
+race conditions (e.g. pod allocation to the same node). Pods can then choose which profile to use for scheduling
+based on the "schedulerName" field under the pod's spec. 
 ```
 
 ##### Node Selector
