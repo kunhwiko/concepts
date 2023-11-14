@@ -299,8 +299,10 @@ Step 3) Host sends a request message specifying the DHCP server it will use.
 
 ##### Domain Name System (DNS)
 ```
-a) DNS servers act as a phonebook for translating domain names or email addresses to IP addresses.
-b) DNS servers are replicated for availability, and caches popular addresses.
+DNS servers act as a phonebook for translating domain names or email addresses to IP addresses. Recursive nameservers start from a root
+server and recursively find the authoritative nameserver (e.g. . --> .com --> google.com --> mail.google.com). The authoritative
+nameserver holds the definitive information about specific domains. DNS servers can be replicated for availability and can cache
+popular addresses to reduce latency of recursive lookup.
 ```
 
 ##### A and CNAME Records
