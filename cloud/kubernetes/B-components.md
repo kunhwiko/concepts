@@ -67,7 +67,8 @@ persist the info in etcd and communicate with the kubelet of the node for where 
 ```
 a) CoreDNS is a pod that functions as a DNS server in the cluster. It has become the default over KubeDNS.
      * Every service receives an A record: <service-name>.<namespace>.svc.cluster.local
-     * Every pod receives an A record: <pod-ip-address>.<namespace>.pod.cluster.local
+     * Every pod receives an A record: <pod-ip-address>.<namespace>.pod.cluster.local. Pods by default do not have an
+       A record for the pod name. Refer to the following: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
 b) When a pod is scheduled, kubelets will write the IP address of the DNS server to /etc/resolv.conf. 
 ```
 
