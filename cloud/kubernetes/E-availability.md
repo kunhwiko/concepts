@@ -54,3 +54,13 @@ a) Readiness probes help address pod level readiness, but not an overall infrast
    Readiness gates address can address infrastructure level readiness.
 b) A pod spec called readinessGates can specify set of conditions for when things are ready.
 ```
+
+### Availability
+---
+##### Pod Disruption Budget
+```
+a) Limits the number of replicas that can be down at a given time due to voluntary disruptions. When using PDBs, it is
+   recommended to drain nodes rather than directly deleting pods or deployments.
+b) Pods deleted by involuntary disruptions and rolling upgrades both count towards the budget. Workload resources are however
+   not limited by PDBs when conducting rolling upgrades, and availability should be configured via each workload's spec.
+```
