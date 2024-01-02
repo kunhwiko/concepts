@@ -1,5 +1,10 @@
 ### Route53 Basics
 ---
+##### Route53
+```
+Route53 is AWS's highly available and scalable DNS service.
+```
+
 ##### Route53 Properties & APIs
 ```
 All Route53 properties are listed here: 

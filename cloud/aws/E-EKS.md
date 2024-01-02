@@ -1,3 +1,11 @@
+### EKS Basics
+---
+##### Elastic Kubernetes Service (EKS)
+```
+EKS is a managed Kubernetes service and AWS's container-as-a-service offering. EKS leverages EC2 for hosting cluster 
+nodes and integrates AWS infrastructure (e.g. VPC networking, IAM, availability).
+```
+
 ### Security
 ---
 ##### IAM Roles for Service Accounts (IRSA)
