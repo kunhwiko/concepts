@@ -47,12 +47,14 @@ c) Admission Plugin : Sets CPU/memory requests for new pods based on recommended
 ---
 ##### Scheduling Algorithm
 ```
-Step 1) The default behavior for the scheduler will place pods that need to be scheduled in a priority queue. The 
-        priority is specified through the "PriorityClass" API.
-Step 2) The scheduler will filter out nodes that are incapable of supporting the pod to be scheduled (e.g. insufficient
-        resources, taints, affinities, cordon).
-Step 3) The scheduler will score capable nodes based on remaining resources. It could also consider affinities, image
-        locality, etc.
+Step 1) By default, the scheduler will place pods that need to be scheduled into a priority queue. The priority of
+        those pods are determined through the "PriorityClass" API.
+Step 2) The scheduler goes through a filtering process to remove nodes that are incapable of supporting the pod to be
+        scheduled. The process considers free ports, node selectors, node resources, volume locality, cordons, network
+        availability, and taints.
+Step 3) The scheduler goes through a scoring process through the remaining filtered nodes. The process will consider
+        affinities, user provided policies over node preferences (e.g. favor nodes to pack pods into smallest set of nodes),
+        and image locality etc.
 Step 4) The scheduler will bind the pod to the chosen node and notify the API server.
 
 The scheduling process is extensible and can be customized via plugins based on user needs. Different schedulers with
