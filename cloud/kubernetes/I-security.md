@@ -147,19 +147,22 @@ file can be specified via the environment variable KUBECONFIG. This file consist
 
 ##### Step 1: Authentication
 ```
-a) Users use keys and certificates to authenticate against the API server over TLS.
+a) Users use keys and certificates to authenticate against the API server over TLS. It is possible to customize the
+   authentication process by injecting a webhook for bearer tokens. This requires how to access the remote authentication
+   service and the TTL of the authentication decision.
 b) Cluster admins can choose what authentication strategy to use. If at least one authentication step succeeds, 
-   authentication is granted.
+   authentication is granted. The authentication request and response are reported through the TokenReview JSON object.
 c) Administrators can impersonate different users (e.g. troubleshoot some issue for a different user) through the --as 
    and --as-group parameters.
 ```
 
 ##### Step 2: Authorization
 ```
-a) Authorization requests include info such as authenticated username and request verb.
+a) Authorization requests include info such as authenticated username and request verb. Like authentication, it is
+   possible to customize the authorization process by injecting a webhook.
 b) Cluster admins can choose what authorization strategy to use. When multiple authorization modules are configured, each 
-   is checked in sequence. If any authorizer approves or denies a request, that decision is immediately returned and no 
-   other authorizer is consulted.
+   is checked in sequence. If any authorizer approves or denies a request, that decision is returned and no other authorizer
+   is consulted. The authorization request and response are reported through the SubjectAccessReview JSON object.
 c) kubectl auth can-i ... verifies whether user can perform certain actions.
 ```
 
@@ -173,7 +176,8 @@ requests from kubelets as their certificates should be configured with a "system
 ##### Step 3: Admission Control Plugins
 ```
 a) Admission controller is code that intercepts requests to the API server after authorization but prior to storing 
-   objects into etcd. All admission control steps must pass for the request to succeed.
+   objects into etcd. All admission control steps must pass for the request to succeed. The admission control request
+   and response are reported through the AdmissionReview JSON object.
 b) Admission controllers can validate (e.g. deny requests that exceed resource limits) or mutate (e.g. create namespace 
    if it does not exist) requests. Mutating admission controllers are invoked before validating admission controllers.
 c) Admission plugins can be compiled or dynamic (i.e. run as webhooks and do not require restart of API server).
