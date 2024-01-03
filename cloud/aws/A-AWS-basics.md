@@ -14,8 +14,17 @@ it is recommended to use this user only for tasks that require root user credent
 
 ##### Region
 ```
-Region (e.g. us-west-1) is a geographical area that consists of multiple zones (e.g. us-west-1a).
+Region (e.g. us-west-1) represents a cluster of data centers in a certain geographical area and consists of multiple
+zones (e.g. us-west-1a). Most AWS services are region scoped and some services might not be available in some regions.
 ```
+
+##### Availability Zone
+```
+Availability zones are one or more data centers with redundant power, networking, and connectivity. Each zone is isolated
+from one another to reduce blast damages caused by disasters.
+```
+
+##### 
 
 ### ARN
 ---
