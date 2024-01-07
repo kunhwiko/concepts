@@ -1,9 +1,9 @@
-### IAM
+### IAM Basics
 ---
 ##### Identity and Access Management (IAM)
 ```
-IAM is a web service that allows for secure access to AWS resources. It is used to centrally manage who is authenticated 
-and authorized to use resources.
+IAM is a web service that deals with secure access to AWS resources. It is used to centrally manage who is authenticated 
+and authorized to use certain resources. Note that IAM resources are globally scoped in an AWS account.
 ```
 
 ##### IAM Properties & APIs
@@ -14,13 +14,38 @@ All IAM APIs are listed here:
   * https://docs.aws.amazon.com/IAM/latest/APIReference/welcome.html
 ```
 
+### IAM Users and Groups
+---
 ##### IAM Users
 ```
-IAM users define permission policies that determine what the identity can and cannot do in AWS. This identity is 
+IAM users have defined permission policies that determine what the identity can and cannot do in AWS. This identity is 
 uniquely associated with one person, and can access resources via access keys (i.e. long term credentials). 
 ```
 
-##### IAM Roles
+##### IAM Group
+```
+a) When the number of IAM users increases, it becomes difficult to maintain permissions for each IAM user. To streamline 
+   the process, users can be grouped into IAM groups so that permissions can be collectively granted. 
+b) Groups can only consist of users. Users do not need to belong to a group, but can belong to multiple groups. When a
+   user belongs to multiple groups, all policies from that group will be inherited to the user.
+```
+
+##### IAM Policy Types
+```
+Managed Policy
+  * Standalone policy that is defined and maintained by AWS. These policies are predefined for convenience reasons.
+
+Customer Managed Policy
+  * Customers can define their own standalone policy and attach the newly defined policy to users, groups, and roles.
+  
+Inline Policy
+  * Policy that is directly embedded into a single IAM identity. The policy maintains a strict one-to-one relationship 
+    between a policy and an identity.   
+```
+
+### IAM Roles
+---
+##### IAM Role
 ```
 IAM role is an identity that is assumable by anyone who needs it. These roles rely on temporary security credentials 
 generated through STS to perform certain actions in AWS. Both roles and users can be attached with IAM policies that 

@@ -15,7 +15,7 @@ Nodes are physical or virtual machines.
 
 ### KRM
 ---
-##### KRM (Kubernetes Resource Model)
+##### Kubernetes Resource Model (KRM)
 ```
 a) KRM is a declarative format used to talk to the Kubernetes API to express the desired state of the cluster. The 
    declarative format makes it particularly helpful for GitOps.
