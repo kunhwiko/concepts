@@ -47,9 +47,9 @@ Inline Policy
 ---
 ##### IAM Role
 ```
-IAM role is an identity that is assumable by anyone who needs it. These roles rely on temporary security credentials 
-generated through STS to perform certain actions in AWS. Both roles and users can be attached with IAM policies that 
-define the scope of permissions for individual roles.
+IAM role is an identity that is assumable by anyone, including applications, who needs it. These roles rely on temporary 
+security credentials generated through STS to perform certain actions in AWS. Like IAM users, roles can be attached with 
+IAM policies that define the scope of permissions.
 ```
 
 ##### Security Token Service (STS)
