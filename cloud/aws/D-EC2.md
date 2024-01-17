@@ -3,7 +3,7 @@
 ##### Elastic Compute Cloud (EC2)
 ```
 EC2 provides scalable computing capacity in AWS. It allows to launch necessary virtual servers, scale based on
-requirements, configure security and networking, and manage storage.
+requirements, configure security/networking, and manage storage.
 ```
 
 ##### EC2 Properties & APIs
@@ -12,6 +12,19 @@ All EC2 properties are listed here:
   * https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html
 All EC2 APIs are listed here: 
   * https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html
+```
+
+### EC2 Configurations
+---
+##### User Data
+```
+Script that is used when EC2 instances bootstrap. The user data script is executed as root user (i.e. sudo rights).
+```
+
+##### Key Pair
+```
+Key pairs allow users to connect to instances securely via SSH. Note that the instance's security group needs to allow
+for incoming SSH traffic.
 ```
 
 ##### Instance Profiles
@@ -24,11 +37,11 @@ and can assume at most 1 IAM role that defines what privileges the profile has.
 ---
 ##### Security Group
 ```
-a) Security group acts as a virtual firewall for EC2 instances and filters incoming and outgoing traffic based on a set 
-   of rules (e.g. allowed protocols, ports, source/destination CIDR, source/destination security groups). 
+a) Security group acts as a virtual firewall for EC2 and filters incoming and outgoing traffic based on a set of rules 
+   (e.g. allowed protocols, port range on instance, source/destination CIDR, source/destination security groups). 
 b) When an instance is launched, one or more security groups can be specified. If not specified, a default security 
-   group for the VPC will be used. When EC2 decides whether to allow traffic to reach the instance, it evaulates all 
-   rules from all security groups associated with the instance.
+   group per VPC will be used. When EC2 decides whether to allow traffic to reach the instance, it evaulates all rules 
+   from all security groups associated with the instance.
 ```
 
 ##### Security Rule Exceptions
