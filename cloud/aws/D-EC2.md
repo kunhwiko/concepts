@@ -14,6 +14,52 @@ All EC2 APIs are listed here:
   * https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html
 ```
 
+### EC2 Purchase Options
+---
+##### On-Demand Instance & Capacity Reservation
+```
+a) Typically used for short-term workloads and are a pay per second after the first minute model.
+b) There is an option for "Capacity Reservation", which reserves on-demand capacity in a specific zone for any duration.
+```
+
+##### Reserved Instances
+```
+a) Model to reserve a certain quantity of instances of specific attributes (e.g. type, OS) with a reservation period of 
+   1 or 3 years at a discounted price. Instances can be reserved at either a regional or zonal scope.
+b) Payment options can vary from paying upfront, partially upfront, or none upfront for further discounts.
+c) Excess reserved instances can be bought or sold on the Reserved Instance Marketplace.
+d) There is an option for "Convertible Reserved Instances" which allow for flexibility to change instance types, family, 
+   OS, and zone/region scope.
+```
+
+##### Savings Plan
+```
+a) 1 or 3 year commitment to a certain amount of usage for a discounted price.
+```
+
+##### Spot Instance & Spot Fleet
+```
+a) Model to use unused EC2 capacity at a discounted price but can be interrupted at any time. Customers specify a max 
+   spot price and are assigned instances that match that price. If the current spot prices exceed the customer specified 
+   max spot price, the instances will be terminated.
+b) Spot fleets allow customers to specify price constraints, max capacity, set of possible launch pools (e.g. instance 
+   type, OS, zone), and strategy where AWS will then optimally bring up a fleet of spot instances from those pools:
+     * Lowest Price: Choose from lowest priced pool that has available capacity
+     * Diversified: Distribute from different pools
+     * Capacity Optimized: Choose from pool with instances based on capacity remaining (i.e. low chance of interruption) 
+     * Price Capacity Optimized: Selects pools with highest capacity available, and then selects pools with lowest price 
+```
+
+##### Dedicated Host & Instance
+```
+a) Dedicated Hosts is a model to book an entire physical server, typically due to compliance requirements. In this model,
+   AWS allows users to control instance placements and provides full visibility about the server (socket, cores, host 
+   ID) which could be required for custom software licenses.
+b) There is an option for "Dedicated Instances" which is used to book an entire dedicated hardware. The physical server 
+   will vary per instance startup as AWS will look for hardware that doesn't have VMs running. EC2 instances in the same
+   account may share the same dedicated hardware.
+```
+
 ### EC2 Configurations
 ---
 ##### User Data
