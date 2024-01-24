@@ -70,7 +70,7 @@ Script that is used when EC2 instances bootstrap. The user data script is execut
 ##### Key Pair
 ```
 Key pairs allow users to connect to instances securely via SSH. Note that the instance's security group needs to allow
-for incoming SSH traffic.
+for incoming SSH traffic. Note that SSH requires the instances to have a public IP unless a VPN exists.
 ```
 
 ##### Instance Profiles
@@ -79,7 +79,15 @@ Instance profiles are similar to IAM users but are intended for EC2 instances. T
 and can assume at most 1 IAM role that defines what privileges the profile has. 
 ```
 
-### Security
+### Networking / Security
+---
+##### Elastic IP
+```
+a) When an EC2 instance is stopped and then started, the public IP will change. If a fixed IP is required, an Elastic IP 
+   needs to be configured. An Elastic IP is a public IPv4 IP address that one own's as long as it is not deleted.
+b) Elastic IPs can be attached to an instance or network interface and are billed as long as they are NOT attached. 
+```
+
 ---
 ##### Security Group
 ```
