@@ -70,7 +70,8 @@ func (p person) wrongModifyFirstName(newName string) {
 }
 
 func (p *person) modifyFirstName(newName string) {
-    (*p).firstName = newName
+    // Go automatically dereferences the pointer for us
+    p.firstName = newName
 }
 
 // anonymous structs
