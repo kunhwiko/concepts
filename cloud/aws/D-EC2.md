@@ -14,6 +14,23 @@ All EC2 APIs are listed here:
   * https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html
 ```
 
+##### Stop / Terminate / Hibernate
+```
+Stop
+  * When stopped, instances retain their instance IDs, private IPv4 address, and data from attached EBS volumes.
+  * When stopped, instances do not retain the host machine, data from local disk or RAM, and public IPv4 address.   
+  
+Terminate
+  * When terminated, the instance along with all previous data including EBS volumes are deleted.
+
+Hibernate
+  * When hibernated, the state of RAM is saved into the root EBS volume and the root volume is persisted. This leads to
+    being able to persist previous state and faster boot time as loading the preserved RAM means the OS can expedite 
+    initialization tasks (e.g. hardware detection, filesystem checks etc.).
+  * The EBS volume needs to have enough space to be able to store the state of RAM.
+  * When hibernated, instances do not retain the host machine and public IPv4 address. 
+```
+
 ### EC2 Purchase Options
 ---
 ##### On-Demand Instance & Capacity Reservation
@@ -34,7 +51,8 @@ d) There is an option for "Convertible Reserved Instances" which allow for flexi
 
 ##### Savings Plan
 ```
-a) 1 or 3 year commitment to a certain amount of usage for a discounted price.
+1 or 3 year commitment to a certain amount of usage for a discounted price. Any usage beyond the commitment will be 
+charged at the on-demand price.
 ```
 
 ##### Spot Instance & Spot Fleet
@@ -62,6 +80,13 @@ b) There is an option for "Dedicated Instances" which is used to book an entire 
 
 ### EC2 Configurations
 ---
+##### Amazon Machine Image (AMI)
+```
+AMI is an image that provides info required to launch an instance. This includes one or more EBS snapshots, templates
+for the root volume of the instance (e.g. OS), launch permissions to control which AWS accounts can use the AMI, and a
+block device mapping that specifies the volumes to attach to the instance during launch.
+```
+
 ##### User Data
 ```
 Script that is used when EC2 instances bootstrap. The user data script is executed as root user (i.e. sudo rights).
@@ -70,7 +95,7 @@ Script that is used when EC2 instances bootstrap. The user data script is execut
 ##### Key Pair
 ```
 Key pairs allow users to connect to instances securely via SSH. Note that the instance's security group needs to allow
-for incoming SSH traffic. Note that SSH requires the instances to have a public IP unless a VPN exists.
+for incoming SSH traffic. Also note that SSH requires the instances to have a public IP unless a VPN exists.
 ```
 
 ##### Instance Profiles
@@ -79,22 +104,53 @@ Instance profiles are similar to IAM users but are intended for EC2 instances. T
 and can assume at most 1 IAM role that defines what privileges the profile has. 
 ```
 
+### Storage
+---
+##### Root Volume
+```
+When an instance is launched, a root volume is attached. Each instance has a single root volume that contains the OS and 
+system files to boot the device. It is generally recommended to use EBS backed root volumes due to persistence.
+```
+
 ### Networking / Security
 ---
+##### Placement Groups
+```
+a) Cluster:   Packs instances close together inside an availability zone to achieve low-latency network communication.
+b) Partition: Spreads instances across logical partitions such that groups of instances in one partition do not share 
+              underlying hardware with groups of instances in different partitions.
+c) Spread:    Strictly places individiual instances across distinct hardware to reduce correlated failures. The max 
+              number of instances for each group (i.e. rack) per available zone is 7. 
+```
+
 ##### Elastic IP
 ```
 a) When an EC2 instance is stopped and then started, the public IP will change. If a fixed IP is required, an Elastic IP 
    needs to be configured. An Elastic IP is a public IPv4 IP address that one own's as long as it is not deleted.
-b) Elastic IPs can be attached to an instance or network interface and are billed as long as they are NOT attached. 
+b) Elastic IPs can be attached to a single instance or network interface at a time. 
+```
+
+##### Elastic Network Interface (ENI)
+```
+a) Logical component representing a virtual network card. An instance will come with a default non-detachable ENI and 
+   can have multiple ENIs additionally attached.
+b) ENIs are bound to a specific subnet and can be dynamically attached and detached onto different EC2 instances in 
+   that subnet.
+c) Each ENI can have a primary private IPv4 address from the IPv4 address range of the VPC. It can then have one or more 
+   secondary private IPv4 addresses from the IPv4 address range of the VPC.
+d) Each ENI can have one public IPv4 address, one MAC address, and one or more security groups. One Elastic IP can
+   be associated with one of the private IPv4 addresses of the ENI.
 ```
 
 ---
 ##### Security Group
 ```
-a) Security group acts as a virtual firewall for EC2 and filters incoming and outgoing traffic based on a set of rules 
-   (e.g. allowed protocols, port range on instance, source/destination CIDR, source/destination security groups). 
-b) When an instance is launched, one or more security groups can be specified. If not specified, a default security 
-   group per VPC will be used. When EC2 decides whether to allow traffic to reach the instance, it evaulates all rules 
+a) Security group acts as a virtual firewall for EC2 and defines what inbound and outbound traffic are allowed based on
+   rules (e.g. allowed protocols, port range on instance, source/destination CIDR or security groups). 
+b) Security groups only contain allow rules. All inbound traffic is blocked by default and all outbound traffic is
+   allowed by default.
+c) When an instance is launched, one or more security groups can be specified. If not specified, a default security 
+   group per VPC will be used. When EC2 decides whether to allow traffic to reach the instance, it evaluates all rules 
    from all security groups associated with the instance.
 ```
 

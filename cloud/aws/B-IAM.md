@@ -32,24 +32,21 @@ b) Groups can only consist of users. Users do not need to belong to a group, but
 
 ##### IAM Policy Types
 ```
-Managed Policy
-  * Standalone policy that is defined and maintained by AWS. These policies are predefined for convenience reasons.
-
-Customer Managed Policy
-  * Customers can define their own standalone policy and attach the newly defined policy to users, groups, and roles.
-  
-Inline Policy
-  * Policy that is directly embedded into a single IAM identity. The policy maintains a strict one-to-one relationship 
-    between a policy and an identity.   
+a) Managed Policy: Standalone policy that is defined and maintained by AWS. These policies are predefined for 
+   convenience reasons.
+b) Customer Managed Policy: Customers can define their own standalone policy and attach the newly defined policy to 
+   users, groups, and roles.
+c) Inline Policy: Policy that is directly embedded into a single IAM identity. The policy maintains a strict one-to-one 
+   relationship between a policy and an identity.   
 ```
 
 ### IAM Roles
 ---
 ##### IAM Role
 ```
-IAM role is an identity that is assumable by anyone, including applications, who needs it. These roles rely on temporary 
-security credentials generated through STS to perform certain actions in AWS. Like IAM users, roles can be attached with 
-IAM policies that define the scope of permissions.
+IAM role is an identity that is usually assumed by a service. These roles rely on temporary security credentials 
+generated through STS to perform actions in AWS. Like IAM users, roles can be attached with IAM policies that define the 
+scope of permissions.
 ```
 
 ##### Security Token Service (STS)
@@ -61,11 +58,8 @@ AssumeRoleWithWebIdentity) that can be found: https://docs.aws.amazon.com/IAM/la
 
 ##### Trust Policy
 ```
-Trust Policy
-  * JSON document that define which principals are allowed to assume the role, and under what conditions.
-
-Principal
-  * Entity (e.g. IAM user) that can perform actions and access resources.
+JSON documentation that defines which principals (e.g. entity that will perform actions) will assume the IAM role and 
+under what conditions.
 ```
 
 ##### Federation
