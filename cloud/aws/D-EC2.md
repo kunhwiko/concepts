@@ -14,6 +14,32 @@ All EC2 APIs are listed here:
   * https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html
 ```
 
+##### Placement Groups
+```
+a) Cluster:   Packs instances close together inside an availability zone to achieve low-latency network communication.
+b) Partition: Spreads instances across logical partitions such that groups of instances in one partition do not share 
+              underlying hardware with groups of instances in different partitions.
+c) Spread:    Strictly places individiual instances across distinct hardware to reduce correlated failures. The max 
+              number of instances for each group (i.e. rack) per available zone is 7. 
+```
+
+##### Stop / Terminate / Hibernate
+```
+Stop
+  * When stopped, instances retain their instance IDs, private IPv4 address, and data from attached EBS volumes.
+  * When stopped, instances do not retain the host machine, data from local disk or RAM, and public IPv4 address.   
+  
+Terminate
+  * When terminated, the instance along with all previous data including EBS volumes are deleted.
+
+Hibernate
+  * When hibernated, the state of RAM is saved into the root EBS volume and the root volume is persisted. This leads to
+    being able to persist previous state and faster boot time as loading the preserved RAM means the OS can expedite 
+    initialization tasks (e.g. hardware detection, filesystem checks etc.).
+  * The EBS volume needs to have enough space to be able to store the state of RAM.
+  * When hibernated, instances do not retain the host machine and public IPv4 address. 
+```
+
 ### EC2 Purchase Options
 ---
 ##### On-Demand Instance & Capacity Reservation
@@ -34,7 +60,7 @@ d) There is an option for "Convertible Reserved Instances" which allow for flexi
 
 ##### Savings Plan
 ```
-a) 1 or 3 year commitment to a certain amount of usage for a discounted price.
+1 or 3 year commitment to a certain amount of usage for a discounted price.
 ```
 
 ##### Spot Instance & Spot Fleet
@@ -62,6 +88,13 @@ b) There is an option for "Dedicated Instances" which is used to book an entire 
 
 ### EC2 Configurations
 ---
+##### Amazon Machine Image (AMI)
+```
+AMI is an image that provides info required to launch an instance. This includes one or more EBS snapshots, templates
+for the root volume of the instance (e.g. OS), launch permissions to control which AWS accounts can use the AMI, and a
+block device mapping that specifies the volumes to attach to the instance during launch.
+```
+
 ##### User Data
 ```
 Script that is used when EC2 instances bootstrap. The user data script is executed as root user (i.e. sudo rights).
@@ -79,6 +112,14 @@ Instance profiles are similar to IAM users but are intended for EC2 instances. T
 and can assume at most 1 IAM role that defines what privileges the profile has. 
 ```
 
+### Storage
+---
+##### Root Volume
+```
+When an instance is launched, a root volume is attached. Each instance has a single root volume that contains the OS and 
+system files to boot the device. It is generally recommended to use EBS backed root volumes due to persistence.
+```
+
 ### Networking / Security
 ---
 ##### Elastic IP
@@ -86,6 +127,16 @@ and can assume at most 1 IAM role that defines what privileges the profile has.
 a) When an EC2 instance is stopped and then started, the public IP will change. If a fixed IP is required, an Elastic IP 
    needs to be configured. An Elastic IP is a public IPv4 IP address that one own's as long as it is not deleted.
 b) Elastic IPs can be attached to an instance or network interface and are billed as long as they are NOT attached. 
+```
+
+##### Elastic Network Interface (ENI)
+```
+a) Logical component of VPC that represents a virtual network card. ENIs are bound to a specific subnet and can be 
+   dynamically attached and detached onto different EC2 instances in that subnet.
+b) Each ENI can have a primary private IPv4/IPv6 address from the IPv4/IPv6 address range of the VPC. It can then have
+   one or more secondary private IPv4 addresses from the IPv4 address range of the VPC.
+c) Each ENI can have one Elastic IP address per private IPv4 address.
+d) Each ENI can have one IPv4 address, a MAC address, and one or more security groups.
 ```
 
 ---
