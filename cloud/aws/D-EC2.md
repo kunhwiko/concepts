@@ -82,9 +82,9 @@ b) There is an option for "Dedicated Instances" which is used to book an entire 
 ---
 ##### Amazon Machine Image (AMI)
 ```
-AMI is an image that provides info required to launch an instance. This includes one or more EBS snapshots, templates
-for the root volume of the instance (e.g. OS), launch permissions to control which AWS accounts can use the AMI, and a
-block device mapping that specifies the volumes to attach to the instance during launch.
+AMI is an image that provides info on how an instance should be launched. This includes one or more EBS snapshots, 
+templates for the instance's root volume (e.g. OS), launch permissions to control which AWS accounts can use the AMI, 
+and a block device mapping that specifies the volumes to attach to the instance during launch.
 ```
 
 ##### User Data
@@ -112,7 +112,22 @@ When an instance is launched, a root volume is attached. Each instance has a sin
 system files to boot the device. It is generally recommended to use EBS backed root volumes due to persistence.
 ```
 
-### Networking / Security
+##### Elastic Block Store (EBS)
+```
+a) EBS is a network based storage for EC2 instances and persists after instance termination. EBS volumes are bound to an
+   availability zone and can be dynamically attached to instances in the same zone. EBS volumes are attached to one 
+   instance at a time, but some volume types support multiple attachments.
+b) Snapshots can be taken to make a backup of EBS volumes at a certain point in time and can be used to create volumes.
+   These snapshots can be copied across zones and regions. 
+```
+
+##### Instance Store
+```
+Instance stores are non-network based hardware disks and generally have better I/O performance than network based 
+volumes. These volumes however are terminated when an instance is stopped.
+```
+
+### Networking
 ---
 ##### Placement Groups
 ```
@@ -142,6 +157,7 @@ d) Each ENI can have one public IPv4 address, one MAC address, and one or more s
    be associated with one of the private IPv4 addresses of the ENI.
 ```
 
+### Security
 ---
 ##### Security Group
 ```
