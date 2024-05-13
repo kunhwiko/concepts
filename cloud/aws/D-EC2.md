@@ -118,7 +118,19 @@ a) EBS is a network based storage for EC2 instances and persists after instance 
    availability zone and can be dynamically attached to instances in the same zone. EBS volumes are attached to one 
    instance at a time, but some volume types support multiple attachments.
 b) Snapshots can be taken to make a backup of EBS volumes at a certain point in time and can be used to create volumes.
-   These snapshots can be copied across zones and regions. 
+   These snapshots can be copied across zones and regions.
+c) If encrypted, data at rest, any in-transit data, snapshots, and all volumes created by snapshots are encrypted.
+d) EBS supports various volume types such as I/O optimized, throughput optimized etc.
+```
+
+##### Elastic File System (EFS)
+```
+a) EFS is a network based storage that can be mounted to multiple EC2 instances in multiple zones. EFS scales automatically
+   with a pay-per-use model, so capacity does not need to be pre-provisoned. In general, EFS has a higher cost than EBS.
+b) EFS supports various volume types such as I/O optimized, throughput optimized etc. It is possible to set lifecycle 
+   management policies to move files to lower cost storage classes for files that are infrequently accessed (e.g. 
+   infrequent-access tier, archive tier).
+b) Security groups are used to control access to EFS.
 ```
 
 ##### Instance Store
