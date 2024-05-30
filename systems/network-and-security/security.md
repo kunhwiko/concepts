@@ -53,7 +53,9 @@ Step 3) Client verifies the server's SSL certificate with the certificate author
         the server can be entrusted.
 Step 4) Client sends an additional string of random bytes called the "premaster secret". This secret is encrypted with
         the server's public key that the client had previously received.
-Step 5) Server decrypts the premaster secret using the private key.
+Step 5) Server decrypts the premaster secret using the private key. This secret is enough to prevent MITM attacks, but
+        it is used alongside client/server randoms to prevent replay attacks. Randoms represent a state that is unique
+        per connection, preventing replay attacks as the attacks require a new connection.
 Step 6) Both client and server will generate sessions keys using the client random, server random, and premaster secret.
         These session keys are temporary symmetric keys and should be identical.
 Step 7) The client and server share a "finished" message encrypted with the session key and the handshake is complete. 
