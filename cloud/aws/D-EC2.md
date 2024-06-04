@@ -169,6 +169,20 @@ d) Each ENI can have one public IPv4 address, one MAC address, and one or more s
    be associated with one of the private IPv4 addresses of the ENI.
 ```
 
+#### Load Balancers
+```
+AWS provides 3 types of load balancers for Elastic Load Balancing (ELB):
+  * Application Load Balancer (ALB)
+      a) Layer 7 load balancer that supports routing to various target groups based on path-based routing. Target groups
+         are individually registered targets (e.g. EC2 instances, Lambda functions, private IPs) and target groups can
+         perform health checks on targets to send traffic to healthy targets. 
+      b) ALBs come with security groups that can be referenced by EC2 instances.
+      c) ALB provides a way to specify rule conditions (e.g. path, headers, Source IP) and perform custom logic on
+         incoming traffic based on those rules (e.g. forward to traffic group, traffic redirect, return error).
+  * Network Load Balancer (NLB): 
+  * Gateway Load Balancer (GWLB): 
+```
+
 ### Security
 ---
 ##### Security Group
