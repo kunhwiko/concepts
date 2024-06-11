@@ -169,35 +169,61 @@ d) Each ENI can have one public IPv4 address, one MAC address, and one or more s
    be associated with one of the private IPv4 addresses of the ENI.
 ```
 
-##### Load Balancers
+### Scalability and High Availability
+---
+##### Elastic Load Balancing (ELB)
 ```
-AWS provides 3 types of load balancers for Elastic Load Balancing (ELB):
+AWS provides a managed load balancing service that can automatically scale based on traffic. AWS provides the following
+load balancer types for elastic load balancing (ELB):
   * Application Load Balancer (ALB)
-      a) Layer 7 load balancer that can route traffic to various target groups. Operating at layer 7, ALBs support 
-         routing based on host, path, query parameters, and headers and supports authentication at the load balancer
-         level. 
-      b) As a layer 7 load balancer, ALB supports rerouting based on rule conditions (e.g. path, headers, Source IP) and 
-         can perform custom logic on incoming traffic based on those rules (e.g. forward to traffic group, traffic 
-         redirect, return error).         
-      c) ALBs come with a hostname that can be connected via DNS resolution. Note that underlying IPs can change.
-      d) ALBs come with security groups that can be referenced and whitelisted by security groups of EC2 instances.
-  * Network Load Balancer (NLB):
-      a) Layer 4 load balancer that is highly performant compared to ALB (e.g. latency performance). As a layer 4 load 
-         balancer, NLBs support routing to various target groups based on ports and protocols, but do not support routing 
-         based on URLs and custom rerouting logic. It also does not support authentication at the load balancer layer.
-      b) Like ALBs, NLBs support routing to target groups, come with security groups, and are assigned a hostname.
-      c) NLBs have a single static IP per availability zone and supports assigning Elastic IPs.
-  * Gateway Load Balancer (GWLB): 
-      a) Layer 3 load balancer that is commonly used to send traffic to a target group of security applications to 
-         inspect incoming traffic (e.g. deep packet inspection, payload manipulation) before routing to the destination.
-         Traffic that satisfies security requirements can be forwarded back to the GWLB and to the destination while 
-         those that do not meet requirements are dropped.   
+  * Network Load Balancer (NLB)
+  * Gateway Load Balancer (GWLB)
 ```
 
 ##### Target Groups
 ```
 Target groups are a grouping of individually registered targets (e.g. EC2 instances, Lambda functions, private IPs). 
 Each target group can perform health checks to ensure traffic is sent to healthy targets.
+```
+
+##### Application Load Balancer (ALB)
+```
+a) Layer 7 load balancer that can route traffic to various target groups. Operating at layer 7, ALBs support routing 
+   based on host, path, query parameters, and headers and supports authentication at the load balancer level. 
+b) As a layer 7 load balancer, ALB supports rerouting based on rule conditions (e.g. path, headers, Source IP) and can 
+   perform custom logic on incoming traffic based on those rules (e.g. forward to traffic group, traffic redirect, 
+   return error).         
+c) ALBs come with a hostname that can be connected via DNS resolution. Note that underlying IPs can change.
+d) ALBs come with security groups that can be referenced and whitelisted by security groups of EC2 instances.
+```
+
+##### Network Load Balancer (NLB)
+```
+a) Layer 4 load balancer that is highly performant compared to ALB (e.g. latency performance). As a layer 4 load 
+   balancer, NLBs support routing to various target groups based on ports and protocols, but do not support routing 
+   based on URLs and custom rerouting logic. It also does not support authentication at the load balancer layer.
+b) Like ALBs, NLBs support routing to target groups, come with security groups, and are assigned a hostname.
+c) NLBs have a single static IP per availability zone and supports assigning Elastic IPs.
+```
+
+##### Gateway Load Balancer (GWLB)
+```
+Layer 3 load balancer that is commonly used to send traffic to a target group of security applications to inspect 
+incoming traffic (e.g. deep packet inspection, payload manipulation) before routing to the destination. Traffic that 
+satisfies security requirements can be forwarded back to the GWLB and to the destination while those that do not meet 
+requirements are dropped.  
+```
+
+##### Auto Scaling Group (ASG)
+```
+a) Means to automate the scaling of EC2 instances based on demand. ASGs can recreate instances that fail health checks
+   and can also be integrated with CloudWatch to scale based on CloudWatch alarms. After an instance is scaled or
+   terminated, there is generally a cooldown period before the next scaling action can occur.
+b) ASGs can be associated with ELBs and can allow new instances to automatically be registered to target groups.
+c) ASGs are configured with launch templates, which define attributes such as instance type, AMI, user data, EBS volumes, 
+   SSH key pair, IAM roles, security groups, and subnet information.
+d) ASGs have various scaling policies that allow scaling based on resource usage, alarms, time intervals, or predictions 
+   based on historical data.
 ```
 
 ### Security
@@ -219,3 +245,5 @@ If a request is sent from an instance, the response for that request is allowed 
 inbound security group rules. Similarly, responses to allowed inbound traffic are allowed to leave the instance
 regardless of outbound rules.
 ```
+
+### 
