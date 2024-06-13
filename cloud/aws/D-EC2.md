@@ -226,6 +226,12 @@ d) ASGs have various scaling policies that allow scaling based on resource usage
    based on historical data.
 ```
 
+##### Connection Drain
+```
+Connection draining, or deregistration delay, is a feature that allows designated instances to complete in-flight 
+requests but causes the ELB to stop sending new requests to deregistered instances.
+```
+
 ### Security
 ---
 ##### Security Group
@@ -245,5 +251,3 @@ If a request is sent from an instance, the response for that request is allowed 
 inbound security group rules. Similarly, responses to allowed inbound traffic are allowed to leave the instance
 regardless of outbound rules.
 ```
-
-### 
