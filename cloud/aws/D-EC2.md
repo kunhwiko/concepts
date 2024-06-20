@@ -180,6 +180,20 @@ load balancer types for elastic load balancing (ELB):
   * Gateway Load Balancer (GWLB)
 ```
 
+##### Features of Elastic Load Balancers
+```
+a) Connection Drain: Otherwise known as deregistration delay, is a feature that allows designated instances to complete 
+   in-flight requests but causes the ELB to stop sending new requests to deregistered instances.
+b) Sticky Sessions: Otherwise known as session affinity, is a feature that allows a client's session to be bound to a 
+   specific instance within a target group. For ALBs, session affinity is implemented in the form of cookies that are 
+   configured at the target group level and can be application-based or duration-based.
+c) Cross Zone Load Balancing: A feature that allows ELBs to distribute traffic evenly across all registered instances
+   even if those instances are in a different availability zone.
+d) TLS Encyrption: Allows connections to be encrypted between the client and the load balancer. ELBs can host multiple
+   SSL certificates that can be managed by AWS Certificate Manager (ACM). To support multiple SSL certificates, SNI is
+   used as part of the TLS handshake.
+```
+
 ##### Target Groups
 ```
 Target groups are a grouping of individually registered targets (e.g. EC2 instances, Lambda functions, private IPs). 
@@ -224,12 +238,6 @@ c) ASGs are configured with launch templates, which define attributes such as in
    SSH key pair, IAM roles, security groups, and subnet information.
 d) ASGs have various scaling policies that allow scaling based on resource usage, alarms, time intervals, or predictions 
    based on historical data.
-```
-
-##### Connection Drain
-```
-Connection draining, or deregistration delay, is a feature that allows designated instances to complete in-flight 
-requests but causes the ELB to stop sending new requests to deregistered instances.
 ```
 
 ### Security

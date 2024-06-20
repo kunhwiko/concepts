@@ -35,11 +35,6 @@ c) Asymmetric encryption tends to be slower than symmetric encryption for data t
 
 ### TLS
 ---
-##### TLS
-```
-Security protocol for secure communication.
-```
-
 ##### TLS Handshake - RSA Key Exchange Algorithm
 ```
 Process to establish a secure connection between a client and server. The RSA key exchange algorithm was used for TLS
@@ -89,6 +84,14 @@ c) Similar to server certificates, CAs have root certificates to validate that t
 ```
 A CSR can be created to get a certificate signed by a root CA. After the root CA reviews the legitimacy of the cert, it
 will be signed. 
+```
+
+##### Server Name Identification (SNI)
+```
+When a server with a single IP address hosts multiple websites each with its own SSL certificates, the server may be
+unaware of which SSL certificate to present back to the client. This is because TLS handshakes occur before the client
+indicates which website it's connecting to. SNI is an extension of the TLS protocol that allows the client to indicate
+the hostname it's connecting to during the TLS handshake.
 ```
 
 ### Secure Shell Protocol (SSH)

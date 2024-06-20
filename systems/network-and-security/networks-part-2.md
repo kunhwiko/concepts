@@ -102,8 +102,8 @@ Cons of Stateless Application
   a) Some applications need persistent state (e.g. shopping carts, usage tracking).
 
 Cookies
-  a) Sets a key-value pair that a website can store in the browser.
-     The cookie is sent from the browser in subsequent client requests so the server can recognize clients.
+  a) Sets a key-value pair that a website can store in the browser. The cookie is sent from the browser in subsequent 
+     client requests so the server can recognize clients.
 ```
 
 ##### HTTP 2
