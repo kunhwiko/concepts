@@ -9,7 +9,7 @@ in time. The snapshot holds all necessary info to instantiate and run a containe
 ##### Image Layers
 ```
 Images are built as a series of layers, or intermediate images that each represent changes from previous layers (e.g. 
-ENV, COPY, RUN commands in Dockerfiles each represent a layer). These layers are read only and if changes  are made, 
+ENV, COPY, RUN commands in Dockerfiles each represent a layer). These layers are read only and if changes are made, 
 only the new layers need to be pulled or pushed on top of existing layers residing in an image cache. 
 ```
 
@@ -40,42 +40,34 @@ b) VMs are relatively slow to start up as they need to boot up an OS. Containers
 
 ##### Tags
 ```
-a) Pointer to a particular image commit / version of an image.
-b) Multiple tags can refer to the same commit, so they have the same image ID. 
-```
-
-##### Separation of Concerns
-```
-a) All changes should be made to the source app, and containers should then be redeployed.
-b) Changes should not be made to a container directly as the results will not be reproducible.
-c) Containers should not contain unique data as they might have to be redeployed.
+Tags are pointers to a particular image commit / version of an image. Multiple tags can refer to the same commit, so 
+they have the same image ID. 
 ```
 
 ### Dockerfile
 ---
 ##### Dockerfile
 ```
-Dockerfiles list instructions (e.g. FROM, ADD, COPY, LABEL, WORKDIR, RUN, CMD) to build out an image.
-Each instruction typically represents a single layer and will be its own intermediary image up to that instruction.
-It is recommended to use .dockerignore and avoid copying unnecessary files or packages to keep image size small.
+Dockerfiles list instructions (e.g. FROM, ADD, COPY, LABEL, WORKDIR, RUN, CMD) to build out an image. Each instruction 
+typically represents a single layer and will be its own intermediary image up to that instruction. It is recommended to 
+use .dockerignore and avoid copying unnecessary files or packages to keep image sizes small.
 ```
 
 ##### CMD vs ENTRYPOINT
 ```
-a) If multiple CMD commands exist, all except the last one are ignored (i.e. there is an expectation that it 
-   can be overriden). It could be further overrriden through arguments to `docker run` or as `args` in a pod manifest
-   file.
-b) ENTRYPOINT instructions on the other hand will always be executed and are useful in multi-stage builds
-   when a command always needs to be executed. There can only be one ENTRYPOINT instruction in a Dockerfile. It could
-   be overriden through `command` in a pod manifest file.
-c) CMD can be used alongside ENTRYPOINT to specify parameters or arguments to the ENTRYPOINT executable.
+a) If multiple CMD exist, all except the last one are ignored. CMDs are typically used to provide default placeholders 
+   and can be overriden. CMDs can be overrriden through arguments to `docker run` or via `args` in a pod manifest.
+b) If multiple ENTRYPOINT exist, all except the last one are ignored. ENTRYPOINTs are typically used as a main command
+   that are meant to be always executed. It could be overriden via `command` in a pod manifest file.
+c) CMD can be used as arguments that are append to the ENTRYPOINT command (e.g. ENTRYPOINT sleep, CMD 10).
 ```
 
 ##### ADD vs COPY
 ```
-a) COPY supports copying of local files into a container and has a much more clear purpose of what to port over.
+a) COPY supports copying of local files or directories into a container and has a much more clear purpose.
 b) ADD has additional functionalities such as automatic tar extraction and fetching of packages from remote URLs.
-   While decompression of compressed files is a valid feature, COPY and curl for remote URLs is generally recommended.  
+   While decompression of compressed files is a valid feature, it is recommended to use COPY for copying files and
+   directories and to use curl to fetch packages from remote URLs.  
 ```
 
 ##### Multiple Staging
@@ -85,8 +77,8 @@ final image. Below is an example:
 
 Step 1) First stage of a Dockerfile will download a repository holding Golang code and necessary dependencies.
 Step 2) This stage will compile the Golang code into a binary using necessary dependencies.
-Step 3) The second stage specifies a new base image and can copy just the binary. The repository, other 
-        dependencies, and the previous base image are discarded and only the final stage is kept.
+Step 3) The second stage specifies a new base image and can copy the previous binary. The repository, other dependencies, 
+        and the previous base image are discarded.
 ```
 
 ### Daemons
@@ -122,24 +114,4 @@ The Docker infrastructure is better explained here: https://docs.docker.com/get-
     API requests by streaming output back to the client (e.g. output to terminal after running docker run).
   * dockerd can invoke containerd via gRPC requests to start a container.
   * dockerd allows for the building of images through Dockerfiles.
-```
-
-##### CLI
-```
-ctr
-  * Created to interact with containerd but is difficult to use and supports a limited subset of operations.
-
-nerdctl
-  * Created to interact with containerd and uses docker API like syntax.
-  * Supports a wide variety of features.
-  
-crictl
-  * Created by the Kubernetes community to interact with all CRI compatible runtimes.
-  * Has a limited subset of supported features but is good for debugging purposes.
-```
-
-##### Kaniko
-```
-Open source tool that enables a container to build other container images without requiring privileged access or the
-need for dockerd. It also supports authentication to push images to private registries. 
 ```
