@@ -2,9 +2,9 @@
 ---
 ##### Relational Database Service (RDS)
 ```
-Managed DB service using SQL as a query language. RDS supports databases such as PostgreSQL, MySQL, Aurora etc. As a
-managed service, AWS handles provisioning, autoscaling, OS upgrades, automated backups, and disaster recovery. Users can 
-also create and migrate snapshots or do point in time restoration.
+Managed DB service using SQL as a query language. RDS supports databases such as PostgreSQL, MySQL, Aurora etc. AWS 
+handles provisioning, autoscaling, monitoring, OS upgrades, automated backups, and disaster recovery. Users can also 
+create and migrate snapshots or do point in time restoration.
 ```
 
 ##### RDS Read Replicas
@@ -68,4 +68,19 @@ fleet that spins up DB instances on demand.
 ```
 AuroraDB can be setup to have a primary region and multiple secondary read-only regions. Replication across regions 
 and promoting another region to primary during failover is highly optimized for low latency. 
+```
+
+### ElastiCache
+---
+##### ElastiCache Basics
+```
+Managed cache service that supports Redis or Memcached. AWS handles provisioning, monitoring, OS upgrades, automated
+backups, and disaster recovery.
+```
+
+##### ElastiCache Patterns
+```
+ElastiCache supports lazy loading (i.e. load all read data to cache) and write-through (i.e. update cache when writing to
+DB). It can also be used to cache session data (i.e. storing temporary session data with TTL) as opposed to binding the
+session to a particular EC2 instance.
 ```
