@@ -20,7 +20,7 @@ a) Containers represent instances of images that run as processes in isolated us
    file system isolation, PID namespace for process isolation), capabilities to limit the root user privileges in the 
    new namespace, and cgroups for resource constraints to provide isolation from the host machine. 
 b) Containers can have a different OS from the host and will share the host's kernel through syscall requests.
-c) Containers are typically created and managed by container runtimes (e.g. Docker, containerd) that run on the host OS. 
+c) Containers are typically created and managed by container runtimes (e.g. containerd, Docker) that run on the host OS. 
 ```
 
 ##### Container Layers
@@ -85,8 +85,8 @@ Step 3) The second stage specifies a new base image and can copy the previous bi
 ---
 ##### Open Container Initiative (OCI)
 ```
-Set of vendor-neutral standards for container runtime that defines how images should be structured (e.g. file system, 
-metadata) and how containers should be launched, managed, and interact with host system (e.g. process isolation, 
+Set of vendor-neutral standards for container runtimes that define how images should be structured (e.g. file system, 
+metadata) and how containers should be launched. managed, and interact with host system (e.g. process isolation, 
 resource constraints, lifecycle management). 
 ```
 

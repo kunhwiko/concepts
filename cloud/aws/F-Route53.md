@@ -2,7 +2,7 @@
 ---
 ##### Route53
 ```
-Route53 is AWS's highly available and scalable DNS service.
+Route53 is AWS's highly available and scalable authoritative DNS service.
 ```
 
 ##### Route53 Properties & APIs
@@ -22,7 +22,7 @@ together and belonging to a single parent domain name. All record sets within a 
 domain name. As an example, the amazon.com hosted zone may contain records named www.amazon.com, and www.aws.amazon.com.
 ```
 
-#### Accessibility
+##### Accessibility
 ```
 Hosted zones can be public for routing internet traffic or private for routing traffic within a VPC.
 ```

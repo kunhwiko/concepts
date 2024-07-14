@@ -1,10 +1,5 @@
 ### Basic Networking Components
 ---
-##### Networks
-```
-System of links that interconnect computers to move data.
-```
-
 ##### Protocols
 ```
 Set of rules and structures that define the semantics of how computers communicate.
@@ -276,12 +271,15 @@ IPv6
 host name (www.github.com) --(DNS)--> IP Address --(ARP)--> MAC address 
 
 Step 1) Host begins only knowing its source MAC address.
-Step 2) Host looks for a DHCP server to discover its own IP address, IP address of DNS servers, IP address of default gateway, and subnet mask.
-Step 3) Host discover the destination's IP address via DNS.
-Step 4) Subnet mask determines if the message should go through a gateway router or if the destination is in the same L2 network.
-        This is determined through entries in the host's routing table (i.e. 0.0.0.0/0 will map to IP address of default gateway).
+Step 2) Host looks for a DHCP server to discover its own IP address, IP address of DNS servers, IP address of default 
+        gateway, and subnet mask.
+Step 3) Host discovers the destination's IP address via DNS.
+Step 4) Subnet mask determines if the message should go through a gateway router or if the destination is in the same L2 
+        network. This is determined through entries in the host's routing table (i.e. 0.0.0.0/0 will map to IP address 
+        of default gateway).
 Step 5) Host fires an ARP broadcast to discover the destination MAC address of the default gateway or destination.
-Step 6) If packet goes through default gateway, the L2 header is rewritten (i.e. L3 header is preserved) and the above process is repeated.
+Step 6) If packet goes through default gateway, the L2 header is rewritten (i.e. L3 header is preserved) and the above 
+        process is repeated.
 ```
 
 ##### Dynamic Host Configuration Protocol (DHCP)
@@ -299,16 +297,36 @@ Step 3) Host sends a request message specifying the DHCP server it will use.
 
 ##### Domain Name System (DNS)
 ```
-DNS servers act as a phonebook for translating domain names or email addresses to IP addresses. Recursive nameservers start from a root
-server and recursively find the authoritative nameserver (e.g. . --> .com --> google.com --> mail.google.com). The authoritative
-nameserver holds the definitive information about specific domains. DNS servers can be replicated for availability and can cache
-popular addresses to reduce latency of recursive lookup.
+DNS servers act as a phonebook for translating domain names or email addresses to IP addresses. A local DNS server does
+a recursive lookup that starts with the root server, then the top level domain server, and ends with the authoritative 
+nameserver (e.g. . --> .com --> google.com --> mail.google.com). The authoritative nameserver usually holds the definitive 
+information about specific domains. DNS servers can be replicated for high availability and local DNS servers can cache 
+IP addresses after a successful recursive lookup.
 ```
 
-##### A and CNAME Records
+##### DNS Zone
 ```
-A Records     : A mapping of a hostname to one or more IP addresses.
-CNAME Records : An alias from one domain to another.
+A DNS zone is a portion of the DNS namespace that a specific organization or administrator manages. Each DNS server for
+a zone has a zone file that contains records for the zone in plain text format.
+```
+
+##### Fully Qualified Domain Name (FQDN)
+```
+mail.google.com
+  * com: top-level domain
+  * google: second-level domain
+  * google.com: domain name
+  * mail: subdomain
+  * mail.google.com: fully qualified domain name
+```
+
+##### Records
+```
+A     : Mapping of a hostname to one or more IPv4 addresses.
+AAAA  : Mapping of a hostname to one or more IPv6 addresses.
+CNAME : Mapping of one hostname to another hostname.
+NS    : Mapping to the nameserver responsible for a particular domain.
+SOA   : Record of administrative information in regards to the DNS zone.
 ``` 
 
 ##### Address Resolution Protocol (ARP)
