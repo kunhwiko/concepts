@@ -315,7 +315,7 @@ a zone has a zone file that contains records for the zone in plain text format.
 mail.google.com
   * com: top-level domain
   * google: second-level domain
-  * google.com: domain name
+  * google.com: domain name, root domain
   * mail: subdomain
   * mail.google.com: fully qualified domain name
 ```
@@ -324,7 +324,7 @@ mail.google.com
 ```
 A     : Mapping of a hostname to one or more IPv4 addresses.
 AAAA  : Mapping of a hostname to one or more IPv6 addresses.
-CNAME : Mapping of one hostname to another hostname.
+CNAME : Mapping of one hostname to another hostname. Cannot map root domains to another hostname.
 NS    : Mapping to the nameserver responsible for a particular domain.
 SOA   : Record of administrative information in regards to the DNS zone.
 ``` 
