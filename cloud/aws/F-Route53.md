@@ -33,6 +33,16 @@ but possibly outdated records.
 Hosted zones can be public for routing internet traffic or private for routing traffic within a VPC.
 ```
 
+##### Health Checks
+```
+a) Health checks allow Route53 to check the health of an endpoint, health of other health checks, or health of CloudWatch
+   alarms. Health checks allow for automated DNS failover if checks are failing. Firewalls must be configured to allow
+   health checks to reach the endpoint.
+b) Health checks cannot access endpoints on private hosted zones as it is outside the VPC. In case of private endpoints,
+   health checks can be associated to CloudWatch alarms.
+c) Multiple health checks can be combined into a single custom health check.
+```
+
 ### Record Types & Route Policies
 ---
 ##### Alias Records
@@ -53,4 +63,28 @@ when multiple values are returned, a random value is selected by the client. Sim
 ```
 Weighted records allow traffic to be distributed based on a weight value. Health checks are supported for weighted 
 records.
+```
+
+##### Latency Route Policy
+```
+Latency routing allows traffic to be routed based on the lowest network latency from the client to the AWS region. 
+Health checks are supported for latency routing.
+```
+
+##### Geolocation Route Policy
+```
+Geolocation routing allows traffic to be routed based on user location. A default record must be set for when none of the
+locations match the user's location. Health checks are supported for geolocation routing.
+```
+
+##### Geoproximity Route Policy
+```
+Geoproximity routing allows traffic to be routed based on the location of users and resources. Bias values can be set to
+bias traffic towards a specific location. This can be helpful if traffic needs to be shifted to a particular resource in
+a specific location.
+```
+
+##### Failover Route Policy
+```
+Failover records route traffic to a secondary endpoint when the primary endpoint is unhealthy as determined by health checks.
 ```
