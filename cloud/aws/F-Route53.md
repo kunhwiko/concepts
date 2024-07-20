@@ -65,6 +65,12 @@ Weighted records allow traffic to be distributed based on a weight value. Health
 records.
 ```
 
+##### Multivalue Route Policy
+```
+Multivalue records are used to return multiple values in response to a DNS query. Unlike simple records with multiple 
+values, health checks are supported for multivalue routing and Route53 will only return values that passed health checks.
+```
+
 ##### Latency Route Policy
 ```
 Latency routing allows traffic to be routed based on the lowest network latency from the client to the AWS region. 
@@ -82,6 +88,11 @@ locations match the user's location. Health checks are supported for geolocation
 Geoproximity routing allows traffic to be routed based on the location of users and resources. Bias values can be set to
 bias traffic towards a specific location. This can be helpful if traffic needs to be shifted to a particular resource in
 a specific location.
+```
+
+##### IP Based Route Policy
+```
+Route traffic based on CIDR ranges of clients.
 ```
 
 ##### Failover Route Policy
