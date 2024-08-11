@@ -49,6 +49,13 @@ generated through STS to perform actions in AWS. Like IAM users, roles can be at
 scope of permissions.
 ```
 
+##### Service Linked Role
+```
+A service role is an IAM role that a service assumes to perform actions on one's behalf. A service linked role is a 
+service role that is predefined by an AWS service and includes all the permissions that the service requires to call 
+other AWS services. Service linked roles can typically be assumed only by the linked AWS service.
+```
+
 ##### Security Token Service (STS)
 ```
 Entities with IAM roles attached will make an API request to the AWS STS endpoint for temporary security credentials, 

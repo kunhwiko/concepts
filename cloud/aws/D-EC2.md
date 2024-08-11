@@ -207,7 +207,7 @@ a) Layer 7 load balancer that can route traffic to various target groups. Operat
 b) As a layer 7 load balancer, ALB supports rerouting based on rule conditions (e.g. path, headers, Source IP) and can 
    perform custom logic on incoming traffic based on those rules (e.g. forward to traffic group, traffic redirect, 
    return error).         
-c) ALBs come with a hostname that can be connected via DNS resolution. Note that underlying IPs can change.
+c) ALBs come with a hostname that can be connected via DNS resolution. The IP address of load balancers can change.
 d) ALBs come with security groups that can be referenced and whitelisted by security groups of EC2 instances.
 ```
 
@@ -217,7 +217,7 @@ a) Layer 4 load balancer that is highly performant compared to ALB (e.g. latency
    balancer, NLBs support routing to various target groups based on ports and protocols, but do not support routing 
    based on URLs and custom rerouting logic. It also does not support authentication at the load balancer layer.
 b) Like ALBs, NLBs support routing to target groups, come with security groups, and are assigned a hostname.
-c) NLBs have a single static IP per availability zone and supports assigning Elastic IPs.
+c) NLBs have a single static IP per availability zone and can be assigned Elastic IPs.
 ```
 
 ##### Gateway Load Balancer (GWLB)
