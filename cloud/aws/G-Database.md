@@ -86,13 +86,3 @@ b) Using session affinity with ELBs can store session data but the data is lost 
    User cookies can also be used but they can only hold limited data and can make HTTP requests heavier. Instead, user
    cookies can send small session IDs where servers can then look up corresponding session data in ElastiCache.
 ```
-
-### S3
----
-##### S3 Basics
-```
-a) S3 is an infinitely scaling storage that store objects (files) into buckets. 
-b) S3 buckets are created at the region level but must have a globally unique name across all regions in all accounts.
-c) S3 objects can be versioned, encrypted, and tagged with metadata. These objects can be accessed through a URL that 
-   comprises of s3://<bucket-name>/<key-name>. The key name is the full path to the object from within a bucket. 
-```
