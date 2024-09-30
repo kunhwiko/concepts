@@ -53,11 +53,33 @@ d) S3 can be used to host static websites.
 a) Security can be set at the user level (e.g. IAM policies) or at the resource level (e.g. bucket policies, object ACL).
 b) A user can access an S3 object if the user has sufficient IAM permissions or there is a resource-level policy that 
    allows for access. If there is an explicit deny rule, the user's access will always be denied.
-c) S3 buckets can be blocked from public access and objects can be encrypted.
+c) Supports encryption in transit through HTTPS endpoints to protect in-flight unencrypted data. Bucket policies can be 
+   used to always enforce users to use secure transport.
+```
+
+##### S3 Encryption
+```
+a) SSE-S3: Server-side encryption with Amazon S3 managed keys, this is the default encryption method.
+b) SSE-KMS: Server-side encryption with KMS keys. This allows for user control over keys and auditing of key usage on
+   CloudTrail. Users need access to both the object and KMS keys to upload/download the object. Note that any KMS 
+   quotas such as requests per second will become applicable. 
+c) SSE-C: Server-side encryption with customer provided keys. Keys are provided by the user and are not stored by AWS.
+   Users must provide the encryption key in the header of the request when uploading/downloading objects. Using HTTPS is
+   mandatory for SSE-C.
+d) Client-side encryption: Encrypt and decrypts data from the client-side.
 ```
 
 ##### Bucket Policy
 ```
 Bucket policies are used to specify what API calls are allowed or denied on a bucket/object for specified principals.
-These policies can be used to allow for cross account access or to allow public access.
+These policies can be used to allow for cross account access or to allow public access. They can also be used to force
+users to always encrypt data with a specific mechanism (e.g. SSE-C) as policies are evaluated before encryption.
+```
+
+##### S3 CORS
+```
+If a client makes a cross origin request on an S3 bucket, CORS configurations need to be set correctly to allow access 
+for other origins. As an example, assume a browser makes a request to Bucket A to fetch an index.html file. That HTML 
+file may contain references to images in Bucket B to render completely. To allow the browser to additionally fetch those 
+images, Bucket B must set bucket A as an allowed origin.
 ```

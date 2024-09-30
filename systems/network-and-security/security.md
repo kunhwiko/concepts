@@ -146,3 +146,24 @@ SSH Tunneling
   b) SSH tunneling be used to forward ports that are blocked by firewalls to a different port that is not blocked.
   c) More information here: https://goteleport.com/blog/ssh-tunneling-explained/ and https://www.youtube.com/watch?v=AtuAdk4MwWw.
 ```
+
+### Cross Origin Resource Sharing (CORS)
+---
+##### Same Origin Policy
+```
+Security measure that allows a web page to only interact with resources of the same origin. An origin is defined as
+the combination of scheme, domain, and port. 
+```
+
+##### CORS
+```
+CORS is a browser-side HTTP header based security mechanism that allows a server to indicate which origins other than 
+its own are permitted to access resources. 
+
+Step 1) When a browser makes a request to https://example.com to fetch an index.html file, the file might require 
+        additional image data to be fetched from https://service.com to completely render the website. 
+Step 2) Before an actual request is made to https://service.com, the browser may send a preflight HTTP request with an
+        origin header (Origin: https://example.com) to check if the server will permit the actual request.
+Step 3) If permitted, the server will send back an access-control-allow-origin header.
+Step 4) The browser will continue to make the actual request to https://service.com to fetch the necessary images.
+```
