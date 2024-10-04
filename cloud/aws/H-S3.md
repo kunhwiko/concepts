@@ -76,6 +76,33 @@ These policies can be used to allow for cross account access or to allow public 
 users to always encrypt data with a specific mechanism (e.g. SSE-C) as policies are evaluated before encryption.
 ```
 
+##### Access Point
+```
+a) Access points limit users to access specific objects within a shared bucket through a given endpoint. This is useful 
+as managing various access on bucket policies is not scalable and creating multiple buckets might result in redundancy.
+b) Access point policies can be configured to ensure objects are accessible only from within a certain VPC.
+c) Object lambda access points can be configured so that functions modify objects before returning data to the user. 
+   This can be useful for redacting or enhancing certain information without having to store a copy.
+```
+
+##### Access Log
+```
+Access logs are used to audit both authorized and denied requests. Logs will be sent to a logging bucket, which must be 
+in the same AWS region.
+```
+
+##### S3 Pre-signed URL
+```
+Pre-signed URLs allow owners to generate a short-lived URL that provides access to an object. The URL inherits permissions
+of the owner and can be given to a third party user without having to make a bucket public or grant AWS credentials.
+```
+
+##### S3 Object Lock
+```
+Object locks ensure objects cannot be modified for a given retention period due to legal reasons. Versioning must be 
+enabled to use the feature and object locks can be created for individual objects.
+```
+
 ##### S3 CORS
 ```
 If a client makes a cross origin request on an S3 bucket, CORS configurations need to be set correctly to allow access 
