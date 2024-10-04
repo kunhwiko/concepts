@@ -42,7 +42,6 @@ management. It has the following features:
   * Pulls metrics from components over HTTP by default. A push model is supported through a push gateway.
   * Built in time series database that can be queried through PromQL.
   * Built in alert manager and the ability to define alerting rules.
-  * Prometheus server nodes are independent and do not rely on shared storage. 
 ```
 
 ##### Prometheus Operator
