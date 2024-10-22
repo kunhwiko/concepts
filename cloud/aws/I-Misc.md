@@ -2,7 +2,8 @@
 ---
 ##### CloudFront
 ```
-CloudFront is a global AWS CDN service that caches content at edge locations. As the service is global, CloudFront can
+CloudFront is a global AWS CDN service that caches content at edge locations. Before caching, contents from the edge are 
+also fetched using the AWS internal network, leading to even lower latencies. As the service is global, CloudFront can
 be used as an endpoint that is safe against DDoS attacks.
 ```
 
@@ -24,4 +25,19 @@ b) Pricing of data transfer varies across countries. Price classes can be set to
    cheaper areas.
 c) When origin contents are refreshed, the cache can be invalidated by invalidating all files or files at a specific path.
    This will bypass CloudFront's TTL settings.
+```
+
+### Global Accelerator
+---
+##### Global Accelerator
+```
+Global Accelerator leverages the AWS internal network to optimize the network path between users and applications.
+Global Accelerator provides two global static Anycast IPs to route traffic directly to edge locations, which will then 
+forward traffic to the destination (e.g. NLBs, EC2 instances, elastic IPs) from within the AWS internal network.
+```
+
+##### Health Checks
+```
+Global Accelerator can declare several endpoints and will route requests to the endpoint with the lowest latency. Health
+checks can be made on each endpoint, and if an endpoint fails, traffic will be routed to the next closest healthy endpoint. 
 ```
