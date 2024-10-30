@@ -53,8 +53,8 @@ d) S3 can be used to host static websites.
 a) Security can be set at the user level (e.g. IAM policies) or at the resource level (e.g. bucket policies, object ACL).
 b) A user can access an S3 object if the user has sufficient IAM permissions or there is a resource-level policy that 
    allows for access. If there is an explicit deny rule, the user's access will always be denied.
-c) Supports encryption in transit through HTTPS endpoints to protect in-flight unencrypted data. Bucket policies can be 
-   used to always enforce users to use secure transport.
+c) Supports at-rest encryption through keys and in-transit encryption through HTTPS endpoints. Bucket policies can be 
+   used to always enforce users to use HTTPS endpoints.
 ```
 
 ##### S3 Encryption
