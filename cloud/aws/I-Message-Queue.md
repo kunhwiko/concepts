@@ -56,3 +56,34 @@ c) SNS access policies, much like S3 bucket policies, can be used to regulate ac
 SNS can be used to fan out messages to multiple SQS queues. Each SQS queue can subscribe to relevant messages which are
 then consumed by respective consumers.
 ```
+
+### Kinesis
+---
+##### Kinesis Data Streams
+```
+a) Data streams help capture, process, and store streams of data in real-time. A stream is divided into shards, which 
+   are the base throughput unit. The number of shards can be provisioned manually or can be adjusted on-demand.
+b) Producers send data to streams in the form of records, which holds a partition key and a data blob. The partition key
+   is used to determine which shard the record belongs to through a hash. Data is ordered at the shard level.
+c) Consumers read data from shards and process records. Each record is uniquely identified by a partition key, sequence 
+   number and a data blob. Multiple consumers can consume the same stream.
+d) Data streams have a retention period and data can be reprocessed within that time frame. Once data is added, it can't
+   be deleted (i.e. imumutable) and data that shares the same partition key will go to the same shard (i.e. ordering).   
+```
+
+##### Kinesis Data Streams Security
+```
+a) Supports in-flight encryption through HTTPS endpoints and at-rest encryption through AWS managed Kinesis keys and KMS 
+   keys. Client-side encryption is also supported if the client wants to perform encryption themselves.
+b) IAM policies can be used to regulate access to Kinesis APIs.
+```
+
+##### Kinesis Data Firehose
+```
+a) Data Firehose loads data streams from producers (e.g. apps, Kinesis Data Streams, CloudWatch) as records, can optionally 
+   convert/compress data or perform custom transform logic through Lambda, and batch writes to destinations (e.g. S3, 
+   3rd party data stores, or custom endpoints).
+b) Data Firehose is serverless and provides automatic scaling. Unlike Kinesis Data Streams, Firehose itself is not a 
+   data store and is solely responsible for ingesting data.
+c) Buffer sizes and intervals can be configured to control latency and costs.
+```
