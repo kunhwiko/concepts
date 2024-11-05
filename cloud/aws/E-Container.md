@@ -13,6 +13,9 @@ a) ECS services help to run and maintain a specified number of instances of a ta
    deploy long-running tasks. Otherwise, short-term tasks can be deployed as a standalone without a service.
 b) When deploying a task, VPC, load balancers, replica count, and security groups (i.e. each task has its own ENI and 
    can have exclusive security groups) can be configured.
+c) Autoscaling can be enabled for services to increase the number of ECS tasks. Scaling can be done based on CPU/memory
+   utilization of tasks, request count on load balancers, or on CloudWatch metrics. The ECS autoscaler can also be paired
+   with ASGs to increase the number of underlying EC2 instances accordingly.
 ```
 
 ##### Launch Type
@@ -28,8 +31,8 @@ b) Fargate Launch Type: Fargate manages the provisioning of instances based on E
 ---
 ##### Elastic Kubernetes Service (EKS)
 ```
-EKS is a managed Kubernetes service and AWS's container-as-a-service offering. EKS leverages EC2 for hosting cluster 
-nodes and integrates with AWS infrastructure (e.g. VPC networking, IAM, availability).
+EKS is AWS's managed Kubernetes service and leverages AWS infrastructure (e.g. EC2 instances, VPC networking, IAM). EKS
+can be launched with EC2 instances or Fargate.
 ```
 
 ##### IAM Roles for Service Accounts (IRSA)
