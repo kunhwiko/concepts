@@ -72,3 +72,27 @@ App Runner is a service that simplifies deploying web applications. After users 
 health checks, and images, App Runner will deploy the application and manage the underlying infrastructure. This simplifies
 availability, load balancing, encryption, and VPC access to other services.
 ```
+
+### Lambda
+---
+##### Lambda
+```
+Lambda is a function-as-a-service that allows users to run code without having to manage server. Lambda functions are 
+typically used for short executions.
+```
+
+##### Lambda Integration
+```
+Lambda can be integrated with various AWS services. Below are some examples:
+  * API Gateway/Eventbridge: Rest APIs/events can trigger Lambda functions.
+  * Kinesis: Lambda functions can trigger data transformations on the fly.
+  * DynamoDB/S3: Functions can modify records/objects during read or update operations.
+```
+
+##### Limitations
+```
+a) For running containers, the image must integrate with the Lambda runtime API, and ECS/EKS/Fargate/App Runner are 
+   typically preferred.
+b) Memory allocation is capped at 10GB, disk capacity is capped at 10GB, and execution time is capped at 15 minutes.
+c) Code and dependencies are capped at 250MB for deployment.
+```
