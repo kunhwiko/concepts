@@ -63,3 +63,12 @@ autoscaler, Karpenter provides the following:
   * Provides a consolidation feature to move workloads from underutilized nodes to other nodes.
   * Provides a feature for node recycling to keep nodes up-to-date.
 ```
+
+### App Runner
+---
+##### App Runner
+```
+App Runner is a service that simplifies deploying web applications. After users configure resource requirements, autoscaling,
+health checks, and images, App Runner will deploy the application and manage the underlying infrastructure. This simplifies
+availability, load balancing, encryption, and VPC access to other services.
+```
