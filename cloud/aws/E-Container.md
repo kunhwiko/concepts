@@ -87,6 +87,7 @@ Lambda can be integrated with various AWS services. Below are some examples:
   * API Gateway/Eventbridge: Rest APIs/events can trigger Lambda functions.
   * Kinesis: Lambda functions can trigger data transformations on the fly.
   * DynamoDB/S3: Functions can modify records/objects during read or update operations.
+  * CloudFront: Functions can be used to make custom routing/authentication logic or customize CDN content at the edge. 
 ```
 
 ##### Limitations
@@ -95,4 +96,13 @@ a) For running containers, the image must integrate with the Lambda runtime API,
    typically preferred.
 b) Memory allocation is capped at 10GB, disk capacity is capped at 10GB, and execution time is capped at 15 minutes.
 c) Code and dependencies are capped at 250MB for deployment.
+```
+
+##### Advanced Features
+```
+a) Functions typically go through initialization, invocation, and shutdown. Lambda supports Snapstart so that when a new
+   function is published, the function is initialized, a snapshot is taken, and is then cached for low-latency access.
+   Through caching, snapstart allows the initialization step to be skipped.
+b) By default, Lambda runs on an AWS owned VPC. Lambda can be configured with a user owned VPC, subnets, and security
+   groups to access private resources. Lambda will create an ENI within the specified subnet in this case.
 ```
