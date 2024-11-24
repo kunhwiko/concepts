@@ -70,6 +70,20 @@ AuroraDB can be setup to have a primary region and multiple secondary read-only 
 and promoting another region to primary during failover is highly optimized for low latency. 
 ```
 
+### DynamoDB
+---
+##### DynamoDB Basics
+```
+a) DynamoDB is a highly available and performant NoSQL database made up of tables. Each table is made up of items (rows), 
+   which are made up of various attributes. TTLs can be set to delete items after a certain time.
+b) DynamoDB supports a provisioned mode where users specify expected read/write capacity units, or an on-demand mode 
+   where DynamoDB automatically scales based on traffic.
+c) DynamoDB Accelerator (DAX) can be used as a caching layer to reduce read congestion on DynamoDB by caching frequently 
+   accessed data.
+d) Changes to DynamoDB tables can be stream processed to DynamoDB Streams or Kinesis Data Streams for further processing.
+   When DynamoDB Stream is enabled, tables can be replicated across regions. 
+```
+
 ### ElastiCache
 ---
 ##### ElastiCache Basics

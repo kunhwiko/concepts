@@ -68,7 +68,7 @@ b) Producers send data to streams in the form of records, which holds a partitio
 c) Consumers read data from shards and process records. Each record is uniquely identified by a partition key, sequence 
    number and a data blob. Multiple consumers can consume the same stream.
 d) Data streams have a retention period and data can be reprocessed within that time frame. Once data is added, it can't
-   be deleted (i.e. imumutable) and data that shares the same partition key will go to the same shard (i.e. ordering).   
+   be deleted (i.e. immutable) and data that shares the same partition key will go to the same shard (i.e. ordering).   
 ```
 
 ##### Kinesis Data Streams Security
