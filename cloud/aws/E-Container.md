@@ -105,4 +105,14 @@ a) Functions typically go through initialization, invocation, and shutdown. Lamb
    Through caching, snapstart allows the initialization step to be skipped.
 b) By default, Lambda runs on an AWS owned VPC. Lambda can be configured with a user owned VPC, subnets, and security
    groups to access private resources. Lambda will create an ENI within the specified subnet in this case.
+c) Step functions can be used to create a workflow that chains multiple Lambda functions. Step functions have control over
+   sequence, parallel execution, condition handling, and error handling. 
+c) Lambda functions can ship event and debug logs to CloudWatch.
+```
+
+##### API Gateway
+```
+API Gateway can be integrated with Lambda to expose REST APIs that invoke Lambda functions. Note that the Gateway can also
+be integrated with other AWS services (e.g. Kinesis Data Streams) or be used to expose HTTP endpoints to backend apps 
+with rate limiting, caching, and authentication features.
 ```
