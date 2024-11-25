@@ -78,3 +78,28 @@ Federation
 Federated Users
    * Existing user identities outside AWS (e.g. IdPs) who can be granted temporary access to AWS resources.
 ```
+
+### Cognito
+---
+##### Cognito Basics
+```
+Amazon Cognito gives users outside AWS an identity to interact with web and mobile applications. User pools provide sign
+in functionality and can be integrated with API Gateway or ALBs. Identity pools provide temporary AWS credentials to 
+```
+
+##### User Pools
+```
+a) User pools provide sign-in functionality with username and password authentication, MFA, or through federated identity 
+   providers (e.g. Google, Facebook, SAML).
+b) After authenticating, users retrieve tokens from user pools that are then passed on to an API Gateway or ALB to 
+   authorize API calls. The API Gateway and ALB will evaluate the token with Cognito to authorize the request.
+```
+
+##### Identity Pools
+```
+a) Identity pools (federated identities) allow clients to obtain temporary AWS credentials. Clients authenticate and
+   retrieve tokens through Cognito user pools or through third party logins (e.g. Google, Facebook, SAML, OIDC). The 
+   token is then exchanged for temporary AWS credentials with Cognito identity pools. After Cognitio validates the token 
+   with third party providers, it will return credentials to the client.
+b) IAM policies applied to the temporary credentials are defined in Cognito.
+```
