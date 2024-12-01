@@ -75,7 +75,8 @@ and promoting another region to primary during failover is highly optimized for 
 ##### DynamoDB Basics
 ```
 a) DynamoDB is a highly available and performant NoSQL database made up of tables. Each table is made up of items (rows), 
-   which are made up of various attributes. TTLs can be set to delete items after a certain time.
+   which are made up of various attributes and queries can only be executed on primary keys or indexes. TTLs can be set 
+   to delete items after a certain time. 
 b) DynamoDB supports a provisioned mode where users specify expected read/write capacity units, or an on-demand mode 
    where DynamoDB automatically scales based on traffic.
 c) DynamoDB Accelerator (DAX) can be used as a caching layer to reduce read congestion on DynamoDB by caching frequently 

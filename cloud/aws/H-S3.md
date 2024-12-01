@@ -110,14 +110,3 @@ for other origins. As an example, assume a browser makes a request to Bucket A t
 file may contain references to images in Bucket B to render completely. To allow the browser to additionally fetch those 
 images, Bucket B must set bucket A as an allowed origin.
 ```
-
-### Athena
----
-##### Athena Basics
-```
-a) Athena is a serverless query service that allows users to query data in S3 using SQL. Billing is based on amount of 
-   data scans performed, so it is recommended to use columnar formats (e.g. Apache Parquet), data compression, and 
-   dataset partitions to increase performance and lower costs.
-b) Data source connectors that run on Lambda can be used to query data from other AWS services such as DynamoDB, 
-   ElastiCache, CloudWatch logs, and AuroraDB. 
-```
