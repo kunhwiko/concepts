@@ -41,3 +41,12 @@ forward traffic to the destination (e.g. NLBs, EC2 instances, elastic IPs) from 
 Global Accelerator can declare several endpoints and will route requests to the endpoint with the lowest latency. Health
 checks can be made on each endpoint, and if an endpoint fails, traffic will be routed to the next closest healthy endpoint. 
 ```
+
+### SageMaker
+---
+##### SageMaker
+```
+SageMaker is a service to build machine learning models. Unlike other services such as Polly or Rekognition which focus
+on a specific aspect of ML, SageMaker is a full suite that helps with the labeling of data, building/training/tuning of 
+models, and deploying models to endpoints. 
+```
