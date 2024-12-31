@@ -49,3 +49,21 @@ a) Event buses are routers that receieve events and deliver them to different ta
    services (e.g. Datadog), and custom event buses can be created to route events from custom applications.
 b) Event buses can be accessed by other accounts for centralization given the necessary resource policy.
 ```
+
+### CloudTrail
+---
+##### CloudTrail Basics
+```
+a) AWS service that enables governance, compliance, and auditing of AWS account activities. This includes a history of
+   API calls.
+b) CloudTrail is enabled by default and will log management events (e.g. VPC, EC2, IAM APIs). Additional charges apply
+   for data events (e.g. S3 object-level, Lambda function execution APIs), insights (e.g. detection of unusual activity)
+   and network activity events (e.g. API calls made to VPC endpoints).
+b) CloudTrail logs can be put into CloudWatch logs or S3 buckets.
+```
+
+##### EventBridge Integration
+```
+API calls logged to CloudTrail can be sent to EventBridge to trigger event rules based on the API call. This can help
+to set up notifications such as SNS topics.
+```
