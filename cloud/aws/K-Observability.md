@@ -67,3 +67,15 @@ b) CloudTrail logs can be put into CloudWatch logs or S3 buckets.
 API calls logged to CloudTrail can be sent to EventBridge to trigger event rules based on the API call. This can help
 to set up notifications such as SNS topics.
 ```
+
+### Config
+---
+##### Config Basics
+```
+a) AWS Config helps record configurations and changes over time to audit and record compliance of AWS resources (e.g.
+   unrestricted SSH access, public S3 buckets) using default rules or custom config rules via Lambda.
+b) Data can be aggregated across regions and AWS accounts and alerts (e.g. SNS) can be set on changes. Configuration data
+   can also be stored into S3 and analyzed with Athena.
+c) AWS-managed SSM automation documents or custom documents (e.g. docs that invoke Lambda functions) can be used to
+   remediate non-compliant resources.
+```
