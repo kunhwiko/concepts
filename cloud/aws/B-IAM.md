@@ -40,6 +40,17 @@ c) Inline Policy: Policy that is directly embedded into a single IAM identity. T
    relationship between a policy and an identity.   
 ```
 
+##### IAM Boundaries
+```
+Boundaries are used to limit the permissions that an identity can have. Even if a user has full admin privileges, they
+can be restricted by a boundary policy.
+```
+
+##### IAM Evaluation Logic
+```
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-denyallow.html
+```
+
 ### IAM Roles
 ---
 ##### IAM Role
@@ -77,6 +88,15 @@ Federation
 
 Federated Users
    * Existing user identities outside AWS (e.g. IdPs) who can be granted temporary access to AWS resources.
+```
+
+##### Resource Based Policy
+```
+a) Instead of associating permissions to a user to be able to perform certain actions, policies can be attached at a 
+   resource level. Only certain resources currently support resource-based policies (e.g. Lambda, S3, SQS, SNS).
+b) Resource-based policies remove the need to associate permissions to individual users. Also, when an IAM role is assumed,
+   the user or service temporarily forgoes the original permissions that they have, but users are able to keep their
+   original permissions when resource-based policies are used. 
 ```
 
 ### Cognito
