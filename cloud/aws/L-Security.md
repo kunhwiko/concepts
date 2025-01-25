@@ -5,8 +5,10 @@
 a) KMS is a service that manages encryption keys. Symmetric keys can both encrypt and decrypt data, but users cannot get
    direct access to these keys and must invoke KMS APIs to use. Asymmetric keys are split into public and private key 
    pairs, and only the public key is accessible to use for encryption outside AWS or for users who cannot invoke KMS.   
-b) KMS is fully integrated with IAM for authorization and usage can be audited by CloudTrail. While KMS is typically
-   region specific, a key can be configured to be copied across regions in an AWS account.
+b) KMS is fully integrated with IAM for authorization and usage can be audited by CloudTrail.
+c) KMS is by default region specific. When doing S3 or EBS replications across regions or accounts, objects and data 
+   need to be decrypted in the source account and then reencrypted with a new key in the new region. While it is possible
+   to copy keys into multi-region, this is not recommended due to higher exposure and possible security risks.
 ```
 
 ##### KMS Key Types
@@ -23,4 +25,13 @@ c) Customer Managed Keys: Keys that are created and managed by users in their ow
 Key policies are used to specify who can use and manage keys. While a default policy grants the root user full access
 to the key, users can also create custom policies to define who can access the key, who can administer the key, and to
 setup cross-account access.
+```
+
+### SSM Parameter Store
+---
+##### SSM Parameter Store Basics
+```
+a) SSM Parameter Store is a service that provides secure storage for configuration data and secrets. Version tracking
+   is supported and notifications can be integrated with EventBridge.
+b) SSM Parameter Store can validate access to data through IAM permissions and can encrypt data with KMS keys.
 ```
