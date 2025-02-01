@@ -27,11 +27,27 @@ to the key, users can also create custom policies to define who can access the k
 setup cross-account access.
 ```
 
-### SSM Parameter Store
+### Secrets Storage
 ---
-##### SSM Parameter Store Basics
+##### SSM Parameter Store
 ```
 a) SSM Parameter Store is a service that provides secure storage for configuration data and secrets. Version tracking
    is supported and notifications can be integrated with EventBridge.
 b) SSM Parameter Store can validate access to data through IAM permissions and can encrypt data with KMS keys.
+```
+
+##### AWS Secrets Manager
+```
+a) Secrets Manager is a service that helps manage secrets and database credentials, which can be encrypted with KMS keys. 
+   As opposed to SSM parameter store, secrets and credentials can be rotated automatically based on a schedule.
+b) Secrets manager can replicate secrets across multiple AWS regions and keep read replicas in sync. 
+```
+
+##### AWS Certificate Manager (ACM)
+```
+a) ACM is a service that deploys, manages, and rotates public and private TLS certificates. ACM can be integrated with 
+   services such as Elastic Load Balancer, CloudFront, and API Gateway to load certificates.
+b) When setting up public certificates, ACM can validate domain ownership through DNS validation or email validation.
+   When using DNS validation, ACM will provide a CNAME record that users must add to their domain's DNS configuration.
+   ACM will automatically check for these records and issue the certificate once validated. 
 ```
