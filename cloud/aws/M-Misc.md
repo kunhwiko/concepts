@@ -50,3 +50,24 @@ SageMaker is a service to build machine learning models. Unlike other services s
 on a specific aspect of ML, SageMaker is a full suite that helps with the labeling of data, building/training/tuning of 
 models, and deploying models to endpoints. 
 ```
+
+### WAF & Shield
+---
+##### Web Application Firewall (WAF)
+```
+WAF is a service that helps protect web applications from common Layer 7 web exploits, including IP address filtering,
+geolocation filtering, and rate limiting. WAF can be deployed to ALBs, CloudFront, and API Gateway.
+```
+
+##### AWS Shield
+```
+Shield is a managed DDoS protection service that is activated by default and protects against SYN/UDP floods, reflection
+attacks, and others. A paid advanced option is available for more complex attacks along with fee protection and access to
+DDoS response team.
+```
+
+##### AWS Firewall Manager
+```
+Firewall Manager is a service that helps manage and apply rules in all accounts within an AWS organization. Common set 
+of rules include WAF rules, AWS shield rules, security groups, and network firewall rules.
+```
