@@ -1,9 +1,9 @@
-### AWS Accounts
+### Overview
 ---
-##### AWS Accounts
+##### Accounts
 ```
-An AWS account is required to be able to control AWS resources. An email address, password, AWS account name, phone 
-number, and credit card information are required to create an AWS account. AWS billing is done per account. 
+An AWS account is required to be able to control AWS resources. An email address, password, account name, phone number,
+and credit card information are required to create an account. Billing is done per account. 
 ```
 
 ##### Root User
@@ -24,10 +24,10 @@ Availability zones are one or more data centers with redundant power, networking
 from one another to reduce blast damages caused by disasters.
 ```
 
-##### Budgeting
+##### Edge Locations
 ```
-a) Billing information shows how much was billed per service and per region.
-b) Budgets can be created to generate alerts when a certain amount of service usage is about to be exceeded.  
+Edge locations are AWS data centers designed to deliver services with the lowest latency possible. Services such as
+CloudFront and Route53 cache data at these locations for faster responses.
 ```
 
 ### Account Protection
@@ -40,16 +40,17 @@ recommended for login via the root user and IAM users.
 
 ##### Access Keys
 ```
-a) While passwords and MFA are used to protect login to the AWS console, access keys can be used to secure access for 
-   AWS CLI and SDK. The access key comes with an access key ID and a secret key which acts as a username and password.
-b) When using the AWS CLI or SDK locally with an access key, the commands will match the IAM permissions of the user for 
-   which the access key had been created from.
+While passwords and MFA are used to protect login to the AWS console, access and secret keys can be used to authenticate 
+for the AWS CLI and SDK. The access key acts as a username and the secret key acts as a password.
+
+When using the AWS CLI or SDK locally with an access key, the commands will match the IAM permissions of the user for 
+which the access key had been created from.
 ```
 
 ##### IAM Credentials Report
 ```
 Report that lists all of an account's users and the status of their various credentials (access key usage, access key 
-age, MFA enablement, user creation time etc.).
+age, MFA enablement, user creation time etc).
 ```
 
 ##### IAM Access Advisor
@@ -58,12 +59,24 @@ Shows the service permissions granted to a user and when those services were las
 be used to revise existing policies for the user. 
 ```
 
-### ARN
+### Properties & APIs
 ---
 ##### Amazon Resource Name (ARN)
 ```
 ARNs uniquely identify AWS resources. These identifiers are typically in the following format:
-  * arn:partition:service:region:account-id:resource-id
-  * arn:partition:service:region:account-id:resource-type:resource-id
-  * arn:partition:service:region:account-id:resource-type/resource-id
+- arn:partition:service:region:account-id:resource-id
+- arn:partition:service:region:account-id:resource-type:resource-id
+- arn:partition:service:region:account-id:resource-type/resource-id
+```
+
+##### Properties
+```
+Refer to the CloudFormation template docs for the list of AWS properties. Below is an example for IAM:
+- https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/AWS_IAM.html
+```
+
+##### API
+```
+Refer to the API reference docs for the list of AWS APIs. Below is an example for IAM APIs:
+- https://docs.aws.amazon.com/IAM/latest/APIReference/API_Operations.html
 ```

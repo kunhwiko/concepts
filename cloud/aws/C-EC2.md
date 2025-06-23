@@ -1,17 +1,9 @@
-### EC2 Basics
+### Overview
 ---
 ##### Elastic Compute Cloud (EC2)
 ```
 EC2 provides scalable computing capacity in AWS. It allows to launch necessary virtual servers, scale based on
 requirements, configure security/networking, and manage storage.
-```
-
-##### EC2 Properties & APIs
-```
-All EC2 properties are listed here:
-  * https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_EC2.html
-All EC2 APIs are listed here: 
-  * https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Welcome.html
 ```
 
 ##### Stop / Terminate / Hibernate

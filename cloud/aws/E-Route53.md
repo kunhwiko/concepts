@@ -1,16 +1,8 @@
-### Route53 Basics
+### Overview
 ---
 ##### Route53
 ```
 Route53 is AWS's highly available and scalable authoritative DNS service.
-```
-
-##### Route53 Properties & APIs
-```
-All Route53 properties are listed here: 
-  * https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/AWS_Route53.html
-All Route53 APIs are listed here: 
-  * https://docs.aws.amazon.com/Route53/latest/APIReference/Welcome.html
 ```
 
 ##### Hosted Zones
