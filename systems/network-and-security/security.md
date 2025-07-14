@@ -106,12 +106,22 @@ b) Port forwarding allows hosts in the Internet to connect to a specific host si
 ```
 SSH is a secure means to connect to a remote server without risking privacy from MITM attacks.
 
-Step 1) Client initiates a TCP handshake with the remote server, which should be listening on port 22.
-Step 2) Server sends a public key to verify authenticity along with a list of supported encryption protocols.
-Step 3) Client agrees on an encryption protocol that it can support and the connection is started.
-Step 4) Client and server use a key exchange algorithm (i.e. Diffie–Hellman) to create a symmetric key to encrypt data.
-        Public keys and private keys of both the client and the server are involved to compute the symmetric key. 
-Step 5) Client sends login credentials that are encrypted with the symmetric key to the server for authentication.
+Step 1) Client initiates a TCP handshake with the remote server, usually listening on port 22.
+Step 2) Client and server agree on an SSH protocol version and encryption/key exchange algorithm that both can support.
+Step 3) Server sends its public key to the client. The client will verify the server's public key against a list of 
+        trusted hosts that it has stored locally. If the server's public key is not in the list, the client will prompt
+        the user to accept or reject the connection.
+Step 4) Client and server use a key exchange algorithm to create a symmetric key. Using Diffie–Hellman as an example, 
+        the client and server first agree on a shared prime number and a generator number. The client and server use their 
+        respective private keys along with the shared prime number and generator to each compute a new public key.
+Step 5) Private keys along with the new public keys and shared prime number are used to compute a new key. The client and
+        server will have arrived at the same value and this new key will be used as a symmetric key:
+        - https://www.practicalnetworking.net/series/cryptography/diffie-hellman/.
+Step 6) The server digitally signs the session key with its private key and sends it to the client. The client can verify
+        the signature using the server's public key (e.g. RSA algorithm). If the signature is valid, the client will use 
+        the session key to encrypt all future communication with the server: 
+        - https://www.encryptionconsulting.com/education-center/what-is-rsa/
+Step 7) After a connection is encrypted, the client sends credentials (e.g. password, public key auth) for authentication.
 ```
 
 ### Virtual Private Network (VPN)

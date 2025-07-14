@@ -101,12 +101,6 @@ and a block device mapping that specifies the volumes to attach to the instance 
 Script that is used when EC2 instances bootstrap. The user data script is executed as root user (i.e. sudo rights).
 ```
 
-##### Key Pair
-```
-Key pairs allow users to connect to instances securely via SSH. Note that the instance's security group needs to allow
-for incoming SSH traffic. Also note that SSH requires the instances to have a public IP unless a VPN exists.
-```
-
 ##### Instance Profiles
 ```
 Instance profiles are similar to IAM users but are intended for EC2 instances. They define "who" the EC2 instances are
@@ -149,6 +143,13 @@ security groups associated with the instance.
 All inbound traffic is blocked by default and all outbound traffic is allowed by default. If a request is sent from an 
 instance, the response for that request is allowed to reach the same instance regardless of inbound security group rules. 
 Similarly, responses to allowed inbound traffic are allowed to leave the same instance regardless of outbound rules.
+```
+
+##### SSH Key Pair
+```
+Private and public key pairs can be generated to SSH into instances. The private key must be maintained by the user and 
+a copy of the public key will be stored in the instance. Note that the instance's security group needs to allow for 
+incoming SSH traffic and the instance must have a public IP unless a VPN exists.
 ```
 
 ### Storage
