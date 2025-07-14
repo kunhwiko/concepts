@@ -9,14 +9,14 @@ requirements.
 
 ##### Instance State
 ```
-a) Stop
+Stop
 - When stopped, instances retain their instance IDs, private IPv4 address, and data from attached EBS volumes.
 - When stopped, instances do not retain the host machine, data from local disk or RAM, and public IPv4 address.   
   
-b) Terminate
+Terminate
 - When terminated, the instance along with all previous data including EBS volumes are deleted.
 
-c) Hibernate
+Hibernate
 - When hibernated, the state of RAM is saved into the root EBS volume and the root volume is persisted. This leads to
   being able to persist previous state and faster boot times as loading the preserved RAM means the OS can expedite 
   initialization tasks (e.g. hardware detection, filesystem checks etc.).
@@ -26,16 +26,16 @@ c) Hibernate
 
 ##### Placement Groups
 ```
-a) Cluster  
+Cluster  
 - Packs instances close together inside an availability zone to achieve low-latency network communication.
 
-b) Partition
-- Spreads instances across logical partitions such that groups of instances in one partition do not share underlying
-  hardware with groups of instances in different partitions.
-  
-c) Spread
-- Strictly places individiual instances across distinct hardware to reduce correlated failures. The max number of
-  instances for each group (i.e. rack) per available zone is 7. 
+Spread
+- Strictly places individiual instances in an availability zone across distinct hardware to reduce correlated failures. 
+  The max number of instances for each group (i.e. rack) per available zone is 7.
+
+Partition
+- Partitions instances into groups where each group is placed into different server racks within an availability zone. 
+  The max number of partitions for each group per availabilty zone is 7.
 ```
 
 ### Purchase Options
@@ -111,9 +111,10 @@ and can assume at most 1 IAM role that defines what privileges the profile has.
 ---
 ##### Elastic IP
 ```
-a) When an EC2 instance is stopped and then started, the public IP will change. If a fixed IP is required, an Elastic IP 
-   needs to be configured. An Elastic IP is a public IPv4 IP address that one own's as long as it is not deleted.
-b) Elastic IPs can be attached to a single instance or network interface at a time. 
+When an EC2 instance is stopped and then started, the public IP will change. If a fixed IP is required, an Elastic IP 
+needs to be configured. An Elastic IP is a public IPv4 IP address that one own's as long as it is not deleted.
+
+Elastic IPs can only be attached to a single instance or network interface at a time. 
 ```
 
 ##### Elastic Network Interface (ENI)
@@ -202,9 +203,9 @@ volumes. These volumes however are terminated when an instance is stopped.
 ```
 AWS provides a managed load balancing service that can automatically scale based on traffic. AWS provides the following
 load balancer types for elastic load balancing (ELB):
-  * Application Load Balancer (ALB)
-  * Network Load Balancer (NLB)
-  * Gateway Load Balancer (GWLB)
+- Application Load Balancer (ALB)
+- Network Load Balancer (NLB)
+- Gateway Load Balancer (GWLB)
 ```
 
 ##### Features of Elastic Load Balancers

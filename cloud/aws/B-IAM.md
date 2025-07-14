@@ -64,14 +64,15 @@ Federated Users
 ---
 ##### IAM Policy Types
 ```
-a) Managed Policy: Standalone policy that is defined and maintained by AWS. These policies are predefined for 
-convenience reasons.
+Managed Policy: 
+- Standalone policy that is defined and maintained by AWS. These policies are predefined for convenience reasons.
 
-b) Customer Managed Policy: Customers can define their own standalone policy and attach this policy to any number of 
-users, groups, and roles.
+Customer Managed Policy:
+- Customers can define their own standalone policy and attach this policy to any number of users, groups, and roles.
 
-c) Inline Policy: Policy that is directly embedded into a single IAM identity. The policy maintains a strict one-to-one 
-relationship between a policy and an identity.  
+Inline Policy:
+- Policy that is directly embedded into a single IAM identity. The policy maintains a strict one-to-one relationship 
+  between a policy and an identity.  
 ```
 
 ##### Resource Based Policy
